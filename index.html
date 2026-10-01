@@ -38,7 +38,9 @@ a{color:inherit}
 .bg i:nth-child(8){right:-6px;top:94%;background:#b98cf0;transform:rotate(12deg)}
 main{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:max(28px,env(safe-area-inset-top)) 16px 28px}
 .hero{text-align:center;padding:8px 0 4px}
-.icon{display:block;width:128px;height:128px;margin:0 auto 14px;border-radius:30px;border:5px solid #fff;box-shadow:0 12px 0 rgba(120,10,70,.28),0 20px 34px rgba(90,0,50,.3);transform-origin:50% 100%;animation:squish 3.2s ease-in-out infinite}
+.reel{position:relative;width:min(100%,540px);margin:0 auto;border-radius:26px;border:5px solid #fff;overflow:hidden;background:#f7c3da;box-shadow:0 10px 0 rgba(120,10,70,.28),0 18px 32px rgba(90,0,50,.3);aspect-ratio:4/3}
+.reel video{display:block;width:100%;height:100%;object-fit:cover}
+.icon{position:relative;z-index:2;display:block;width:88px;height:88px;margin:-46px auto 10px;border-radius:22px;border:4px solid #fff;box-shadow:0 7px 0 rgba(120,10,70,.28),0 12px 22px rgba(90,0,50,.3);transform-origin:50% 100%;animation:squish 3.2s ease-in-out infinite}
 @keyframes squish{0%,100%{transform:scale(1,1)}8%{transform:scale(1.06,.93)}16%{transform:scale(.96,1.05)}24%{transform:scale(1,1)}}
 .logo{display:block;width:min(100%,460px);height:auto;margin:0 auto}
 .logo text{font-family:"Fredoka",system-ui,sans-serif;font-weight:600;text-anchor:middle}
@@ -81,7 +83,12 @@ footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 <main>
   <header class="hero">
-    <img class="icon" src="icon-512.jpg" width="128" height="128" alt="Pop! Jelly PangPang app icon: a surprised blue jelly">
+    <div class="reel">
+      <video id="reel" autoplay muted loop playsinline preload="auto" poster="hero.jpg" width="720" height="540" aria-label="Gameplay: jellies drop bombs and pop each other across candy arenas">
+        <source src="hero.mp4" type="video/mp4">
+      </video>
+    </div>
+    <img class="icon" src="icon-512.jpg" width="88" height="88" alt="Pop! Jelly PangPang app icon: a surprised blue jelly">
     <h1>Pop! Jelly PangPang</h1>
     <svg class="logo" viewBox="0 0 600 196" aria-hidden="true" focusable="false">
       <defs>
@@ -157,6 +164,14 @@ footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
   var CFG = { play: '', appstore: '', applePt: '', trailer: '' };
 
   var $ = function (id) { return document.getElementById(id); };
+  /* 맨 위 영상 — 무음 자동 재생·반복. 움직임 줄이기를 켠 기기에서는 멈춘 그림으로 두고, 자동 재생이 막힌 기기(절전 모드)에서는 재생 단추를 보인다. */
+  try {
+    var v = $('reel');
+    if (v) {
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; }
+      else { var pr = v.play(); if (pr && pr.catch) pr.catch(function () { v.controls = true; }); }
+    }
+  } catch (e) {}
   var src = '';
   try { src = (new URLSearchParams(location.search).get('s') || '').toLowerCase().replace(/[^a-z0-9_]/g, '').slice(0, 24); } catch (e) {}
   function join(u) { return u + (u.indexOf('?') < 0 ? '?' : '&'); }
