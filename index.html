@@ -40,6 +40,14 @@ main{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:max(28px,
 .hero{text-align:center;padding:8px 0 4px}
 .reel{position:relative;width:min(100%,540px);margin:0 auto;border-radius:26px;border:5px solid #fff;overflow:hidden;background:#f7c3da;box-shadow:0 10px 0 rgba(120,10,70,.28),0 18px 32px rgba(90,0,50,.3);aspect-ratio:4/3}
 .reel video{display:block;width:100%;height:100%;object-fit:cover}
+.snd{position:absolute;top:10px;right:10px;z-index:3;display:flex;align-items:center;justify-content:center;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 4px 0 rgba(120,10,70,.3),0 6px 14px rgba(90,0,50,.25);transition:transform .08s ease}
+.snd:active{transform:scale(.94)}
+.snd:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.snd svg{display:block;width:26px;height:26px}
+.snd .on{display:none}
+.snd[aria-pressed="true"]{background:var(--yellow)}
+.snd[aria-pressed="true"] .on{display:block}
+.snd[aria-pressed="true"] .off{display:none}
 .icon{position:relative;z-index:2;display:block;width:88px;height:88px;margin:-46px auto 10px;border-radius:22px;border:4px solid #fff;box-shadow:0 7px 0 rgba(120,10,70,.28),0 12px 22px rgba(90,0,50,.3);transform-origin:50% 100%;animation:squish 3.2s ease-in-out infinite}
 @keyframes squish{0%,100%{transform:scale(1,1)}8%{transform:scale(1.06,.93)}16%{transform:scale(.96,1.05)}24%{transform:scale(1,1)}}
 .logo{display:block;width:min(100%,460px);height:auto;margin:0 auto}
@@ -76,7 +84,7 @@ footer{margin-top:22px;text-align:center;color:#fff;font-size:14.5px;text-shadow
 footer nav{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;margin-bottom:8px}
 footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
 [hidden]{display:none!important}
-@media (prefers-reduced-motion:reduce){.icon{animation:none}.btn{transition:none}}
+@media (prefers-reduced-motion:reduce){.icon{animation:none}.btn,.snd{transition:none}}
 </style>
 </head>
 <body>
@@ -87,6 +95,10 @@ footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
       <video id="reel" autoplay muted loop playsinline preload="auto" poster="hero.jpg" width="720" height="540" aria-label="Gameplay: jellies drop bombs and pop each other across candy arenas">
         <source src="hero.mp4" type="video/mp4">
       </video>
+      <button type="button" class="snd" id="snd" aria-pressed="false" aria-label="Turn sound on">
+        <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.4L12 5.6v12.8l-4.6-3.9H4z" fill="currentColor"/><path d="M16 9.4l5 5.2M21 9.4l-5 5.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.4L12 5.6v12.8l-4.6-3.9H4z" fill="currentColor"/><path d="M15.3 9.2a4 4 0 0 1 0 5.6M17.9 6.8a7.4 7.4 0 0 1 0 10.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
     </div>
     <img class="icon" src="icon-512.jpg" width="88" height="88" alt="Pop! Jelly PangPang app icon: a surprised blue jelly">
     <h1>Pop! Jelly PangPang</h1>
@@ -164,12 +176,24 @@ footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
   var CFG = { play: '', appstore: '', applePt: '', trailer: '' };
 
   var $ = function (id) { return document.getElementById(id); };
-  /* 맨 위 영상 — 무음 자동 재생·반복. 움직임 줄이기를 켠 기기에서는 멈춘 그림으로 두고, 자동 재생이 막힌 기기(절전 모드)에서는 재생 단추를 보인다. */
+  /* 맨 위 영상 — 무음 자동 재생·반복. 움직임 줄이기를 켠 기기에서는 멈춘 그림으로 두고, 자동 재생이 막힌 기기(절전 모드)에서는 재생 단추를 보인다.
+     소리 단추(오른쪽 위) — 브라우저는 소리 있는 자동 재생을 막으므로 꺼진 채 시작하고, 누르면 켜진다. 다른 탭으로 가면 소리를 끈다. */
   try {
-    var v = $('reel');
+    var v = $('reel'), sb = $('snd');
     if (v) {
-      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; }
+      var still = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+      if (still) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; }
       else { var pr = v.play(); if (pr && pr.catch) pr.catch(function () { v.controls = true; }); }
+      var paint = function () { var on = !v.muted; sb.setAttribute('aria-pressed', on ? 'true' : 'false'); sb.setAttribute('aria-label', on ? 'Turn sound off' : 'Turn sound on'); };
+      if (sb) {
+        sb.addEventListener('click', function () {
+          v.muted = !v.muted;
+          if (!v.muted) { v.volume = 1; var p2 = v.play(); if (p2 && p2.catch) p2.catch(function () { v.muted = true; paint(); }); }
+          paint();
+        });
+        v.addEventListener('volumechange', paint);
+        document.addEventListener('visibilitychange', function () { if (document.hidden && !v.muted) { v.muted = true; paint(); } });
+      }
     }
   } catch (e) {}
   var src = '';
