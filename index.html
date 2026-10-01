@@ -6,8 +6,10 @@
 <title>Pop! Jelly PangPang — a squishy bomb-battle party game</title>
 <meta name="description" content="Drop jelly bombs, trap your friends, and pop! A squishy bomb-battle party game for Android and iOS. No ads. No gacha.">
 <meta name="theme-color" content="#f23d86">
-<link rel="icon" type="image/png" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="canonical" href="https://jellypangpang1231.github.io/">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Pop! Jelly PangPang">
 <meta property="og:title" content="Pop! Jelly PangPang">
@@ -15,9 +17,11 @@
 <meta property="og:image" content="https://jellypangpang1231.github.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pop! Jelly PangPang: the app icon, a surprised blue jelly, next to the words Drop jelly bombs. Trap your friends. Pop!">
 <meta property="og:url" content="https://jellypangpang1231.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@jelly_pang_pang">
+<meta name="twitter:image" content="https://jellypangpang1231.github.io/og.png">
 <script>
 /* 언어를 본문보다 먼저 정한다. 우리가 번역해 둔 언어로 보여 줄 때는 브라우저 자동 번역을 막는다 —
    크롬이 영어 원문 기준으로 '항상 번역'을 걸어 두면, 우리가 넣은 번역문을 한 번 더 번역해 문구가 망가진다(2026-10-01 실기).
@@ -67,7 +71,7 @@ a{color:inherit}
 .bg i:nth-child(6){right:-5px;top:72%;background:#ffb27a;transform:rotate(-48deg)}
 .bg i:nth-child(7){left:-4px;top:91%;background:#fff;transform:rotate(64deg)}
 .bg i:nth-child(8){right:-6px;top:94%;background:#b98cf0;transform:rotate(12deg)}
-main{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:max(28px,env(safe-area-inset-top)) 16px 28px}
+main{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 16px 28px}
 .hero{text-align:center;padding:8px 0 4px}
 .reel{position:relative;width:min(100%,540px);margin:0 auto;border-radius:26px;border:5px solid #fff;overflow:hidden;background:#f7c3da;box-shadow:0 10px 0 rgba(120,10,70,.28),0 18px 32px rgba(90,0,50,.3);aspect-ratio:4/3}
 .reel video{display:block;width:100%;height:100%;object-fit:cover}
@@ -99,6 +103,20 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 .btn-discord{background:var(--discord);color:#fff;box-shadow:0 5px 0 #3c45b5}
 .btn-discord:active{box-shadow:0 2px 0 #3c45b5}
 .btn-line{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 3px var(--ink)}
+.btn-pink{background:var(--pink-d);color:#fff;box-shadow:0 5px 0 #b3225f}
+.btn-pink:active{box-shadow:0 2px 0 #b3225f}
+.btn .pl{flex:none;width:20px;height:20px}
+.cta>.btn:not([hidden])+.btn{margin-top:12px}
+.trust{margin:16px 0 0;gap:6px}
+.trust .tag{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;font-size:13px;background:#dff6e6}
+.trust svg{flex:none;width:13px;height:13px;color:#1c8a4a}
+.shots{margin:18px -16px 0}
+.strip{display:flex;gap:12px;margin:0;padding:6px 16px 16px;list-style:none;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding:0 16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.strip:focus-visible{outline:3px solid #fff;outline-offset:-3px}
+.strip li{flex:none;width:min(40vw,200px);scroll-snap-align:start}
+.strip img{display:block;width:100%;height:auto;aspect-ratio:440/952;border-radius:20px;border:4px solid #fff;background:#f7c3da;box-shadow:0 6px 0 rgba(120,10,70,.25),0 10px 18px rgba(90,0,50,.22)}
+@media (hover:hover) and (pointer:fine){.strip{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.8) transparent}.strip::-webkit-scrollbar{display:block;height:8px}.strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.8);border-radius:8px}}
 .fine{margin:18px 0 0;font-size:14px;color:var(--ink-soft)}
 .tagline span{display:inline-block}
 .feats{display:grid;gap:12px;margin:0;padding:0;list-style:none}
@@ -127,7 +145,7 @@ h2{margin:0 0 6px;font-size:23px;line-height:1.2}
 footer{margin-top:22px;text-align:center;color:#fff;font-size:14.5px;text-shadow:0 1px 0 rgba(130,10,70,.4)}
 footer nav{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;margin-bottom:8px}
 footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
-.topbar{display:flex;justify-content:flex-end;margin:0 0 12px}
+.topbar{display:flex;justify-content:flex-end;margin:0 0 10px}
 .lang{position:relative;display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 34px 0 12px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--ink);font-size:15px;line-height:1;box-shadow:0 3px 0 rgba(120,10,70,.28)}
 .lang svg{flex:none;width:18px;height:18px}
 .lang:after{content:"";position:absolute;right:14px;top:50%;width:7px;height:7px;margin-top:-6px;border-right:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);transform:rotate(45deg);pointer-events:none}
@@ -186,9 +204,27 @@ html[lang="ko"] body{word-break:keep-all}
       <a class="btn btn-store" id="bPlay" rel="noopener" hidden><small>Get it on</small>Google Play</a>
       <a class="btn btn-store" id="bApp" rel="noopener" hidden><small>Download on the</small>App Store</a>
     </div>
-    <a class="btn btn-line" id="bTrailer" rel="noopener" hidden data-i="trailer">Watch the trailer</a>
+    <a class="btn btn-pink" id="bTrailer" rel="noopener" hidden><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4.6v14.8a1 1 0 0 0 1.5.86l12.3-7.4a1 1 0 0 0 0-1.72L9 3.74a1 1 0 0 0-1.5.86z" fill="currentColor"/></svg><span data-i="trailer">Watch the trailer</span></a>
     <a class="btn btn-discord" id="bDiscord" href="https://discord.gg/Ug5UMKS7ZB" rel="noopener" data-i="join">Join the official Discord</a>
+    <ul class="tags trust">
+      <li class="tag"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6l3.4 3.4 7.6-8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="c1">No ads</span></li>
+      <li class="tag"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6l3.4 3.4 7.6-8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="c2">No gacha</span></li>
+      <li class="tag"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6l3.4 3.4 7.6-8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="c3">15 stages free</span></li>
+    </ul>
     <p class="fine" id="ctaNote">Launch news lands on Discord first.</p>
+  </section>
+
+  <section class="shots">
+    <ul class="strip" id="strip" tabindex="0" aria-label="Screenshots">
+      <li><img src="shot-en-1.webp" width="440" height="952" loading="lazy" decoding="async" alt="Boss stage: a giant purple boss jelly guards a chocolate board"></li>
+      <li><img src="shot-en-2.webp" width="440" height="952" loading="lazy" decoding="async" alt="Dress-up screen: a jelly in bunny ears with rows of toppings to choose from"></li>
+      <li><img src="shot-en-3.webp" width="440" height="952" loading="lazy" decoding="async" alt="A six-player battle kicks off on a cookie board with a big GO!"></li>
+      <li><img src="shot-en-4.webp" width="440" height="952" loading="lazy" decoding="async" alt="The jelly town: a candy plaza with a clock tower and jelly friends"></li>
+      <li><img src="shot-en-5.webp" width="440" height="952" loading="lazy" decoding="async" alt="Squish screen: a giggling jelly in bunny ears on a donut cushion"></li>
+      <li><img src="shot-en-6.webp" width="440" height="952" loading="lazy" decoding="async" alt="A chocolate-and-cookie board where jellies hop over blocks"></li>
+      <li><img src="shot-en-7.webp" width="440" height="952" loading="lazy" decoding="async" alt="A strawberry jam world with arrow tiles and red jam blocks"></li>
+      <li><img src="shot-en-8.webp" width="440" height="952" loading="lazy" decoding="async" alt="A pink macaron board where jellies trap each other with jelly bombs"></li>
+    </ul>
   </section>
 
   <section class="card" aria-label="About the game">
@@ -231,11 +267,12 @@ html[lang="ko"] body{word-break:keep-all}
      play     : 'https://play.google.com/store/apps/details?id=com.jellypangpang.game'
      appstore : 'https://apps.apple.com/app/id6817233245'
      applePt  : App Store Connect 캠페인 링크의 pt 값(없으면 꼬리표 없이 보낸다)
-     trailer  : 출시 트레일러 유튜브 주소
+     trailer  : 트레일러 유튜브 주소(이미 채워 둠 — 새 트레일러를 올리면 이 주소만 바꾼다)
      ──────────────────────────────────────────────────────────────────── */
-  var CFG = { play: '', appstore: '', applePt: '', trailer: '' };
+  var CFG = { play: '', appstore: '', applePt: '', trailer: 'https://youtu.be/AtGxtpKSSvo' };
 
   var $ = function (id) { return document.getElementById(id); };
+  var SHOTS = window.__SHOTS || {};               /* 한 장짜리 미리보기(build.py)만 쓴다 — 스크린샷 파일 이름 → 박아 넣은 그림 */
 
   /* ── 언어 ── 게임이 지원하는 12개(게임의 LANGS 와 같은 차례·같은 이름). 낱말은 게임 번역 표를 따른다(젤리 폭탄·방 번호·패드).
      고르는 차례: 주소의 ?lang= → 전에 고른 것(localStorage) → 브라우저 언어 → 영어. 원문(HTML)은 영어다. */
@@ -253,7 +290,12 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12 languages', t2: 'Controller support', t3: 'No sign-up needed',
       chH: 'Follow the jellies', chP: 'New clips and updates on every channel. To find people to play with, share your maps or report a bug, come to Discord.',
       age: 'Discord is for ages 13 and up (older in some countries).', priv: 'Privacy', contact: 'Contact',
-      sndOn: 'Turn sound on', sndOff: 'Turn sound off', langLbl: 'Language', vid: 'Gameplay: jellies drop bombs and pop each other across candy arenas' },
+      sndOn: 'Turn sound on', sndOff: 'Turn sound off', langLbl: 'Language', vid: 'Gameplay: jellies drop bombs and pop each other across candy arenas',
+      c1: 'No ads', c2: 'No gacha', c3: '15 stages free', shots: 'Screenshots', shot: 'Screenshot',
+      alts: ['Boss stage: a giant purple boss jelly guards a chocolate board', 'Dress-up screen: a jelly in bunny ears with rows of toppings to choose from',
+        'A six-player battle kicks off on a cookie board with a big GO!', 'The jelly town: a candy plaza with a clock tower and jelly friends',
+        'Squish screen: a giggling jelly in bunny ears on a donut cushion', 'A chocolate-and-cookie board where jellies hop over blocks',
+        'A strawberry jam world with arrow tiles and red jam blocks', 'A pink macaron board where jellies trap each other with jelly bombs'] },
     ko: { name: '터져라! 젤리팡팡', tag1: '젤리 폭탄을 놓고,', tag2: '친구를 가두고, 팡!', sub: '안드로이드와 iOS에서 즐기는 말랑말랑 폭탄 대전 파티 게임.',
       soon: '구글 플레이 · 앱 스토어 출시 예정', outBoth: '지금 출시 — 무료로 시작', outPlay: '구글 플레이에 출시', outApp: '앱 스토어에 출시',
       join: '공식 디스코드 들어가기', noteSoon: '출시 소식은 디스코드에 가장 먼저 올라옵니다.', noteOut: '15단계까지 무료. 광고도 뽑기도 없습니다.',
@@ -265,7 +307,12 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12개 언어', t2: '패드 지원', t3: '가입 없이 바로',
       chH: '젤리 소식 받아 보기', chP: '새 영상과 업데이트 소식은 모든 채널에 올라옵니다. 같이 할 사람 찾기, 내가 만든 맵 공유, 버그 제보는 디스코드에서.',
       age: '디스코드는 만 13세 이상(나라에 따라 더 높음)부터 이용할 수 있습니다.', priv: '개인정보처리방침', contact: '문의',
-      sndOn: '소리 켜기', sndOff: '소리 끄기', langLbl: '언어', vid: '게임 장면: 젤리들이 과자 판 위에서 폭탄을 놓고 서로를 터뜨립니다' },
+      sndOn: '소리 켜기', sndOff: '소리 끄기', langLbl: '언어', vid: '게임 장면: 젤리들이 과자 판 위에서 폭탄을 놓고 서로를 터뜨립니다',
+      c1: '광고 없음', c2: '뽑기 없음', c3: '15단계 무료', shots: '스크린샷', shot: '스크린샷',
+      alts: ['대장 판: 커다란 보라색 대장 젤리가 초콜릿 판을 지키고 있는 장면', '꾸미기 화면: 토끼 귀를 쓴 젤리와 골라 쓸 수 있는 토핑 목록',
+        '쿠키 판에서 6인 대전이 「시작!」과 함께 시작되는 장면', '젤리 마을: 시계탑이 있는 과자 광장과 젤리 친구들',
+        '말랑 화면: 도넛 방석 위에서 깔깔 웃는 토끼 귀 젤리', '초콜릿과 쿠키 판에서 젤리가 블록을 뛰어넘는 장면',
+        '딸기잼 세상: 화살표 칸과 빨간 잼 블록이 있는 판', '분홍 마카롱 판에서 젤리들이 젤리 폭탄으로 서로를 가두는 장면'] },
     ja: { name: 'はじけろ！ゼリーパンパン', tag1: 'ゼリーばくだんを置いて、', tag2: '友だちを閉じこめて、ポン！', sub: 'Android と iOS で遊べる、ぷるぷるボムバトルのパーティーゲーム。',
       soon: 'Google Play・App Store で近日配信', outBoth: '配信中 — 無料で始められます', outPlay: 'Google Play で配信中', outApp: 'App Store で配信中',
       join: '公式 Discord に参加', noteSoon: '配信のお知らせは Discord でいちばん早く届きます。', noteOut: '最初の15ステージは無料。広告なし、ガチャなし。',
@@ -277,7 +324,8 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12言語対応', t2: 'コントローラー対応', t3: '登録不要',
       chH: 'ゼリーたちをフォロー', chP: '新しい動画やアップデート情報は各チャンネルで。一緒に遊ぶ仲間探し、マップの共有、バグ報告は Discord へ。',
       age: 'Discord は13歳以上（国によってはそれ以上）が対象です。', priv: 'プライバシー', contact: 'お問い合わせ',
-      sndOn: 'サウンドをオンにする', sndOff: 'サウンドをオフにする', langLbl: '言語', vid: 'ゲーム映像：ゼリーたちがお菓子のステージでばくだんを置いてはじけ合います' },
+      sndOn: 'サウンドをオンにする', sndOff: 'サウンドをオフにする', langLbl: '言語', vid: 'ゲーム映像：ゼリーたちがお菓子のステージでばくだんを置いてはじけ合います',
+      c1: '広告なし', c2: 'ガチャなし', c3: '15ステージ無料', shots: 'スクリーンショット', shot: 'スクリーンショット' },
     'zh-Hant': { name: '果凍碰碰樂', tag1: '放下果凍炸彈，', tag2: '困住朋友，砰！', sub: 'Android 與 iOS 上的 Q 彈炸彈對戰派對遊戲。',
       soon: '即將登上 Google Play 與 App Store', outBoth: '現已推出 — 免費開始', outPlay: '已在 Google Play 推出', outApp: '已在 App Store 推出',
       join: '加入官方 Discord', noteSoon: '上線消息會最先在 Discord 公布。', noteOut: '前 15 關免費。無廣告，無轉蛋。',
@@ -289,7 +337,8 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12 種語言', t2: '支援手把', t3: '無需註冊',
       chH: '追蹤果凍們', chP: '新影片與更新消息會發布在各個頻道。找人一起玩、分享地圖或回報問題，請到 Discord。',
       age: 'Discord 僅限 13 歲以上使用（部分國家/地區要求更高）。', priv: '隱私權政策', contact: '聯絡我們',
-      sndOn: '開啟聲音', sndOff: '關閉聲音', langLbl: '語言', vid: '遊戲畫面：果凍們在糖果場地上放炸彈、互相炸開' },
+      sndOn: '開啟聲音', sndOff: '關閉聲音', langLbl: '語言', vid: '遊戲畫面：果凍們在糖果場地上放炸彈、互相炸開',
+      c1: '無廣告', c2: '無轉蛋', c3: '前 15 關免費', shots: '遊戲截圖', shot: '遊戲截圖' },
     'zh-Hans': { name: '果冻碰碰乐', tag1: '放下果冻炸弹，', tag2: '困住朋友，砰！', sub: 'Android 和 iOS 上的 Q 弹炸弹对战派对游戏。',
       soon: '即将登陆 Google Play 和 App Store', outBoth: '现已上线 — 免费开玩', outPlay: '已在 Google Play 上线', outApp: '已在 App Store 上线',
       join: '加入官方 Discord', noteSoon: '上线消息会最先在 Discord 发布。', noteOut: '前 15 关免费。无广告，无抽卡。',
@@ -301,7 +350,8 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12 种语言', t2: '支持手柄', t3: '无需注册',
       chH: '关注果冻们', chP: '新视频和更新消息会发布在各个频道。找人一起玩、分享地图或反馈问题，请来 Discord。',
       age: 'Discord 仅限 13 岁及以上用户使用（部分国家/地区要求更高）。', priv: '隐私政策', contact: '联系我们',
-      sndOn: '打开声音', sndOff: '关闭声音', langLbl: '语言', vid: '游戏画面：果冻们在糖果场地上放炸弹、互相炸开' },
+      sndOn: '打开声音', sndOff: '关闭声音', langLbl: '语言', vid: '游戏画面：果冻们在糖果场地上放炸弹、互相炸开',
+      c1: '无广告', c2: '无抽卡', c3: '前 15 关免费', shots: '游戏截图', shot: '游戏截图' },
     ru: { name: 'Pop! Jelly PangPang', tag1: 'Ставь желе-бомбы.', tag2: 'Лови друзей — и бах!', sub: 'Мягкая и весёлая игра-вечеринка с бомбами для Android и iOS.',
       soon: 'Скоро в Google Play и App Store', outBoth: 'Уже вышла — начни бесплатно', outPlay: 'Уже в Google Play', outApp: 'Уже в App Store',
       join: 'Зайти в официальный Discord', noteSoon: 'Новости о выходе первыми появляются в Discord.', noteOut: 'Первые 15 уровней бесплатно. Без рекламы и гачи.',
@@ -313,7 +363,8 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12 языков', t2: 'Поддержка геймпада', t3: 'Без регистрации',
       chH: 'Следи за желе', chP: 'Новые ролики и обновления — на всех каналах. Найти напарников, поделиться картами или сообщить об ошибке можно в Discord.',
       age: 'Discord доступен с 13 лет (в некоторых странах — старше).', priv: 'Конфиденциальность', contact: 'Связаться',
-      sndOn: 'Включить звук', sndOff: 'Выключить звук', langLbl: 'Язык', vid: 'Игровой процесс: желе ставят бомбы и лопают друг друга на сладких аренах' },
+      sndOn: 'Включить звук', sndOff: 'Выключить звук', langLbl: 'Язык', vid: 'Игровой процесс: желе ставят бомбы и лопают друг друга на сладких аренах',
+      c1: 'Без рекламы', c2: 'Без гачи', c3: '15 уровней бесплатно', shots: 'Скриншоты', shot: 'Скриншот' },
     ar: { name: 'جيلي بانغ بانغ', tag1: 'ضع قنابل الجيلي.', tag2: 'احبس أصدقاءك. بوم!', sub: 'لعبة جماعية طرية لمعارك القنابل على أندرويد و iOS.',
       soon: 'قريبًا على Google Play و App Store', outBoth: 'متوفرة الآن — ابدأ مجانًا', outPlay: 'متوفرة الآن على Google Play', outApp: 'متوفرة الآن على App Store',
       join: 'انضم إلى Discord الرسمي', noteSoon: 'أخبار الإصدار تُنشر على Discord أولًا.', noteOut: 'أول 15 مرحلة مجانية. بلا إعلانات وبلا غاتشا.',
@@ -325,7 +376,8 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12 لغة', t2: 'دعم يد التحكم', t3: 'بدون تسجيل',
       chH: 'تابع الجيلي', chP: 'مقاطع جديدة وتحديثات على كل القنوات. للبحث عن لاعبين أو مشاركة خرائطك أو الإبلاغ عن خطأ، تعال إلى Discord.',
       age: 'Discord متاح لمن هم بعمر 13 عامًا فأكثر (وأكبر في بعض الدول).', priv: 'الخصوصية', contact: 'اتصل بنا',
-      sndOn: 'تشغيل الصوت', sndOff: 'إيقاف الصوت', langLbl: 'اللغة', vid: 'مشاهد من اللعبة: الجيلي يضع القنابل ويفجّر بعضه بعضًا في ساحات الحلوى' },
+      sndOn: 'تشغيل الصوت', sndOff: 'إيقاف الصوت', langLbl: 'اللغة', vid: 'مشاهد من اللعبة: الجيلي يضع القنابل ويفجّر بعضه بعضًا في ساحات الحلوى',
+      c1: 'بلا إعلانات', c2: 'بلا غاتشا', c3: '15 مرحلة مجانية', shots: 'لقطات من اللعبة', shot: 'لقطة من اللعبة' },
     es: { name: 'Pop! Jelly PangPang', tag1: 'Pon bombas de gelatina.', tag2: 'Atrapa a tus amigos. ¡Pop!', sub: 'Un blandito juego de fiesta con batallas de bombas para Android e iOS.',
       soon: 'Próximamente en Google Play y App Store', outBoth: 'Ya disponible: empieza gratis', outPlay: 'Ya disponible en Google Play', outApp: 'Ya disponible en App Store',
       join: 'Únete al Discord oficial', noteSoon: 'Las noticias del lanzamiento llegan primero a Discord.', noteOut: 'Los primeros 15 niveles son gratis. Sin anuncios ni gacha.',
@@ -337,7 +389,8 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12 idiomas', t2: 'Compatible con mando', t3: 'Sin registro',
       chH: 'Sigue a las gelatinas', chP: 'Nuevos clips y novedades en todos los canales. Para buscar con quién jugar, compartir tus mapas o avisar de un error, ven a Discord.',
       age: 'Discord es para mayores de 13 años (más en algunos países).', priv: 'Privacidad', contact: 'Contacto',
-      sndOn: 'Activar sonido', sndOff: 'Desactivar sonido', langLbl: 'Idioma', vid: 'Juego: las gelatinas ponen bombas y se revientan entre sí en arenas de dulces' },
+      sndOn: 'Activar sonido', sndOff: 'Desactivar sonido', langLbl: 'Idioma', vid: 'Juego: las gelatinas ponen bombas y se revientan entre sí en arenas de dulces',
+      c1: 'Sin anuncios', c2: 'Sin gacha', c3: '15 niveles gratis', shots: 'Capturas de pantalla', shot: 'Captura de pantalla' },
     fr: { name: 'Pop! Jelly PangPang', tag1: 'Pose des bombes gelée.', tag2: 'Piège tes amis. Pop !', sub: 'Un jeu de fête tout moelleux de batailles de bombes, sur Android et iOS.',
       soon: 'Bientôt sur Google Play et l’App Store', outBoth: 'Disponible — gratuit pour commencer', outPlay: 'Disponible sur Google Play', outApp: 'Disponible sur l’App Store',
       join: 'Rejoindre le Discord officiel', noteSoon: 'Les infos de sortie arrivent d’abord sur Discord.', noteOut: 'Les 15 premiers niveaux sont gratuits. Sans pub, sans gacha.',
@@ -349,7 +402,8 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12 langues', t2: 'Compatible manette', t3: 'Sans inscription',
       chH: 'Suis les gelées', chP: 'Nouveaux clips et mises à jour sur toutes les chaînes. Pour trouver des partenaires, partager tes cartes ou signaler un bug, viens sur Discord.',
       age: 'Discord est réservé aux 13 ans et plus (davantage dans certains pays).', priv: 'Confidentialité', contact: 'Contact',
-      sndOn: 'Activer le son', sndOff: 'Couper le son', langLbl: 'Langue', vid: 'Extrait du jeu : les gelées posent des bombes et s’éclatent dans des arènes sucrées' },
+      sndOn: 'Activer le son', sndOff: 'Couper le son', langLbl: 'Langue', vid: 'Extrait du jeu : les gelées posent des bombes et s’éclatent dans des arènes sucrées',
+      c1: 'Sans pub', c2: 'Sans gacha', c3: '15 niveaux gratuits', shots: 'Captures d’écran', shot: 'Capture d’écran' },
     it: { name: 'Pop! Jelly PangPang', tag1: 'Piazza bombe di gelatina.', tag2: 'Intrappola gli amici. Pop!', sub: 'Un morbido party game di battaglie a colpi di bombe per Android e iOS.',
       soon: 'Presto su Google Play e App Store', outBoth: 'Disponibile ora: inizia gratis', outPlay: 'Disponibile su Google Play', outApp: 'Disponibile su App Store',
       join: 'Entra nel Discord ufficiale', noteSoon: 'Le notizie sul lancio arrivano prima su Discord.', noteOut: 'I primi 15 livelli sono gratis. Niente pubblicità, niente gacha.',
@@ -361,7 +415,8 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12 lingue', t2: 'Supporto controller', t3: 'Nessuna registrazione',
       chH: 'Segui le gelatine', chP: 'Nuove clip e aggiornamenti su tutti i canali. Per trovare compagni di gioco, condividere le mappe o segnalare un bug, vieni su Discord.',
       age: 'Discord è per chi ha almeno 13 anni (di più in alcuni Paesi).', priv: 'Privacy', contact: 'Contatti',
-      sndOn: 'Attiva audio', sndOff: 'Disattiva audio', langLbl: 'Lingua', vid: 'Gameplay: le gelatine piazzano bombe e si fanno scoppiare in arene di dolci' },
+      sndOn: 'Attiva audio', sndOff: 'Disattiva audio', langLbl: 'Lingua', vid: 'Gameplay: le gelatine piazzano bombe e si fanno scoppiare in arene di dolci',
+      c1: 'Niente pubblicità', c2: 'Niente gacha', c3: '15 livelli gratis', shots: 'Screenshot', shot: 'Screenshot' },
     de: { name: 'Pop! Jelly PangPang', tag1: 'Leg Gelee-Bomben.', tag2: 'Fang deine Freunde. Peng!', sub: 'Ein wabbeliges Bomben-Partyspiel für Android und iOS.',
       soon: 'Bald bei Google Play und im App Store', outBoth: 'Jetzt erhältlich – kostenlos starten', outPlay: 'Jetzt bei Google Play', outApp: 'Jetzt im App Store',
       join: 'Zum offiziellen Discord', noteSoon: 'Neuigkeiten zum Start gibt es zuerst auf Discord.', noteOut: 'Die ersten 15 Level sind kostenlos. Keine Werbung, kein Gacha.',
@@ -373,7 +428,8 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12 Sprachen', t2: 'Controller-Unterstützung', t3: 'Keine Anmeldung nötig',
       chH: 'Folge den Gelees', chP: 'Neue Clips und Updates gibt es auf allen Kanälen. Mitspieler finden, Karten teilen oder Fehler melden: auf Discord.',
       age: 'Discord ist ab 13 Jahren (in manchen Ländern älter).', priv: 'Datenschutz', contact: 'Kontakt',
-      sndOn: 'Ton einschalten', sndOff: 'Ton ausschalten', langLbl: 'Sprache', vid: 'Gameplay: Gelees legen Bomben und lassen einander in Süßigkeiten-Arenen platzen' },
+      sndOn: 'Ton einschalten', sndOff: 'Ton ausschalten', langLbl: 'Sprache', vid: 'Gameplay: Gelees legen Bomben und lassen einander in Süßigkeiten-Arenen platzen',
+      c1: 'Keine Werbung', c2: 'Kein Gacha', c3: '15 Level kostenlos', shots: 'Screenshots', shot: 'Screenshot' },
     pt: { name: 'Pop! Jelly PangPang', tag1: 'Solte bombas de gelatina.', tag2: 'Prenda seus amigos. Pop!', sub: 'Um party game fofinho de batalhas de bombas para Android e iOS.',
       soon: 'Em breve no Google Play e na App Store', outBoth: 'Já disponível — comece grátis', outPlay: 'Já disponível no Google Play', outApp: 'Já disponível na App Store',
       join: 'Entre no Discord oficial', noteSoon: 'As novidades do lançamento chegam primeiro no Discord.', noteOut: 'As 15 primeiras fases são grátis. Sem anúncios, sem gacha.',
@@ -385,7 +441,8 @@ html[lang="ko"] body{word-break:keep-all}
       t1: '12 idiomas', t2: 'Suporte a controle', t3: 'Sem cadastro',
       chH: 'Siga as gelatinas', chP: 'Novos clipes e novidades em todos os canais. Para achar gente para jogar, compartilhar seus mapas ou avisar de um bug, venha para o Discord.',
       age: 'O Discord é para maiores de 13 anos (mais em alguns países).', priv: 'Privacidade', contact: 'Contato',
-      sndOn: 'Ativar som', sndOff: 'Desativar som', langLbl: 'Idioma', vid: 'Gameplay: as gelatinas soltam bombas e estouram umas às outras em arenas de doces' }
+      sndOn: 'Ativar som', sndOff: 'Desativar som', langLbl: 'Idioma', vid: 'Gameplay: as gelatinas soltam bombas e estouram umas às outras em arenas de doces',
+      c1: 'Sem anúncios', c2: 'Sem gacha', c3: '15 fases grátis', shots: 'Capturas de tela', shot: 'Captura de tela' }
   };
   var pick = window.__jppPick, lang = window.__jppLang || 'en', src = '';   /* 언어는 <head> 의 스크립트가 먼저 정했다 */
   try { src = (new URLSearchParams(location.search).get('s') || '').toLowerCase().replace(/[^a-z0-9_]/g, '').slice(0, 24); } catch (e) {}
@@ -403,9 +460,19 @@ html[lang="ko"] body{word-break:keep-all}
     $('lang').setAttribute('aria-label', t.langLbl); $('lang').value = lang;
     if ($('reel')) $('reel').setAttribute('aria-label', t.vid);
     $('chip').textContent = (!hasPlay && !hasApp) ? t.soon : (hasPlay && hasApp) ? t.outBoth : (hasPlay ? t.outPlay : t.outApp);
-    $('ctaNote').textContent = (!hasPlay && !hasApp) ? t.noteSoon : t.noteOut;
+    $('ctaNote').textContent = t.noteSoon; $('ctaNote').hidden = hasPlay || hasApp;   /* 출시 뒤에는 바로 위 칩 셋(광고 없음·뽑기 없음·15단계 무료)이 그 말을 대신한다 */
     if (hasPlay || hasApp) { two($('bPlay'), hasPlay ? t.getPlay : t.soonPlay, 'Google Play'); two($('bApp'), hasApp ? t.getApp : t.soonApp, 'App Store'); }
     if ($('snd')) $('snd').setAttribute('aria-label', sndIsOn ? t.sndOff : t.sndOn);
+    var st = $('strip');                          /* 스크린샷 줄 — 한국어는 한국어 화면, 나머지는 영어 화면 */
+    if (st) {
+      st.setAttribute('aria-label', t.shots);
+      var im = st.getElementsByTagName('img'), set = lang === 'ko' ? 'ko' : 'en';
+      for (i = 0; i < im.length; i++) {
+        var f = 'shot-' + set + '-' + (i + 1) + '.webp', u = SHOTS[f] || f;
+        if (im[i].getAttribute('src') !== u) im[i].src = u;
+        im[i].alt = (t.alts && t.alts[i]) || (t.shot + ' ' + (i + 1));
+      }
+    }
   }
   (function () {
     var sel = $('lang');
@@ -476,8 +543,9 @@ html[lang="ko"] body{word-break:keep-all}
     if (!src || !CFG.applePt) return CFG.appstore;
     return join(CFG.appstore) + 'pt=' + encodeURIComponent(CFG.applePt) + '&ct=' + encodeURIComponent(src + '_launch') + '&mt=8';
   }
-  if (CFG.trailer) { $('bTrailer').href = CFG.trailer; $('bTrailer').hidden = false; $('bTrailer').style.marginBottom = '10px'; }
-  if (hasPlay || hasApp) {                       // 출시 뒤: 스토어 단추를 보이고 디스코드 단추는 테두리 단추로
+  if (CFG.trailer) { $('bTrailer').href = CFG.trailer; $('bTrailer').hidden = false; }
+  if (hasPlay || hasApp) {                       // 출시 뒤: 스토어 단추를 보이고 트레일러·디스코드 단추는 테두리 단추로
+    $('bTrailer').className = 'btn btn-line';
     var stores = $('stores'), bPlay = $('bPlay'), bApp = $('bApp');
     stores.hidden = false; bPlay.hidden = false; bApp.hidden = false;
     if (hasPlay) { bPlay.href = playUrl(); } else { bPlay.className += ' soon'; bPlay.removeAttribute('href'); bPlay.setAttribute('aria-disabled', 'true'); }
