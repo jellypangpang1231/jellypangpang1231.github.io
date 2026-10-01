@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pop! Jelly PangPang — a squishy bomb-battle party game</title>
-<meta name="description" content="Drop jelly bombs, trap your friends, and pop! A squishy bomb-battle party game for Android and iOS. No ads. No gacha.">
+<meta name="description" content="Drop jelly bombs, trap your friends, and pop! Battle up to 6 online, build and share your own maps, and take on 12 Challenge Letters. No ads. No gacha.">
 <meta name="theme-color" content="#f23d86">
 <link rel="canonical" href="https://jellypangpang1231.github.io/">
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Pop! Jelly PangPang">
 <meta property="og:title" content="Pop! Jelly PangPang">
-<meta property="og:description" content="Drop jelly bombs, trap your friends, and pop! A squishy bomb-battle party game. No ads. No gacha.">
+<meta property="og:description" content="Drop jelly bombs, trap your friends, and pop! Online battles for up to 6, a map maker and 12 Challenge Letters. No ads. No gacha.">
 <meta property="og:image" content="https://jellypangpang1231.github.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -175,6 +175,19 @@ footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
 .lang:focus-within{outline:3px solid var(--ink);outline-offset:3px}
 html[lang="ko"] body{word-break:keep-all}
 [hidden]{display:none!important}
+/* [c430] 강조 칸 — 온라인 대전 · 맵 만들기 · 도전장(스크린샷 줄 아래). 칸마다 강조색 하나(--acc 알약 · --tint 칩) */
+.hl{--acc:#d92d77;--tint:#ffe3ef;padding:14px 14px 18px}
+.hl-map{--acc:#1f78c4;--tint:#e2f2ff}
+.hl-ch{--acc:#6a3fd1;--tint:#eee7ff}
+.hlm{position:relative;margin:0 0 14px;border-radius:20px;overflow:hidden;border:4px solid #fff;background:#f7c3da;aspect-ratio:4/3;box-shadow:0 6px 0 rgba(120,10,70,.25),0 10px 18px rgba(90,0,50,.22)}
+.hlm video{display:block;width:100%;height:100%;object-fit:cover}
+.hlk{position:absolute;inset-inline-start:10px;top:10px;display:inline-flex;align-items:center;gap:6px;padding:6px 14px 6px 10px;border-radius:999px;background:var(--acc);color:#fff;font-family:"Fredoka",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-weight:600;font-size:15px;line-height:1.2;box-shadow:0 3px 0 rgba(0,0,0,.22)}
+.hlk svg{flex:none;width:19px;height:19px}
+.hl h2{margin:0 4px 6px;font-size:24px}
+.hl>p{margin:0 4px 12px;font-size:16px;color:var(--ink-soft)}
+.hlc{display:flex;flex-wrap:wrap;gap:8px;margin:0 4px;padding:0;list-style:none}
+.hlc li{padding:5px 12px;border-radius:999px;background:var(--tint);font-family:"Fredoka",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-weight:600;font-size:14px;line-height:1.35;color:var(--ink)}
+@media (max-width:350px){.hl{padding:12px 12px 16px}.hl h2{font-size:22px}.hlk{font-size:14px}}
 @media (prefers-reduced-motion:reduce){.icon{animation:none}.btn,.snd{transition:none}}
 </style>
 </head>
@@ -237,15 +250,39 @@ html[lang="ko"] body{word-break:keep-all}
 
   <section class="shots">
     <ul class="strip" id="strip" tabindex="0" aria-label="Screenshots">
-      <li><img src="shot-en-1.webp" width="440" height="952" loading="lazy" decoding="async" alt="Boss stage: a giant purple boss jelly guards a chocolate board"></li>
-      <li><img src="shot-en-2.webp" width="440" height="952" loading="lazy" decoding="async" alt="Dress-up screen: a jelly in bunny ears with rows of toppings to choose from"></li>
-      <li><img src="shot-en-3.webp" width="440" height="952" loading="lazy" decoding="async" alt="A six-player battle kicks off on a cookie board with a big GO!"></li>
-      <li><img src="shot-en-4.webp" width="440" height="952" loading="lazy" decoding="async" alt="The jelly town: a candy plaza with a clock tower and jelly friends"></li>
-      <li><img src="shot-en-5.webp" width="440" height="952" loading="lazy" decoding="async" alt="Squish screen: a giggling jelly in bunny ears on a donut cushion"></li>
-      <li><img src="shot-en-6.webp" width="440" height="952" loading="lazy" decoding="async" alt="A chocolate-and-cookie board where jellies hop over blocks"></li>
-      <li><img src="shot-en-7.webp" width="440" height="952" loading="lazy" decoding="async" alt="A strawberry jam world with arrow tiles and red jam blocks"></li>
-      <li><img src="shot-en-8.webp" width="440" height="952" loading="lazy" decoding="async" alt="A pink macaron board where jellies trap each other with jelly bombs"></li>
+      <li><img src="shot-en-1.webp" width="440" height="952" loading="lazy" decoding="async" alt="A six-player battle kicks off on a cookie board with a big GO!"></li>
+      <li><img src="shot-en-2.webp" width="440" height="952" loading="lazy" decoding="async" alt="The map maker: a symmetrical six-player arena painted with cookies, walls, bushes and water"></li>
+      <li><img src="shot-en-3.webp" width="440" height="952" loading="lazy" decoding="async" alt="A challenge letter pops up on the home screen with the rule All mega bombs!"></li>
+      <li><img src="shot-en-4.webp" width="440" height="952" loading="lazy" decoding="async" alt="Boss stage: a giant purple boss jelly guards a chocolate board"></li>
+      <li><img src="shot-en-5.webp" width="440" height="952" loading="lazy" decoding="async" alt="The Challenges map: every candy world has its own special stage with a twist, like Short fuses! or All mega bombs!"></li>
+      <li><img src="shot-en-6.webp" width="440" height="952" loading="lazy" decoding="async" alt="Dress-up screen: a jelly in bunny ears with rows of toppings to choose from"></li>
+      <li><img src="shot-en-7.webp" width="440" height="952" loading="lazy" decoding="async" alt="The jelly town: a candy plaza with a clock tower and jelly friends"></li>
+      <li><img src="shot-en-8.webp" width="440" height="952" loading="lazy" decoding="async" alt="Squish screen: a giggling jelly in bunny ears on a donut cushion"></li>
+      <li><img src="shot-en-9.webp" width="440" height="952" loading="lazy" decoding="async" alt="A chocolate-and-cookie board where jellies hop over blocks"></li>
+      <li><img src="shot-en-10.webp" width="440" height="952" loading="lazy" decoding="async" alt="A strawberry jam world with arrow tiles and red jam blocks"></li>
+      <li><img src="shot-en-11.webp" width="440" height="952" loading="lazy" decoding="async" alt="A pink macaron board where jellies trap each other with jelly bombs"></li>
     </ul>
+  </section>
+
+  <section class="hls" aria-label="Highlights">
+    <article class="card hl hl-vs">
+      <div class="hlm"><video muted loop playsinline preload="none" poster="hl-vs.jpg" width="640" height="480" aria-hidden="true" tabindex="-1"><source src="hl-vs.mp4" type="video/mp4"></video><span class="hlk"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="14" r="7" fill="currentColor"/><path d="M15 9l2.6-2.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M19.6 1.8v4M17.6 3.8h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i="hVsK">Online battle</span></span></div>
+      <h2 data-i="hVsH">Battle up to 6 online</h2>
+      <p data-i="hVsP">Make a room, share the five-letter code, and your friends hop right in. Free-for-all or teams, ten candy arenas, bots with their own personalities, and a replay when the dust settles.</p>
+      <ul class="hlc"><li data-i="hVs1">Up to 6 players</li><li data-i="hVs2">Room code</li><li data-i="hVs3">Teams or free-for-all</li><li data-i="hVs4">Replay</li></ul>
+    </article>
+    <article class="card hl hl-map">
+      <div class="hlm"><video muted loop playsinline preload="none" poster="hl-map.jpg" width="640" height="480" aria-hidden="true" tabindex="-1"><source src="hl-map.mp4" type="video/mp4"></video><span class="hlk"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2.2" fill="currentColor"/><rect x="13" y="3" width="8" height="8" rx="2.2" fill="currentColor" opacity=".55"/><rect x="3" y="13" width="8" height="8" rx="2.2" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="8" height="8" rx="2.2" fill="currentColor"/></svg><span data-i="hMpK">Map maker</span></span></div>
+      <h2 data-i="hMpH">Build your own arena</h2>
+      <p data-i="hMpP">Paint cookies and walls, add bushes and water, pick 2, 4 or 6 players and choose the items. Then get a JELLY-code: friends type it in and battle on your map.</p>
+      <ul class="hlc"><li data-i="hMp1">Paint it your way</li><li data-i="hMp2">2, 4 or 6 players</li><li data-i="hMp3">Share with a code</li></ul>
+    </article>
+    <article class="card hl hl-ch">
+      <div class="hlm"><video muted loop playsinline preload="none" poster="hl-ch.jpg" width="640" height="480" aria-hidden="true" tabindex="-1"><source src="hl-ch.mp4" type="video/mp4"></video><span class="hlk"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.8" fill="currentColor"/><path d="M4.2 8l7.8 5.6L19.8 8" fill="none" stroke="var(--acc)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="hChK">Challenge Letters</span></span></div>
+      <h2 data-i="hChH">12 special stages with a twist</h2>
+      <p data-i="hChP">Beat a world’s boss and a challenge letter arrives: the same stage with one rule flipped. Short fuses. One bomb only. All mega bombs. Everyone rushing you. From the second letter on, the twist changes every day.</p>
+      <ul class="hlc"><li data-i="hCh1">12 special stages</li><li data-i="hCh2">A new twist every day</li><li data-i="hCh3">Boss stages, remixed</li></ul>
+    </article>
   </section>
 
   <section class="card" aria-label="About the game">
@@ -270,6 +307,7 @@ html[lang="ko"] body{word-break:keep-all}
       <details><summary data-i="q3">How do we play together?</summary><p data-i="a3">Two players share one phone on a wide board built for two. Online, create a room and share its five-letter room code. Up to 6 can play.</p></details>
       <details><summary data-i="q4">Do I need an account?</summary><p data-i="a4">No. You can play right away. Signing in (Settings → Account) is optional and saves your progress, so you can carry on from another device.</p></details>
       <details><summary data-i="q5">Controllers and languages?</summary><p data-i="a5">Controllers are supported. The game comes in 12 languages: English, Korean, Japanese, Chinese (Simplified and Traditional), Spanish, French, German, Italian, Portuguese, Russian and Arabic.</p></details>
+      <details><summary data-i="q6">What opens when?</summary><p data-i="a6">Battle mode, online rooms and the map maker open up as you play through the free stages. The first two challenge letters are free too; the rest come with the full version.</p></details>
     </div>
   </section>
 
@@ -327,15 +365,32 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: 'Turn sound on', sndOff: 'Turn sound off', langLbl: 'Language', vid: 'Gameplay: jellies drop bombs and pop each other across candy arenas',
       faqH: 'Good to know',
       q1: 'Is it free?', a1: 'Yes, free to download and play. The first 15 stages are free, and one purchase unlocks all 50. Cosmetic theme packs are optional. No ads, no subscriptions, no gacha.',
-      q2: 'Do I need internet?', a2: 'No. The stages and two players on one phone work offline. Only online matches need a connection.',
+      q2: 'Do I need internet?', a2: 'No. The stages and two players on one phone work offline. Online matches and sharing maps need a connection.',
       q3: 'How do we play together?', a3: 'Two players share one phone on a wide board built for two. Online, create a room and share its five-letter room code. Up to 6 can play.',
       q4: 'Do I need an account?', a4: 'No. You can play right away. Signing in (Settings → Account) is optional and saves your progress, so you can carry on from another device.',
       q5: 'Controllers and languages?', a5: 'Controllers are supported. The game comes in 12 languages: English, Korean, Japanese, Chinese (Simplified and Traditional), Spanish, French, German, Italian, Portuguese, Russian and Arabic.',
       c1: 'No ads', c2: 'No gacha', c3: '15 stages free', shots: 'Screenshots', shot: 'Screenshot',
-      alts: ['Boss stage: a giant purple boss jelly guards a chocolate board', 'Dress-up screen: a jelly in bunny ears with rows of toppings to choose from',
-        'A six-player battle kicks off on a cookie board with a big GO!', 'The jelly town: a candy plaza with a clock tower and jelly friends',
-        'Squish screen: a giggling jelly in bunny ears on a donut cushion', 'A chocolate-and-cookie board where jellies hop over blocks',
-        'A strawberry jam world with arrow tiles and red jam blocks', 'A pink macaron board where jellies trap each other with jelly bombs'] },
+      alts: ['A six-player battle kicks off on a cookie board with a big GO!',
+        'The map maker: a symmetrical six-player arena painted with cookies, walls, bushes and water',
+        'A challenge letter pops up on the home screen with the rule All mega bombs!',
+        'Boss stage: a giant purple boss jelly guards a chocolate board',
+        'The Challenges map: every candy world has its own special stage with a twist, like Short fuses! or All mega bombs!',
+        'Dress-up screen: a jelly in bunny ears with rows of toppings to choose from',
+        'The jelly town: a candy plaza with a clock tower and jelly friends',
+        'Squish screen: a giggling jelly in bunny ears on a donut cushion',
+        'A chocolate-and-cookie board where jellies hop over blocks',
+        'A strawberry jam world with arrow tiles and red jam blocks',
+        'A pink macaron board where jellies trap each other with jelly bombs'],
+      hVsK: 'Online battle', hVsH: 'Battle up to 6 online',
+      hVsP: 'Make a room, share the five-letter code, and your friends hop right in. Free-for-all or teams, ten candy arenas, bots with their own personalities, and a replay when the dust settles.',
+      hVs1: 'Up to 6 players', hVs2: 'Room code', hVs3: 'Teams or free-for-all', hVs4: 'Replay',
+      hMpK: 'Map maker', hMpH: 'Build your own arena',
+      hMpP: 'Paint cookies and walls, add bushes and water, pick 2, 4 or 6 players and choose the items. Then get a JELLY-code: friends type it in and battle on your map.',
+      hMp1: 'Paint it your way', hMp2: '2, 4 or 6 players', hMp3: 'Share with a code',
+      hChK: 'Challenge Letters', hChH: '12 special stages with a twist',
+      hChP: 'Beat a world’s boss and a challenge letter arrives: the same stage with one rule flipped. Short fuses. One bomb only. All mega bombs. Everyone rushing you. From the second letter on, the twist changes every day.',
+      hCh1: '12 special stages', hCh2: 'A new twist every day', hCh3: 'Boss stages, remixed',
+      q6: 'What opens when?', a6: 'Battle mode, online rooms and the map maker open up as you play through the free stages. The first two challenge letters are free too; the rest come with the full version.' },
     ko: { name: '터져라! 젤리팡팡', tag1: '젤리 폭탄을 놓고,', tag2: '친구를 가두고, 팡!', sub: '안드로이드와 iOS에서 즐기는 말랑말랑 폭탄 대전 파티 게임.',
       soon: '구글 플레이 · 앱 스토어 출시 예정', outBoth: '지금 출시 — 무료로 시작', outPlay: '구글 플레이에 출시', outApp: '앱 스토어에 출시',
       join: '공식 디스코드 들어가기', noteSoon: '출시 소식은 디스코드에 가장 먼저 올라옵니다.', noteOut: '15단계까지 무료. 광고도 뽑기도 없습니다.',
@@ -350,15 +405,32 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: '소리 켜기', sndOff: '소리 끄기', langLbl: '언어', vid: '게임 장면: 젤리들이 과자 판 위에서 폭탄을 놓고 서로를 터뜨립니다',
       faqH: '자주 묻는 질문',
       q1: '무료인가요?', a1: '네, 받아서 노는 건 무료입니다. 15단계까지 무료이고, 한 번 구매하면 50단계가 전부 열립니다. 꾸미기 테마팩은 원하는 것만 고르면 됩니다. 광고도, 구독도, 뽑기도 없습니다.',
-      q2: '인터넷이 꼭 있어야 하나요?', a2: '아니요. 혼자 하는 단계와 한 폰으로 둘이서 하는 대전은 인터넷 없이도 됩니다. 온라인 대전만 연결이 필요합니다.',
+      q2: '인터넷이 꼭 있어야 하나요?', a2: '아니요. 혼자 하는 단계와 한 폰으로 둘이서 하는 대전은 인터넷 없이도 됩니다. 온라인 대전과 맵 공유만 연결이 필요합니다.',
       q3: '친구와는 어떻게 하나요?', a3: '폰 하나로 둘이서, 둘을 위한 옆으로 긴 판에서 겨룹니다. 온라인은 방을 만들고 다섯 글자 방 번호를 알려 주면 됩니다. 최대 6명까지 함께합니다.',
       q4: '가입해야 하나요?', a4: '아니요. 받자마자 바로 할 수 있습니다. 로그인(설정 → 계정)은 선택이고, 해 두면 진행 상황이 저장되어 다른 기기에서 이어서 할 수 있습니다.',
       q5: '패드와 언어는요?', a5: '패드를 지원합니다. 언어는 12개입니다 — 한국어, 영어, 일본어, 중국어(간체·번체), 스페인어, 프랑스어, 독일어, 이탈리아어, 포르투갈어, 러시아어, 아랍어.',
       c1: '광고 없음', c2: '뽑기 없음', c3: '15단계 무료', shots: '스크린샷', shot: '스크린샷',
-      alts: ['대장 판: 커다란 보라색 대장 젤리가 초콜릿 판을 지키고 있는 장면', '꾸미기 화면: 토끼 귀를 쓴 젤리와 골라 쓸 수 있는 토핑 목록',
-        '쿠키 판에서 6인 대전이 「시작!」과 함께 시작되는 장면', '젤리 마을: 시계탑이 있는 과자 광장과 젤리 친구들',
-        '말랑 화면: 도넛 방석 위에서 깔깔 웃는 토끼 귀 젤리', '초콜릿과 쿠키 판에서 젤리가 블록을 뛰어넘는 장면',
-        '딸기잼 세상: 화살표 칸과 빨간 잼 블록이 있는 판', '분홍 마카롱 판에서 젤리들이 젤리 폭탄으로 서로를 가두는 장면'] },
+      alts: ['쿠키 판에서 6인 대전이 「시작!」과 함께 시작되는 장면',
+        '맵 만들기: 과자·벽·부쉬·물로 칠한 6인용 대칭 판',
+        '홈 화면에 도전장이 날아온 장면: 규칙 카드 「전부 대왕 폭탄!」',
+        '대장 판: 커다란 보라색 대장 젤리가 초콜릿 판을 지키고 있는 장면',
+        '도전장 지도: 달콤한 세상마다 규칙 하나가 뒤집힌 특별 스테이지가 기다린다',
+        '꾸미기 화면: 토끼 귀를 쓴 젤리와 골라 쓸 수 있는 토핑 목록',
+        '젤리 마을: 시계탑이 있는 과자 광장과 젤리 친구들',
+        '말랑 화면: 도넛 방석 위에서 깔깔 웃는 토끼 귀 젤리',
+        '초콜릿과 쿠키 판에서 젤리가 블록을 뛰어넘는 장면',
+        '딸기잼 세상: 화살표 칸과 빨간 잼 블록이 있는 판',
+        '분홍 마카롱 판에서 젤리들이 젤리 폭탄으로 서로를 가두는 장면'],
+      hVsK: '온라인 대전', hVsH: '최대 6명이 한 판에서 대결',
+      hVsP: '방을 만들고 다섯 글자 방 번호만 알려 주면 친구가 바로 들어옵니다. 개인전도 팀전도 되고, 달콤한 판은 열 가지, 혼자일 땐 성격이 제각각인 봇 젤리와 한 판. 끝난 판은 다시 볼 수 있습니다.',
+      hVs1: '최대 6명', hVs2: '방 번호', hVs3: '개인전 · 팀전', hVs4: '다시 보기',
+      hMpK: '맵 만들기', hMpH: '직접 그린 판을 코드로 공유',
+      hMpP: '과자와 벽을 칠하고, 부쉬와 물을 더하고, 2·4·6인용을 고르고 아이템까지 정합니다. 완성하면 JELLY-코드가 나오고, 친구가 그 코드를 넣으면 내 판에서 함께 겨룹니다.',
+      hMp1: '내 마음대로 칠하기', hMp2: '2 · 4 · 6인용', hMp3: '코드로 공유',
+      hChK: '도전장', hChH: '규칙을 뒤집는 특별 스테이지 12개',
+      hChP: '각 세계의 대장을 넘으면 도전장이 날아옵니다. 같은 판인데 규칙 하나가 뒤집혀요 — 심지는 짧아지고, 폭탄은 하나뿐이고, 전부 대왕 폭탄이고, 모두가 돌격해 옵니다. 두 번째 도전장부터는 규칙이 날마다 바뀝니다.',
+      hCh1: '특별 스테이지 12개', hCh2: '날마다 바뀌는 규칙', hCh3: '대장 판의 변주',
+      q6: '언제부터 열리나요?', a6: '대전과 온라인 방, 맵 만들기는 무료 단계를 진행하는 동안 차례로 열립니다. 도전장은 1·2번이 무료이고, 나머지는 풀버전에 들어 있습니다.' },
     ja: { name: 'はじけろ！ゼリーパンパン', tag1: 'ゼリーばくだんを置いて、', tag2: '友だちを閉じこめて、ポン！', sub: 'Android と iOS で遊べる、ぷるぷるボムバトルのパーティーゲーム。',
       soon: 'Google Play・App Store で近日配信', outBoth: '配信中 — 無料で始められます', outPlay: 'Google Play で配信中', outApp: 'App Store で配信中',
       join: '公式 Discord に参加', noteSoon: '配信のお知らせは Discord でいちばん早く届きます。', noteOut: '最初の15ステージは無料。広告なし、ガチャなし。',
@@ -373,11 +445,21 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: 'サウンドをオンにする', sndOff: 'サウンドをオフにする', langLbl: '言語', vid: 'ゲーム映像：ゼリーたちがお菓子のステージでばくだんを置いてはじけ合います',
       faqH: 'よくある質問',
       q1: '無料ですか？', a1: 'はい、ダウンロードもプレイも無料です。最初の15ステージは無料で、1回の購入で全50ステージが遊べます。きせかえテーマパックは好きなものだけどうぞ。広告なし、サブスクなし、ガチャなし。',
-      q2: 'インターネットは必要ですか？', a2: 'いいえ。ステージと、1台のスマホでの2人対戦はオフラインで遊べます。オンライン対戦だけ接続が必要です。',
+      q2: 'インターネットは必要ですか？', a2: 'いいえ。ステージと、1台のスマホでの2人対戦はオフラインで遊べます。オンライン対戦とマップの共有だけ接続が必要です。',
       q3: '友だちとはどうやって遊びますか？', a3: '1台のスマホを2人で使い、2人用の横長ステージで対戦します。オンラインは部屋を作って5文字の部屋番号を伝えるだけ。最大6人まで遊べます。',
       q4: 'アカウント登録は必要ですか？', a4: 'いいえ。すぐに遊べます。サインイン（せってい → アカウント）は任意で、進行状況が保存され、別の端末でも続きから遊べます。',
       q5: 'コントローラーと言語は？', a5: 'コントローラーに対応しています。言語は12言語：日本語、英語、韓国語、中国語（簡体字・繁体字）、スペイン語、フランス語、ドイツ語、イタリア語、ポルトガル語、ロシア語、アラビア語。',
-      c1: '広告なし', c2: 'ガチャなし', c3: '15ステージ無料', shots: 'スクリーンショット', shot: 'スクリーンショット' },
+      c1: '広告なし', c2: 'ガチャなし', c3: '15ステージ無料', shots: 'スクリーンショット', shot: 'スクリーンショット',
+      hVsK: 'オンライン対戦', hVsH: '最大6人で同時対戦',
+      hVsP: '部屋を作って5文字の部屋番号を伝えれば、友だちがすぐに入ってきます。個人戦もチーム戦もOK。ステージはお菓子の世界が10種類、ひとりのときは性格バラバラのボットゼリーが相手。終わった試合はリプレイで見られます。',
+      hVs1: '最大6人', hVs2: '部屋番号', hVs3: '個人戦・チーム戦', hVs4: 'リプレイ',
+      hMpK: 'マップ作り', hMpH: '自分で作ったステージをコードで共有',
+      hMpP: 'お菓子や壁を塗って、草むらや水を置き、2・4・6人用を選んでアイテムも決められます。できあがるとJELLYコードが出るので、友だちが入力すれば、あなたのマップで対戦できます。',
+      hMp1: '思いどおりに作れる', hMp2: '2・4・6人用', hMp3: 'コードで共有',
+      hChK: 'ちょうせんじょう', hChH: 'ルールがひっくり返る特別ステージ12個',
+      hChP: 'ワールドのボスを倒すと、ちょうせんじょうが届きます。同じステージなのに、ルールがひとつだけひっくり返る！ 導火線が短い、ばくだんはひとつだけ、ぜんぶ大玉、みんなが突撃してくる。2通目からは、ルールが毎日変わります。',
+      hCh1: '特別ステージ12個', hCh2: '毎日変わるルール', hCh3: 'ボス戦のアレンジ',
+      q6: 'いつから遊べますか？', a6: '対戦・オンライン部屋・マップ作りは、無料のステージを進めるにつれて遊べるようになります。ちょうせんじょうは1・2通目が無料で、残りはフルバージョンに入っています。' },
     'zh-Hant': { name: '果凍碰碰樂', tag1: '放下果凍炸彈，', tag2: '困住朋友，砰！', sub: 'Android 與 iOS 上的 Q 彈炸彈對戰派對遊戲。',
       soon: '即將登上 Google Play 與 App Store', outBoth: '現已推出 — 免費開始', outPlay: '已在 Google Play 推出', outApp: '已在 App Store 推出',
       join: '加入官方 Discord', noteSoon: '上線消息會最先在 Discord 公布。', noteOut: '前 15 關免費。無廣告，無轉蛋。',
@@ -392,11 +474,21 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: '開啟聲音', sndOff: '關閉聲音', langLbl: '語言', vid: '遊戲畫面：果凍們在糖果場地上放炸彈、互相炸開',
       faqH: '常見問題',
       q1: '遊戲免費嗎？', a1: '是的，下載和遊玩都免費。前 15 關免費，一次購買即可解鎖全部 50 關。裝扮主題包可依喜好選購。無廣告、無訂閱、無轉蛋。',
-      q2: '需要網路嗎？', a2: '不需要。闖關和一支手機兩人同玩都可以離線遊玩，只有線上對戰需要連線。',
+      q2: '需要網路嗎？', a2: '不需要。闖關和一支手機兩人同玩都可以離線遊玩，只有線上對戰和分享地圖需要連線。',
       q3: '怎麼和朋友一起玩？', a3: '兩人共用一支手機，在專為雙人設計的橫向場地對戰。線上對戰只要建立房間並分享五個字的房間號碼，最多 6 人同玩。',
       q4: '需要註冊帳號嗎？', a4: '不需要，下載後就能直接玩。登入（設定 → 帳號）為選用，登入後會儲存進度，換裝置也能繼續玩。',
       q5: '支援手把和哪些語言？', a5: '支援手把。提供 12 種語言：繁體中文、簡體中文、英文、韓文、日文、西班牙文、法文、德文、義大利文、葡萄牙文、俄文、阿拉伯文。',
-      c1: '無廣告', c2: '無轉蛋', c3: '前 15 關免費', shots: '遊戲截圖', shot: '遊戲截圖' },
+      c1: '無廣告', c2: '無轉蛋', c3: '前 15 關免費', shots: '遊戲截圖', shot: '遊戲截圖',
+      hVsK: '線上對戰', hVsH: '最多 6 人同場對戰',
+      hVsP: '建立房間，把五位房間號碼告訴朋友，他們馬上就能加入。個人戰、團隊戰都可以，場地有十種糖果世界，一個人玩時有個性各異的機器人果凍陪你打，打完的對戰還能重播。',
+      hVs1: '最多 6 人', hVs2: '房間號碼', hVs3: '個人戰或團隊戰', hVs4: '重播',
+      hMpK: '地圖製作', hMpH: '親手做地圖，用分享碼傳給朋友',
+      hMpP: '塗上餅乾和牆壁，再加入草叢和水，選擇 2、4 或 6 人，連道具也能自己決定。完成後會得到 JELLY 分享碼，朋友輸入後就能在你的地圖上對戰。',
+      hMp1: '隨心所欲地畫', hMp2: '2、4 或 6 人', hMp3: '用分享碼傳送',
+      hChK: '挑戰書', hChH: '12 個改變規則的特殊關卡',
+      hChP: '打倒每個世界的魔王，就會收到挑戰書：同一關，但有一條規則被翻轉。引線變短、只能放一個炸彈、全是大王炸彈、大家一起衝鋒。從第二封挑戰書開始，規則每天都不一樣。',
+      hCh1: '12 個特殊關卡', hCh2: '每天不同的規則', hCh3: '魔王關的變奏',
+      q6: '什麼時候開放？', a6: '對戰、線上房間和地圖製作，會在你遊玩免費關卡的過程中陸續開放。前兩封挑戰書免費，其餘包含在完整版中。' },
     'zh-Hans': { name: '果冻碰碰乐', tag1: '放下果冻炸弹，', tag2: '困住朋友，砰！', sub: 'Android 和 iOS 上的 Q 弹炸弹对战派对游戏。',
       soon: '即将登陆 Google Play 和 App Store', outBoth: '现已上线 — 免费开玩', outPlay: '已在 Google Play 上线', outApp: '已在 App Store 上线',
       join: '加入官方 Discord', noteSoon: '上线消息会最先在 Discord 发布。', noteOut: '前 15 关免费。无广告，无抽卡。',
@@ -411,11 +503,21 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: '打开声音', sndOff: '关闭声音', langLbl: '语言', vid: '游戏画面：果冻们在糖果场地上放炸弹、互相炸开',
       faqH: '常见问题',
       q1: '游戏免费吗？', a1: '是的，下载和游玩都免费。前 15 关免费，一次购买即可解锁全部 50 关。装扮主题包可按喜好选购。无广告、无订阅、无抽卡。',
-      q2: '需要联网吗？', a2: '不需要。闯关和一部手机两人同玩都可以离线游玩，只有联机对战需要网络。',
+      q2: '需要联网吗？', a2: '不需要。闯关和一部手机两人同玩都可以离线游玩，只有在线对战和分享地图需要联网。',
       q3: '怎么和朋友一起玩？', a3: '两人共用一部手机，在专为双人设计的横向场地对战。联机对战只要创建房间并分享五位房间号码，最多 6 人同玩。',
       q4: '需要注册账号吗？', a4: '不需要，下载后就能直接玩。登录（设置 → 账号）为可选项，登录后会保存进度，换设备也能继续玩。',
       q5: '支持手柄和哪些语言？', a5: '支持手柄。提供 12 种语言：简体中文、繁体中文、英语、韩语、日语、西班牙语、法语、德语、意大利语、葡萄牙语、俄语、阿拉伯语。',
-      c1: '无广告', c2: '无抽卡', c3: '前 15 关免费', shots: '游戏截图', shot: '游戏截图' },
+      c1: '无广告', c2: '无抽卡', c3: '前 15 关免费', shots: '游戏截图', shot: '游戏截图',
+      hVsK: '在线对战', hVsH: '最多 6 人同场对战',
+      hVsP: '创建房间，把五位房间号码告诉朋友，他们马上就能加入。个人战、团队战都可以，场地有十种糖果世界，一个人玩时有性格各异的机器人果冻陪你打，打完的对战还能重播。',
+      hVs1: '最多 6 人', hVs2: '房间号码', hVs3: '个人战或团队战', hVs4: '重播',
+      hMpK: '地图制作', hMpH: '亲手做地图，用分享码发给朋友',
+      hMpP: '涂上饼干和墙壁，再加入草丛和水，选择 2、4 或 6 人，连道具也能自己决定。完成后会得到 JELLY 分享码，朋友输入后就能在你的地图上对战。',
+      hMp1: '随心所欲地画', hMp2: '2、4 或 6 人', hMp3: '用分享码发送',
+      hChK: '挑战书', hChH: '12 个改变规则的特殊关卡',
+      hChP: '打倒每个世界的魔王，就会收到挑战书：同一关，但有一条规则被翻转。引线变短、只能放一个炸弹、全是大王炸弹、大家一起冲锋。从第二封挑战书开始，规则每天都不一样。',
+      hCh1: '12 个特殊关卡', hCh2: '每天不同的规则', hCh3: '魔王关的变奏',
+      q6: '什么时候开放？', a6: '对战、在线房间和地图制作，会在你玩免费关卡的过程中陆续开放。前两封挑战书免费，其余包含在完整版中。' },
     ru: { name: 'Pop! Jelly PangPang', tag1: 'Ставь желе-бомбы.', tag2: 'Лови друзей — и бах!', sub: 'Мягкая и весёлая игра-вечеринка с бомбами для Android и iOS.',
       soon: 'Скоро в Google Play и App Store', outBoth: 'Уже вышла — начни бесплатно', outPlay: 'Уже в Google Play', outApp: 'Уже в App Store',
       join: 'Зайти в официальный Discord', noteSoon: 'Новости о выходе первыми появляются в Discord.', noteOut: 'Первые 15 уровней бесплатно. Без рекламы и гачи.',
@@ -430,11 +532,21 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: 'Включить звук', sndOff: 'Выключить звук', langLbl: 'Язык', vid: 'Игровой процесс: желе ставят бомбы и лопают друг друга на сладких аренах',
       faqH: 'Частые вопросы',
       q1: 'Игра бесплатная?', a1: 'Да, скачать и играть можно бесплатно. Первые 15 уровней бесплатны, а одна покупка открывает все 50. Тематические наборы украшений — по желанию. Без рекламы, без подписок, без гачи.',
-      q2: 'Нужен ли интернет?', a2: 'Нет. Уровни и игра вдвоём на одном телефоне работают офлайн. Подключение нужно только для онлайн-матчей.',
+      q2: 'Нужен ли интернет?', a2: 'Нет. Уровни и игра вдвоём на одном телефоне работают офлайн. Подключение нужно только для онлайн-матчей и обмена картами.',
       q3: 'Как играть вместе?', a3: 'Вдвоём на одном телефоне — на широком поле для двоих. В онлайне создайте комнату и поделитесь её кодом комнаты из пяти букв. Играть могут до 6 человек.',
       q4: 'Нужен ли аккаунт?', a4: 'Нет, играть можно сразу. Вход (Настройки → Аккаунт) необязателен: он сохраняет прогресс, чтобы продолжить на другом устройстве.',
       q5: 'Геймпады и языки?', a5: 'Геймпады поддерживаются. В игре 12 языков: русский, английский, корейский, японский, китайский (упрощённый и традиционный), испанский, французский, немецкий, итальянский, португальский и арабский.',
-      c1: 'Без рекламы', c2: 'Без гачи', c3: '15 уровней бесплатно', shots: 'Скриншоты', shot: 'Скриншот' },
+      c1: 'Без рекламы', c2: 'Без гачи', c3: '15 уровней бесплатно', shots: 'Скриншоты', shot: 'Скриншот',
+      hVsK: 'Онлайн-матчи', hVsH: 'До 6 игроков в одном бою',
+      hVsP: 'Создай комнату, поделись кодом из пяти символов, и друзья сразу заходят. Каждый сам за себя или команды, десять сладких арен, желе-боты со своим характером и повтор после матча.',
+      hVs1: 'До 6 игроков', hVs2: 'Код комнаты', hVs3: 'Команды или каждый сам', hVs4: 'Повтор',
+      hMpK: 'Редактор карт', hMpH: 'Построй свою арену',
+      hMpP: 'Рисуй печенье и стены, добавляй кусты и воду, выбери поле на 2, 4 или 6 игроков и предметы. Получи JELLY-код: друзья введут его и сразятся на твоей карте.',
+      hMp1: 'Рисуй как хочешь', hMp2: '2, 4 или 6 игроков', hMp3: 'Делись по коду',
+      hChK: 'Вызовы', hChH: '12 особых уровней с подвохом',
+      hChP: 'Победи босса мира — и придёт вызов: тот же уровень, но с одним перевёрнутым правилом. Фитиль короче. Только одна бомба. Только мега-бомбы. Все бросаются на тебя. Со второго вызова подвох меняется каждый день.',
+      hCh1: '12 особых уровней', hCh2: 'Новый подвох каждый день', hCh3: 'Боссы с новыми правилами',
+      q6: 'Что и когда открывается?', a6: 'Бои, онлайн-комнаты и редактор карт открываются по мере прохождения бесплатных уровней. Первые два вызова тоже бесплатны, остальные входят в полную версию.' },
     ar: { name: 'جيلي بانغ بانغ', tag1: 'ضع قنابل الجيلي.', tag2: 'احبس أصدقاءك. بوم!', sub: 'لعبة جماعية طرية لمعارك القنابل على أندرويد و iOS.',
       soon: 'قريبًا على Google Play و App Store', outBoth: 'متوفرة الآن — ابدأ مجانًا', outPlay: 'متوفرة الآن على Google Play', outApp: 'متوفرة الآن على App Store',
       join: 'انضم إلى Discord الرسمي', noteSoon: 'أخبار الإصدار تُنشر على Discord أولًا.', noteOut: 'أول 15 مرحلة مجانية. بلا إعلانات وبلا غاتشا.',
@@ -449,11 +561,21 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: 'تشغيل الصوت', sndOff: 'إيقاف الصوت', langLbl: 'اللغة', vid: 'مشاهد من اللعبة: الجيلي يضع القنابل ويفجّر بعضه بعضًا في ساحات الحلوى',
       faqH: 'أسئلة شائعة',
       q1: 'هل اللعبة مجانية؟', a1: 'نعم، التحميل واللعب مجانيان. أول 15 مرحلة مجانية، وشراء واحد يفتح المراحل الخمسين كلها. حزم الزينة اختيارية. بلا إعلانات، بلا اشتراكات، بلا غاتشا.',
-      q2: 'هل أحتاج إلى الإنترنت؟', a2: 'لا. المراحل ولعب لاعبَين على هاتف واحد يعملان بدون إنترنت. المباريات عبر الإنترنت فقط تحتاج إلى اتصال.',
+      q2: 'هل أحتاج إلى الإنترنت؟', a2: 'لا. المراحل واللعب بين لاعبين على هاتف واحد يعملان دون إنترنت. المباريات عبر الإنترنت ومشاركة الخرائط فقط تحتاجان إلى اتصال.',
       q3: 'كيف نلعب معًا؟', a3: 'لاعبان يتشاركان هاتفًا واحدًا على ساحة عريضة مصممة لاثنين. وعبر الإنترنت أنشئ غرفة وشارك رمز الغرفة المكوّن من خمسة أحرف. يمكن أن يلعب حتى 6 لاعبين.',
       q4: 'هل أحتاج إلى حساب؟', a4: 'لا. يمكنك اللعب فورًا. تسجيل الدخول اختياري (الإعدادات ← الحساب) ويحفظ تقدمك لتكمل من جهاز آخر.',
       q5: 'ماذا عن يد التحكم واللغات؟', a5: 'اللعبة تدعم يد التحكم، ومتوفرة بـ 12 لغة: العربية والإنجليزية والكورية واليابانية والصينية (المبسطة والتقليدية) والإسبانية والفرنسية والألمانية والإيطالية والبرتغالية والروسية.',
-      c1: 'بلا إعلانات', c2: 'بلا غاتشا', c3: '15 مرحلة مجانية', shots: 'لقطات من اللعبة', shot: 'لقطة من اللعبة' },
+      c1: 'بلا إعلانات', c2: 'بلا غاتشا', c3: '15 مرحلة مجانية', shots: 'لقطات من اللعبة', shot: 'لقطة من اللعبة',
+      hVsK: 'مباريات عبر الإنترنت', hVsH: 'حتى 6 لاعبين في مباراة واحدة',
+      hVsP: 'أنشئ غرفة وشارك رمزها المكوّن من خمسة أحرف، وسينضم أصدقاؤك فورًا. فردي أو فرق، وعشر ساحات حلوى، وجيلي آلية لكل منها شخصيتها، وإعادة للمباراة بعد انتهائها.',
+      hVs1: 'حتى 6 لاعبين', hVs2: 'رمز الغرفة', hVs3: 'فردي أو فرق', hVs4: 'إعادة',
+      hMpK: 'صانع الخرائط', hMpH: 'ابنِ ساحتك بنفسك',
+      hMpP: 'ارسم البسكويت والجدران، وأضف الشجيرات والماء، واختر ساحة لـ 2 أو 4 أو 6 لاعبين وحدّد العناصر. ثم احصل على رمز JELLY: يكتبه أصدقاؤك ويلعبون على خريطتك.',
+      hMp1: 'ارسمها كما تشاء', hMp2: '2 أو 4 أو 6 لاعبين', hMp3: 'شاركها برمز',
+      hChK: 'التحديات', hChH: '12 مرحلة خاصة بمفاجأة',
+      hChP: 'اهزم زعيم أحد العوالم فيصلك تحدٍّ: المرحلة نفسها لكن بقاعدة واحدة مقلوبة. فتيل قصير. قنبلة واحدة فقط. كل القنابل ضخمة. الجميع يندفع نحوك. ومن التحدي الثاني تتغيّر المفاجأة كل يوم.',
+      hCh1: '12 مرحلة خاصة', hCh2: 'مفاجأة جديدة كل يوم', hCh3: 'مراحل الزعماء بحلّة جديدة',
+      q6: 'ما الذي يُفتح ومتى؟', a6: 'تُفتح المباريات والغرف عبر الإنترنت وصانع الخرائط تدريجيًا أثناء تقدّمك في المراحل المجانية. أول تحدّيين مجانيان أيضًا، والباقي ضمن النسخة الكاملة.' },
     es: { name: 'Pop! Jelly PangPang', tag1: 'Pon bombas de gelatina.', tag2: 'Atrapa a tus amigos. ¡Pop!', sub: 'Un blandito juego de fiesta con batallas de bombas para Android e iOS.',
       soon: 'Próximamente en Google Play y App Store', outBoth: 'Ya disponible: empieza gratis', outPlay: 'Ya disponible en Google Play', outApp: 'Ya disponible en App Store',
       join: 'Únete al Discord oficial', noteSoon: 'Las noticias del lanzamiento llegan primero a Discord.', noteOut: 'Los primeros 15 niveles son gratis. Sin anuncios ni gacha.',
@@ -468,11 +590,21 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: 'Activar sonido', sndOff: 'Desactivar sonido', langLbl: 'Idioma', vid: 'Juego: las gelatinas ponen bombas y se revientan entre sí en arenas de dulces',
       faqH: 'Preguntas frecuentes',
       q1: '¿Es gratis?', a1: 'Sí, descargar y jugar es gratis. Los primeros 15 niveles son gratis y una sola compra desbloquea los 50. Los packs temáticos de aspectos son opcionales. Sin anuncios, sin suscripciones, sin gacha.',
-      q2: '¿Necesito internet?', a2: 'No. Los niveles y el modo de dos jugadores en un mismo móvil funcionan sin conexión. Solo las partidas en línea la necesitan.',
+      q2: '¿Necesito internet?', a2: 'No. Los niveles y el modo de dos jugadores en un teléfono funcionan sin conexión. Solo las partidas en línea y compartir mapas necesitan conexión.',
       q3: '¿Cómo jugamos juntos?', a3: 'Dos jugadores comparten un mismo móvil en un tablero ancho hecho para dos. En línea, crea una sala y comparte su código de sala de cinco letras. Pueden jugar hasta 6.',
       q4: '¿Necesito una cuenta?', a4: 'No. Puedes jugar al instante. Iniciar sesión (Ajustes → Cuenta) es opcional y guarda tu progreso para continuar en otro dispositivo.',
       q5: '¿Mandos e idiomas?', a5: 'Es compatible con mandos. El juego está en 12 idiomas: español, inglés, coreano, japonés, chino (simplificado y tradicional), francés, alemán, italiano, portugués, ruso y árabe.',
-      c1: 'Sin anuncios', c2: 'Sin gacha', c3: '15 niveles gratis', shots: 'Capturas de pantalla', shot: 'Captura de pantalla' },
+      c1: 'Sin anuncios', c2: 'Sin gacha', c3: '15 niveles gratis', shots: 'Capturas de pantalla', shot: 'Captura de pantalla',
+      hVsK: 'Batalla en línea', hVsH: 'Hasta 6 jugadores en una partida',
+      hVsP: 'Crea una sala, comparte el código de cinco caracteres y tus amigos entran al momento. Todos contra todos o por equipos, diez arenas de dulces, gelatinas bot con personalidad propia y repetición al terminar.',
+      hVs1: 'Hasta 6 jugadores', hVs2: 'Código de sala', hVs3: 'Equipos o todos contra todos', hVs4: 'Repetición',
+      hMpK: 'Crear mapa', hMpH: 'Construye tu propia arena',
+      hMpP: 'Pinta galletas y muros, añade arbustos y agua, elige 2, 4 o 6 jugadores y decide los objetos. Después obtén un código JELLY: tus amigos lo escriben y juegan en tu mapa.',
+      hMp1: 'Píntalo a tu manera', hMp2: '2, 4 o 6 jugadores', hMp3: 'Compártelo con un código',
+      hChK: 'Desafíos', hChH: '12 niveles especiales con giro',
+      hChP: 'Vence al jefe de un mundo y llega un desafío: el mismo nivel con una regla al revés. Mecha corta. Una sola bomba. Todo bombas gigantes. Todos a por ti. Desde el segundo desafío, el giro cambia cada día.',
+      hCh1: '12 niveles especiales', hCh2: 'Un giro nuevo cada día', hCh3: 'Niveles de jefe, remezclados',
+      q6: '¿Qué se abre y cuándo?', a6: 'El modo batalla, las salas en línea y Crear mapa se abren a medida que avanzas por los niveles gratis. Los dos primeros desafíos también son gratis; el resto viene con la versión completa.' },
     fr: { name: 'Pop! Jelly PangPang', tag1: 'Pose des bombes gelée.', tag2: 'Piège tes amis. Pop !', sub: 'Un jeu de fête tout moelleux de batailles de bombes, sur Android et iOS.',
       soon: 'Bientôt sur Google Play et l’App Store', outBoth: 'Disponible — gratuit pour commencer', outPlay: 'Disponible sur Google Play', outApp: 'Disponible sur l’App Store',
       join: 'Rejoindre le Discord officiel', noteSoon: 'Les infos de sortie arrivent d’abord sur Discord.', noteOut: 'Les 15 premiers niveaux sont gratuits. Sans pub, sans gacha.',
@@ -487,11 +619,21 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: 'Activer le son', sndOff: 'Couper le son', langLbl: 'Langue', vid: 'Extrait du jeu : les gelées posent des bombes et s’éclatent dans des arènes sucrées',
       faqH: 'Questions fréquentes',
       q1: 'Est-ce gratuit ?', a1: 'Oui, le téléchargement et le jeu sont gratuits. Les 15 premiers niveaux sont gratuits et un seul achat débloque les 50. Les packs de tenues à thème sont facultatifs. Sans pub, sans abonnement, sans gacha.',
-      q2: 'Faut-il une connexion internet ?', a2: 'Non. Les niveaux et le mode à deux sur un seul téléphone fonctionnent hors ligne. Seules les parties en ligne demandent une connexion.',
+      q2: 'Faut-il une connexion internet ?', a2: 'Non. Les niveaux et le mode à deux sur un seul téléphone marchent hors ligne. Seuls les matchs en ligne et le partage de cartes demandent une connexion.',
       q3: 'Comment jouer ensemble ?', a3: 'À deux sur un seul téléphone, sur un plateau large conçu pour deux. En ligne, crée un salon et partage son code du salon à cinq lettres. Jusqu’à 6 joueurs peuvent jouer.',
       q4: 'Faut-il un compte ?', a4: 'Non. Tu peux jouer tout de suite. La connexion (Réglages → Compte) est facultative et sauvegarde ta progression pour continuer sur un autre appareil.',
       q5: 'Manettes et langues ?', a5: 'Les manettes sont prises en charge. Le jeu existe en 12 langues : français, anglais, coréen, japonais, chinois (simplifié et traditionnel), espagnol, allemand, italien, portugais, russe et arabe.',
-      c1: 'Sans pub', c2: 'Sans gacha', c3: '15 niveaux gratuits', shots: 'Captures d’écran', shot: 'Capture d’écran' },
+      c1: 'Sans pub', c2: 'Sans gacha', c3: '15 niveaux gratuits', shots: 'Captures d’écran', shot: 'Capture d’écran',
+      hVsK: 'Combat en ligne', hVsH: 'Jusqu’à 6 joueurs dans une partie',
+      hVsP: 'Crée un salon, partage son code à cinq caractères et tes amis arrivent aussitôt. Chacun pour soi ou en équipes, dix arènes sucrées, des gelées bots avec leur caractère et un replay à la fin.',
+      hVs1: 'Jusqu’à 6 joueurs', hVs2: 'Code du salon', hVs3: 'Équipes ou chacun pour soi', hVs4: 'Replay',
+      hMpK: 'Créer une carte', hMpH: 'Construis ta propre arène',
+      hMpP: 'Peins des biscuits et des murs, ajoute des buissons et de l’eau, choisis 2, 4 ou 6 joueurs et les objets. Tu obtiens un code JELLY : tes amis le saisissent et jouent sur ta carte.',
+      hMp1: 'Peins comme tu veux', hMp2: '2, 4 ou 6 joueurs', hMp3: 'Partage avec un code',
+      hChK: 'Défis', hChH: '12 niveaux spéciaux, une règle bousculée',
+      hChP: 'Bats le boss d’un monde et un défi arrive : le même niveau, avec une règle retournée. Meche courte. Une seule bombe. Que des méga bombes. Tout le monde fonce sur toi. Dès le deuxième défi, la surprise change chaque jour.',
+      hCh1: '12 niveaux spéciaux', hCh2: 'Une nouvelle surprise chaque jour', hCh3: 'Niveaux de boss remixés',
+      q6: 'Qu’est-ce qui s’ouvre, et quand ?', a6: 'Le mode combat, les salons en ligne et Créer une carte s’ouvrent au fil des niveaux gratuits. Les deux premiers défis sont gratuits aussi ; le reste est dans la version complète.' },
     it: { name: 'Pop! Jelly PangPang', tag1: 'Piazza bombe di gelatina.', tag2: 'Intrappola gli amici. Pop!', sub: 'Un morbido party game di battaglie a colpi di bombe per Android e iOS.',
       soon: 'Presto su Google Play e App Store', outBoth: 'Disponibile ora: inizia gratis', outPlay: 'Disponibile su Google Play', outApp: 'Disponibile su App Store',
       join: 'Entra nel Discord ufficiale', noteSoon: 'Le notizie sul lancio arrivano prima su Discord.', noteOut: 'I primi 15 livelli sono gratis. Niente pubblicità, niente gacha.',
@@ -506,11 +648,21 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: 'Attiva audio', sndOff: 'Disattiva audio', langLbl: 'Lingua', vid: 'Gameplay: le gelatine piazzano bombe e si fanno scoppiare in arene di dolci',
       faqH: 'Domande frequenti',
       q1: 'È gratis?', a1: 'Sì, scaricare e giocare è gratis. I primi 15 livelli sono gratis e un solo acquisto sblocca tutti e 50. I pacchetti a tema per vestire la gelatina sono facoltativi. Niente pubblicità, niente abbonamenti, niente gacha.',
-      q2: 'Serve internet?', a2: 'No. I livelli e la modalità a due sullo stesso telefono funzionano offline. Solo le partite online richiedono la connessione.',
+      q2: 'Serve internet?', a2: 'No. I livelli e la modalità a due sullo stesso telefono funzionano offline. Solo le partite online e la condivisione delle mappe richiedono la connessione.',
       q3: 'Come si gioca insieme?', a3: 'In due sullo stesso telefono, su un campo largo pensato per due. Online, crea una stanza e condividi il suo codice stanza di cinque lettere. Si può giocare fino a 6.',
       q4: 'Serve un account?', a4: 'No. Puoi giocare subito. L’accesso (Impostazioni → Account) è facoltativo e salva i tuoi progressi per continuare su un altro dispositivo.',
       q5: 'Controller e lingue?', a5: 'I controller sono supportati. Il gioco è in 12 lingue: italiano, inglese, coreano, giapponese, cinese (semplificato e tradizionale), spagnolo, francese, tedesco, portoghese, russo e arabo.',
-      c1: 'Niente pubblicità', c2: 'Niente gacha', c3: '15 livelli gratis', shots: 'Screenshot', shot: 'Screenshot' },
+      c1: 'Niente pubblicità', c2: 'Niente gacha', c3: '15 livelli gratis', shots: 'Screenshot', shot: 'Screenshot',
+      hVsK: 'Battaglia online', hVsH: 'Fino a 6 giocatori in una partita',
+      hVsP: 'Crea una stanza, condividi il codice di cinque caratteri e i tuoi amici entrano subito. Tutti contro tutti o a squadre, dieci arene di dolci, gelatine bot con la loro personalità e un replay a fine partita.',
+      hVs1: 'Fino a 6 giocatori', hVs2: 'Codice stanza', hVs3: 'Squadre o tutti contro tutti', hVs4: 'Replay',
+      hMpK: 'Crea mappa', hMpH: 'Costruisci la tua arena',
+      hMpP: 'Dipingi biscotti e muri, aggiungi cespugli e acqua, scegli 2, 4 o 6 giocatori e gli oggetti. Poi ottieni un codice JELLY: i tuoi amici lo inseriscono e giocano sulla tua mappa.',
+      hMp1: 'Dipingila a modo tuo', hMp2: '2, 4 o 6 giocatori', hMp3: 'Condividila con un codice',
+      hChK: 'Sfide', hChH: '12 livelli speciali con una variante',
+      hChP: 'Batti il boss di un mondo e arriva una sfida: lo stesso livello con una regola capovolta. Miccia corta. Una sola bomba. Solo bombe giganti. Tutti ti caricano. Dalla seconda sfida in poi, la variante cambia ogni giorno.',
+      hCh1: '12 livelli speciali', hCh2: 'Una novità ogni giorno', hCh3: 'Livelli boss rimescolati',
+      q6: 'Cosa si apre e quando?', a6: 'La modalità battaglia, le stanze online e Crea mappa si aprono man mano che superi i livelli gratuiti. Anche le prime due sfide sono gratis; il resto è nella versione completa.' },
     de: { name: 'Pop! Jelly PangPang', tag1: 'Leg Gelee-Bomben.', tag2: 'Fang deine Freunde. Peng!', sub: 'Ein wabbeliges Bomben-Partyspiel für Android und iOS.',
       soon: 'Bald bei Google Play und im App Store', outBoth: 'Jetzt erhältlich – kostenlos starten', outPlay: 'Jetzt bei Google Play', outApp: 'Jetzt im App Store',
       join: 'Zum offiziellen Discord', noteSoon: 'Neuigkeiten zum Start gibt es zuerst auf Discord.', noteOut: 'Die ersten 15 Level sind kostenlos. Keine Werbung, kein Gacha.',
@@ -525,11 +677,21 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: 'Ton einschalten', sndOff: 'Ton ausschalten', langLbl: 'Sprache', vid: 'Gameplay: Gelees legen Bomben und lassen einander in Süßigkeiten-Arenen platzen',
       faqH: 'Häufige Fragen',
       q1: 'Ist es kostenlos?', a1: 'Ja, Herunterladen und Spielen ist kostenlos. Die ersten 15 Level sind kostenlos, ein einmaliger Kauf schaltet alle 50 frei. Thematische Kosmetik-Pakete sind optional. Keine Werbung, kein Abo, kein Gacha.',
-      q2: 'Brauche ich Internet?', a2: 'Nein. Die Level und der Zwei-Spieler-Modus an einem Handy funktionieren offline. Nur Online-Matches brauchen eine Verbindung.',
+      q2: 'Brauche ich Internet?', a2: 'Nein. Die Level und der Zwei-Spieler-Modus an einem Handy funktionieren offline. Nur Online-Matches und das Teilen von Karten brauchen eine Verbindung.',
       q3: 'Wie spielen wir zusammen?', a3: 'Zu zweit an einem Handy, auf einem breiten Spielfeld für zwei. Online erstellst du einen Raum und teilst seinen Raumcode mit fünf Buchstaben. Bis zu 6 können mitspielen.',
       q4: 'Brauche ich ein Konto?', a4: 'Nein. Du kannst sofort spielen. Die Anmeldung (Einstellungen → Konto) ist freiwillig und speichert deinen Fortschritt, damit du auf einem anderen Gerät weiterspielen kannst.',
       q5: 'Controller und Sprachen?', a5: 'Controller werden unterstützt. Das Spiel gibt es in 12 Sprachen: Deutsch, Englisch, Koreanisch, Japanisch, Chinesisch (vereinfacht und traditionell), Spanisch, Französisch, Italienisch, Portugiesisch, Russisch und Arabisch.',
-      c1: 'Keine Werbung', c2: 'Kein Gacha', c3: '15 Level kostenlos', shots: 'Screenshots', shot: 'Screenshot' },
+      c1: 'Keine Werbung', c2: 'Kein Gacha', c3: '15 Level kostenlos', shots: 'Screenshots', shot: 'Screenshot',
+      hVsK: 'Online-Kampf', hVsH: 'Bis zu 6 Spieler in einer Runde',
+      hVsP: 'Raum erstellen, den Raumcode mit fünf Buchstaben teilen, und deine Freunde sind sofort dabei. Jeder gegen jeden oder in Teams, zehn Süßigkeiten-Arenen, Bots mit eigenem Charakter und eine Wiederholung nach der Runde.',
+      hVs1: 'Bis zu 6 Spieler', hVs2: 'Raumcode', hVs3: 'Teams oder jeder gegen jeden', hVs4: 'Wiederholung',
+      hMpK: 'Karten-Editor', hMpH: 'Bau deine eigene Arena',
+      hMpP: 'Mal Kekse und Wände, setz Büsche und Wasser dazu, wähle 2, 4 oder 6 Spieler und bestimme die Items. Dann bekommst du einen JELLY-Code: Freunde geben ihn ein und kämpfen auf deiner Karte.',
+      hMp1: 'Ganz nach deinem Geschmack', hMp2: '2, 4 oder 6 Spieler', hMp3: 'Per Code teilen',
+      hChK: 'Herausforderungen', hChH: '12 Spezial-Level mit Twist',
+      hChP: 'Besiege den Boss einer Welt und eine Herausforderung trifft ein: dasselbe Level, aber mit einer umgedrehten Regel. Kurze Lunte. Nur eine Bombe. Nur Riesenbomben. Alle stürmen auf dich zu. Ab der zweiten Herausforderung wechselt der Twist jeden Tag.',
+      hCh1: '12 Spezial-Level', hCh2: 'Jeden Tag ein neuer Twist', hCh3: 'Boss-Level neu gemischt',
+      q6: 'Was öffnet sich wann?', a6: 'Kampfmodus, Online-Räume und Karten-Editor öffnen sich, während du die kostenlosen Level spielst. Auch die ersten zwei Herausforderungen sind kostenlos, der Rest gehört zur Vollversion.' },
     pt: { name: 'Pop! Jelly PangPang', tag1: 'Solte bombas de gelatina.', tag2: 'Prenda seus amigos. Pop!', sub: 'Um party game fofinho de batalhas de bombas para Android e iOS.',
       soon: 'Em breve no Google Play e na App Store', outBoth: 'Já disponível — comece grátis', outPlay: 'Já disponível no Google Play', outApp: 'Já disponível na App Store',
       join: 'Entre no Discord oficial', noteSoon: 'As novidades do lançamento chegam primeiro no Discord.', noteOut: 'As 15 primeiras fases são grátis. Sem anúncios, sem gacha.',
@@ -544,11 +706,21 @@ html[lang="ko"] body{word-break:keep-all}
       sndOn: 'Ativar som', sndOff: 'Desativar som', langLbl: 'Idioma', vid: 'Gameplay: as gelatinas soltam bombas e estouram umas às outras em arenas de doces',
       faqH: 'Perguntas frequentes',
       q1: 'É grátis?', a1: 'Sim, baixar e jogar é grátis. As 15 primeiras fases são grátis e uma única compra libera todas as 50. Os pacotes temáticos de visuais são opcionais. Sem anúncios, sem assinatura, sem gacha.',
-      q2: 'Preciso de internet?', a2: 'Não. As fases e o modo de dois jogadores no mesmo celular funcionam offline. Só as partidas online precisam de conexão.',
+      q2: 'Preciso de internet?', a2: 'Não. As fases e o modo de dois jogadores no mesmo celular funcionam offline. Só as partidas online e o compartilhamento de mapas precisam de conexão.',
       q3: 'Como jogamos juntos?', a3: 'Dois jogadores dividem o mesmo celular em um tabuleiro largo feito para dois. Online, crie uma sala e compartilhe o código da sala de cinco letras. Até 6 podem jogar.',
       q4: 'Preciso de uma conta?', a4: 'Não. Dá para jogar na hora. Entrar na conta (Opções → Conta) é opcional e salva seu progresso para continuar em outro aparelho.',
       q5: 'Controles e idiomas?', a5: 'Há suporte a controle. O jogo está em 12 idiomas: português, inglês, coreano, japonês, chinês (simplificado e tradicional), espanhol, francês, alemão, italiano, russo e árabe.',
-      c1: 'Sem anúncios', c2: 'Sem gacha', c3: '15 fases grátis', shots: 'Capturas de tela', shot: 'Captura de tela' }
+      c1: 'Sem anúncios', c2: 'Sem gacha', c3: '15 fases grátis', shots: 'Capturas de tela', shot: 'Captura de tela',
+      hVsK: 'Batalha online', hVsH: 'Até 6 jogadores na mesma partida',
+      hVsP: 'Crie uma sala, compartilhe o código de cinco letras e seus amigos entram na hora. Todos contra todos ou em equipes, dez arenas de doces, gelatinas bot com personalidade própria e replay no fim da partida.',
+      hVs1: 'Até 6 jogadores', hVs2: 'Código da sala', hVs3: 'Equipes ou todos contra todos', hVs4: 'Replay',
+      hMpK: 'Criar mapa', hMpH: 'Monte a sua própria arena',
+      hMpP: 'Pinte biscoitos e muros, adicione arbustos e água, escolha 2, 4 ou 6 jogadores e defina os itens. Depois, receba um código JELLY: seus amigos digitam e jogam no seu mapa.',
+      hMp1: 'Pinte do seu jeito', hMp2: '2, 4 ou 6 jogadores', hMp3: 'Compartilhe com um código',
+      hChK: 'Desafios', hChH: '12 fases especiais com reviravolta',
+      hChP: 'Vença o chefe de um mundo e chega um desafio: a mesma fase com uma regra de cabeça para baixo. Pavio curto. Só uma bomba. Só bombas gigantes. Todo mundo vem para cima de você. A partir do segundo desafio, a reviravolta muda todo dia.',
+      hCh1: '12 fases especiais', hCh2: 'Uma reviravolta nova por dia', hCh3: 'Fases de chefe remixadas',
+      q6: 'O que abre e quando?', a6: 'O modo batalha, as salas online e o Criar mapa vão abrindo conforme você joga as fases grátis. Os dois primeiros desafios também são grátis; o resto vem com a versão completa.' }
   };
   var pick = window.__jppPick, lang = window.__jppLang || 'en', src = '';   /* 언어는 <head> 의 스크립트가 먼저 정했다 */
   try { src = (new URLSearchParams(location.search).get('s') || '').toLowerCase().replace(/[^a-z0-9_]/g, '').slice(0, 24); } catch (e) {}
@@ -582,7 +754,7 @@ html[lang="ko"] body{word-break:keep-all}
     $('ctaNote').textContent = t.noteSoon; $('ctaNote').hidden = hasPlay || hasApp;   /* 출시 뒤에는 바로 위 칩 셋(광고 없음·뽑기 없음·15단계 무료)이 그 말을 대신한다 */
     badges(t);
     if ($('snd')) $('snd').setAttribute('aria-label', sndIsOn ? t.sndOff : t.sndOn);
-    var st = $('strip');                          /* 스크린샷 줄 — 한국어는 한국어 화면, 나머지는 영어 화면 */
+    var st = $('strip');                          /* 스크린샷 줄 — 한국어는 한국어 화면, 나머지는 영어 화면 · [c430b] 열한 장: 6인 대전 · 맵 만들기 · 도전장 편지 · 대장 · 도전장 지도 · 꾸미기 … */
     if (st) {
       st.setAttribute('aria-label', t.shots);
       var im = st.getElementsByTagName('img'), set = lang === 'ko' ? 'ko' : 'en';
@@ -657,7 +829,7 @@ html[lang="ko"] body{word-break:keep-all}
 
   /* 소개 칸의 작은 장면 — 화면에 들어오면 돌고 나가면 멈춘다. 움직임 줄이기를 켠 기기에서는 멈춘 그림 그대로 둔다(파일도 안 받는다). */
   try {
-    var fvs = document.querySelectorAll('.fv');
+    var fvs = document.querySelectorAll('.fv, .hlm video');   /* [c430] */
     if (fvs.length && 'IntersectionObserver' in window && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
       var fio = new IntersectionObserver(function (es) {
         for (var i = 0; i < es.length; i++) {
