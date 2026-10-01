@@ -50,7 +50,7 @@ main{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:max(28px,
 .snd[aria-pressed="true"] .off{display:none}
 .icon{position:relative;z-index:2;display:block;width:88px;height:88px;margin:-46px auto 10px;border-radius:22px;border:4px solid #fff;box-shadow:0 7px 0 rgba(120,10,70,.28),0 12px 22px rgba(90,0,50,.3);transform-origin:50% 100%;animation:squish 3.2s ease-in-out infinite}
 @keyframes squish{0%,100%{transform:scale(1,1)}8%{transform:scale(1.06,.93)}16%{transform:scale(.96,1.05)}24%{transform:scale(1,1)}}
-.logo{display:block;width:min(100%,460px);height:auto;margin:0 auto}
+.logo{display:block;width:min(100%,460px);height:auto;margin:0 auto;direction:ltr}
 .logo text{font-family:"Fredoka",system-ui,sans-serif;font-weight:600;text-anchor:middle}
 h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tagline{margin:10px auto 0;font-family:"Fredoka",system-ui,sans-serif;font-weight:600;font-size:clamp(21px,5.6vw,27px);line-height:1.25;color:#fff;text-shadow:0 2px 0 rgba(130,10,70,.45)}
@@ -80,9 +80,31 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 h2{margin:0 0 6px;font-size:23px;line-height:1.2}
 .card>p{margin:0 0 14px}
 .card>.fine{margin:20px 0 0}
+.chan{display:grid;grid-template-columns:1fr 1fr;gap:12px 10px;margin:0;padding:0 0 5px;list-style:none}
+.chan li:first-child:nth-last-child(odd){grid-column:1/-1}
+.chan .btn{min-height:54px;padding:8px 10px;gap:8px;font-size:18px;color:#fff}
+.chan svg{flex:none;width:23px;height:23px;fill:currentColor}
+.chan .ch-x svg{width:26px;height:26px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ch-yt{background:#e6002e;box-shadow:0 5px 0 #a80021}
+.ch-yt:active{box-shadow:0 2px 0 #a80021}
+.ch-ig{background:linear-gradient(45deg,#f0562f 0%,#e1306c 38%,#c13584 68%,#833ab4 100%);box-shadow:0 5px 0 #7d2466}
+.ch-ig:active{box-shadow:0 2px 0 #7d2466}
+.ch-x{background:#17121f;box-shadow:0 5px 0 #000}
+.ch-x:active{box-shadow:0 2px 0 #000}
+@media (max-width:350px){.chan .btn{font-size:15.5px;gap:6px;padding:8px 6px}.chan svg{width:20px;height:20px}}
 footer{margin-top:22px;text-align:center;color:#fff;font-size:14.5px;text-shadow:0 1px 0 rgba(130,10,70,.4)}
 footer nav{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;margin-bottom:8px}
 footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
+.topbar{display:flex;justify-content:flex-end;margin:0 0 12px}
+.lang{position:relative;display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 34px 0 12px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--ink);font-size:15px;line-height:1;box-shadow:0 3px 0 rgba(120,10,70,.28)}
+.lang svg{flex:none;width:18px;height:18px}
+.lang:after{content:"";position:absolute;right:14px;top:50%;width:7px;height:7px;margin-top:-6px;border-right:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);transform:rotate(45deg);pointer-events:none}
+[dir="rtl"] .lang{padding:0 12px 0 34px}
+[dir="rtl"] .lang:after{right:auto;left:14px}
+.lang select{position:absolute;inset:0;width:100%;height:100%;opacity:0;font-size:16px;cursor:pointer}
+.lang:focus-within{outline:3px solid var(--ink);outline-offset:3px}
+html[lang="ko"] body{word-break:keep-all}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){.icon{animation:none}.btn,.snd{transition:none}}
 </style>
@@ -90,6 +112,11 @@ footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
 <body>
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 <main>
+  <div class="topbar">
+    <label class="lang"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.8 12h18.4M12 2.8c2.7 2.6 4 5.7 4 9.2s-1.3 6.600-4 9.200c-2.700-2.600-4-5.700-4-9.200s1.300-6.600 4-9.200z" fill="none" stroke="currentColor" stroke-width="2"/></svg><span id="langName">English</span>
+      <select id="lang" aria-label="Language"></select>
+    </label>
+  </div>
   <header class="hero">
     <div class="reel">
       <video id="reel" autoplay muted loop playsinline preload="auto" poster="hero.jpg" width="720" height="540" aria-label="Gameplay: jellies drop bombs and pop each other across candy arenas">
@@ -118,8 +145,8 @@ footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
         <text x="300" y="158" fill="url(#gJelly)">JELLY PANG PANG</text>
       </g>
     </svg>
-    <p class="tagline"><span>Drop jelly bombs.</span> <span>Trap your friends. Pop!</span></p>
-    <p class="sub">A squishy bomb-battle party game for Android and iOS.</p>
+    <p class="tagline"><span data-i="tag1">Drop jelly bombs.</span> <span data-i="tag2">Trap your friends. Pop!</span></p>
+    <p class="sub" data-i="sub">A squishy bomb-battle party game for Android and iOS.</p>
   </header>
 
   <section class="card cta" aria-label="Get the game">
@@ -128,41 +155,43 @@ footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
       <a class="btn btn-store" id="bPlay" rel="noopener" hidden><small>Get it on</small>Google Play</a>
       <a class="btn btn-store" id="bApp" rel="noopener" hidden><small>Download on the</small>App Store</a>
     </div>
-    <a class="btn btn-line" id="bTrailer" rel="noopener" hidden>Watch the trailer</a>
-    <a class="btn btn-discord" id="bDiscord" href="https://discord.gg/Ug5UMKS7ZB" rel="noopener">Join the official Discord</a>
+    <a class="btn btn-line" id="bTrailer" rel="noopener" hidden data-i="trailer">Watch the trailer</a>
+    <a class="btn btn-discord" id="bDiscord" href="https://discord.gg/Ug5UMKS7ZB" rel="noopener" data-i="join">Join the official Discord</a>
     <p class="fine" id="ctaNote">Launch news lands on Discord first.</p>
   </section>
 
   <section class="card" aria-label="About the game">
     <ul class="feats">
-      <li><h3>Squishy</h3><p>Tap your jelly and it giggles. Poke it too much and it sulks.</p></li>
-      <li><h3>Better together</h3><p>Two players on one phone, or up to 6 online with a room code.</p></li>
-      <li><h3>Fair</h3><p>No ads. No gacha. The first 15 stages are free, and one purchase unlocks the rest.</p></li>
-      <li><h3>Plenty to do</h3><p>50 stages with bosses, a one-tile jump, a map maker and lots of ways to dress up your jelly.</p></li>
+      <li><h3 data-i="f1h">Squishy</h3><p data-i="f1p">Tap your jelly and it giggles. Poke it too much and it sulks.</p></li>
+      <li><h3 data-i="f2h">Better together</h3><p data-i="f2p">Two players on one phone, or up to 6 online with a room code.</p></li>
+      <li><h3 data-i="f3h">Fair</h3><p data-i="f3p">No ads. No gacha. The first 15 stages are free, and one purchase unlocks the rest.</p></li>
+      <li><h3 data-i="f4h">Plenty to do</h3><p data-i="f4p">50 stages with bosses, a one-tile jump, a map maker and lots of ways to dress up your jelly.</p></li>
     </ul>
     <ul class="tags">
-      <li class="tag">12 languages</li>
-      <li class="tag">Controller support</li>
-      <li class="tag">No sign-up needed</li>
+      <li class="tag" data-i="t1">12 languages</li>
+      <li class="tag" data-i="t2">Controller support</li>
+      <li class="tag" data-i="t3">No sign-up needed</li>
     </ul>
   </section>
 
-  <section class="card" aria-label="Community">
-    <h2>The official community is on Discord</h2>
-    <p>Find people to play online, share the maps you build, report bugs and talk to the developer. News and updates are posted there first.</p>
-    <a class="btn btn-discord" href="https://discord.gg/Ug5UMKS7ZB" rel="noopener">Open Discord</a>
-    <p class="fine">Discord is for ages 13 and up (older in some countries).</p>
+  <section class="card" aria-label="Official channels">
+    <h2 data-i="chH">Follow the jellies</h2>
+    <p data-i="chP">New clips and updates on every channel. To find people to play with, share your maps or report a bug, come to Discord.</p>
+    <ul class="chan">
+      <li><a class="btn btn-discord" href="https://discord.gg/Ug5UMKS7ZB" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>Discord</a></li>
+      <li><a class="btn ch-yt" href="https://www.youtube.com/channel/UCCp5AW7TDuy-Gc2rFn62g3Q" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>YouTube</a></li>
+      <li><a class="btn ch-ig" href="https://www.instagram.com/jelly_pang_pang/" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 1.5h9.6a5.7 5.7 0 0 1 5.7 5.7v9.6a5.7 5.7 0 0 1-5.7 5.7H7.2a5.7 5.7 0 0 1-5.7-5.7V7.2a5.7 5.7 0 0 1 5.7-5.7zm0 2.2a3.5 3.5 0 0 0-3.5 3.5v9.6a3.5 3.5 0 0 0 3.5 3.5h9.6a3.5 3.5 0 0 0 3.5-3.5V7.2a3.5 3.5 0 0 0-3.5-3.5zM12 6.9a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2zm0 2.2a2.9 2.9 0 1 0 0 5.8 2.9 2.9 0 0 0 0-5.8zm5.4-3.8a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"/></svg>Instagram</a></li>
+      <li><a class="btn ch-x" href="https://x.com/jelly_pang_pang" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span class="vh">X</span></a></li>
+    </ul>
+    <p class="fine" data-i="age">Discord is for ages 13 and up (older in some countries).</p>
   </section>
 
   <footer>
     <nav aria-label="Links">
-      <a href="https://www.youtube.com/channel/UCCp5AW7TDuy-Gc2rFn62g3Q" rel="noopener">YouTube</a>
-      <a href="https://www.instagram.com/jelly_pang_pang/" rel="noopener">Instagram</a>
-      <a href="https://x.com/jelly_pang_pang" rel="noopener">X</a>
-      <a href="https://jellypangpang1231.github.io/privacy/">Privacy</a>
-      <a href="mailto:jellypangpang1231@gmail.com">Contact</a>
+      <a href="https://jellypangpang1231.github.io/privacy/" data-i="priv">Privacy</a>
+      <a href="mailto:jellypangpang1231@gmail.com" data-i="contact">Contact</a>
     </nav>
-    <div>© 2026 Jelly PangPang</div>
+    <div dir="ltr">© 2026 Jelly PangPang</div>
   </footer>
 </main>
 <script>
@@ -176,28 +205,248 @@ footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
   var CFG = { play: '', appstore: '', applePt: '', trailer: '' };
 
   var $ = function (id) { return document.getElementById(id); };
+
+  /* ── 언어 ── 게임이 지원하는 12개(게임의 LANGS 와 같은 차례·같은 이름). 낱말은 게임 번역 표를 따른다(젤리 폭탄·방 번호·패드).
+     고르는 차례: 주소의 ?lang= → 전에 고른 것(localStorage) → 브라우저 언어 → 영어. 원문(HTML)은 영어다. */
+  var LANGS = [['ko', '한국어'], ['en', 'English'], ['ja', '日本語'], ['zh-Hant', '繁體中文'], ['zh-Hans', '简体中文'], ['ru', 'Русский'],
+               ['ar', 'العربية'], ['es', 'Español'], ['fr', 'Français'], ['it', 'Italiano'], ['de', 'Deutsch'], ['pt', 'Português']];
+  var T = {
+    en: { name: 'Pop! Jelly PangPang', tag1: 'Drop jelly bombs.', tag2: 'Trap your friends. Pop!', sub: 'A squishy bomb-battle party game for Android and iOS.',
+      soon: 'Coming soon to Google Play & App Store', outBoth: 'Out now — free to start', outPlay: 'Out now on Google Play', outApp: 'Out now on the App Store',
+      join: 'Join the official Discord', noteSoon: 'Launch news lands on Discord first.', noteOut: 'The first 15 stages are free. No ads, no gacha.',
+      getPlay: 'Get it on', getApp: 'Download on the', soonPlay: 'Coming soon to', soonApp: 'Coming soon to the', trailer: 'Watch the trailer',
+      f1h: 'Squishy', f1p: 'Tap your jelly and it giggles. Poke it too much and it sulks.',
+      f2h: 'Better together', f2p: 'Two players on one phone, or up to 6 online with a room code.',
+      f3h: 'Fair', f3p: 'No ads. No gacha. The first 15 stages are free, and one purchase unlocks the rest.',
+      f4h: 'Plenty to do', f4p: '50 stages with bosses, a one-tile jump, a map maker and lots of ways to dress up your jelly.',
+      t1: '12 languages', t2: 'Controller support', t3: 'No sign-up needed',
+      chH: 'Follow the jellies', chP: 'New clips and updates on every channel. To find people to play with, share your maps or report a bug, come to Discord.',
+      age: 'Discord is for ages 13 and up (older in some countries).', priv: 'Privacy', contact: 'Contact',
+      sndOn: 'Turn sound on', sndOff: 'Turn sound off', langLbl: 'Language', vid: 'Gameplay: jellies drop bombs and pop each other across candy arenas' },
+    ko: { name: '터져라! 젤리팡팡', tag1: '젤리 폭탄을 놓고,', tag2: '친구를 가두고, 팡!', sub: '안드로이드와 iOS에서 즐기는 말랑말랑 폭탄 대전 파티 게임.',
+      soon: '구글 플레이 · 앱 스토어 출시 예정', outBoth: '지금 출시 — 무료로 시작', outPlay: '구글 플레이에 출시', outApp: '앱 스토어에 출시',
+      join: '공식 디스코드 들어가기', noteSoon: '출시 소식은 디스코드에 가장 먼저 올라옵니다.', noteOut: '15단계까지 무료. 광고도 뽑기도 없습니다.',
+      getPlay: '다운로드', getApp: '다운로드', soonPlay: '출시 예정', soonApp: '출시 예정', trailer: '트레일러 보기',
+      f1h: '말랑말랑', f1p: '톡 치면 깔깔 웃고, 자꾸 찌르면 삐집니다.',
+      f2h: '같이 하면 더 재밌다', f2p: '한 폰으로 둘이서, 온라인은 방 번호로 6명까지.',
+      f3h: '깔끔한 구성', f3p: '광고 없음. 뽑기 없음. 15단계까지 무료이고, 한 번 구매하면 나머지가 전부 열립니다.',
+      f4h: '할 게 많다', f4p: '대장이 나오는 50단계, 한 칸 점프, 맵 만들기, 그리고 다양한 젤리 꾸미기.',
+      t1: '12개 언어', t2: '패드 지원', t3: '가입 없이 바로',
+      chH: '젤리 소식 받아 보기', chP: '새 영상과 업데이트 소식은 모든 채널에 올라옵니다. 같이 할 사람 찾기, 내가 만든 맵 공유, 버그 제보는 디스코드에서.',
+      age: '디스코드는 만 13세 이상(나라에 따라 더 높음)부터 이용할 수 있습니다.', priv: '개인정보처리방침', contact: '문의',
+      sndOn: '소리 켜기', sndOff: '소리 끄기', langLbl: '언어', vid: '게임 장면: 젤리들이 과자 판 위에서 폭탄을 놓고 서로를 터뜨립니다' },
+    ja: { name: 'はじけろ！ゼリーパンパン', tag1: 'ゼリーばくだんを置いて、', tag2: '友だちを閉じこめて、ポン！', sub: 'Android と iOS で遊べる、ぷるぷるボムバトルのパーティーゲーム。',
+      soon: 'Google Play・App Store で近日配信', outBoth: '配信中 — 無料で始められます', outPlay: 'Google Play で配信中', outApp: 'App Store で配信中',
+      join: '公式 Discord に参加', noteSoon: '配信のお知らせは Discord でいちばん早く届きます。', noteOut: '最初の15ステージは無料。広告なし、ガチャなし。',
+      getPlay: 'ダウンロード', getApp: 'ダウンロード', soonPlay: '近日配信', soonApp: '近日配信', trailer: 'トレーラーを見る',
+      f1h: 'ぷるぷる', f1p: 'タップするとくすくす笑い、つつきすぎるとすねます。',
+      f2h: 'みんなで遊ぼう', f2p: '1台のスマホで2人対戦、オンラインは部屋番号で最大6人。',
+      f3h: 'フェアな設計', f3p: '広告なし。ガチャなし。最初の15ステージは無料、1回の購入で残りがすべて遊べます。',
+      f4h: '遊びがいっぱい', f4p: 'ボスが待つ50ステージ、1マスジャンプ、マップ作り、ゼリーの着せ替えもたくさん。',
+      t1: '12言語対応', t2: 'コントローラー対応', t3: '登録不要',
+      chH: 'ゼリーたちをフォロー', chP: '新しい動画やアップデート情報は各チャンネルで。一緒に遊ぶ仲間探し、マップの共有、バグ報告は Discord へ。',
+      age: 'Discord は13歳以上（国によってはそれ以上）が対象です。', priv: 'プライバシー', contact: 'お問い合わせ',
+      sndOn: 'サウンドをオンにする', sndOff: 'サウンドをオフにする', langLbl: '言語', vid: 'ゲーム映像：ゼリーたちがお菓子のステージでばくだんを置いてはじけ合います' },
+    'zh-Hant': { name: '果凍碰碰樂', tag1: '放下果凍炸彈，', tag2: '困住朋友，砰！', sub: 'Android 與 iOS 上的 Q 彈炸彈對戰派對遊戲。',
+      soon: '即將登上 Google Play 與 App Store', outBoth: '現已推出 — 免費開始', outPlay: '已在 Google Play 推出', outApp: '已在 App Store 推出',
+      join: '加入官方 Discord', noteSoon: '上線消息會最先在 Discord 公布。', noteOut: '前 15 關免費。無廣告，無轉蛋。',
+      getPlay: '前往下載', getApp: '前往下載', soonPlay: '即將推出', soonApp: '即將推出', trailer: '觀看預告片',
+      f1h: 'Q 彈軟萌', f1p: '輕點果凍，它會咯咯笑；戳太多次，它會鬧脾氣。',
+      f2h: '一起玩更有趣', f2p: '一支手機兩人同玩，或用房間號碼連線，最多 6 人。',
+      f3h: '公平實在', f3p: '無廣告。無轉蛋。前 15 關免費，一次購買即可解鎖其餘全部內容。',
+      f4h: '內容滿滿', f4p: '50 個有魔王的關卡、一格跳躍、地圖編輯器，還有多種果凍裝扮。',
+      t1: '12 種語言', t2: '支援手把', t3: '無需註冊',
+      chH: '追蹤果凍們', chP: '新影片與更新消息會發布在各個頻道。找人一起玩、分享地圖或回報問題，請到 Discord。',
+      age: 'Discord 僅限 13 歲以上使用（部分國家/地區要求更高）。', priv: '隱私權政策', contact: '聯絡我們',
+      sndOn: '開啟聲音', sndOff: '關閉聲音', langLbl: '語言', vid: '遊戲畫面：果凍們在糖果場地上放炸彈、互相炸開' },
+    'zh-Hans': { name: '果冻碰碰乐', tag1: '放下果冻炸弹，', tag2: '困住朋友，砰！', sub: 'Android 和 iOS 上的 Q 弹炸弹对战派对游戏。',
+      soon: '即将登陆 Google Play 和 App Store', outBoth: '现已上线 — 免费开玩', outPlay: '已在 Google Play 上线', outApp: '已在 App Store 上线',
+      join: '加入官方 Discord', noteSoon: '上线消息会最先在 Discord 发布。', noteOut: '前 15 关免费。无广告，无抽卡。',
+      getPlay: '前往下载', getApp: '前往下载', soonPlay: '即将上线', soonApp: '即将上线', trailer: '观看预告片',
+      f1h: 'Q 弹软萌', f1p: '轻点果冻，它会咯咯笑；戳太多次，它会闹脾气。',
+      f2h: '一起玩更有趣', f2p: '一部手机两人同玩，或用房间号码联机，最多 6 人。',
+      f3h: '公平实在', f3p: '无广告。无抽卡。前 15 关免费，一次购买即可解锁其余全部内容。',
+      f4h: '内容满满', f4p: '50 个有头目的关卡、一格跳跃、地图编辑器，还有多种果冻装扮。',
+      t1: '12 种语言', t2: '支持手柄', t3: '无需注册',
+      chH: '关注果冻们', chP: '新视频和更新消息会发布在各个频道。找人一起玩、分享地图或反馈问题，请来 Discord。',
+      age: 'Discord 仅限 13 岁及以上用户使用（部分国家/地区要求更高）。', priv: '隐私政策', contact: '联系我们',
+      sndOn: '打开声音', sndOff: '关闭声音', langLbl: '语言', vid: '游戏画面：果冻们在糖果场地上放炸弹、互相炸开' },
+    ru: { name: 'Pop! Jelly PangPang', tag1: 'Ставь желе-бомбы.', tag2: 'Лови друзей — и бах!', sub: 'Мягкая и весёлая игра-вечеринка с бомбами для Android и iOS.',
+      soon: 'Скоро в Google Play и App Store', outBoth: 'Уже вышла — начни бесплатно', outPlay: 'Уже в Google Play', outApp: 'Уже в App Store',
+      join: 'Зайти в официальный Discord', noteSoon: 'Новости о выходе первыми появляются в Discord.', noteOut: 'Первые 15 уровней бесплатно. Без рекламы и гачи.',
+      getPlay: 'Доступно в', getApp: 'Загрузите в', soonPlay: 'Скоро в', soonApp: 'Скоро в', trailer: 'Смотреть трейлер',
+      f1h: 'Мягкое желе', f1p: 'Коснись желе — оно хихикает. Тыкай слишком часто — обидится.',
+      f2h: 'Вместе веселее', f2p: 'Вдвоём на одном телефоне или до 6 игроков онлайн по коду комнаты.',
+      f3h: 'Честно', f3p: 'Без рекламы. Без гачи. Первые 15 уровней бесплатно, а одна покупка открывает всё остальное.',
+      f4h: 'Есть чем заняться', f4p: '50 уровней с боссами, прыжок на одну клетку, редактор карт и множество нарядов для желе.',
+      t1: '12 языков', t2: 'Поддержка геймпада', t3: 'Без регистрации',
+      chH: 'Следи за желе', chP: 'Новые ролики и обновления — на всех каналах. Найти напарников, поделиться картами или сообщить об ошибке можно в Discord.',
+      age: 'Discord доступен с 13 лет (в некоторых странах — старше).', priv: 'Конфиденциальность', contact: 'Связаться',
+      sndOn: 'Включить звук', sndOff: 'Выключить звук', langLbl: 'Язык', vid: 'Игровой процесс: желе ставят бомбы и лопают друг друга на сладких аренах' },
+    ar: { name: 'جيلي بانغ بانغ', tag1: 'ضع قنابل الجيلي.', tag2: 'احبس أصدقاءك. بوم!', sub: 'لعبة جماعية طرية لمعارك القنابل على أندرويد و iOS.',
+      soon: 'قريبًا على Google Play و App Store', outBoth: 'متوفرة الآن — ابدأ مجانًا', outPlay: 'متوفرة الآن على Google Play', outApp: 'متوفرة الآن على App Store',
+      join: 'انضم إلى Discord الرسمي', noteSoon: 'أخبار الإصدار تُنشر على Discord أولًا.', noteOut: 'أول 15 مرحلة مجانية. بلا إعلانات وبلا غاتشا.',
+      getPlay: 'حمّلها من', getApp: 'حمّلها من', soonPlay: 'قريبًا على', soonApp: 'قريبًا على', trailer: 'شاهد العرض التشويقي',
+      f1h: 'طرية ولطيفة', f1p: 'المس الجيلي فيضحك. وإن أكثرتَ من وخزه يزعل.',
+      f2h: 'أمتع مع الأصدقاء', f2p: 'لاعبان على هاتف واحد، أو حتى 6 لاعبين عبر الإنترنت برمز الغرفة.',
+      f3h: 'منصفة', f3p: 'بلا إعلانات. بلا غاتشا. أول 15 مرحلة مجانية، وشراء واحد يفتح الباقي.',
+      f4h: 'الكثير لتفعله', f4p: '50 مرحلة مع زعماء، قفزة بمربع واحد، صانع خرائط وطرق كثيرة لتزيين الجيلي.',
+      t1: '12 لغة', t2: 'دعم يد التحكم', t3: 'بدون تسجيل',
+      chH: 'تابع الجيلي', chP: 'مقاطع جديدة وتحديثات على كل القنوات. للبحث عن لاعبين أو مشاركة خرائطك أو الإبلاغ عن خطأ، تعال إلى Discord.',
+      age: 'Discord متاح لمن هم بعمر 13 عامًا فأكثر (وأكبر في بعض الدول).', priv: 'الخصوصية', contact: 'اتصل بنا',
+      sndOn: 'تشغيل الصوت', sndOff: 'إيقاف الصوت', langLbl: 'اللغة', vid: 'مشاهد من اللعبة: الجيلي يضع القنابل ويفجّر بعضه بعضًا في ساحات الحلوى' },
+    es: { name: 'Pop! Jelly PangPang', tag1: 'Pon bombas de gelatina.', tag2: 'Atrapa a tus amigos. ¡Pop!', sub: 'Un blandito juego de fiesta con batallas de bombas para Android e iOS.',
+      soon: 'Próximamente en Google Play y App Store', outBoth: 'Ya disponible: empieza gratis', outPlay: 'Ya disponible en Google Play', outApp: 'Ya disponible en App Store',
+      join: 'Únete al Discord oficial', noteSoon: 'Las noticias del lanzamiento llegan primero a Discord.', noteOut: 'Los primeros 15 niveles son gratis. Sin anuncios ni gacha.',
+      getPlay: 'Disponible en', getApp: 'Descárgalo en el', soonPlay: 'Próximamente en', soonApp: 'Próximamente en el', trailer: 'Ver el tráiler',
+      f1h: 'Blandito', f1p: 'Toca tu gelatina y se ríe. Si la pinchas demasiado, se enfurruña.',
+      f2h: 'Mejor en compañía', f2p: 'Dos jugadores en un mismo móvil, o hasta 6 en línea con un código de sala.',
+      f3h: 'Justo', f3p: 'Sin anuncios. Sin gacha. Los primeros 15 niveles son gratis y una sola compra desbloquea el resto.',
+      f4h: 'Mucho por hacer', f4p: '50 niveles con jefes, un salto de una casilla, un editor de mapas y un montón de formas de vestir a tu gelatina.',
+      t1: '12 idiomas', t2: 'Compatible con mando', t3: 'Sin registro',
+      chH: 'Sigue a las gelatinas', chP: 'Nuevos clips y novedades en todos los canales. Para buscar con quién jugar, compartir tus mapas o avisar de un error, ven a Discord.',
+      age: 'Discord es para mayores de 13 años (más en algunos países).', priv: 'Privacidad', contact: 'Contacto',
+      sndOn: 'Activar sonido', sndOff: 'Desactivar sonido', langLbl: 'Idioma', vid: 'Juego: las gelatinas ponen bombas y se revientan entre sí en arenas de dulces' },
+    fr: { name: 'Pop! Jelly PangPang', tag1: 'Pose des bombes gelée.', tag2: 'Piège tes amis. Pop !', sub: 'Un jeu de fête tout moelleux de batailles de bombes, sur Android et iOS.',
+      soon: 'Bientôt sur Google Play et l’App Store', outBoth: 'Disponible — gratuit pour commencer', outPlay: 'Disponible sur Google Play', outApp: 'Disponible sur l’App Store',
+      join: 'Rejoindre le Discord officiel', noteSoon: 'Les infos de sortie arrivent d’abord sur Discord.', noteOut: 'Les 15 premiers niveaux sont gratuits. Sans pub, sans gacha.',
+      getPlay: 'Disponible sur', getApp: 'Télécharger dans l’', soonPlay: 'Bientôt sur', soonApp: 'Bientôt sur l’', trailer: 'Voir la bande-annonce',
+      f1h: 'Tout moelleux', f1p: 'Touche ta gelée et elle rigole. Embête-la trop et elle boude.',
+      f2h: 'Meilleur à plusieurs', f2p: 'À deux sur un seul téléphone, ou jusqu’à 6 en ligne avec un code du salon.',
+      f3h: 'Honnête', f3p: 'Sans pub. Sans gacha. Les 15 premiers niveaux sont gratuits et un seul achat débloque le reste.',
+      f4h: 'Plein de choses à faire', f4p: '50 niveaux avec des boss, un saut d’une case, un éditeur de cartes et plein de façons d’habiller ta gelée.',
+      t1: '12 langues', t2: 'Compatible manette', t3: 'Sans inscription',
+      chH: 'Suis les gelées', chP: 'Nouveaux clips et mises à jour sur toutes les chaînes. Pour trouver des partenaires, partager tes cartes ou signaler un bug, viens sur Discord.',
+      age: 'Discord est réservé aux 13 ans et plus (davantage dans certains pays).', priv: 'Confidentialité', contact: 'Contact',
+      sndOn: 'Activer le son', sndOff: 'Couper le son', langLbl: 'Langue', vid: 'Extrait du jeu : les gelées posent des bombes et s’éclatent dans des arènes sucrées' },
+    it: { name: 'Pop! Jelly PangPang', tag1: 'Piazza bombe di gelatina.', tag2: 'Intrappola gli amici. Pop!', sub: 'Un morbido party game di battaglie a colpi di bombe per Android e iOS.',
+      soon: 'Presto su Google Play e App Store', outBoth: 'Disponibile ora: inizia gratis', outPlay: 'Disponibile su Google Play', outApp: 'Disponibile su App Store',
+      join: 'Entra nel Discord ufficiale', noteSoon: 'Le notizie sul lancio arrivano prima su Discord.', noteOut: 'I primi 15 livelli sono gratis. Niente pubblicità, niente gacha.',
+      getPlay: 'Disponibile su', getApp: 'Scarica su', soonPlay: 'Presto su', soonApp: 'Presto su', trailer: 'Guarda il trailer',
+      f1h: 'Morbidoso', f1p: 'Tocca la tua gelatina e ridacchia. Stuzzicala troppo e mette il broncio.',
+      f2h: 'Insieme è meglio', f2p: 'In due sullo stesso telefono, o fino a 6 online con un codice stanza.',
+      f3h: 'Onesto', f3p: 'Niente pubblicità. Niente gacha. I primi 15 livelli sono gratis e un solo acquisto sblocca il resto.',
+      f4h: 'Tanto da fare', f4p: '50 livelli con boss, un salto di una casella, un editor di mappe e tanti modi per vestire la tua gelatina.',
+      t1: '12 lingue', t2: 'Supporto controller', t3: 'Nessuna registrazione',
+      chH: 'Segui le gelatine', chP: 'Nuove clip e aggiornamenti su tutti i canali. Per trovare compagni di gioco, condividere le mappe o segnalare un bug, vieni su Discord.',
+      age: 'Discord è per chi ha almeno 13 anni (di più in alcuni Paesi).', priv: 'Privacy', contact: 'Contatti',
+      sndOn: 'Attiva audio', sndOff: 'Disattiva audio', langLbl: 'Lingua', vid: 'Gameplay: le gelatine piazzano bombe e si fanno scoppiare in arene di dolci' },
+    de: { name: 'Pop! Jelly PangPang', tag1: 'Leg Gelee-Bomben.', tag2: 'Fang deine Freunde. Peng!', sub: 'Ein wabbeliges Bomben-Partyspiel für Android und iOS.',
+      soon: 'Bald bei Google Play und im App Store', outBoth: 'Jetzt erhältlich – kostenlos starten', outPlay: 'Jetzt bei Google Play', outApp: 'Jetzt im App Store',
+      join: 'Zum offiziellen Discord', noteSoon: 'Neuigkeiten zum Start gibt es zuerst auf Discord.', noteOut: 'Die ersten 15 Level sind kostenlos. Keine Werbung, kein Gacha.',
+      getPlay: 'Jetzt bei', getApp: 'Laden im', soonPlay: 'Bald bei', soonApp: 'Bald im', trailer: 'Trailer ansehen',
+      f1h: 'Wabbelig', f1p: 'Tipp dein Gelee an und es kichert. Piks es zu oft und es schmollt.',
+      f2h: 'Zusammen besser', f2p: 'Zu zweit an einem Handy oder online mit bis zu 6 Spielern per Raumcode.',
+      f3h: 'Fair', f3p: 'Keine Werbung. Kein Gacha. Die ersten 15 Level sind kostenlos, ein einmaliger Kauf schaltet den Rest frei.',
+      f4h: 'Viel zu tun', f4p: '50 Level mit Bossen, ein Sprung über ein Feld, ein Karteneditor und viele Möglichkeiten, dein Gelee zu stylen.',
+      t1: '12 Sprachen', t2: 'Controller-Unterstützung', t3: 'Keine Anmeldung nötig',
+      chH: 'Folge den Gelees', chP: 'Neue Clips und Updates gibt es auf allen Kanälen. Mitspieler finden, Karten teilen oder Fehler melden: auf Discord.',
+      age: 'Discord ist ab 13 Jahren (in manchen Ländern älter).', priv: 'Datenschutz', contact: 'Kontakt',
+      sndOn: 'Ton einschalten', sndOff: 'Ton ausschalten', langLbl: 'Sprache', vid: 'Gameplay: Gelees legen Bomben und lassen einander in Süßigkeiten-Arenen platzen' },
+    pt: { name: 'Pop! Jelly PangPang', tag1: 'Solte bombas de gelatina.', tag2: 'Prenda seus amigos. Pop!', sub: 'Um party game fofinho de batalhas de bombas para Android e iOS.',
+      soon: 'Em breve no Google Play e na App Store', outBoth: 'Já disponível — comece grátis', outPlay: 'Já disponível no Google Play', outApp: 'Já disponível na App Store',
+      join: 'Entre no Discord oficial', noteSoon: 'As novidades do lançamento chegam primeiro no Discord.', noteOut: 'As 15 primeiras fases são grátis. Sem anúncios, sem gacha.',
+      getPlay: 'Disponível no', getApp: 'Baixar na', soonPlay: 'Em breve no', soonApp: 'Em breve na', trailer: 'Assistir ao trailer',
+      f1h: 'Fofinho', f1p: 'Toque na sua gelatina e ela dá risada. Cutuque demais e ela fica emburrada.',
+      f2h: 'Melhor em grupo', f2p: 'Dois jogadores no mesmo celular, ou até 6 online com um código da sala.',
+      f3h: 'Justo', f3p: 'Sem anúncios. Sem gacha. As 15 primeiras fases são grátis e uma única compra libera o resto.',
+      f4h: 'Muito o que fazer', f4p: '50 fases com chefes, um pulo de uma casa, um criador de mapas e várias formas de vestir sua gelatina.',
+      t1: '12 idiomas', t2: 'Suporte a controle', t3: 'Sem cadastro',
+      chH: 'Siga as gelatinas', chP: 'Novos clipes e novidades em todos os canais. Para achar gente para jogar, compartilhar seus mapas ou avisar de um bug, venha para o Discord.',
+      age: 'O Discord é para maiores de 13 anos (mais em alguns países).', priv: 'Privacidade', contact: 'Contato',
+      sndOn: 'Ativar som', sndOff: 'Desativar som', langLbl: 'Idioma', vid: 'Gameplay: as gelatinas soltam bombas e estouram umas às outras em arenas de doces' }
+  };
+  function pick(c) {
+    c = String(c || '').toLowerCase();
+    if (!c) return '';
+    if (c.indexOf('zh') === 0) return /hant|tw|hk|mo/.test(c) ? 'zh-Hant' : 'zh-Hans';
+    c = c.split('-')[0];
+    for (var i = 0; i < LANGS.length; i++) if (LANGS[i][0] === c) return c;
+    return '';
+  }
+  var lang = '', src = '';
+  try { var q = new URLSearchParams(location.search); lang = pick(q.get('lang')); src = (q.get('s') || '').toLowerCase().replace(/[^a-z0-9_]/g, '').slice(0, 24); } catch (e) {}
+  try { if (!lang) lang = pick(localStorage.getItem('jpp_lang')); } catch (e) {}
+  if (!lang) { var nl = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]; for (var i = 0; i < nl.length && !lang; i++) lang = pick(nl[i]); }
+  if (!lang) lang = 'en';
+
+  var hasPlay = !!CFG.play, hasApp = !!CFG.appstore, sndIsOn = false;
+  function two(el, small, big) { el.textContent = ''; var s = document.createElement('small'); s.textContent = small; el.appendChild(s); el.appendChild(document.createTextNode(big)); }
+  function apply() {
+    var t = T[lang] || T.en, de = document.documentElement, i;
+    de.lang = lang; de.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.title = t.name + ' — ' + t.sub.replace(/[.。]$/, '');
+    var els = document.querySelectorAll('[data-i]');
+    for (i = 0; i < els.length; i++) { var k = els[i].getAttribute('data-i'); if (t[k] != null) els[i].textContent = t[k]; }
+    var h1 = document.querySelector('h1'); if (h1) h1.textContent = t.name;
+    for (i = 0; i < LANGS.length; i++) if (LANGS[i][0] === lang) $('langName').textContent = LANGS[i][1];
+    $('lang').setAttribute('aria-label', t.langLbl); $('lang').value = lang;
+    if ($('reel')) $('reel').setAttribute('aria-label', t.vid);
+    $('chip').textContent = (!hasPlay && !hasApp) ? t.soon : (hasPlay && hasApp) ? t.outBoth : (hasPlay ? t.outPlay : t.outApp);
+    $('ctaNote').textContent = (!hasPlay && !hasApp) ? t.noteSoon : t.noteOut;
+    if (hasPlay || hasApp) { two($('bPlay'), hasPlay ? t.getPlay : t.soonPlay, 'Google Play'); two($('bApp'), hasApp ? t.getApp : t.soonApp, 'App Store'); }
+    if ($('snd')) $('snd').setAttribute('aria-label', sndIsOn ? t.sndOff : t.sndOn);
+  }
+  (function () {
+    var sel = $('lang');
+    for (var i = 0; i < LANGS.length; i++) { var o = document.createElement('option'); o.value = LANGS[i][0]; o.textContent = LANGS[i][1]; o.lang = LANGS[i][0]; sel.appendChild(o); }
+    sel.addEventListener('change', function () { lang = pick(sel.value) || 'en'; try { localStorage.setItem('jpp_lang', lang); } catch (e) {} apply(); });
+  })();
+
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+
   /* 맨 위 영상 — 무음 자동 재생·반복. 움직임 줄이기를 켠 기기에서는 멈춘 그림으로 두고, 자동 재생이 막힌 기기(절전 모드)에서는 재생 단추를 보인다.
-     소리 단추(오른쪽 위) — 브라우저는 소리 있는 자동 재생을 막으므로 꺼진 채 시작하고, 누르면 켜진다. 다른 탭으로 가면 소리를 끈다. */
+     소리 단추(오른쪽 위) — 꺼진 채 시작하고, 누르면 켜진다. 다른 탭으로 가면 끈다.
+     소리는 영상에서 따로 뺀 8마디 고리(hero-loop.m4a)를 웹 오디오로 틈 없이 반복한다(<video loop> 는 이음매에서 끊긴다 — mk_loop.py).
+     영상은 그 소리 시계를 따라간다(0.2초 넘게 벌어지면 맞춘다). 웹 오디오가 안 되거나 아이폰이면 영상 자체의 소리 트랙을 켠다(예비). */
   try {
     var v = $('reel'), sb = $('snd');
     if (v) {
       var still = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
       if (still) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; }
       else { var pr = v.play(); if (pr && pr.catch) pr.catch(function () { v.controls = true; }); }
-      var paint = function () { var on = !v.muted; sb.setAttribute('aria-pressed', on ? 'true' : 'false'); sb.setAttribute('aria-label', on ? 'Turn sound off' : 'Turn sound on'); };
+      var AC = window.AudioContext || window.webkitAudioContext, LEAD = 0.5, D = 8 * (60 / 140 * 4);
+      var ctx = null, gain = null, buf = null, node = null, t0 = 0, mode = '', loading = false;
+      var paint = function () { var t = T[lang] || T.en; sb.setAttribute('aria-pressed', sndIsOn ? 'true' : 'false'); sb.setAttribute('aria-label', sndIsOn ? t.sndOff : t.sndOn); };
+      var stopNode = function () { if (node) { try { node.stop(); } catch (e) {} try { node.disconnect(); } catch (e) {} node = null; } };
+      var startNode = function () {
+        stopNode();
+        node = ctx.createBufferSource(); node.buffer = buf; node.loop = true; node.loopStart = LEAD; node.loopEnd = LEAD + D; node.connect(gain);
+        var p = ((v.currentTime || 0) % D + D) % D; t0 = ctx.currentTime - p; node.start(0, LEAD + p);
+      };
+      var viaVideo = function () { mode = 'video'; stopNode(); v.muted = false; v.volume = 1; var p2 = v.play(); if (p2 && p2.catch) p2.catch(function () { off(); }); };
+      var on = function () {
+        sndIsOn = true; paint();
+        if (!AC || isIOS) return viaVideo();          // 아이폰·아이패드: 무음 스위치가 웹 오디오를 막는다 → 영상 소리 트랙(이음매 틈은 남는다)
+        try {
+          if (!ctx) { ctx = new AC(); gain = ctx.createGain(); gain.connect(ctx.destination); }
+          if (ctx.resume) ctx.resume();
+        } catch (e) { return viaVideo(); }
+        var go = function () { if (!sndIsOn) return; mode = 'wa'; v.muted = true; gain.gain.value = 1; startNode(); if (v.paused) { var p3 = v.play(); if (p3 && p3.catch) p3.catch(function () {}); } };
+        if (buf) return go();
+        if (loading) return;
+        loading = true;
+        fetch('hero-loop.m4a').then(function (r) { if (!r.ok) throw 0; return r.arrayBuffer(); })
+          .then(function (ab) { return new Promise(function (res, rej) { ctx.decodeAudioData(ab, res, rej); }); })
+          .then(function (b) { buf = b; loading = false; go(); })
+          .catch(function () { loading = false; if (sndIsOn) viaVideo(); });
+      };
+      var off = function () { sndIsOn = false; stopNode(); v.muted = true; mode = ''; if (ctx && ctx.suspend) { try { ctx.suspend(); } catch (e) {} } paint(); };
+      var sync = function () {                      // 영상이 소리를 따라간다
+        if (mode !== 'wa' || !node || !v.duration) return;
+        var p = (((ctx.currentTime - t0) % D) + D) % D, d = (((v.currentTime - p) % D) + D + D / 2) % D - D / 2;
+        if (Math.abs(d) > 0.2) { try { v.currentTime = Math.min(p + 0.06, v.duration - 0.05); } catch (e) {} }
+      };
       if (sb) {
-        sb.addEventListener('click', function () {
-          v.muted = !v.muted;
-          if (!v.muted) { v.volume = 1; var p2 = v.play(); if (p2 && p2.catch) p2.catch(function () { v.muted = true; paint(); }); }
-          paint();
-        });
-        v.addEventListener('volumechange', paint);
-        document.addEventListener('visibilitychange', function () { if (document.hidden && !v.muted) { v.muted = true; paint(); } });
+        sb.addEventListener('click', function () { if (sndIsOn) off(); else on(); });
+        v.addEventListener('timeupdate', sync);
+        document.addEventListener('visibilitychange', function () { if (document.hidden && sndIsOn) off(); });
+        window.__snd = function () { return { on: sndIsOn, mode: mode, state: ctx ? ctx.state : '', pos: ctx && node ? +((((ctx.currentTime - t0) % D) + D) % D).toFixed(3) : -1, vt: +v.currentTime.toFixed(3), loop: D, muted: v.muted }; };
       }
     }
   } catch (e) {}
-  var src = '';
-  try { src = (new URLSearchParams(location.search).get('s') || '').toLowerCase().replace(/[^a-z0-9_]/g, '').slice(0, 24); } catch (e) {}
+
   function join(u) { return u + (u.indexOf('?') < 0 ? '?' : '&'); }
   function playUrl() {
     if (!src) return CFG.play;
@@ -207,22 +456,16 @@ footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
     if (!src || !CFG.applePt) return CFG.appstore;
     return join(CFG.appstore) + 'pt=' + encodeURIComponent(CFG.applePt) + '&ct=' + encodeURIComponent(src + '_launch') + '&mt=8';
   }
-  var ua = navigator.userAgent || '';
-  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
-  var hasPlay = !!CFG.play, hasApp = !!CFG.appstore;
-
   if (CFG.trailer) { $('bTrailer').href = CFG.trailer; $('bTrailer').hidden = false; $('bTrailer').style.marginBottom = '10px'; }
-  if (!hasPlay && !hasApp) return;            // 출시 전: 문서 그대로(Coming soon + 디스코드)
-
-  var stores = $('stores'), bPlay = $('bPlay'), bApp = $('bApp');
-  stores.hidden = false; bPlay.hidden = false; bApp.hidden = false;
-  if (hasPlay) { bPlay.href = playUrl(); } else { bPlay.className += ' soon'; bPlay.removeAttribute('href'); bPlay.setAttribute('aria-disabled', 'true'); bPlay.innerHTML = '<small>Coming soon to</small>Google Play'; }
-  if (hasApp) { bApp.href = appUrl(); } else { bApp.className += ' soon'; bApp.removeAttribute('href'); bApp.setAttribute('aria-disabled', 'true'); bApp.innerHTML = '<small>Coming soon to the</small>App Store'; }
-  if (isIOS) stores.insertBefore(bApp, bPlay);   // 아이폰·아이패드는 앱 스토어를 앞에
-  $('chip').textContent = (hasPlay && hasApp) ? 'Out now — free to start' : (hasPlay ? 'Out now on Google Play' : 'Out now on the App Store');
-  $('bDiscord').className = 'btn btn-line';
-  $('bDiscord').textContent = 'Join the official Discord';
-  $('ctaNote').textContent = 'The first 15 stages are free. No ads, no gacha.';
+  if (hasPlay || hasApp) {                       // 출시 뒤: 스토어 단추를 보이고 디스코드 단추는 테두리 단추로
+    var stores = $('stores'), bPlay = $('bPlay'), bApp = $('bApp');
+    stores.hidden = false; bPlay.hidden = false; bApp.hidden = false;
+    if (hasPlay) { bPlay.href = playUrl(); } else { bPlay.className += ' soon'; bPlay.removeAttribute('href'); bPlay.setAttribute('aria-disabled', 'true'); }
+    if (hasApp) { bApp.href = appUrl(); } else { bApp.className += ' soon'; bApp.removeAttribute('href'); bApp.setAttribute('aria-disabled', 'true'); }
+    if (isIOS) stores.insertBefore(bApp, bPlay);   // 아이폰·아이패드는 앱 스토어를 앞에
+    $('bDiscord').className = 'btn btn-line';
+  }
+  apply();
 })();
 </script>
 </body>
