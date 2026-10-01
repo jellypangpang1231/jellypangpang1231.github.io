@@ -83,23 +83,32 @@ main{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:max(18px,
 .snd[aria-pressed="true"]{background:var(--yellow)}
 .snd[aria-pressed="true"] .on{display:block}
 .snd[aria-pressed="true"] .off{display:none}
-.icon{position:relative;z-index:2;display:block;width:88px;height:88px;margin:-46px auto 10px;border-radius:22px;border:4px solid #fff;box-shadow:0 7px 0 rgba(120,10,70,.28),0 12px 22px rgba(90,0,50,.3);transform-origin:50% 100%;animation:squish 3.2s ease-in-out infinite}
+.icon{position:relative;z-index:2;display:block;width:88px;height:88px;margin:-46px auto 8px;border-radius:22px;border:4px solid #fff;box-shadow:0 7px 0 rgba(120,10,70,.28),0 12px 22px rgba(90,0,50,.3);transform-origin:50% 100%;animation:squish 3.2s ease-in-out infinite}
 @keyframes squish{0%,100%{transform:scale(1,1)}8%{transform:scale(1.06,.93)}16%{transform:scale(.96,1.05)}24%{transform:scale(1,1)}}
 .logo{display:block;width:min(100%,460px);height:auto;margin:0 auto;direction:ltr}
 .logo text{font-family:"Fredoka",system-ui,sans-serif;font-weight:600;text-anchor:middle}
 h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.tagline{margin:10px auto 0;font-family:"Fredoka",system-ui,sans-serif;font-weight:600;font-size:clamp(21px,5.6vw,27px);line-height:1.25;color:#fff;text-shadow:0 2px 0 rgba(130,10,70,.45)}
+.tagline{margin:8px auto 0;font-family:"Fredoka",system-ui,sans-serif;font-weight:600;font-size:clamp(21px,5.6vw,27px);line-height:1.25;color:#fff;text-shadow:0 2px 0 rgba(130,10,70,.45)}
 .sub{margin:6px auto 0;max-width:30em;color:#fff;font-size:16px;text-shadow:0 1px 0 rgba(130,10,70,.4)}
 .card{margin-top:18px;padding:20px 18px;border-radius:26px;background:var(--cream);box-shadow:0 8px 0 rgba(120,10,70,.22),0 16px 30px rgba(90,0,50,.22)}
 .chip{display:inline-block;margin:0 0 14px;padding:6px 14px;border-radius:999px;background:var(--yellow);color:var(--ink);font-size:15px;line-height:1.3}
 .cta{text-align:center}
-.stores{display:grid;gap:10px;margin-bottom:10px}
 .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;padding:8px 20px;border:0;border-radius:999px;font-size:19px;line-height:1.15;text-decoration:none;cursor:pointer;transition:transform .08s ease}
 .btn:active{transform:scale(.97)}
 .btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-.btn-store{flex-direction:column;gap:0;background:#17121f;color:#fff}
-.btn-store small{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-weight:500;font-size:12px;letter-spacing:.02em;opacity:.85}
-.btn-store.soon{background:#e9dfe6;color:#7b6b8f;pointer-events:none}
+/* 스토어 배지 — 구글·애플이 준 그림 그대로(badges/). 그림자·테두리·움직임을 덧대지 않고, 둘레 여백은 배지 높이의 1/4 이상, 두 배지는 같은 높이.
+   구글 PNG 는 그림 안에 투명 여백이 들어 있어(언어에 따라 두 가지) 틀(.bx)을 보이는 배지 크기로 잡고 그림을 그만큼 밀어 넣는다(--s --px --py 는 스크립트가 넣는다). */
+.getit{--bh:56px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:16px;margin:16px auto 0}
+.bdg{display:block;line-height:0;border-radius:10px;-webkit-tap-highlight-color:transparent}
+.bdg:focus-visible{outline:3px solid #fff;outline-offset:5px}
+.bdg .bx{position:relative;display:block;overflow:hidden;height:var(--bh);width:calc(var(--bh)*var(--r,3))}
+.bdg img{position:absolute;left:0;top:0;display:block;max-width:none;width:100%;height:100%}
+.bdg.gp img{width:calc(var(--bh)*var(--s,1.302)*2.584);height:calc(var(--bh)*var(--s,1.302));left:calc(var(--bh)*var(--s,1.302)*2.584*var(--px,0)*-1);top:calc(var(--bh)*var(--s,1.302)*var(--py,.116)*-1)}
+.more{margin:14px auto 0;color:#fff;font-size:14.5px;text-shadow:0 1px 0 rgba(130,10,70,.4)}
+.getit:not([hidden])+.more[hidden]+.sub{margin-top:14px}
+.more a{color:#fff;text-underline-offset:3px;padding:8px 2px}
+.legal{margin:12px auto 0;max-width:44em;font-size:11.5px;line-height:1.5;opacity:.85}
+@media (max-width:350px){.getit{--bh:50px}}
 .btn-discord{background:var(--discord);color:#fff;box-shadow:0 5px 0 #3c45b5}
 .btn-discord:active{box-shadow:0 2px 0 #3c45b5}
 .btn-line{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 3px var(--ink)}
@@ -120,13 +129,24 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 .fine{margin:18px 0 0;font-size:14px;color:var(--ink-soft)}
 .tagline span{display:inline-block}
 .feats{display:grid;gap:12px;margin:0;padding:0;list-style:none}
-@media (min-width:520px){.feats{grid-template-columns:1fr 1fr}}
-.feats li{padding:14px 14px 15px;border-radius:18px;background:#fff;box-shadow:inset 0 0 0 2px #f6d7e6}
+.feats li{display:grid;grid-template-columns:84px 1fr;gap:13px;align-items:center;padding:12px 14px 12px 12px;border-radius:18px;background:#fff;box-shadow:inset 0 0 0 2px #f6d7e6}
+.fv{display:block;width:84px;height:84px;border-radius:16px;object-fit:cover;background:#f7c3da}
+@media (max-width:350px){.feats li{grid-template-columns:68px 1fr;gap:11px}.fv{width:68px;height:68px;border-radius:14px}}
 .feats h3{margin:0 0 4px;font-size:19px;line-height:1.2}
 .feats p{margin:0;font-size:15.5px;color:var(--ink-soft)}
 .tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0 0;padding:0;list-style:none}
 .tag{padding:5px 12px;border-radius:999px;background:#ffe3ef;font-size:14px;color:var(--ink)}
 h2{margin:0 0 6px;font-size:23px;line-height:1.2}
+.faq{display:grid;gap:10px;margin-top:12px}
+.faq details{border-radius:16px;background:#fff;box-shadow:inset 0 0 0 2px #f6d7e6}
+.faq summary{position:relative;display:block;padding:13px 46px 13px 14px;font-family:"Fredoka",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-weight:600;font-size:17.5px;line-height:1.3;cursor:pointer;list-style:none;border-radius:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"";position:absolute;right:19px;top:50%;width:8px;height:8px;margin-top:-7px;border-right:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);transform:rotate(45deg)}
+.faq details[open] summary:after{margin-top:-2px;transform:rotate(225deg)}
+.faq summary:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.faq p{margin:0;padding:0 14px 14px;font-size:15.5px;color:var(--ink-soft)}
+[dir="rtl"] .faq summary{padding:13px 14px 13px 46px}
+[dir="rtl"] .faq summary:after{right:auto;left:19px}
 .card>p{margin:0 0 14px}
 .card>.fine{margin:20px 0 0}
 .chan{display:grid;grid-template-columns:1fr 1fr;gap:12px 10px;margin:0;padding:0 0 5px;list-style:none}
@@ -195,15 +215,16 @@ html[lang="ko"] body{word-break:keep-all}
       </g>
     </svg>
     <p class="tagline"><span data-i="tag1">Drop jelly bombs.</span> <span data-i="tag2">Trap your friends. Pop!</span></p>
+    <div class="getit" id="getit" hidden>
+      <a class="bdg as" id="bApp" rel="noopener" hidden><span class="bx"><img id="imApp" alt="" decoding="async"></span></a>
+      <a class="bdg gp" id="bPlay" rel="noopener" hidden><span class="bx"><img id="imPlay" alt="" decoding="async"></span></a>
+    </div>
+    <p class="more" id="more" hidden></p>
     <p class="sub" data-i="sub">A squishy bomb-battle party game for Android and iOS.</p>
   </header>
 
   <section class="card cta" aria-label="Get the game">
     <p class="chip" id="chip">Coming soon to Google Play &amp; App Store</p>
-    <div class="stores" id="stores" hidden>
-      <a class="btn btn-store" id="bPlay" rel="noopener" hidden><small>Get it on</small>Google Play</a>
-      <a class="btn btn-store" id="bApp" rel="noopener" hidden><small>Download on the</small>App Store</a>
-    </div>
     <a class="btn btn-pink" id="bTrailer" rel="noopener" hidden><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4.6v14.8a1 1 0 0 0 1.5.86l12.3-7.4a1 1 0 0 0 0-1.72L9 3.74a1 1 0 0 0-1.5.86z" fill="currentColor"/></svg><span data-i="trailer">Watch the trailer</span></a>
     <a class="btn btn-discord" id="bDiscord" href="https://discord.gg/Ug5UMKS7ZB" rel="noopener" data-i="join">Join the official Discord</a>
     <ul class="tags trust">
@@ -229,16 +250,27 @@ html[lang="ko"] body{word-break:keep-all}
 
   <section class="card" aria-label="About the game">
     <ul class="feats">
-      <li><h3 data-i="f1h">Squishy</h3><p data-i="f1p">Tap your jelly and it giggles. Poke it too much and it sulks.</p></li>
-      <li><h3 data-i="f2h">Better together</h3><p data-i="f2p">Two players on one phone, or up to 6 online with a room code.</p></li>
-      <li><h3 data-i="f3h">Fair</h3><p data-i="f3p">No ads. No gacha. The first 15 stages are free, and one purchase unlocks the rest.</p></li>
-      <li><h3 data-i="f4h">Plenty to do</h3><p data-i="f4p">50 stages with bosses, a one-tile jump, a map maker and lots of ways to dress up your jelly.</p></li>
+      <li><video class="fv" muted loop playsinline preload="none" poster="feat-1.jpg" width="240" height="240" aria-hidden="true" tabindex="-1"><source src="feat-1.mp4" type="video/mp4"></video><div><h3 data-i="f1h">Squishy</h3><p data-i="f1p">Tap your jelly and it giggles. Poke it too much and it sulks.</p></div></li>
+      <li><video class="fv" muted loop playsinline preload="none" poster="feat-2.jpg" width="240" height="240" aria-hidden="true" tabindex="-1"><source src="feat-2.mp4" type="video/mp4"></video><div><h3 data-i="f2h">Better together</h3><p data-i="f2p">Two players on one phone, or up to 6 online with a room code.</p></div></li>
+      <li><video class="fv" muted loop playsinline preload="none" poster="feat-3.jpg" width="240" height="240" aria-hidden="true" tabindex="-1"><source src="feat-3.mp4" type="video/mp4"></video><div><h3 data-i="f3h">Fair</h3><p data-i="f3p">No ads. No gacha. The first 15 stages are free, and one purchase unlocks the rest.</p></div></li>
+      <li><video class="fv" muted loop playsinline preload="none" poster="feat-4.jpg" width="240" height="240" aria-hidden="true" tabindex="-1"><source src="feat-4.mp4" type="video/mp4"></video><div><h3 data-i="f4h">Plenty to do</h3><p data-i="f4p">50 stages with bosses, a one-tile jump, a map maker and lots of ways to dress up your jelly.</p></div></li>
     </ul>
     <ul class="tags">
       <li class="tag" data-i="t1">12 languages</li>
       <li class="tag" data-i="t2">Controller support</li>
       <li class="tag" data-i="t3">No sign-up needed</li>
     </ul>
+  </section>
+
+  <section class="card" aria-labelledby="faqH">
+    <h2 id="faqH" data-i="faqH">Good to know</h2>
+    <div class="faq">
+      <details><summary data-i="q1">Is it free?</summary><p data-i="a1">Yes, free to download and play. The first 15 stages are free, and one purchase unlocks all 50. Cosmetic theme packs are optional. No ads, no subscriptions, no gacha.</p></details>
+      <details><summary data-i="q2">Do I need internet?</summary><p data-i="a2">No. The stages and two players on one phone work offline. Only online matches need a connection.</p></details>
+      <details><summary data-i="q3">How do we play together?</summary><p data-i="a3">Two players share one phone on a wide board built for two. Online, create a room and share its five-letter room code. Up to 6 can play.</p></details>
+      <details><summary data-i="q4">Do I need an account?</summary><p data-i="a4">No. You can play right away. Signing in (Settings → Account) is optional and saves your progress, so you can carry on from another device.</p></details>
+      <details><summary data-i="q5">Controllers and languages?</summary><p data-i="a5">Controllers are supported. The game comes in 12 languages: English, Korean, Japanese, Chinese (Simplified and Traditional), Spanish, French, German, Italian, Portuguese, Russian and Arabic.</p></details>
+    </div>
   </section>
 
   <section class="card" aria-label="Official channels">
@@ -259,6 +291,7 @@ html[lang="ko"] body{word-break:keep-all}
       <a href="mailto:jellypangpang1231@gmail.com" data-i="contact">Contact</a>
     </nav>
     <div dir="ltr">© 2026 Jelly PangPang</div>
+    <p class="legal" id="legal" dir="ltr" lang="en" hidden>Google Play and the Google Play logo are trademarks of Google LLC. Apple, the Apple logo, iPhone and iPad are trademarks of Apple Inc., registered in the U.S. and other countries and regions. App Store is a service mark of Apple Inc.</p>
   </footer>
 </main>
 <script>
@@ -272,7 +305,8 @@ html[lang="ko"] body{word-break:keep-all}
   var CFG = { play: '', appstore: '', applePt: '', trailer: 'https://youtu.be/AtGxtpKSSvo' };
 
   var $ = function (id) { return document.getElementById(id); };
-  var SHOTS = window.__SHOTS || {};               /* 한 장짜리 미리보기(build.py)만 쓴다 — 스크린샷 파일 이름 → 박아 넣은 그림 */
+  var INL = window.__INL || {};                   /* 한 장짜리 미리보기(build.py)만 쓴다 — 파일 이름 → 박아 넣은 그림(스크린샷·배지) */
+  function setSrc(el, f) { var u = INL[f] || f; if (el.getAttribute('src') !== u) el.src = u; }
 
   /* ── 언어 ── 게임이 지원하는 12개(게임의 LANGS 와 같은 차례·같은 이름). 낱말은 게임 번역 표를 따른다(젤리 폭탄·방 번호·패드).
      고르는 차례: 주소의 ?lang= → 전에 고른 것(localStorage) → 브라우저 언어 → 영어. 원문(HTML)은 영어다. */
@@ -282,7 +316,7 @@ html[lang="ko"] body{word-break:keep-all}
     en: { name: 'Pop! Jelly PangPang', tag1: 'Drop jelly bombs.', tag2: 'Trap your friends. Pop!', sub: 'A squishy bomb-battle party game for Android and iOS.',
       soon: 'Coming soon to Google Play & App Store', outBoth: 'Out now — free to start', outPlay: 'Out now on Google Play', outApp: 'Out now on the App Store',
       join: 'Join the official Discord', noteSoon: 'Launch news lands on Discord first.', noteOut: 'The first 15 stages are free. No ads, no gacha.',
-      getPlay: 'Get it on', getApp: 'Download on the', soonPlay: 'Coming soon to', soonApp: 'Coming soon to the', trailer: 'Watch the trailer',
+      aPlay: 'Get it on Google Play', aApp: 'Download on the App Store', appSoon: 'iPhone and iPad: coming soon', playSoon: 'Android: coming soon', alsoApp: 'Also on iPhone and iPad', alsoPlay: 'Also on Android', trailer: 'Watch the trailer',
       f1h: 'Squishy', f1p: 'Tap your jelly and it giggles. Poke it too much and it sulks.',
       f2h: 'Better together', f2p: 'Two players on one phone, or up to 6 online with a room code.',
       f3h: 'Fair', f3p: 'No ads. No gacha. The first 15 stages are free, and one purchase unlocks the rest.',
@@ -291,6 +325,12 @@ html[lang="ko"] body{word-break:keep-all}
       chH: 'Follow the jellies', chP: 'New clips and updates on every channel. To find people to play with, share your maps or report a bug, come to Discord.',
       age: 'Discord is for ages 13 and up (older in some countries).', priv: 'Privacy', contact: 'Contact',
       sndOn: 'Turn sound on', sndOff: 'Turn sound off', langLbl: 'Language', vid: 'Gameplay: jellies drop bombs and pop each other across candy arenas',
+      faqH: 'Good to know',
+      q1: 'Is it free?', a1: 'Yes, free to download and play. The first 15 stages are free, and one purchase unlocks all 50. Cosmetic theme packs are optional. No ads, no subscriptions, no gacha.',
+      q2: 'Do I need internet?', a2: 'No. The stages and two players on one phone work offline. Only online matches need a connection.',
+      q3: 'How do we play together?', a3: 'Two players share one phone on a wide board built for two. Online, create a room and share its five-letter room code. Up to 6 can play.',
+      q4: 'Do I need an account?', a4: 'No. You can play right away. Signing in (Settings → Account) is optional and saves your progress, so you can carry on from another device.',
+      q5: 'Controllers and languages?', a5: 'Controllers are supported. The game comes in 12 languages: English, Korean, Japanese, Chinese (Simplified and Traditional), Spanish, French, German, Italian, Portuguese, Russian and Arabic.',
       c1: 'No ads', c2: 'No gacha', c3: '15 stages free', shots: 'Screenshots', shot: 'Screenshot',
       alts: ['Boss stage: a giant purple boss jelly guards a chocolate board', 'Dress-up screen: a jelly in bunny ears with rows of toppings to choose from',
         'A six-player battle kicks off on a cookie board with a big GO!', 'The jelly town: a candy plaza with a clock tower and jelly friends',
@@ -299,7 +339,7 @@ html[lang="ko"] body{word-break:keep-all}
     ko: { name: '터져라! 젤리팡팡', tag1: '젤리 폭탄을 놓고,', tag2: '친구를 가두고, 팡!', sub: '안드로이드와 iOS에서 즐기는 말랑말랑 폭탄 대전 파티 게임.',
       soon: '구글 플레이 · 앱 스토어 출시 예정', outBoth: '지금 출시 — 무료로 시작', outPlay: '구글 플레이에 출시', outApp: '앱 스토어에 출시',
       join: '공식 디스코드 들어가기', noteSoon: '출시 소식은 디스코드에 가장 먼저 올라옵니다.', noteOut: '15단계까지 무료. 광고도 뽑기도 없습니다.',
-      getPlay: '다운로드', getApp: '다운로드', soonPlay: '출시 예정', soonApp: '출시 예정', trailer: '트레일러 보기',
+      aPlay: 'Google Play에서 받기', aApp: 'App Store에서 받기', appSoon: '아이폰·아이패드는 곧 출시', playSoon: '안드로이드는 곧 출시', alsoApp: '아이폰·아이패드에서도 받기', alsoPlay: '안드로이드에서도 받기', trailer: '트레일러 보기',
       f1h: '말랑말랑', f1p: '톡 치면 깔깔 웃고, 자꾸 찌르면 삐집니다.',
       f2h: '같이 하면 더 재밌다', f2p: '한 폰으로 둘이서, 온라인은 방 번호로 6명까지.',
       f3h: '깔끔한 구성', f3p: '광고 없음. 뽑기 없음. 15단계까지 무료이고, 한 번 구매하면 나머지가 전부 열립니다.',
@@ -308,6 +348,12 @@ html[lang="ko"] body{word-break:keep-all}
       chH: '젤리 소식 받아 보기', chP: '새 영상과 업데이트 소식은 모든 채널에 올라옵니다. 같이 할 사람 찾기, 내가 만든 맵 공유, 버그 제보는 디스코드에서.',
       age: '디스코드는 만 13세 이상(나라에 따라 더 높음)부터 이용할 수 있습니다.', priv: '개인정보처리방침', contact: '문의',
       sndOn: '소리 켜기', sndOff: '소리 끄기', langLbl: '언어', vid: '게임 장면: 젤리들이 과자 판 위에서 폭탄을 놓고 서로를 터뜨립니다',
+      faqH: '자주 묻는 질문',
+      q1: '무료인가요?', a1: '네, 받아서 노는 건 무료입니다. 15단계까지 무료이고, 한 번 구매하면 50단계가 전부 열립니다. 꾸미기 테마팩은 원하는 것만 고르면 됩니다. 광고도, 구독도, 뽑기도 없습니다.',
+      q2: '인터넷이 꼭 있어야 하나요?', a2: '아니요. 혼자 하는 단계와 한 폰으로 둘이서 하는 대전은 인터넷 없이도 됩니다. 온라인 대전만 연결이 필요합니다.',
+      q3: '친구와는 어떻게 하나요?', a3: '폰 하나로 둘이서, 둘을 위한 옆으로 긴 판에서 겨룹니다. 온라인은 방을 만들고 다섯 글자 방 번호를 알려 주면 됩니다. 최대 6명까지 함께합니다.',
+      q4: '가입해야 하나요?', a4: '아니요. 받자마자 바로 할 수 있습니다. 로그인(설정 → 계정)은 선택이고, 해 두면 진행 상황이 저장되어 다른 기기에서 이어서 할 수 있습니다.',
+      q5: '패드와 언어는요?', a5: '패드를 지원합니다. 언어는 12개입니다 — 한국어, 영어, 일본어, 중국어(간체·번체), 스페인어, 프랑스어, 독일어, 이탈리아어, 포르투갈어, 러시아어, 아랍어.',
       c1: '광고 없음', c2: '뽑기 없음', c3: '15단계 무료', shots: '스크린샷', shot: '스크린샷',
       alts: ['대장 판: 커다란 보라색 대장 젤리가 초콜릿 판을 지키고 있는 장면', '꾸미기 화면: 토끼 귀를 쓴 젤리와 골라 쓸 수 있는 토핑 목록',
         '쿠키 판에서 6인 대전이 「시작!」과 함께 시작되는 장면', '젤리 마을: 시계탑이 있는 과자 광장과 젤리 친구들',
@@ -316,7 +362,7 @@ html[lang="ko"] body{word-break:keep-all}
     ja: { name: 'はじけろ！ゼリーパンパン', tag1: 'ゼリーばくだんを置いて、', tag2: '友だちを閉じこめて、ポン！', sub: 'Android と iOS で遊べる、ぷるぷるボムバトルのパーティーゲーム。',
       soon: 'Google Play・App Store で近日配信', outBoth: '配信中 — 無料で始められます', outPlay: 'Google Play で配信中', outApp: 'App Store で配信中',
       join: '公式 Discord に参加', noteSoon: '配信のお知らせは Discord でいちばん早く届きます。', noteOut: '最初の15ステージは無料。広告なし、ガチャなし。',
-      getPlay: 'ダウンロード', getApp: 'ダウンロード', soonPlay: '近日配信', soonApp: '近日配信', trailer: 'トレーラーを見る',
+      aPlay: 'Google Play で手に入れよう', aApp: 'App Store からダウンロード', appSoon: 'iPhone・iPad 版は近日配信', playSoon: 'Android 版は近日配信', alsoApp: 'iPhone・iPad 版もあります', alsoPlay: 'Android 版もあります', trailer: 'トレーラーを見る',
       f1h: 'ぷるぷる', f1p: 'タップするとくすくす笑い、つつきすぎるとすねます。',
       f2h: 'みんなで遊ぼう', f2p: '1台のスマホで2人対戦、オンラインは部屋番号で最大6人。',
       f3h: 'フェアな設計', f3p: '広告なし。ガチャなし。最初の15ステージは無料、1回の購入で残りがすべて遊べます。',
@@ -325,11 +371,17 @@ html[lang="ko"] body{word-break:keep-all}
       chH: 'ゼリーたちをフォロー', chP: '新しい動画やアップデート情報は各チャンネルで。一緒に遊ぶ仲間探し、マップの共有、バグ報告は Discord へ。',
       age: 'Discord は13歳以上（国によってはそれ以上）が対象です。', priv: 'プライバシー', contact: 'お問い合わせ',
       sndOn: 'サウンドをオンにする', sndOff: 'サウンドをオフにする', langLbl: '言語', vid: 'ゲーム映像：ゼリーたちがお菓子のステージでばくだんを置いてはじけ合います',
+      faqH: 'よくある質問',
+      q1: '無料ですか？', a1: 'はい、ダウンロードもプレイも無料です。最初の15ステージは無料で、1回の購入で全50ステージが遊べます。きせかえテーマパックは好きなものだけどうぞ。広告なし、サブスクなし、ガチャなし。',
+      q2: 'インターネットは必要ですか？', a2: 'いいえ。ステージと、1台のスマホでの2人対戦はオフラインで遊べます。オンライン対戦だけ接続が必要です。',
+      q3: '友だちとはどうやって遊びますか？', a3: '1台のスマホを2人で使い、2人用の横長ステージで対戦します。オンラインは部屋を作って5文字の部屋番号を伝えるだけ。最大6人まで遊べます。',
+      q4: 'アカウント登録は必要ですか？', a4: 'いいえ。すぐに遊べます。サインイン（せってい → アカウント）は任意で、進行状況が保存され、別の端末でも続きから遊べます。',
+      q5: 'コントローラーと言語は？', a5: 'コントローラーに対応しています。言語は12言語：日本語、英語、韓国語、中国語（簡体字・繁体字）、スペイン語、フランス語、ドイツ語、イタリア語、ポルトガル語、ロシア語、アラビア語。',
       c1: '広告なし', c2: 'ガチャなし', c3: '15ステージ無料', shots: 'スクリーンショット', shot: 'スクリーンショット' },
     'zh-Hant': { name: '果凍碰碰樂', tag1: '放下果凍炸彈，', tag2: '困住朋友，砰！', sub: 'Android 與 iOS 上的 Q 彈炸彈對戰派對遊戲。',
       soon: '即將登上 Google Play 與 App Store', outBoth: '現已推出 — 免費開始', outPlay: '已在 Google Play 推出', outApp: '已在 App Store 推出',
       join: '加入官方 Discord', noteSoon: '上線消息會最先在 Discord 公布。', noteOut: '前 15 關免費。無廣告，無轉蛋。',
-      getPlay: '前往下載', getApp: '前往下載', soonPlay: '即將推出', soonApp: '即將推出', trailer: '觀看預告片',
+      aPlay: '在 Google Play 下載', aApp: '在 App Store 下載', appSoon: 'iPhone 與 iPad 版即將推出', playSoon: 'Android 版即將推出', alsoApp: '也有 iPhone 與 iPad 版', alsoPlay: '也有 Android 版', trailer: '觀看預告片',
       f1h: 'Q 彈軟萌', f1p: '輕點果凍，它會咯咯笑；戳太多次，它會鬧脾氣。',
       f2h: '一起玩更有趣', f2p: '一支手機兩人同玩，或用房間號碼連線，最多 6 人。',
       f3h: '公平實在', f3p: '無廣告。無轉蛋。前 15 關免費，一次購買即可解鎖其餘全部內容。',
@@ -338,11 +390,17 @@ html[lang="ko"] body{word-break:keep-all}
       chH: '追蹤果凍們', chP: '新影片與更新消息會發布在各個頻道。找人一起玩、分享地圖或回報問題，請到 Discord。',
       age: 'Discord 僅限 13 歲以上使用（部分國家/地區要求更高）。', priv: '隱私權政策', contact: '聯絡我們',
       sndOn: '開啟聲音', sndOff: '關閉聲音', langLbl: '語言', vid: '遊戲畫面：果凍們在糖果場地上放炸彈、互相炸開',
+      faqH: '常見問題',
+      q1: '遊戲免費嗎？', a1: '是的，下載和遊玩都免費。前 15 關免費，一次購買即可解鎖全部 50 關。裝扮主題包可依喜好選購。無廣告、無訂閱、無轉蛋。',
+      q2: '需要網路嗎？', a2: '不需要。闖關和一支手機兩人同玩都可以離線遊玩，只有線上對戰需要連線。',
+      q3: '怎麼和朋友一起玩？', a3: '兩人共用一支手機，在專為雙人設計的橫向場地對戰。線上對戰只要建立房間並分享五個字的房間號碼，最多 6 人同玩。',
+      q4: '需要註冊帳號嗎？', a4: '不需要，下載後就能直接玩。登入（設定 → 帳號）為選用，登入後會儲存進度，換裝置也能繼續玩。',
+      q5: '支援手把和哪些語言？', a5: '支援手把。提供 12 種語言：繁體中文、簡體中文、英文、韓文、日文、西班牙文、法文、德文、義大利文、葡萄牙文、俄文、阿拉伯文。',
       c1: '無廣告', c2: '無轉蛋', c3: '前 15 關免費', shots: '遊戲截圖', shot: '遊戲截圖' },
     'zh-Hans': { name: '果冻碰碰乐', tag1: '放下果冻炸弹，', tag2: '困住朋友，砰！', sub: 'Android 和 iOS 上的 Q 弹炸弹对战派对游戏。',
       soon: '即将登陆 Google Play 和 App Store', outBoth: '现已上线 — 免费开玩', outPlay: '已在 Google Play 上线', outApp: '已在 App Store 上线',
       join: '加入官方 Discord', noteSoon: '上线消息会最先在 Discord 发布。', noteOut: '前 15 关免费。无广告，无抽卡。',
-      getPlay: '前往下载', getApp: '前往下载', soonPlay: '即将上线', soonApp: '即将上线', trailer: '观看预告片',
+      aPlay: '在 Google Play 下载', aApp: '在 App Store 下载', appSoon: 'iPhone 和 iPad 版即将上线', playSoon: 'Android 版即将上线', alsoApp: '也有 iPhone 和 iPad 版', alsoPlay: '也有 Android 版', trailer: '观看预告片',
       f1h: 'Q 弹软萌', f1p: '轻点果冻，它会咯咯笑；戳太多次，它会闹脾气。',
       f2h: '一起玩更有趣', f2p: '一部手机两人同玩，或用房间号码联机，最多 6 人。',
       f3h: '公平实在', f3p: '无广告。无抽卡。前 15 关免费，一次购买即可解锁其余全部内容。',
@@ -351,11 +409,17 @@ html[lang="ko"] body{word-break:keep-all}
       chH: '关注果冻们', chP: '新视频和更新消息会发布在各个频道。找人一起玩、分享地图或反馈问题，请来 Discord。',
       age: 'Discord 仅限 13 岁及以上用户使用（部分国家/地区要求更高）。', priv: '隐私政策', contact: '联系我们',
       sndOn: '打开声音', sndOff: '关闭声音', langLbl: '语言', vid: '游戏画面：果冻们在糖果场地上放炸弹、互相炸开',
+      faqH: '常见问题',
+      q1: '游戏免费吗？', a1: '是的，下载和游玩都免费。前 15 关免费，一次购买即可解锁全部 50 关。装扮主题包可按喜好选购。无广告、无订阅、无抽卡。',
+      q2: '需要联网吗？', a2: '不需要。闯关和一部手机两人同玩都可以离线游玩，只有联机对战需要网络。',
+      q3: '怎么和朋友一起玩？', a3: '两人共用一部手机，在专为双人设计的横向场地对战。联机对战只要创建房间并分享五位房间号码，最多 6 人同玩。',
+      q4: '需要注册账号吗？', a4: '不需要，下载后就能直接玩。登录（设置 → 账号）为可选项，登录后会保存进度，换设备也能继续玩。',
+      q5: '支持手柄和哪些语言？', a5: '支持手柄。提供 12 种语言：简体中文、繁体中文、英语、韩语、日语、西班牙语、法语、德语、意大利语、葡萄牙语、俄语、阿拉伯语。',
       c1: '无广告', c2: '无抽卡', c3: '前 15 关免费', shots: '游戏截图', shot: '游戏截图' },
     ru: { name: 'Pop! Jelly PangPang', tag1: 'Ставь желе-бомбы.', tag2: 'Лови друзей — и бах!', sub: 'Мягкая и весёлая игра-вечеринка с бомбами для Android и iOS.',
       soon: 'Скоро в Google Play и App Store', outBoth: 'Уже вышла — начни бесплатно', outPlay: 'Уже в Google Play', outApp: 'Уже в App Store',
       join: 'Зайти в официальный Discord', noteSoon: 'Новости о выходе первыми появляются в Discord.', noteOut: 'Первые 15 уровней бесплатно. Без рекламы и гачи.',
-      getPlay: 'Доступно в', getApp: 'Загрузите в', soonPlay: 'Скоро в', soonApp: 'Скоро в', trailer: 'Смотреть трейлер',
+      aPlay: 'Доступно в Google Play', aApp: 'Загрузите в App Store', appSoon: 'iPhone и iPad: скоро', playSoon: 'Android: скоро', alsoApp: 'Также на iPhone и iPad', alsoPlay: 'Также на Android', trailer: 'Смотреть трейлер',
       f1h: 'Мягкое желе', f1p: 'Коснись желе — оно хихикает. Тыкай слишком часто — обидится.',
       f2h: 'Вместе веселее', f2p: 'Вдвоём на одном телефоне или до 6 игроков онлайн по коду комнаты.',
       f3h: 'Честно', f3p: 'Без рекламы. Без гачи. Первые 15 уровней бесплатно, а одна покупка открывает всё остальное.',
@@ -364,11 +428,17 @@ html[lang="ko"] body{word-break:keep-all}
       chH: 'Следи за желе', chP: 'Новые ролики и обновления — на всех каналах. Найти напарников, поделиться картами или сообщить об ошибке можно в Discord.',
       age: 'Discord доступен с 13 лет (в некоторых странах — старше).', priv: 'Конфиденциальность', contact: 'Связаться',
       sndOn: 'Включить звук', sndOff: 'Выключить звук', langLbl: 'Язык', vid: 'Игровой процесс: желе ставят бомбы и лопают друг друга на сладких аренах',
+      faqH: 'Частые вопросы',
+      q1: 'Игра бесплатная?', a1: 'Да, скачать и играть можно бесплатно. Первые 15 уровней бесплатны, а одна покупка открывает все 50. Тематические наборы украшений — по желанию. Без рекламы, без подписок, без гачи.',
+      q2: 'Нужен ли интернет?', a2: 'Нет. Уровни и игра вдвоём на одном телефоне работают офлайн. Подключение нужно только для онлайн-матчей.',
+      q3: 'Как играть вместе?', a3: 'Вдвоём на одном телефоне — на широком поле для двоих. В онлайне создайте комнату и поделитесь её кодом комнаты из пяти букв. Играть могут до 6 человек.',
+      q4: 'Нужен ли аккаунт?', a4: 'Нет, играть можно сразу. Вход (Настройки → Аккаунт) необязателен: он сохраняет прогресс, чтобы продолжить на другом устройстве.',
+      q5: 'Геймпады и языки?', a5: 'Геймпады поддерживаются. В игре 12 языков: русский, английский, корейский, японский, китайский (упрощённый и традиционный), испанский, французский, немецкий, итальянский, португальский и арабский.',
       c1: 'Без рекламы', c2: 'Без гачи', c3: '15 уровней бесплатно', shots: 'Скриншоты', shot: 'Скриншот' },
     ar: { name: 'جيلي بانغ بانغ', tag1: 'ضع قنابل الجيلي.', tag2: 'احبس أصدقاءك. بوم!', sub: 'لعبة جماعية طرية لمعارك القنابل على أندرويد و iOS.',
       soon: 'قريبًا على Google Play و App Store', outBoth: 'متوفرة الآن — ابدأ مجانًا', outPlay: 'متوفرة الآن على Google Play', outApp: 'متوفرة الآن على App Store',
       join: 'انضم إلى Discord الرسمي', noteSoon: 'أخبار الإصدار تُنشر على Discord أولًا.', noteOut: 'أول 15 مرحلة مجانية. بلا إعلانات وبلا غاتشا.',
-      getPlay: 'حمّلها من', getApp: 'حمّلها من', soonPlay: 'قريبًا على', soonApp: 'قريبًا على', trailer: 'شاهد العرض التشويقي',
+      aPlay: 'احصل عليها من Google Play', aApp: 'حمّلها من App Store', appSoon: 'iPhone و iPad: قريبًا', playSoon: 'Android: قريبًا', alsoApp: 'متوفرة أيضًا على iPhone و iPad', alsoPlay: 'متوفرة أيضًا على Android', trailer: 'شاهد العرض التشويقي',
       f1h: 'طرية ولطيفة', f1p: 'المس الجيلي فيضحك. وإن أكثرتَ من وخزه يزعل.',
       f2h: 'أمتع مع الأصدقاء', f2p: 'لاعبان على هاتف واحد، أو حتى 6 لاعبين عبر الإنترنت برمز الغرفة.',
       f3h: 'منصفة', f3p: 'بلا إعلانات. بلا غاتشا. أول 15 مرحلة مجانية، وشراء واحد يفتح الباقي.',
@@ -377,11 +447,17 @@ html[lang="ko"] body{word-break:keep-all}
       chH: 'تابع الجيلي', chP: 'مقاطع جديدة وتحديثات على كل القنوات. للبحث عن لاعبين أو مشاركة خرائطك أو الإبلاغ عن خطأ، تعال إلى Discord.',
       age: 'Discord متاح لمن هم بعمر 13 عامًا فأكثر (وأكبر في بعض الدول).', priv: 'الخصوصية', contact: 'اتصل بنا',
       sndOn: 'تشغيل الصوت', sndOff: 'إيقاف الصوت', langLbl: 'اللغة', vid: 'مشاهد من اللعبة: الجيلي يضع القنابل ويفجّر بعضه بعضًا في ساحات الحلوى',
+      faqH: 'أسئلة شائعة',
+      q1: 'هل اللعبة مجانية؟', a1: 'نعم، التحميل واللعب مجانيان. أول 15 مرحلة مجانية، وشراء واحد يفتح المراحل الخمسين كلها. حزم الزينة اختيارية. بلا إعلانات، بلا اشتراكات، بلا غاتشا.',
+      q2: 'هل أحتاج إلى الإنترنت؟', a2: 'لا. المراحل ولعب لاعبَين على هاتف واحد يعملان بدون إنترنت. المباريات عبر الإنترنت فقط تحتاج إلى اتصال.',
+      q3: 'كيف نلعب معًا؟', a3: 'لاعبان يتشاركان هاتفًا واحدًا على ساحة عريضة مصممة لاثنين. وعبر الإنترنت أنشئ غرفة وشارك رمز الغرفة المكوّن من خمسة أحرف. يمكن أن يلعب حتى 6 لاعبين.',
+      q4: 'هل أحتاج إلى حساب؟', a4: 'لا. يمكنك اللعب فورًا. تسجيل الدخول اختياري (الإعدادات ← الحساب) ويحفظ تقدمك لتكمل من جهاز آخر.',
+      q5: 'ماذا عن يد التحكم واللغات؟', a5: 'اللعبة تدعم يد التحكم، ومتوفرة بـ 12 لغة: العربية والإنجليزية والكورية واليابانية والصينية (المبسطة والتقليدية) والإسبانية والفرنسية والألمانية والإيطالية والبرتغالية والروسية.',
       c1: 'بلا إعلانات', c2: 'بلا غاتشا', c3: '15 مرحلة مجانية', shots: 'لقطات من اللعبة', shot: 'لقطة من اللعبة' },
     es: { name: 'Pop! Jelly PangPang', tag1: 'Pon bombas de gelatina.', tag2: 'Atrapa a tus amigos. ¡Pop!', sub: 'Un blandito juego de fiesta con batallas de bombas para Android e iOS.',
       soon: 'Próximamente en Google Play y App Store', outBoth: 'Ya disponible: empieza gratis', outPlay: 'Ya disponible en Google Play', outApp: 'Ya disponible en App Store',
       join: 'Únete al Discord oficial', noteSoon: 'Las noticias del lanzamiento llegan primero a Discord.', noteOut: 'Los primeros 15 niveles son gratis. Sin anuncios ni gacha.',
-      getPlay: 'Disponible en', getApp: 'Descárgalo en el', soonPlay: 'Próximamente en', soonApp: 'Próximamente en el', trailer: 'Ver el tráiler',
+      aPlay: 'Disponible en Google Play', aApp: 'Descárgalo en el App Store', appSoon: 'iPhone y iPad: próximamente', playSoon: 'Android: próximamente', alsoApp: 'También en iPhone y iPad', alsoPlay: 'También en Android', trailer: 'Ver el tráiler',
       f1h: 'Blandito', f1p: 'Toca tu gelatina y se ríe. Si la pinchas demasiado, se enfurruña.',
       f2h: 'Mejor en compañía', f2p: 'Dos jugadores en un mismo móvil, o hasta 6 en línea con un código de sala.',
       f3h: 'Justo', f3p: 'Sin anuncios. Sin gacha. Los primeros 15 niveles son gratis y una sola compra desbloquea el resto.',
@@ -390,11 +466,17 @@ html[lang="ko"] body{word-break:keep-all}
       chH: 'Sigue a las gelatinas', chP: 'Nuevos clips y novedades en todos los canales. Para buscar con quién jugar, compartir tus mapas o avisar de un error, ven a Discord.',
       age: 'Discord es para mayores de 13 años (más en algunos países).', priv: 'Privacidad', contact: 'Contacto',
       sndOn: 'Activar sonido', sndOff: 'Desactivar sonido', langLbl: 'Idioma', vid: 'Juego: las gelatinas ponen bombas y se revientan entre sí en arenas de dulces',
+      faqH: 'Preguntas frecuentes',
+      q1: '¿Es gratis?', a1: 'Sí, descargar y jugar es gratis. Los primeros 15 niveles son gratis y una sola compra desbloquea los 50. Los packs temáticos de aspectos son opcionales. Sin anuncios, sin suscripciones, sin gacha.',
+      q2: '¿Necesito internet?', a2: 'No. Los niveles y el modo de dos jugadores en un mismo móvil funcionan sin conexión. Solo las partidas en línea la necesitan.',
+      q3: '¿Cómo jugamos juntos?', a3: 'Dos jugadores comparten un mismo móvil en un tablero ancho hecho para dos. En línea, crea una sala y comparte su código de sala de cinco letras. Pueden jugar hasta 6.',
+      q4: '¿Necesito una cuenta?', a4: 'No. Puedes jugar al instante. Iniciar sesión (Ajustes → Cuenta) es opcional y guarda tu progreso para continuar en otro dispositivo.',
+      q5: '¿Mandos e idiomas?', a5: 'Es compatible con mandos. El juego está en 12 idiomas: español, inglés, coreano, japonés, chino (simplificado y tradicional), francés, alemán, italiano, portugués, ruso y árabe.',
       c1: 'Sin anuncios', c2: 'Sin gacha', c3: '15 niveles gratis', shots: 'Capturas de pantalla', shot: 'Captura de pantalla' },
     fr: { name: 'Pop! Jelly PangPang', tag1: 'Pose des bombes gelée.', tag2: 'Piège tes amis. Pop !', sub: 'Un jeu de fête tout moelleux de batailles de bombes, sur Android et iOS.',
       soon: 'Bientôt sur Google Play et l’App Store', outBoth: 'Disponible — gratuit pour commencer', outPlay: 'Disponible sur Google Play', outApp: 'Disponible sur l’App Store',
       join: 'Rejoindre le Discord officiel', noteSoon: 'Les infos de sortie arrivent d’abord sur Discord.', noteOut: 'Les 15 premiers niveaux sont gratuits. Sans pub, sans gacha.',
-      getPlay: 'Disponible sur', getApp: 'Télécharger dans l’', soonPlay: 'Bientôt sur', soonApp: 'Bientôt sur l’', trailer: 'Voir la bande-annonce',
+      aPlay: 'Disponible sur Google Play', aApp: 'Télécharger dans l’App Store', appSoon: 'iPhone et iPad : bientôt', playSoon: 'Android : bientôt', alsoApp: 'Aussi sur iPhone et iPad', alsoPlay: 'Aussi sur Android', trailer: 'Voir la bande-annonce',
       f1h: 'Tout moelleux', f1p: 'Touche ta gelée et elle rigole. Embête-la trop et elle boude.',
       f2h: 'Meilleur à plusieurs', f2p: 'À deux sur un seul téléphone, ou jusqu’à 6 en ligne avec un code du salon.',
       f3h: 'Honnête', f3p: 'Sans pub. Sans gacha. Les 15 premiers niveaux sont gratuits et un seul achat débloque le reste.',
@@ -403,11 +485,17 @@ html[lang="ko"] body{word-break:keep-all}
       chH: 'Suis les gelées', chP: 'Nouveaux clips et mises à jour sur toutes les chaînes. Pour trouver des partenaires, partager tes cartes ou signaler un bug, viens sur Discord.',
       age: 'Discord est réservé aux 13 ans et plus (davantage dans certains pays).', priv: 'Confidentialité', contact: 'Contact',
       sndOn: 'Activer le son', sndOff: 'Couper le son', langLbl: 'Langue', vid: 'Extrait du jeu : les gelées posent des bombes et s’éclatent dans des arènes sucrées',
+      faqH: 'Questions fréquentes',
+      q1: 'Est-ce gratuit ?', a1: 'Oui, le téléchargement et le jeu sont gratuits. Les 15 premiers niveaux sont gratuits et un seul achat débloque les 50. Les packs de tenues à thème sont facultatifs. Sans pub, sans abonnement, sans gacha.',
+      q2: 'Faut-il une connexion internet ?', a2: 'Non. Les niveaux et le mode à deux sur un seul téléphone fonctionnent hors ligne. Seules les parties en ligne demandent une connexion.',
+      q3: 'Comment jouer ensemble ?', a3: 'À deux sur un seul téléphone, sur un plateau large conçu pour deux. En ligne, crée un salon et partage son code du salon à cinq lettres. Jusqu’à 6 joueurs peuvent jouer.',
+      q4: 'Faut-il un compte ?', a4: 'Non. Tu peux jouer tout de suite. La connexion (Réglages → Compte) est facultative et sauvegarde ta progression pour continuer sur un autre appareil.',
+      q5: 'Manettes et langues ?', a5: 'Les manettes sont prises en charge. Le jeu existe en 12 langues : français, anglais, coréen, japonais, chinois (simplifié et traditionnel), espagnol, allemand, italien, portugais, russe et arabe.',
       c1: 'Sans pub', c2: 'Sans gacha', c3: '15 niveaux gratuits', shots: 'Captures d’écran', shot: 'Capture d’écran' },
     it: { name: 'Pop! Jelly PangPang', tag1: 'Piazza bombe di gelatina.', tag2: 'Intrappola gli amici. Pop!', sub: 'Un morbido party game di battaglie a colpi di bombe per Android e iOS.',
       soon: 'Presto su Google Play e App Store', outBoth: 'Disponibile ora: inizia gratis', outPlay: 'Disponibile su Google Play', outApp: 'Disponibile su App Store',
       join: 'Entra nel Discord ufficiale', noteSoon: 'Le notizie sul lancio arrivano prima su Discord.', noteOut: 'I primi 15 livelli sono gratis. Niente pubblicità, niente gacha.',
-      getPlay: 'Disponibile su', getApp: 'Scarica su', soonPlay: 'Presto su', soonApp: 'Presto su', trailer: 'Guarda il trailer',
+      aPlay: 'Disponibile su Google Play', aApp: 'Scarica su App Store', appSoon: 'iPhone e iPad: presto disponibile', playSoon: 'Android: presto disponibile', alsoApp: 'Anche su iPhone e iPad', alsoPlay: 'Anche su Android', trailer: 'Guarda il trailer',
       f1h: 'Morbidoso', f1p: 'Tocca la tua gelatina e ridacchia. Stuzzicala troppo e mette il broncio.',
       f2h: 'Insieme è meglio', f2p: 'In due sullo stesso telefono, o fino a 6 online con un codice stanza.',
       f3h: 'Onesto', f3p: 'Niente pubblicità. Niente gacha. I primi 15 livelli sono gratis e un solo acquisto sblocca il resto.',
@@ -416,11 +504,17 @@ html[lang="ko"] body{word-break:keep-all}
       chH: 'Segui le gelatine', chP: 'Nuove clip e aggiornamenti su tutti i canali. Per trovare compagni di gioco, condividere le mappe o segnalare un bug, vieni su Discord.',
       age: 'Discord è per chi ha almeno 13 anni (di più in alcuni Paesi).', priv: 'Privacy', contact: 'Contatti',
       sndOn: 'Attiva audio', sndOff: 'Disattiva audio', langLbl: 'Lingua', vid: 'Gameplay: le gelatine piazzano bombe e si fanno scoppiare in arene di dolci',
+      faqH: 'Domande frequenti',
+      q1: 'È gratis?', a1: 'Sì, scaricare e giocare è gratis. I primi 15 livelli sono gratis e un solo acquisto sblocca tutti e 50. I pacchetti a tema per vestire la gelatina sono facoltativi. Niente pubblicità, niente abbonamenti, niente gacha.',
+      q2: 'Serve internet?', a2: 'No. I livelli e la modalità a due sullo stesso telefono funzionano offline. Solo le partite online richiedono la connessione.',
+      q3: 'Come si gioca insieme?', a3: 'In due sullo stesso telefono, su un campo largo pensato per due. Online, crea una stanza e condividi il suo codice stanza di cinque lettere. Si può giocare fino a 6.',
+      q4: 'Serve un account?', a4: 'No. Puoi giocare subito. L’accesso (Impostazioni → Account) è facoltativo e salva i tuoi progressi per continuare su un altro dispositivo.',
+      q5: 'Controller e lingue?', a5: 'I controller sono supportati. Il gioco è in 12 lingue: italiano, inglese, coreano, giapponese, cinese (semplificato e tradizionale), spagnolo, francese, tedesco, portoghese, russo e arabo.',
       c1: 'Niente pubblicità', c2: 'Niente gacha', c3: '15 livelli gratis', shots: 'Screenshot', shot: 'Screenshot' },
     de: { name: 'Pop! Jelly PangPang', tag1: 'Leg Gelee-Bomben.', tag2: 'Fang deine Freunde. Peng!', sub: 'Ein wabbeliges Bomben-Partyspiel für Android und iOS.',
       soon: 'Bald bei Google Play und im App Store', outBoth: 'Jetzt erhältlich – kostenlos starten', outPlay: 'Jetzt bei Google Play', outApp: 'Jetzt im App Store',
       join: 'Zum offiziellen Discord', noteSoon: 'Neuigkeiten zum Start gibt es zuerst auf Discord.', noteOut: 'Die ersten 15 Level sind kostenlos. Keine Werbung, kein Gacha.',
-      getPlay: 'Jetzt bei', getApp: 'Laden im', soonPlay: 'Bald bei', soonApp: 'Bald im', trailer: 'Trailer ansehen',
+      aPlay: 'Jetzt bei Google Play', aApp: 'Laden im App Store', appSoon: 'iPhone und iPad: bald verfügbar', playSoon: 'Android: bald verfügbar', alsoApp: 'Auch für iPhone und iPad', alsoPlay: 'Auch für Android', trailer: 'Trailer ansehen',
       f1h: 'Wabbelig', f1p: 'Tipp dein Gelee an und es kichert. Piks es zu oft und es schmollt.',
       f2h: 'Zusammen besser', f2p: 'Zu zweit an einem Handy oder online mit bis zu 6 Spielern per Raumcode.',
       f3h: 'Fair', f3p: 'Keine Werbung. Kein Gacha. Die ersten 15 Level sind kostenlos, ein einmaliger Kauf schaltet den Rest frei.',
@@ -429,11 +523,17 @@ html[lang="ko"] body{word-break:keep-all}
       chH: 'Folge den Gelees', chP: 'Neue Clips und Updates gibt es auf allen Kanälen. Mitspieler finden, Karten teilen oder Fehler melden: auf Discord.',
       age: 'Discord ist ab 13 Jahren (in manchen Ländern älter).', priv: 'Datenschutz', contact: 'Kontakt',
       sndOn: 'Ton einschalten', sndOff: 'Ton ausschalten', langLbl: 'Sprache', vid: 'Gameplay: Gelees legen Bomben und lassen einander in Süßigkeiten-Arenen platzen',
+      faqH: 'Häufige Fragen',
+      q1: 'Ist es kostenlos?', a1: 'Ja, Herunterladen und Spielen ist kostenlos. Die ersten 15 Level sind kostenlos, ein einmaliger Kauf schaltet alle 50 frei. Thematische Kosmetik-Pakete sind optional. Keine Werbung, kein Abo, kein Gacha.',
+      q2: 'Brauche ich Internet?', a2: 'Nein. Die Level und der Zwei-Spieler-Modus an einem Handy funktionieren offline. Nur Online-Matches brauchen eine Verbindung.',
+      q3: 'Wie spielen wir zusammen?', a3: 'Zu zweit an einem Handy, auf einem breiten Spielfeld für zwei. Online erstellst du einen Raum und teilst seinen Raumcode mit fünf Buchstaben. Bis zu 6 können mitspielen.',
+      q4: 'Brauche ich ein Konto?', a4: 'Nein. Du kannst sofort spielen. Die Anmeldung (Einstellungen → Konto) ist freiwillig und speichert deinen Fortschritt, damit du auf einem anderen Gerät weiterspielen kannst.',
+      q5: 'Controller und Sprachen?', a5: 'Controller werden unterstützt. Das Spiel gibt es in 12 Sprachen: Deutsch, Englisch, Koreanisch, Japanisch, Chinesisch (vereinfacht und traditionell), Spanisch, Französisch, Italienisch, Portugiesisch, Russisch und Arabisch.',
       c1: 'Keine Werbung', c2: 'Kein Gacha', c3: '15 Level kostenlos', shots: 'Screenshots', shot: 'Screenshot' },
     pt: { name: 'Pop! Jelly PangPang', tag1: 'Solte bombas de gelatina.', tag2: 'Prenda seus amigos. Pop!', sub: 'Um party game fofinho de batalhas de bombas para Android e iOS.',
       soon: 'Em breve no Google Play e na App Store', outBoth: 'Já disponível — comece grátis', outPlay: 'Já disponível no Google Play', outApp: 'Já disponível na App Store',
       join: 'Entre no Discord oficial', noteSoon: 'As novidades do lançamento chegam primeiro no Discord.', noteOut: 'As 15 primeiras fases são grátis. Sem anúncios, sem gacha.',
-      getPlay: 'Disponível no', getApp: 'Baixar na', soonPlay: 'Em breve no', soonApp: 'Em breve na', trailer: 'Assistir ao trailer',
+      aPlay: 'Disponível no Google Play', aApp: 'Baixar na App Store', appSoon: 'iPhone e iPad: em breve', playSoon: 'Android: em breve', alsoApp: 'Também no iPhone e iPad', alsoPlay: 'Também no Android', trailer: 'Assistir ao trailer',
       f1h: 'Fofinho', f1p: 'Toque na sua gelatina e ela dá risada. Cutuque demais e ela fica emburrada.',
       f2h: 'Melhor em grupo', f2p: 'Dois jogadores no mesmo celular, ou até 6 online com um código da sala.',
       f3h: 'Justo', f3p: 'Sem anúncios. Sem gacha. As 15 primeiras fases são grátis e uma única compra libera o resto.',
@@ -442,13 +542,32 @@ html[lang="ko"] body{word-break:keep-all}
       chH: 'Siga as gelatinas', chP: 'Novos clipes e novidades em todos os canais. Para achar gente para jogar, compartilhar seus mapas ou avisar de um bug, venha para o Discord.',
       age: 'O Discord é para maiores de 13 anos (mais em alguns países).', priv: 'Privacidade', contact: 'Contato',
       sndOn: 'Ativar som', sndOff: 'Desativar som', langLbl: 'Idioma', vid: 'Gameplay: as gelatinas soltam bombas e estouram umas às outras em arenas de doces',
+      faqH: 'Perguntas frequentes',
+      q1: 'É grátis?', a1: 'Sim, baixar e jogar é grátis. As 15 primeiras fases são grátis e uma única compra libera todas as 50. Os pacotes temáticos de visuais são opcionais. Sem anúncios, sem assinatura, sem gacha.',
+      q2: 'Preciso de internet?', a2: 'Não. As fases e o modo de dois jogadores no mesmo celular funcionam offline. Só as partidas online precisam de conexão.',
+      q3: 'Como jogamos juntos?', a3: 'Dois jogadores dividem o mesmo celular em um tabuleiro largo feito para dois. Online, crie uma sala e compartilhe o código da sala de cinco letras. Até 6 podem jogar.',
+      q4: 'Preciso de uma conta?', a4: 'Não. Dá para jogar na hora. Entrar na conta (Opções → Conta) é opcional e salva seu progresso para continuar em outro aparelho.',
+      q5: 'Controles e idiomas?', a5: 'Há suporte a controle. O jogo está em 12 idiomas: português, inglês, coreano, japonês, chinês (simplificado e tradicional), espanhol, francês, alemão, italiano, russo e árabe.',
       c1: 'Sem anúncios', c2: 'Sem gacha', c3: '15 fases grátis', shots: 'Capturas de tela', shot: 'Captura de tela' }
   };
   var pick = window.__jppPick, lang = window.__jppLang || 'en', src = '';   /* 언어는 <head> 의 스크립트가 먼저 정했다 */
   try { src = (new URLSearchParams(location.search).get('s') || '').toLowerCase().replace(/[^a-z0-9_]/g, '').slice(0, 24); } catch (e) {}
 
   var hasPlay = !!CFG.play, hasApp = !!CFG.appstore, sndIsOn = false;
-  function two(el, small, big) { el.textContent = ''; var s = document.createElement('small'); s.textContent = small; el.appendChild(s); el.appendChild(document.createTextNode(big)); }
+  /* 스토어 배지(공식 그림 · badges/ · mk_badges.py 가 받아 잰 값) — 애플 SVG 는 언어마다 가로세로 비가 다르고,
+     구글 PNG(646x250)는 영어·아랍어만 사방에 투명 여백(41px)이 있고 나머지는 위아래(29px)만 있다. 보이는 배지 높이를 --bh 로 똑같이 맞춘다. */
+  var AS_R = { ko: 3.2425, ja: 2.7213, 'zh-Hant': 2.7213, 'zh-Hans': 2.7213, fr: 3.1627 }, GP_PAD = { en: 1, ar: 1 };
+  var showApp = false, showPlay = false, MORE = null;      /* 아래 '출시 뒤' 대목이 정한다 */
+  function badges(t) {
+    if (showApp) { var a = $('bApp'); a.style.setProperty('--r', AS_R[lang] || 2.9916); a.setAttribute('aria-label', t.aApp); setSrc($('imApp'), 'badges/as-' + lang + '.svg'); }
+    if (showPlay) {
+      var g = $('bPlay'), pad = GP_PAD[lang];
+      g.style.setProperty('--r', pad ? 3.3571 : 3.3646); g.style.setProperty('--s', pad ? 1.4881 : 1.3021); g.style.setProperty('--px', pad ? 0.0635 : 0); g.style.setProperty('--py', pad ? 0.164 : 0.116);
+      g.setAttribute('aria-label', t.aPlay); setSrc($('imPlay'), 'badges/gp-' + lang + '.png');
+    }
+    var m = $('more'); m.hidden = !MORE;
+    if (MORE) { m.textContent = ''; if (MORE[1]) { var l = document.createElement('a'); l.href = MORE[1]; l.rel = 'noopener'; l.textContent = t[MORE[0]]; m.appendChild(l); } else m.textContent = t[MORE[0]]; }
+  }
   function apply() {
     var t = T[lang] || T.en, de = document.documentElement, i;
     de.lang = lang; de.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -461,15 +580,14 @@ html[lang="ko"] body{word-break:keep-all}
     if ($('reel')) $('reel').setAttribute('aria-label', t.vid);
     $('chip').textContent = (!hasPlay && !hasApp) ? t.soon : (hasPlay && hasApp) ? t.outBoth : (hasPlay ? t.outPlay : t.outApp);
     $('ctaNote').textContent = t.noteSoon; $('ctaNote').hidden = hasPlay || hasApp;   /* 출시 뒤에는 바로 위 칩 셋(광고 없음·뽑기 없음·15단계 무료)이 그 말을 대신한다 */
-    if (hasPlay || hasApp) { two($('bPlay'), hasPlay ? t.getPlay : t.soonPlay, 'Google Play'); two($('bApp'), hasApp ? t.getApp : t.soonApp, 'App Store'); }
+    badges(t);
     if ($('snd')) $('snd').setAttribute('aria-label', sndIsOn ? t.sndOff : t.sndOn);
     var st = $('strip');                          /* 스크린샷 줄 — 한국어는 한국어 화면, 나머지는 영어 화면 */
     if (st) {
       st.setAttribute('aria-label', t.shots);
       var im = st.getElementsByTagName('img'), set = lang === 'ko' ? 'ko' : 'en';
       for (i = 0; i < im.length; i++) {
-        var f = 'shot-' + set + '-' + (i + 1) + '.webp', u = SHOTS[f] || f;
-        if (im[i].getAttribute('src') !== u) im[i].src = u;
+        setSrc(im[i], 'shot-' + set + '-' + (i + 1) + '.webp');
         im[i].alt = (t.alts && t.alts[i]) || (t.shot + ' ' + (i + 1));
       }
     }
@@ -482,6 +600,9 @@ html[lang="ko"] body{word-break:keep-all}
 
   var ua = navigator.userAgent || '';
   var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+  var isAndroid = !isIOS && /Android/i.test(ua);
+  try { var os = (new URLSearchParams(location.search).get('os') || '').toLowerCase();      /* 확인용: 주소에 ?os=android|ios|pc 를 붙이면 그 기기에서 보이는 모습으로 본다 */
+        if (os === 'android' || os === 'ios' || os === 'pc') { isIOS = os === 'ios'; isAndroid = os === 'android'; } } catch (e) {}
 
   /* 맨 위 영상 — 무음 자동 재생·반복. 움직임 줄이기를 켠 기기에서는 멈춘 그림으로 두고, 자동 재생이 막힌 기기(절전 모드)에서는 재생 단추를 보인다.
      소리 단추(오른쪽 위) — 꺼진 채 시작하고, 누르면 켜진다. 다른 탭으로 가면 끈다.
@@ -534,6 +655,20 @@ html[lang="ko"] body{word-break:keep-all}
     }
   } catch (e) {}
 
+  /* 소개 칸의 작은 장면 — 화면에 들어오면 돌고 나가면 멈춘다. 움직임 줄이기를 켠 기기에서는 멈춘 그림 그대로 둔다(파일도 안 받는다). */
+  try {
+    var fvs = document.querySelectorAll('.fv');
+    if (fvs.length && 'IntersectionObserver' in window && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      var fio = new IntersectionObserver(function (es) {
+        for (var i = 0; i < es.length; i++) {
+          var x = es[i].target;
+          if (es[i].isIntersecting) { var p = x.play(); if (p && p.catch) p.catch(function () {}); } else x.pause();
+        }
+      }, { threshold: 0.35 });
+      for (var k = 0; k < fvs.length; k++) fio.observe(fvs[k]);
+    }
+  } catch (e) {}
+
   function join(u) { return u + (u.indexOf('?') < 0 ? '?' : '&'); }
   function playUrl() {
     if (!src) return CFG.play;
@@ -544,14 +679,17 @@ html[lang="ko"] body{word-break:keep-all}
     return join(CFG.appstore) + 'pt=' + encodeURIComponent(CFG.applePt) + '&ct=' + encodeURIComponent(src + '_launch') + '&mt=8';
   }
   if (CFG.trailer) { $('bTrailer').href = CFG.trailer; $('bTrailer').hidden = false; }
-  if (hasPlay || hasApp) {                       // 출시 뒤: 스토어 단추를 보이고 트레일러·디스코드 단추는 테두리 단추로
-    $('bTrailer').className = 'btn btn-line';
-    var stores = $('stores'), bPlay = $('bPlay'), bApp = $('bApp');
-    stores.hidden = false; bPlay.hidden = false; bApp.hidden = false;
-    if (hasPlay) { bPlay.href = playUrl(); } else { bPlay.className += ' soon'; bPlay.removeAttribute('href'); bPlay.setAttribute('aria-disabled', 'true'); }
-    if (hasApp) { bApp.href = appUrl(); } else { bApp.className += ' soon'; bApp.removeAttribute('href'); bApp.setAttribute('aria-disabled', 'true'); }
-    if (isIOS) stores.insertBefore(bApp, bPlay);   // 아이폰·아이패드는 앱 스토어를 앞에
-    $('bDiscord').className = 'btn btn-line';
+  if (hasPlay || hasApp) {                       // 출시 뒤: 로고 아래에 스토어 배지 · 트레일러·디스코드 단추는 테두리 단추로
+    $('bTrailer').className = 'btn btn-line'; $('bDiscord').className = 'btn btn-line';
+    if (hasPlay) $('bPlay').href = playUrl();
+    if (hasApp) $('bApp').href = appUrl();
+    /* 폰에서는 제 스토어 배지 하나만(다른 기기는 글 한 줄), PC 에서는 나온 것 전부 — HTML 차례가 애플 먼저다(애플 규정: 나란히 놓을 때 맨 앞). */
+    showApp = hasApp && !isAndroid; showPlay = hasPlay && !isIOS;
+    $('bApp').hidden = !showApp; $('bPlay').hidden = !showPlay;
+    $('getit').hidden = !(showApp || showPlay); $('legal').hidden = !(showApp || showPlay);
+    MORE = isIOS ? (hasApp ? (hasPlay ? ['alsoPlay', playUrl()] : null) : ['appSoon', ''])
+         : isAndroid ? (hasPlay ? (hasApp ? ['alsoApp', appUrl()] : ['appSoon', '']) : ['playSoon', ''])
+         : (hasPlay && hasApp ? null : hasPlay ? ['appSoon', ''] : ['playSoon', '']);
   }
   apply();
 })();
