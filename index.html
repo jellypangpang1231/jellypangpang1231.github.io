@@ -55,6 +55,11 @@
 </script>
 <style>
 @font-face{font-family:"Fredoka";src:url("fredoka-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+/* [c599] [c599b] 한국어 로고 글꼴 — 글자 6개 서브셋(나눔스퀘어라운드 EB) */
+/* [c599b] 간체 중국어·아랍어 로고 글꼴 */
+@font-face{font-family:"SRLogo";src:url("srlogo.woff2") format("woff2");font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:"ARLogo";src:url("arlogo.woff2") format("woff2");font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:"NSRoundLogo";src:url("nsround-logo.woff2") format("woff2");font-weight:800;font-style:normal;font-display:block}
 :root{--ink:#2b1b4a;--ink-soft:#5a4a78;--pink:#ff5fa2;--pink-d:#ee3a84;--cream:#fff7fb;--yellow:#ffd95a;--orange:#ff9a3d;--blue:#6fc6f7;--discord:#5865f2}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -87,6 +92,13 @@ main{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:max(18px,
 @keyframes squish{0%,100%{transform:scale(1,1)}8%{transform:scale(1.06,.93)}16%{transform:scale(.96,1.05)}24%{transform:scale(1,1)}}
 .logo{display:block;width:min(100%,460px);height:auto;margin:0 auto;direction:ltr}
 .logo text{font-family:"Fredoka",system-ui,sans-serif;font-weight:600;text-anchor:middle}
+.logo.ko{display:none}
+.logo.ko text{font-family:"NSRoundLogo","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;font-weight:800}
+.logo.zh,.logo.ar{display:none}
+.logo.zh text{font-family:"SRLogo","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;font-weight:700}
+.logo.ar text{font-family:"ARLogo","Segoe UI","Noto Sans Arabic",system-ui,sans-serif;font-weight:700;direction:rtl;unicode-bidi:isolate}
+html[lang="ko"] .logo.en,html[lang="zh-Hans"] .logo.en,html[lang="ar"] .logo.en{display:none}
+html[lang="ko"] .logo.ko,html[lang="zh-Hans"] .logo.zh,html[lang="ar"] .logo.ar{display:block}
 h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tagline{margin:8px auto 0;font-family:"Fredoka",system-ui,sans-serif;font-weight:600;font-size:clamp(21px,5.6vw,27px);line-height:1.25;color:#fff;text-shadow:0 2px 0 rgba(130,10,70,.45)}
 .sub{margin:6px auto 0;max-width:30em;color:#fff;font-size:16px;text-shadow:0 1px 0 rgba(130,10,70,.4)}
@@ -211,7 +223,7 @@ html[lang="ko"] body{word-break:keep-all}
     </div>
     <img class="icon" src="icon-512.jpg" width="88" height="88" alt="Pop! Jelly PangPang app icon: a surprised blue jelly">
     <h1>Pop! Jelly PangPang</h1>
-    <svg class="logo" viewBox="0 0 600 196" aria-hidden="true" focusable="false">
+    <svg class="logo en" viewBox="0 0 600 196" aria-hidden="true" focusable="false">
       <defs>
         <linearGradient id="gPop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset="1" stop-color="#ff9a3d"/></linearGradient>
         <linearGradient id="gJelly" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a8"/><stop offset=".55" stop-color="#ffb3c9"/><stop offset="1" stop-color="#ff6fa8"/></linearGradient>
@@ -225,6 +237,54 @@ html[lang="ko"] body{word-break:keep-all}
         <text x="300" y="158" fill="none" stroke="#2b1b4a" stroke-width="26" stroke-linejoin="round">JELLY PANG PANG</text>
         <text x="300" y="158" fill="none" stroke="#fff" stroke-width="11" stroke-linejoin="round">JELLY PANG PANG</text>
         <text x="300" y="158" fill="url(#gJelly)">JELLY PANG PANG</text>
+      </g>
+    </svg>
+    <svg class="logo ko" viewBox="0 0 600 196" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="gPopK" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset="1" stop-color="#ff9a3d"/></linearGradient>
+        <linearGradient id="gJellyK" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a8"/><stop offset=".55" stop-color="#ffb3c9"/><stop offset="1" stop-color="#ff6fa8"/></linearGradient>
+      </defs>
+      <g font-size="62">
+        <text x="300" y="64" fill="none" stroke="#6b2f1a" stroke-width="24" stroke-linejoin="round">터져라!</text>
+        <text x="300" y="64" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round">터져라!</text>
+        <text x="300" y="64" fill="url(#gPopK)">터져라!</text>
+      </g>
+      <g font-size="88" letter-spacing="3">
+        <text x="300" y="166" fill="none" stroke="#2b1b4a" stroke-width="26" stroke-linejoin="round">젤리팡팡</text>
+        <text x="300" y="166" fill="none" stroke="#fff" stroke-width="11" stroke-linejoin="round">젤리팡팡</text>
+        <text x="300" y="166" fill="url(#gJellyK)">젤리팡팡</text>
+      </g>
+    </svg>
+    <svg class="logo zh" viewBox="0 0 600 196" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="gPopZ" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset="1" stop-color="#ff9a3d"/></linearGradient>
+        <linearGradient id="gJellyZ" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a8"/><stop offset=".55" stop-color="#ffb3c9"/><stop offset="1" stop-color="#ff6fa8"/></linearGradient>
+      </defs>
+      <g font-size="62" letter-spacing="4">
+        <text x="300" y="64" fill="none" stroke="#6b2f1a" stroke-width="24" stroke-linejoin="round">果冻</text>
+        <text x="300" y="64" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round">果冻</text>
+        <text x="300" y="64" fill="url(#gPopZ)">果冻</text>
+      </g>
+      <g font-size="88" letter-spacing="6">
+        <text x="300" y="166" fill="none" stroke="#2b1b4a" stroke-width="26" stroke-linejoin="round">碰碰乐</text>
+        <text x="300" y="166" fill="none" stroke="#fff" stroke-width="11" stroke-linejoin="round">碰碰乐</text>
+        <text x="300" y="166" fill="url(#gJellyZ)">碰碰乐</text>
+      </g>
+    </svg>
+    <svg class="logo ar" viewBox="0 0 600 196" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="gPopA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset="1" stop-color="#ff9a3d"/></linearGradient>
+        <linearGradient id="gJellyA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a8"/><stop offset=".55" stop-color="#ffb3c9"/><stop offset="1" stop-color="#ff6fa8"/></linearGradient>
+      </defs>
+      <g font-size="70">
+        <text x="300" y="68" fill="none" stroke="#6b2f1a" stroke-width="24" stroke-linejoin="round">جيلي</text>
+        <text x="300" y="68" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round">جيلي</text>
+        <text x="300" y="68" fill="url(#gPopA)">جيلي</text>
+      </g>
+      <g font-size="92">
+        <text x="300" y="164" fill="none" stroke="#2b1b4a" stroke-width="26" stroke-linejoin="round">بانغ بانغ</text>
+        <text x="300" y="164" fill="none" stroke="#fff" stroke-width="11" stroke-linejoin="round">بانغ بانغ</text>
+        <text x="300" y="164" fill="url(#gJellyA)">بانغ بانغ</text>
       </g>
     </svg>
     <p class="tagline"><span data-i="tag1">Drop jelly bombs.</span> <span data-i="tag2">Trap your friends. Pop!</span></p>
@@ -391,7 +451,7 @@ html[lang="ko"] body{word-break:keep-all}
       hChP: 'Beat a world’s boss and a challenge letter arrives: the same stage with one rule flipped. Short fuses. One bomb only. All mega bombs. Everyone rushing you. From the second letter on, the twist changes every day.',
       hCh1: '12 special stages', hCh2: 'A new twist every day', hCh3: 'Boss stages, remixed',
       q6: 'What opens when?', a6: 'Battle mode, online rooms and the map maker open up as you play through the free stages. The first two challenge letters are free too; the rest come with the full version.' },
-    ko: { name: '터져라! 젤리팡팡', tag1: '젤리 폭탄을 놓고,', tag2: '친구를 가두고, 팡!', sub: '말랑말랑 폭탄 대전 파티 게임, 안드로이드와 iOS에서 만나요.',
+    ko: { name: '터져라! 젤리팡팡', iconAlt: '터져라! 젤리팡팡 앱 아이콘 — 깜짝 놀란 파란 젤리', tag1: '젤리 폭탄을 놓고,', tag2: '친구를 가두고, 팡!', sub: '말랑말랑 폭탄 대전 파티 게임, 안드로이드와 iOS에서 만나요.',
       soon: '곧 구글 플레이 · 앱 스토어에서 만나요', outBoth: '드디어 출시! 무료로 시작해요', outPlay: '구글 플레이에 출시했어요', outApp: '앱 스토어에 출시했어요',
       join: '공식 디스코드 놀러 가기', noteSoon: '출시 소식은 디스코드에 제일 먼저 올라와요.', noteOut: '15단계까지 무료예요. 광고도 뽑기도 없어요.',
       aPlay: 'Google Play에서 받기', aApp: 'App Store에서 받기', appSoon: '아이폰·아이패드는 곧 나와요', playSoon: '안드로이드는 곧 나와요', alsoApp: '아이폰·아이패드에서도 받기', alsoPlay: '안드로이드에서도 받기', trailer: '트레일러 보기',
@@ -489,7 +549,7 @@ html[lang="ko"] body{word-break:keep-all}
       hChP: '打倒每個世界的魔王，就會收到挑戰書：同一關，但有一條規則被翻轉。引線變短、只能放一個炸彈、全是大王炸彈、大家一起衝鋒。從第二封挑戰書開始，規則每天都不一樣。',
       hCh1: '12 個特殊關卡', hCh2: '每天不同的規則', hCh3: '魔王關的變奏',
       q6: '什麼時候開放？', a6: '對戰、線上房間和地圖製作，會在你遊玩免費關卡的過程中陸續開放。前兩封挑戰書免費，其餘包含在完整版中。' },
-    'zh-Hans': { name: '果冻碰碰乐', tag1: '放下果冻炸弹，', tag2: '困住朋友，砰！', sub: 'Android 和 iOS 上的 Q 弹炸弹对战派对游戏。',
+    'zh-Hans': { name: '果冻碰碰乐', iconAlt: '果冻碰碰乐 应用图标：一只吓了一跳的蓝色果冻', tag1: '放下果冻炸弹，', tag2: '困住朋友，砰！', sub: 'Android 和 iOS 上的 Q 弹炸弹对战派对游戏。',
       soon: '即将登陆 Google Play 和 App Store', outBoth: '现已上线 — 免费开玩', outPlay: '已在 Google Play 上线', outApp: '已在 App Store 上线',
       join: '加入官方 Discord', noteSoon: '上线消息会最先在 Discord 发布。', noteOut: '前 15 关免费。无广告，无抽卡。',
       aPlay: '在 Google Play 下载', aApp: '在 App Store 下载', appSoon: 'iPhone 和 iPad 版即将上线', playSoon: 'Android 版即将上线', alsoApp: '也有 iPhone 和 iPad 版', alsoPlay: '也有 Android 版', trailer: '观看预告片',
@@ -547,7 +607,7 @@ html[lang="ko"] body{word-break:keep-all}
       hChP: 'Победи босса мира — и придёт вызов: тот же уровень, но с одним перевёрнутым правилом. Фитиль короче. Только одна бомба. Только мега-бомбы. Все бросаются на тебя. Со второго вызова подвох меняется каждый день.',
       hCh1: '12 особых уровней', hCh2: 'Новый подвох каждый день', hCh3: 'Боссы с новыми правилами',
       q6: 'Что и когда открывается?', a6: 'Бои, онлайн-комнаты и редактор карт открываются по мере прохождения бесплатных уровней. Первые два вызова тоже бесплатны, остальные входят в полную версию.' },
-    ar: { name: 'جيلي بانغ بانغ', tag1: 'ضع قنابل الجيلي.', tag2: 'احبس أصدقاءك. بوم!', sub: 'لعبة جماعية طرية لمعارك القنابل على أندرويد و iOS.',
+    ar: { name: 'جيلي بانغ بانغ', iconAlt: 'أيقونة تطبيق جيلي بانغ بانغ: جيلي أزرق متفاجئ', tag1: 'ضع قنابل الجيلي.', tag2: 'احبس أصدقاءك. بوم!', sub: 'لعبة جماعية طرية لمعارك القنابل على أندرويد و iOS.',
       soon: 'قريبًا على Google Play و App Store', outBoth: 'متوفرة الآن — ابدأ مجانًا', outPlay: 'متوفرة الآن على Google Play', outApp: 'متوفرة الآن على App Store',
       join: 'انضم إلى Discord الرسمي', noteSoon: 'أخبار الإصدار تُنشر على Discord أولًا.', noteOut: 'أول 15 مرحلة مجانية. بلا إعلانات وبلا غاتشا.',
       aPlay: 'احصل عليها من Google Play', aApp: 'حمّلها من App Store', appSoon: 'iPhone و iPad: قريبًا', playSoon: 'Android: قريبًا', alsoApp: 'متوفرة أيضًا على iPhone و iPad', alsoPlay: 'متوفرة أيضًا على Android', trailer: 'شاهد العرض التشويقي',
@@ -747,6 +807,7 @@ html[lang="ko"] body{word-break:keep-all}
     var els = document.querySelectorAll('[data-i]');
     for (i = 0; i < els.length; i++) { var k = els[i].getAttribute('data-i'); if (t[k] != null) els[i].textContent = t[k]; }
     var h1 = document.querySelector('h1'); if (h1) h1.textContent = t.name;
+    var ic = document.querySelector('img.icon'); if (ic) { if (ic.__alt0 == null) ic.__alt0 = ic.alt; ic.alt = t.iconAlt || ic.__alt0; }   /* [c599] */
     for (i = 0; i < LANGS.length; i++) if (LANGS[i][0] === lang) $('langName').textContent = LANGS[i][1];
     $('lang').setAttribute('aria-label', t.langLbl); $('lang').value = lang;
     if ($('reel')) $('reel').setAttribute('aria-label', t.vid);
