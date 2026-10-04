@@ -213,6 +213,59 @@ html[lang="ko"] body{word-break:keep-all}
 .hlc li{padding:5px 12px;border-radius:999px;background:var(--tint);font-family:"Fredoka",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-weight:600;font-size:14px;line-height:1.35;color:var(--ink)}
 @media (max-width:350px){.hl{padding:12px 12px 16px}.hl h2{font-size:22px}.hlk{font-size:14px}}
 @media (prefers-reduced-motion:reduce){.icon{animation:none}.btn,.snd{transition:none}}
+/* [c668] PC 화면(폭 1024 이상) — 맨 위 두 단(영상 | 로고·단추·받기 칸) · 스크린샷 넘김 단추 · 강조 셋 가로 · 소개·질문 두 단. 1023 이하는 그대로 */
+.sx{display:none}
+@media (min-width:1024px){
+main{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);column-gap:48px;align-items:start;max-width:1200px;padding:22px 36px 44px}
+main>*{grid-column:1/-1;min-width:0}
+.hero{display:contents}
+.reel{grid-column:1;grid-row:2;align-self:center;width:100%;margin:0;border-radius:30px;border-width:6px}
+.hinfo{grid-column:2;grid-row:2;align-self:center;text-align:center}
+.cta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 16px;max-width:860px;width:100%;margin:26px auto 0;padding:22px 28px}
+.cta>*{flex:1 1 100%;margin:0}
+.cta>.btn{flex:0 1 360px}
+.cta>.btn:not([hidden])+.btn{margin-top:0}
+.cta>.trust{margin-top:2px}
+.icon{width:96px;height:96px;margin:0 auto 6px;border-radius:24px}
+.logo{width:min(100%,440px)}
+.tagline{font-size:28px}
+.sub{font-size:16.5px;text-wrap:balance}
+.preget{grid-template-columns:minmax(0,1fr);width:min(100%,380px)}
+.preget>.btn-pre.off{order:2}
+.preget>.prenote{order:3}
+.shots{position:relative;margin:30px 0 0}
+.strip{gap:16px;padding:8px 4px 18px;scroll-padding:0 4px}
+.strip li{width:228px}
+.strip img{border-radius:24px}
+.hls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:14px}
+.hls>.card{margin-top:0}
+.hl{display:flex;flex-direction:column}
+.hl h2{font-size:23px}
+.hl>p{font-size:15.5px}
+.hlc{margin-top:auto}
+.card{margin-top:24px;padding:26px 28px}
+.hl{padding:16px 16px 20px}
+.feats{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.feats li{grid-template-columns:104px 1fr;gap:16px;padding:14px 18px 14px 14px}
+.fv{width:104px;height:104px;border-radius:18px}
+h2{font-size:26px}
+.faq{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:12px 14px}
+.chan{grid-template-columns:repeat(4,minmax(0,1fr))}
+.chan li:first-child:nth-last-child(odd){grid-column:auto}
+.card[aria-label="Official channels"]>p{max-width:46em}
+footer{margin-top:30px}
+}
+@media (min-width:1024px) and (hover:hover) and (pointer:fine){
+.sx{position:absolute;top:calc(50% - 32px);z-index:2;display:flex;align-items:center;justify-content:center;width:52px;height:52px;padding:0;border:0;border-radius:50%;background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 4px 0 rgba(120,10,70,.3),0 8px 16px rgba(90,0,50,.25);transition:opacity .15s ease,transform .08s ease}
+.sx:active{transform:scale(.94)}
+.sx svg{display:block;width:24px;height:24px}
+.sx-prev{left:-22px}
+.sx-next{right:-22px}
+[dir="rtl"] .sx-prev{left:auto;right:-22px}
+[dir="rtl"] .sx-next{right:auto;left:-22px}
+[dir="rtl"] .sx svg{transform:scaleX(-1)}
+.sx[data-end]{opacity:0;pointer-events:none}
+}
 </style>
 </head>
 <body>
@@ -233,6 +286,7 @@ html[lang="ko"] body{word-break:keep-all}
         <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.4L12 5.6v12.8l-4.6-3.9H4z" fill="currentColor"/><path d="M15.3 9.2a4 4 0 0 1 0 5.6M17.9 6.8a7.4 7.4 0 0 1 0 10.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
       </button>
     </div>
+    <div class="hinfo">
     <img class="icon" src="icon-512.jpg" width="88" height="88" alt="Pop! Jelly PangPang app icon: a surprised blue jelly">
     <h1>Pop! Jelly PangPang</h1>
     <svg class="logo en" viewBox="0 0 600 196" aria-hidden="true" focusable="false">
@@ -310,6 +364,7 @@ html[lang="ko"] body{word-break:keep-all}
     </div>
     <p class="more" id="more" hidden></p>
     <p class="sub" data-i="sub">A squishy bomb-battle party game for Android and iOS.</p>
+    </div>
   </header>
 
   <section class="card cta" aria-label="Get the game">
@@ -325,6 +380,8 @@ html[lang="ko"] body{word-break:keep-all}
   </section>
 
   <section class="shots">
+    <button type="button" class="sx sx-prev" id="sxPrev" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="sx sx-next" id="sxNext" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <ul class="strip" id="strip" tabindex="0" aria-label="Screenshots">
       <li><img src="shot-en-1.webp" width="440" height="952" loading="lazy" decoding="async" alt="A six-player battle kicks off on a cookie board with a big GO!"></li>
       <li><img src="shot-en-2.webp" width="440" height="952" loading="lazy" decoding="async" alt="The map maker: a symmetrical six-player arena painted with cookies, walls, bushes and water"></li>
@@ -1000,6 +1057,23 @@ html[lang="ko"] body{word-break:keep-all}
     if (hasApp) $('bPreApp').href = appUrl();
   }
   apply();
+  (function () {                                  /* [c668] 스크린샷 넘김 단추(PC 마우스 기기만 보인다 — CSS) · 끝에 닿으면 그쪽 단추를 숨긴다 · 아랍어는 방향을 뒤집는다 */
+    var st = $('strip'), pv = $('sxPrev'), nx = $('sxNext');
+    if (!st || !pv || !nx) return;
+    var dir = function () { return document.documentElement.dir === 'rtl' ? -1 : 1; };
+    var go = function (k) { st.scrollBy({ left: k * dir() * Math.max(240, st.clientWidth * 0.8), behavior: 'smooth' }); };
+    var mark = function () {
+      var x = Math.abs(st.scrollLeft), max = st.scrollWidth - st.clientWidth - 2;
+      if (x <= 2) pv.setAttribute('data-end', ''); else pv.removeAttribute('data-end');
+      if (x >= max) nx.setAttribute('data-end', ''); else nx.removeAttribute('data-end');
+    };
+    pv.addEventListener('click', function () { go(-1); });
+    nx.addEventListener('click', function () { go(1); });
+    st.addEventListener('scroll', mark, { passive: true });
+    window.addEventListener('resize', mark);
+    window.addEventListener('load', mark);
+    mark();
+  })();
 })();
 </script>
 </body>
