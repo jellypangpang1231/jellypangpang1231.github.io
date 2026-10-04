@@ -121,6 +121,18 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 .more a{color:#fff;text-underline-offset:3px;padding:8px 2px}
 .legal{margin:12px auto 0;max-width:44em;font-size:11.5px;line-height:1.5;opacity:.85}
 @media (max-width:350px){.getit{--bh:50px}}
+/* [c619] 사전 예약 단계(CFG.phase='pre') — 공식 배지 대신 글자 단추. 로고 아래 배지 자리에 놓는다. */
+/* [c620] 사전 예약 화면 정리 — 단추 둘은 같은 모양·크기(제 스토어가 위) · 날짜 칩은 단추 바로 위 · 안내 한 줄은 단추 아래 · 안 열린 쪽은 점선 단추 */
+.preget{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;gap:12px;width:min(100%,340px);margin:18px auto 0}
+.preget>.btn{width:100%}
+.preget>.chip{margin:0}
+.btn-pre{background:#fff;color:var(--ink);font-size:17px;box-shadow:0 5px 0 rgba(120,10,70,.34)}
+.btn-pre:active{box-shadow:0 2px 0 rgba(120,10,70,.34)}
+.btn-pre.off{background:rgba(255,255,255,.16);color:#fff;font-size:15.5px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.75);text-shadow:0 1px 0 rgba(130,10,70,.35);cursor:default;pointer-events:none}
+.btn-pre.off:active{transform:none}
+.chip.pre{max-width:100%;line-height:1.35;border-radius:20px;text-wrap:balance}
+.prenote{margin:2px 0 0;max-width:24em;font-size:14px;line-height:1.45;color:#fff;text-shadow:0 1px 0 rgba(130,10,70,.4);text-wrap:balance}
+@media (min-width:640px){.preget{grid-template-columns:repeat(2,minmax(0,1fr));width:min(100%,580px)}.preget>.chip,.preget>.prenote{grid-column:1/-1}}
 .btn-discord{background:var(--discord);color:#fff;box-shadow:0 5px 0 #3c45b5}
 .btn-discord:active{box-shadow:0 2px 0 #3c45b5}
 .btn-line{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 3px var(--ink)}
@@ -288,6 +300,10 @@ html[lang="ko"] body{word-break:keep-all}
       </g>
     </svg>
     <p class="tagline"><span data-i="tag1">Drop jelly bombs.</span> <span data-i="tag2">Trap your friends. Pop!</span></p>
+    <div class="preget" id="preGet" hidden>
+      <a class="btn btn-pre" id="bPreApp" rel="noopener"><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2h16l-2-2zM10 20a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="aAppPre">Pre-order on the App Store</span></a>
+      <a class="btn btn-pre" id="bPrePlay" rel="noopener"><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2h16l-2-2zM10 20a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="aPlayPre">Pre-register on Google Play</span></a>
+    </div>
     <div class="getit" id="getit" hidden>
       <a class="bdg as" id="bApp" rel="noopener" hidden><span class="bx"><img id="imApp" alt="" decoding="async"></span></a>
       <a class="bdg gp" id="bPlay" rel="noopener" hidden><span class="bx"><img id="imPlay" alt="" decoding="async"></span></a>
@@ -399,8 +415,10 @@ html[lang="ko"] body{word-break:keep-all}
      appstore : 'https://apps.apple.com/app/id6817233245'
      applePt  : App Store Connect 캠페인 링크의 pt 값(없으면 꼬리표 없이 보낸다)
      trailer  : 트레일러 유튜브 주소(이미 채워 둠 — 새 트레일러를 올리면 이 주소만 바꾼다)
+     phase    : ''(기본 · 위 주소에 따라 '곧 출시' / '출시됨') | 'pre'(사전 예약 화면 — 구글 사전 등록 · 애플 사전 주문 글자 단추, play·appstore 중 하나는 채워져 있어야 함) | 'live'(= '' 와 같음, 기록용)
+     launch   : 'YYYY-MM-DD' — pre 일 때 칩에 "10월 8일 출시" 로 현지화해 보인다(비우면 날짜 없이 · 날짜가 지나면 저절로 빠진다)
      ──────────────────────────────────────────────────────────────────── */
-  var CFG = { play: '', appstore: '', applePt: '', trailer: 'https://youtu.be/zD-ADSRCdg8' };
+  var CFG = { play: 'https://play.google.com/store/apps/details?id=com.jellypangpang.game', appstore: '', applePt: '', trailer: 'https://youtu.be/zD-ADSRCdg8', phase: 'pre', launch: '' };
 
   var $ = function (id) { return document.getElementById(id); };
   var INL = window.__INL || {};                   /* 한 장짜리 미리보기(build.py)만 쓴다 — 파일 이름 → 박아 넣은 그림(스크린샷·배지) */
@@ -412,6 +430,8 @@ html[lang="ko"] body{word-break:keep-all}
                ['ar', 'العربية'], ['es', 'Español'], ['fr', 'Français'], ['it', 'Italiano'], ['de', 'Deutsch'], ['pt', 'Português']];
   var T = {
     en: { name: 'Pop! Jelly PangPang', tag1: 'Drop jelly bombs.', tag2: 'Trap your friends. Pop!', sub: 'A squishy bomb-battle party game for Android and iOS.',
+      preChip: 'Pre-registration open\u00a0· Launches {d}', preChipNoDate: 'Pre-registration open',
+      aPlayPre: 'Pre-register on Google Play', aAppPre: 'Pre-order on the App Store', preNote: 'Pre-register or pre-order to get it on launch day.',
       soon: 'Coming soon to Google Play & App Store', outBoth: 'Out now! Free to start', outPlay: 'Out now on Google Play', outApp: 'Out now on the App Store',
       join: 'Join the official Discord', noteSoon: 'Launch news lands on Discord first.', noteOut: 'The first 15 stages are free. No ads, no gacha.',
       aPlay: 'Get it on Google Play', aApp: 'Download on the App Store', appSoon: 'iPhone and iPad: coming soon', playSoon: 'Android: coming soon', alsoApp: 'Also on iPhone and iPad', alsoPlay: 'Also on Android', trailer: 'Watch the trailer',
@@ -452,6 +472,8 @@ html[lang="ko"] body{word-break:keep-all}
       hCh1: '12 special stages', hCh2: 'A different twist in every stage', hCh3: 'Boss stages, remixed',
       q6: 'Can I play battles and the map maker right away?', a6: 'You start with the solo stages. Battle mode, online rooms and the map maker unlock one by one as you clear the free stages. The first two challenge letters are free; the rest come with the full version.' },
     ko: { name: '터져라! 젤리팡팡', iconAlt: '터져라! 젤리팡팡 앱 아이콘 — 깜짝 놀란 파란 젤리', tag1: '젤리 폭탄을 놓고,', tag2: '친구를 가두고, 팡!', sub: '젤리로 하는 폭탄 대전 파티 게임, 안드로이드와 iOS에서 만나요.',
+      preChip: '사전 예약 중\u00a0· {d} 출시', preChipNoDate: '사전 예약 중',
+      aPlayPre: 'Google Play 사전 예약', aAppPre: 'App Store 사전 예약', preNote: '사전 예약하면 출시 날 바로 받을 수 있어요.',
       soon: '곧 구글 플레이 · 앱 스토어에서 만나요', outBoth: '출시했어요. 무료로 시작할 수 있어요', outPlay: '구글 플레이에 출시했어요', outApp: '앱 스토어에 출시했어요',
       join: '공식 디스코드 놀러 가기', noteSoon: '출시 소식은 디스코드에 제일 먼저 올라와요.', noteOut: '15단계까지 무료예요. 광고도 뽑기도 없어요.',
       aPlay: 'Google Play에서 받기', aApp: 'App Store에서 받기', appSoon: '아이폰·아이패드는 곧 나와요', playSoon: '안드로이드는 곧 나와요', alsoApp: '아이폰·아이패드에서도 받기', alsoPlay: '안드로이드에서도 받기', trailer: '트레일러 보기',
@@ -492,6 +514,8 @@ html[lang="ko"] body{word-break:keep-all}
       hCh1: '특별 스테이지 12개', hCh2: '도전장마다 다른 규칙', hCh3: '대장 판 리믹스',
       q6: '대전이나 맵 만들기는 처음부터 할 수 있나요?', a6: '처음에는 혼자 하는 단계부터 시작해요. 무료 단계를 하나씩 깨다 보면 대전, 온라인 방, 맵 만들기가 차례로 열려요. 도전장은 1·2번만 무료고, 나머지는 풀버전에 들어 있어요.' },
     ja: { name: 'Pop! Jelly PangPang', tag1: 'ゼリーばくだんを置いて、', tag2: '友だちを閉じこめて、ポン！', sub: 'Android と iOS で遊べる、ぷるぷるボムバトルのパーティーゲーム。',
+      preChip: '事前登録受付中\u00a0· {d}配信開始', preChipNoDate: '事前登録受付中',
+      aPlayPre: 'Google Play で事前登録', aAppPre: 'App Store で事前登録', preNote: '事前登録しておくと、配信日にすぐダウンロードできます。',
       soon: 'Google Play・App Store で近日配信', outBoth: '配信中 — 無料で始められます', outPlay: 'Google Play で配信中', outApp: 'App Store で配信中',
       join: '公式 Discord に参加', noteSoon: '配信のお知らせは Discord でいちばん早く届きます。', noteOut: '最初の15ステージは無料。広告なし、ガチャなし。',
       aPlay: 'Google Play で手に入れよう', aApp: 'App Store からダウンロード', appSoon: 'iPhone・iPad 版は近日配信', playSoon: 'Android 版は近日配信', alsoApp: 'iPhone・iPad 版もあります', alsoPlay: 'Android 版もあります', trailer: 'トレーラーを見る',
@@ -521,6 +545,8 @@ html[lang="ko"] body{word-break:keep-all}
       hCh1: '特別ステージ12個', hCh2: 'ちょうせんじょうごとに違うルール', hCh3: 'ボス戦のアレンジ',
       q6: '対戦やマップ作りは最初から遊べますか？', a6: '最初はひとり用のステージから始まります。無料のステージをクリアしていくと、対戦・オンライン部屋・マップ作りが順番に遊べるようになります。ちょうせんじょうは1・2通目が無料で、残りはフルバージョンに入っています。' },
     'zh-Hant': { name: 'Pop! Jelly PangPang', tag1: '放下果凍炸彈，', tag2: '困住朋友，砰！', sub: 'Android 與 iOS 上的 Q 彈炸彈對戰派對遊戲。',
+      preChip: '開放事前預約\u00a0· {d}上線', preChipNoDate: '開放事前預約',
+      aPlayPre: '在 Google Play 事前預約', aAppPre: '在 App Store 事前預約', preNote: '事前預約後，上線當天就能下載。',
       soon: '即將登上 Google Play 與 App Store', outBoth: '現已推出 — 免費開始', outPlay: '已在 Google Play 推出', outApp: '已在 App Store 推出',
       join: '加入官方 Discord', noteSoon: '上線消息會最先在 Discord 公布。', noteOut: '前 15 關免費。無廣告，無轉蛋。',
       aPlay: '在 Google Play 下載', aApp: '在 App Store 下載', appSoon: 'iPhone 與 iPad 版即將推出', playSoon: 'Android 版即將推出', alsoApp: '也有 iPhone 與 iPad 版', alsoPlay: '也有 Android 版', trailer: '觀看預告片',
@@ -550,6 +576,8 @@ html[lang="ko"] body{word-break:keep-all}
       hCh1: '12 個特殊關卡', hCh2: '每封挑戰書規則不同', hCh3: '魔王關的變奏',
       q6: '對戰和地圖製作一開始就能玩嗎？', a6: '一開始是單人關卡。通關免費關卡的過程中，對戰、線上房間和地圖製作會依序開放。前兩封挑戰書免費，其餘包含在完整版中。' },
     'zh-Hans': { name: '果冻碰碰乐', iconAlt: '果冻碰碰乐 应用图标：一只吓了一跳的蓝色果冻', tag1: '放下果冻炸弹，', tag2: '困住朋友，砰！', sub: 'Android 和 iOS 上的 Q 弹炸弹对战派对游戏。',
+      preChip: '开放预约\u00a0· {d}上线', preChipNoDate: '开放预约',
+      aPlayPre: '在 Google Play 预约', aAppPre: '在 App Store 预约', preNote: '预约后，上线当天就能下载。',
       soon: '即将登陆 Google Play 和 App Store', outBoth: '现已上线 — 免费开玩', outPlay: '已在 Google Play 上线', outApp: '已在 App Store 上线',
       join: '加入官方 Discord', noteSoon: '上线消息会最先在 Discord 发布。', noteOut: '前 15 关免费。无广告，无抽卡。',
       aPlay: '在 Google Play 下载', aApp: '在 App Store 下载', appSoon: 'iPhone 和 iPad 版即将上线', playSoon: 'Android 版即将上线', alsoApp: '也有 iPhone 和 iPad 版', alsoPlay: '也有 Android 版', trailer: '观看预告片',
@@ -579,6 +607,8 @@ html[lang="ko"] body{word-break:keep-all}
       hCh1: '12 个特殊关卡', hCh2: '每封挑战书规则不同', hCh3: '魔王关的变奏',
       q6: '对战和地图制作一开始就能玩吗？', a6: '一开始是单人关卡。通关免费关卡的过程中，对战、在线房间和地图制作会依次开放。前两封挑战书免费，其余包含在完整版中。' },
     ru: { name: 'Pop! Jelly PangPang', tag1: 'Ставь желе-бомбы.', tag2: 'Лови друзей — и бах!', sub: 'Мягкая и весёлая игра-вечеринка с бомбами для Android и iOS.',
+      preChip: 'Открыта предзапись\u00a0· выход {d}', preChipNoDate: 'Открыта предзапись',
+      aPlayPre: 'Предварительная регистрация в Google Play', aAppPre: 'Предзаказ в App Store', preNote: 'Оформите предварительную регистрацию или предзаказ, и в день выхода игру можно сразу скачать.',
       soon: 'Скоро в Google Play и App Store', outBoth: 'Уже вышла — начни бесплатно', outPlay: 'Уже в Google Play', outApp: 'Уже в App Store',
       join: 'Зайти в официальный Discord', noteSoon: 'Новости о выходе первыми появляются в Discord.', noteOut: 'Первые 15 уровней бесплатно. Без рекламы и гачи.',
       aPlay: 'Доступно в Google Play', aApp: 'Загрузите в App Store', appSoon: 'iPhone и iPad: скоро', playSoon: 'Android: скоро', alsoApp: 'Также на iPhone и iPad', alsoPlay: 'Также на Android', trailer: 'Смотреть трейлер',
@@ -608,6 +638,8 @@ html[lang="ko"] body{word-break:keep-all}
       hCh1: '12 особых уровней', hCh2: 'У каждого вызова своё правило', hCh3: 'Боссы с новыми правилами',
       q6: 'Бои и редактор карт доступны сразу?', a6: 'Сначала идут одиночные уровни. По мере прохождения бесплатных уровней по очереди открываются бои, онлайн-комнаты и редактор карт. Первые два вызова бесплатны, остальные входят в полную версию.' },
     ar: { name: 'جيلي بانغ بانغ', iconAlt: 'أيقونة تطبيق جيلي بانغ بانغ: جيلي أزرق متفاجئ', tag1: 'ضع قنابل الجيلي.', tag2: 'احبس أصدقاءك. بوم!', sub: 'لعبة جماعية طرية لمعارك القنابل على أندرويد و iOS.',
+      preChip: 'التسجيل المسبق مفتوح\u00a0· الإطلاق في {d}', preChipNoDate: 'التسجيل المسبق مفتوح',
+      aPlayPre: 'التسجيل المسبق في Google Play', aAppPre: 'الطلب المسبق في App Store', preNote: 'سجّل مسبقًا أو اطلبها مسبقًا لتحمّلها فور إطلاقها.',
       soon: 'قريبًا على Google Play و App Store', outBoth: 'متوفرة الآن — ابدأ مجانًا', outPlay: 'متوفرة الآن على Google Play', outApp: 'متوفرة الآن على App Store',
       join: 'انضم إلى Discord الرسمي', noteSoon: 'أخبار الإصدار تُنشر على Discord أولًا.', noteOut: 'أول 15 مرحلة مجانية. بلا إعلانات وبلا غاتشا.',
       aPlay: 'احصل عليها من Google Play', aApp: 'حمّلها من App Store', appSoon: 'iPhone و iPad: قريبًا', playSoon: 'Android: قريبًا', alsoApp: 'متوفرة أيضًا على iPhone و iPad', alsoPlay: 'متوفرة أيضًا على Android', trailer: 'شاهد العرض التشويقي',
@@ -637,6 +669,8 @@ html[lang="ko"] body{word-break:keep-all}
       hCh1: '12 مرحلة خاصة', hCh2: 'لكل تحدٍّ قاعدته الخاصة', hCh3: 'مراحل الزعماء بحلّة جديدة',
       q6: 'هل يمكنني لعب المباريات وصانع الخرائط من البداية؟', a6: 'تبدأ بالمراحل الفردية. ومع إنهاء المراحل المجانية تُفتح المباريات والغرف عبر الإنترنت وصانع الخرائط واحدة تلو الأخرى. أول تحدّيين مجانيان، والباقي ضمن النسخة الكاملة.' },
     es: { name: 'Pop! Jelly PangPang', tag1: 'Pon bombas de gelatina.', tag2: 'Atrapa a tus amigos. ¡Pop!', sub: 'Un blandito juego de fiesta con batallas de bombas para Android e iOS.',
+      preChip: 'Registro previo abierto\u00a0· Lanzamiento: {d}', preChipNoDate: 'Registro previo abierto',
+      aPlayPre: 'Registro previo en Google Play', aAppPre: 'Reserva en el App Store', preNote: 'Haz el registro previo o la reserva y podrás descargar el juego el mismo día del lanzamiento.',
       soon: 'Próximamente en Google Play y App Store', outBoth: 'Ya disponible: empieza gratis', outPlay: 'Ya disponible en Google Play', outApp: 'Ya disponible en App Store',
       join: 'Únete al Discord oficial', noteSoon: 'Las noticias del lanzamiento llegan primero a Discord.', noteOut: 'Los primeros 15 niveles son gratis. Sin anuncios ni gacha.',
       aPlay: 'Disponible en Google Play', aApp: 'Descárgalo en el App Store', appSoon: 'iPhone y iPad: próximamente', playSoon: 'Android: próximamente', alsoApp: 'También en iPhone y iPad', alsoPlay: 'También en Android', trailer: 'Ver el tráiler',
@@ -666,6 +700,8 @@ html[lang="ko"] body{word-break:keep-all}
       hCh1: '12 niveles especiales', hCh2: 'Una regla distinta en cada desafío', hCh3: 'Niveles de jefe, remezclados',
       q6: '¿Puedo jugar batallas y crear mapas desde el principio?', a6: 'Al principio solo hay niveles para un jugador. Al superar los niveles gratis se abren, uno a uno, el modo batalla, las salas en línea y Crear mapa. Los dos primeros desafíos también son gratis; el resto viene con la versión completa.' },
     fr: { name: 'Pop! Jelly PangPang', tag1: 'Pose des bombes gelée.', tag2: 'Piège tes amis. Pop !', sub: 'Un jeu de fête tout moelleux de batailles de bombes, sur Android et iOS.',
+      preChip: 'Préinscriptions ouvertes\u00a0· Sortie\u00a0: {d}', preChipNoDate: 'Préinscriptions ouvertes',
+      aPlayPre: 'Se préinscrire sur Google Play', aAppPre: 'Précommander sur l’App Store', preNote: 'Préinscrivez-vous ou précommandez pour télécharger le jeu dès le jour de sa sortie.',
       soon: 'Bientôt sur Google Play et l’App Store', outBoth: 'Disponible — gratuit pour commencer', outPlay: 'Disponible sur Google Play', outApp: 'Disponible sur l’App Store',
       join: 'Rejoindre le Discord officiel', noteSoon: 'Les infos de sortie arrivent d’abord sur Discord.', noteOut: 'Les 15 premiers niveaux sont gratuits. Sans pub, sans gacha.',
       aPlay: 'Disponible sur Google Play', aApp: 'Télécharger dans l’App Store', appSoon: 'iPhone et iPad : bientôt', playSoon: 'Android : bientôt', alsoApp: 'Aussi sur iPhone et iPad', alsoPlay: 'Aussi sur Android', trailer: 'Voir la bande-annonce',
@@ -695,6 +731,8 @@ html[lang="ko"] body{word-break:keep-all}
       hCh1: '12 niveaux spéciaux', hCh2: 'Une règle différente à chaque défi', hCh3: 'Niveaux de boss remixés',
       q6: 'Peut-on jouer en combat et créer des cartes dès le début ?', a6: 'On commence par les niveaux solo. En terminant les niveaux gratuits, le mode combat, les salons en ligne et Créer une carte s’ouvrent un à un. Les deux premiers défis sont gratuits aussi ; le reste est dans la version complète.' },
     it: { name: 'Pop! Jelly PangPang', tag1: 'Piazza bombe di gelatina.', tag2: 'Intrappola gli amici. Pop!', sub: 'Un morbido party game di battaglie a colpi di bombe per Android e iOS.',
+      preChip: 'Preregistrazione aperta\u00a0· Uscita: {d}', preChipNoDate: 'Preregistrazione aperta',
+      aPlayPre: 'Preregistrati su Google Play', aAppPre: 'Preordina su App Store', preNote: 'Preregistrati o preordina e potrai scaricare il gioco dal giorno del lancio.',
       soon: 'Presto su Google Play e App Store', outBoth: 'Disponibile ora: inizia gratis', outPlay: 'Disponibile su Google Play', outApp: 'Disponibile su App Store',
       join: 'Entra nel Discord ufficiale', noteSoon: 'Le notizie sul lancio arrivano prima su Discord.', noteOut: 'I primi 15 livelli sono gratis. Niente pubblicità, niente gacha.',
       aPlay: 'Disponibile su Google Play', aApp: 'Scarica su App Store', appSoon: 'iPhone e iPad: presto disponibile', playSoon: 'Android: presto disponibile', alsoApp: 'Anche su iPhone e iPad', alsoPlay: 'Anche su Android', trailer: 'Guarda il trailer',
@@ -724,6 +762,8 @@ html[lang="ko"] body{word-break:keep-all}
       hCh1: '12 livelli speciali', hCh2: 'Una regola diversa per ogni sfida', hCh3: 'Livelli boss rimescolati',
       q6: 'Posso giocare in battaglia e creare mappe fin da subito?', a6: 'All’inizio ci sono i livelli singoli. Superando i livelli gratuiti si aprono, uno alla volta, la modalità battaglia, le stanze online e Crea mappa. Anche le prime due sfide sono gratis; il resto è nella versione completa.' },
     de: { name: 'Pop! Jelly PangPang', tag1: 'Leg Gelee-Bomben.', tag2: 'Fang deine Freunde. Peng!', sub: 'Ein wabbeliges Bomben-Partyspiel für Android und iOS.',
+      preChip: 'Vorregistrierung offen\u00a0· Start: {d}', preChipNoDate: 'Vorregistrierung offen',
+      aPlayPre: 'Bei Google Play vorregistrieren', aAppPre: 'Im App Store vorbestellen', preNote: 'Wer sich vorregistriert oder vorbestellt, kann das Spiel am Starttag sofort laden.',
       soon: 'Bald bei Google Play und im App Store', outBoth: 'Jetzt erhältlich – kostenlos starten', outPlay: 'Jetzt bei Google Play', outApp: 'Jetzt im App Store',
       join: 'Zum offiziellen Discord', noteSoon: 'Neuigkeiten zum Start gibt es zuerst auf Discord.', noteOut: 'Die ersten 15 Level sind kostenlos. Keine Werbung, kein Gacha.',
       aPlay: 'Jetzt bei Google Play', aApp: 'Laden im App Store', appSoon: 'iPhone und iPad: bald verfügbar', playSoon: 'Android: bald verfügbar', alsoApp: 'Auch für iPhone und iPad', alsoPlay: 'Auch für Android', trailer: 'Trailer ansehen',
@@ -753,6 +793,8 @@ html[lang="ko"] body{word-break:keep-all}
       hCh1: '12 Spezial-Level', hCh2: 'Jede Herausforderung mit eigener Regel', hCh3: 'Boss-Level neu gemischt',
       q6: 'Kann ich sofort kämpfen und Karten bauen?', a6: 'Am Anfang gibt es die Einzelspieler-Level. Während du die kostenlosen Level schaffst, werden Kampfmodus, Online-Räume und Karten-Editor nach und nach freigeschaltet. Auch die ersten zwei Herausforderungen sind kostenlos, der Rest gehört zur Vollversion.' },
     pt: { name: 'Pop! Jelly PangPang', tag1: 'Solte bombas de gelatina.', tag2: 'Prenda seus amigos. Pop!', sub: 'Um party game fofinho de batalhas de bombas para Android e iOS.',
+      preChip: 'Pré-registro aberto\u00a0· Lançamento: {d}', preChipNoDate: 'Pré-registro aberto',
+      aPlayPre: 'Pré-registro no Google Play', aAppPre: 'Pré-venda na App Store', preNote: 'Com o pré-registro ou a pré-venda, o jogo fica pronto para baixar no dia do lançamento.',
       soon: 'Em breve no Google Play e na App Store', outBoth: 'Já disponível — comece grátis', outPlay: 'Já disponível no Google Play', outApp: 'Já disponível na App Store',
       join: 'Entre no Discord oficial', noteSoon: 'As novidades do lançamento chegam primeiro no Discord.', noteOut: 'As 15 primeiras fases são grátis. Sem anúncios, sem gacha.',
       aPlay: 'Disponível no Google Play', aApp: 'Baixar na App Store', appSoon: 'iPhone e iPad: em breve', playSoon: 'Android: em breve', alsoApp: 'Também no iPhone e iPad', alsoPlay: 'Também no Android', trailer: 'Assistir ao trailer',
@@ -786,6 +828,7 @@ html[lang="ko"] body{word-break:keep-all}
   try { src = (new URLSearchParams(location.search).get('s') || '').toLowerCase().replace(/[^a-z0-9_]/g, '').slice(0, 24); } catch (e) {}
 
   var hasPlay = !!CFG.play, hasApp = !!CFG.appstore, sndIsOn = false;
+  var PRE = CFG.phase === 'pre' && (hasPlay || hasApp);     /* [c619] 사전 예약 단계 — 주소가 하나도 없으면 켜지 않는다(열려 있다는 말만 있고 갈 곳이 없는 화면 방지) */
   /* 스토어 배지(공식 그림 · badges/ · mk_badges.py 가 받아 잰 값) — 애플 SVG 는 언어마다 가로세로 비가 다르고,
      구글 PNG(646x250)는 영어·아랍어만 사방에 투명 여백(41px)이 있고 나머지는 위아래(29px)만 있다. 보이는 배지 높이를 --bh 로 똑같이 맞춘다. */
   var AS_R = { ko: 3.2425, ja: 2.7213, 'zh-Hant': 2.7213, 'zh-Hans': 2.7213, fr: 3.1627 }, GP_PAD = { en: 1, ar: 1 };
@@ -800,6 +843,33 @@ html[lang="ko"] body{word-break:keep-all}
     var m = $('more'); m.hidden = !MORE;
     if (MORE) { m.textContent = ''; if (MORE[1]) { var l = document.createElement('a'); l.href = MORE[1]; l.rel = 'noopener'; l.textContent = t[MORE[0]]; m.appendChild(l); } else m.textContent = t[MORE[0]]; }
   }
+  /* [c619] 사전 예약 단계 — 구글은 '사전 등록', 애플은 '사전 주문'(스토어가 쓰는 말 그대로). 공식 배지는 출시 뒤 것이라 쓰지 않고 글자 단추로 둔다.
+     날짜(CFG.launch)는 브라우저 언어로 현지화한다. 형식이 틀렸거나 이미 지난 날짜면 빼고 날짜 없는 문구로 간다. */
+  function preDate() {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(CFG.launch || '');
+    if (!m) return '';
+    var y = +m[1], mo = +m[2], da = +m[3], dt = new Date(Date.UTC(y, mo - 1, da, 12));
+    if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== mo - 1 || dt.getUTCDate() !== da) return '';
+    if (Date.UTC(y, mo - 1, da + 1) < Date.now()) return '';
+    try { return new Intl.DateTimeFormat(lang === 'ar' ? 'ar-u-nu-latn' : lang, { month: 'long', day: 'numeric', timeZone: 'UTC' }).format(dt); } catch (e) { return ''; }
+  }
+  function preChip(t) { var d = preDate(); return d ? t.preChip.replace('{d}', d) : t.preChipNoDate; }
+  function preUi(t) {                            /* [c620] 사전 예약 화면 — 단추 둘은 같은 모양(제 스토어가 위) · 날짜 칩은 단추 위 · 안내 한 줄은 단추 아래 · 소개 줄은 구호 바로 밑 */
+    var g = $('preGet'), chip = $('chip'), note = $('ctaNote'), sub = document.querySelector('.hero .sub'), m = $('more'),
+        bA = $('bPreApp'), bP = $('bPrePlay'), first = isAndroid ? bP : bA, second = isAndroid ? bA : bP, order = [chip, first, second, note], i;
+    function setBtn(b, on, key, soonKey, url) {
+      b.className = 'btn btn-pre' + (on ? '' : ' off'); b.hidden = false;
+      if (on) { b.href = url; b.removeAttribute('aria-disabled'); b.removeAttribute('tabindex'); }
+      else { b.removeAttribute('href'); b.setAttribute('aria-disabled', 'true'); b.tabIndex = -1; }
+      b.getElementsByTagName('span')[0].textContent = on ? t[key] : t[soonKey];
+    }
+    setBtn(bA, hasApp, 'aAppPre', 'appSoon', hasApp ? appUrl() : '');
+    setBtn(bP, hasPlay, 'aPlayPre', 'playSoon', hasPlay ? playUrl() : '');
+    chip.className = 'chip pre'; note.className = 'prenote';
+    if (sub && sub.nextElementSibling !== g) g.parentNode.insertBefore(sub, g);
+    for (i = 0; i < order.length; i++) g.appendChild(order[i]);
+    g.hidden = false; m.hidden = true; m.textContent = ''; $('legal').hidden = false;
+  }
   function apply() {
     var t = T[lang] || T.en, de = document.documentElement, i;
     de.lang = lang; de.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -811,9 +881,9 @@ html[lang="ko"] body{word-break:keep-all}
     for (i = 0; i < LANGS.length; i++) if (LANGS[i][0] === lang) $('langName').textContent = LANGS[i][1];
     $('lang').setAttribute('aria-label', t.langLbl); $('lang').value = lang;
     if ($('reel')) $('reel').setAttribute('aria-label', t.vid);
-    $('chip').textContent = (!hasPlay && !hasApp) ? t.soon : (hasPlay && hasApp) ? t.outBoth : (hasPlay ? t.outPlay : t.outApp);
-    $('ctaNote').textContent = t.noteSoon; $('ctaNote').hidden = hasPlay || hasApp;   /* 출시 뒤에는 바로 위 칩 셋(광고 없음·뽑기 없음·15단계 무료)이 그 말을 대신한다 */
-    badges(t);
+    $('chip').textContent = PRE ? preChip(t) : (!hasPlay && !hasApp) ? t.soon : (hasPlay && hasApp) ? t.outBoth : (hasPlay ? t.outPlay : t.outApp);
+    $('ctaNote').textContent = PRE ? t.preNote : t.noteSoon; $('ctaNote').hidden = !PRE && (hasPlay || hasApp);   /* 출시 뒤에는 바로 위 칩 셋(광고 없음·뽑기 없음·15단계 무료)이 그 말을 대신한다 */
+    if (PRE) preUi(t); else badges(t);
     if ($('snd')) $('snd').setAttribute('aria-label', sndIsOn ? t.sndOff : t.sndOn);
     var st = $('strip');                          /* 스크린샷 줄 — 한국어는 한국어 화면, 나머지는 영어 화면 · [c430b] 열한 장: 6인 대전 · 맵 만들기 · 도전장 편지 · 대장 · 도전장 지도 · 꾸미기 … */
     if (st) {
@@ -912,7 +982,7 @@ html[lang="ko"] body{word-break:keep-all}
     return join(CFG.appstore) + 'pt=' + encodeURIComponent(CFG.applePt) + '&ct=' + encodeURIComponent(src + '_launch') + '&mt=8';
   }
   if (CFG.trailer) { $('bTrailer').href = CFG.trailer; $('bTrailer').hidden = false; }
-  if (hasPlay || hasApp) {                       // 출시 뒤: 로고 아래에 스토어 배지 · 트레일러·디스코드 단추는 테두리 단추로
+  if (!PRE && (hasPlay || hasApp)) {             // 출시 뒤: 로고 아래에 스토어 배지 · 트레일러·디스코드 단추는 테두리 단추로
     $('bTrailer').className = 'btn btn-line'; $('bDiscord').className = 'btn btn-line';
     if (hasPlay) $('bPlay').href = playUrl();
     if (hasApp) $('bApp').href = appUrl();
@@ -923,6 +993,11 @@ html[lang="ko"] body{word-break:keep-all}
     MORE = isIOS ? (hasApp ? (hasPlay ? ['alsoPlay', playUrl()] : null) : ['appSoon', ''])
          : isAndroid ? (hasPlay ? (hasApp ? ['alsoApp', appUrl()] : ['appSoon', '']) : ['playSoon', ''])
          : (hasPlay && hasApp ? null : hasPlay ? ['appSoon', ''] : ['playSoon', '']);
+  }
+  if (PRE) {                                     /* [c619] 사전 예약 단계: 단추 주소(출처 꼬리표 ?s= 포함은 playUrl/appUrl 그대로) · 보이기는 preUi 가 언어를 바꿀 때마다 다시 정한다 */
+    if (hasPlay) $('bPrePlay').href = playUrl();
+    $('bTrailer').className = 'btn btn-line'; $('bDiscord').className = 'btn btn-line';   /* [c620] */
+    if (hasApp) $('bPreApp').href = appUrl();
   }
   apply();
 })();
