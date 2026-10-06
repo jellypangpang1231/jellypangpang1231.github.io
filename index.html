@@ -57,6 +57,8 @@
 @font-face{font-family:"Fredoka";src:url("fredoka-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
 /* [c599] [c599b] [c599c] [c613] 한국어 로고 글꼴 — 글자 6개 서브셋(나눔스퀘어라운드 EB) */
 /* [c599b] 간체 중국어·아랍어 로고 글꼴 */
+/* [c722] 일본어 로고 글꼴 — ハジケロ！ゼリーパンパン 서브셋(Resource Han Rounded JP Bold) */
+@font-face{font-family:"JPLogo";src:url("jplogo.woff2") format("woff2");font-weight:700;font-style:normal;font-display:block}
 @font-face{font-family:"SRLogo";src:url("srlogo.woff2") format("woff2");font-weight:700;font-style:normal;font-display:block}
 @font-face{font-family:"ARLogo";src:url("arlogo.woff2") format("woff2");font-weight:700;font-style:normal;font-display:block}
 @font-face{font-family:"NSRoundLogo";src:url("nsround-logo.woff2") format("woff2");font-weight:800;font-style:normal;font-display:block}
@@ -99,6 +101,11 @@ main{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:max(18px,
 .logo.ar text{font-family:"ARLogo","Segoe UI","Noto Sans Arabic",system-ui,sans-serif;font-weight:700;direction:rtl;unicode-bidi:isolate}
 html[lang="ko"] .logo.en,html[lang="zh-Hans"] .logo.en,html[lang="ar"] .logo.en{display:none}
 html[lang="ko"] .logo.ko,html[lang="zh-Hans"] .logo.zh,html[lang="ar"] .logo.ar{display:block}
+/* [c722] */
+.logo.ja{display:none}
+.logo.ja text{font-family:"JPLogo","Hiragino Maru Gothic ProN","Yu Gothic","Meiryo","Noto Sans JP",system-ui,sans-serif;font-weight:700}
+html[lang="ja"] .logo.en{display:none}
+html[lang="ja"] .logo.ja{display:block}
 h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tagline{margin:8px auto 0;font-family:"Fredoka",system-ui,sans-serif;font-weight:600;font-size:clamp(21px,5.6vw,27px);line-height:1.25;color:#fff;text-shadow:0 2px 0 rgba(130,10,70,.45)}
 .sub{margin:6px auto 0;max-width:30em;color:#fff;font-size:16px;text-shadow:0 1px 0 rgba(130,10,70,.4)}
@@ -353,6 +360,22 @@ footer{margin-top:30px}
         <text x="300" y="194" fill="url(#gJellyA)">بانغ بانغ</text>
       </g>
     </svg>
+    <svg class="logo ja" viewBox="0 0 600 196" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="gPopJ" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset="1" stop-color="#ff9a3d"/></linearGradient>
+        <linearGradient id="gJellyJ" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a8"/><stop offset=".55" stop-color="#ffb3c9"/><stop offset="1" stop-color="#ff6fa8"/></linearGradient>
+      </defs>
+      <g font-size="62" letter-spacing="2">
+        <text x="300" y="64" fill="none" stroke="#6b2f1a" stroke-width="24" stroke-linejoin="round">ハジケロ！</text>
+        <text x="300" y="64" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round">ハジケロ！</text>
+        <text x="300" y="64" fill="url(#gPopJ)">ハジケロ！</text>
+      </g>
+      <g font-size="78">
+        <text x="300" y="164" fill="none" stroke="#2b1b4a" stroke-width="26" stroke-linejoin="round">ゼリーパンパン</text>
+        <text x="300" y="164" fill="none" stroke="#fff" stroke-width="11" stroke-linejoin="round">ゼリーパンパン</text>
+        <text x="300" y="164" fill="url(#gJellyJ)">ゼリーパンパン</text>
+      </g>
+    </svg>
     <p class="tagline"><span data-i="tag1">Drop jelly bombs.</span> <span data-i="tag2">Trap your friends. Pop!</span></p>
     <div class="preget" id="preGet" hidden>
       <a class="btn btn-pre" id="bPreApp" rel="noopener"><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2h16l-2-2zM10 20a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="aAppPre">Pre-order on the App Store</span></a>
@@ -570,7 +593,7 @@ footer{margin-top:30px}
       hChP: '각 세계의 대장을 물리치면 도전장이 날아와요. 그 세계의 대장 판에 새 규칙이 붙어서 다시 도전하는 거예요. 초콜릿 성벽은 점프로만 넘고, 말랑 블록은 밀어서 길을 막고, 어떤 판에는 함정 젤리만 나와요. 도전장마다 규칙이 따로 있어서 깰 때마다 새로운 판이에요.',
       hCh1: '특별 스테이지 12개', hCh2: '도전장마다 다른 규칙', hCh3: '대장 판 리믹스',
       q6: '대전이나 맵 만들기는 처음부터 할 수 있나요?', a6: '처음에는 혼자 하는 단계부터 시작해요. 무료 단계를 하나씩 깨다 보면 대전, 온라인 방, 맵 만들기가 차례로 열려요. 도전장은 1·2번만 무료고, 나머지는 풀버전에 들어 있어요.' },
-    ja: { name: 'Pop! Jelly PangPang', tag1: 'ゼリーばくだんを置いて、', tag2: '友だちを閉じこめて、ポン！', sub: 'Android と iOS で遊べる、ぷるぷるボムバトルのパーティーゲーム。',
+    ja: { name: 'ハジケロ！ゼリーパンパン', iconAlt: 'ハジケロ！ゼリーパンパン アプリアイコン：びっくりした青いゼリー', tag1: 'ゼリーばくだんを置いて、', tag2: '友だちを閉じこめて、ポン！', sub: 'Android と iOS で遊べる、ぷるぷるボムバトルのパーティーゲーム。',
       preChip: '事前登録受付中\u00a0· {d}配信開始', preChipNoDate: '事前登録受付中',
       aPlayPre: 'Google Play で事前登録', aAppPre: 'App Store で事前登録', preNote: '事前登録しておくと、配信日にすぐダウンロードできます。',
       soon: 'Google Play・App Store で近日配信', outBoth: '配信中 — 無料で始められます', outPlay: 'Google Play で配信中', outApp: 'App Store で配信中',
