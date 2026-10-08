@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pop! Jelly PangPang — a squishy bomb-battle party game</title>
-<meta name="description" content="Drop jelly bombs, trap your friends, and pop! Battle up to 6 online, build and share your own maps, and take on 12 Challenge Letters. No ads. No gacha.">
+<meta name="description" content="Trap them with jelly bombs — pang-pang! Battle up to 6 online, build and share your own maps, and take on 12 Challenge Letters. No ads. No gacha.">
 <meta name="theme-color" content="#f23d86">
 <link rel="canonical" href="https://jellypangpang1231.github.io/">
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -13,11 +13,11 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Pop! Jelly PangPang">
 <meta property="og:title" content="Pop! Jelly PangPang">
-<meta property="og:description" content="Drop jelly bombs, trap your friends, and pop! Online battles for up to 6, a map maker and 12 Challenge Letters. No ads. No gacha.">
+<meta property="og:description" content="Trap them with jelly bombs — pang-pang! Online battles for up to 6, a map maker and 12 Challenge Letters. No ads. No gacha.">
 <meta property="og:image" content="https://jellypangpang1231.github.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Pop! Jelly PangPang: the app icon, a surprised blue jelly, next to the words Drop jelly bombs. Trap your friends. Pop!">
+<meta property="og:image:alt" content="Pop! Jelly PangPang: the app icon, a surprised blue jelly, next to the words Trap them with jelly bombs — pang-pang! No ads · No gacha">
 <meta property="og:url" content="https://jellypangpang1231.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@jelly_pang_pang">
@@ -153,6 +153,8 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 .shots{margin:18px -16px 0}
 .strip{display:flex;gap:12px;margin:0;padding:6px 16px 16px;list-style:none;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding:0 16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .strip::-webkit-scrollbar{display:none}
+.strip li.land{width:min(62vw,300px);align-self:center;display:flex;flex-direction:column;gap:12px}  /* [c708b] 가로 컷 — 글 없이 은근히 */
+.strip li.land img{aspect-ratio:1170/540;border-radius:16px}
 .strip:focus-visible{outline:3px solid #fff;outline-offset:-3px}
 .strip li{flex:none;width:min(40vw,200px);scroll-snap-align:start}
 .strip img{display:block;width:100%;height:auto;aspect-ratio:440/952;border-radius:20px;border:4px solid #fff;background:#f7c3da;box-shadow:0 6px 0 rgba(120,10,70,.25),0 10px 18px rgba(90,0,50,.22)}
@@ -244,6 +246,7 @@ main>*{grid-column:1/-1;min-width:0}
 .strip{gap:16px;padding:8px 4px 18px;scroll-padding:0 4px}
 .strip li{width:228px}
 .strip img{border-radius:24px}
+.strip li.land{width:360px}  /* [c708b] */
 .hls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:14px}
 .hls>.card{margin-top:0}
 .hl{display:flex;flex-direction:column}
@@ -274,6 +277,7 @@ footer{margin-top:30px}
 .sx[data-end]{opacity:0;pointer-events:none}
 }
 </style>
+<!-- [c708b] -->
 </head>
 <body>
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -417,6 +421,7 @@ footer{margin-top:30px}
       <li><img src="shot-en-9.webp" width="440" height="952" loading="lazy" decoding="async" alt="A chocolate-and-cookie board where jellies hop over blocks"></li>
       <li><img src="shot-en-10.webp" width="440" height="952" loading="lazy" decoding="async" alt="A strawberry jam world with arrow tiles and red jam blocks"></li>
       <li><img src="shot-en-11.webp" width="440" height="952" loading="lazy" decoding="async" alt="A pink macaron board where jellies trap each other with jelly bombs"></li>
+      <li class="land"><img src="land-1.webp" width="1170" height="540" loading="lazy" decoding="async" alt="The game also plays sideways: an ice stage in landscape" data-land="1"><img src="land-2.webp" width="1170" height="540" loading="lazy" decoding="async" alt="A boss stage in landscape" data-land="2"></li><!-- [c708b] -->
     </ul>
   </section>
 
@@ -530,14 +535,15 @@ footer{margin-top:30px}
       q4: 'Do I need an account?', a4: 'Nope! Jump right in. Signing in (Settings → Account) is optional. It saves your progress, so you can pick up on another device.',
       q5: 'Controllers and languages?', a5: 'Yes to controllers! The game comes in 12 languages: English, Korean, Japanese, Chinese (Simplified and Traditional), Spanish, French, German, Italian, Portuguese, Russian and Arabic.',
       c1: 'No ads', c2: 'No gacha', c3: '15 stages free', shots: 'Screenshots', shot: 'Screenshot',
-      alts: ['A six-player battle kicks off on a cookie board with a big GO!',
+      landAlts: ['The game also plays sideways: an ice stage in landscape', 'A boss stage in landscape'],
+      alts: ['A six-player battle on a chocolate and cookie board, bombs and rainbow power-ups everywhere',
         'The map maker: a symmetrical six-player arena painted with cookies, walls, bushes and water',
-        'A challenge letter pops up on the home screen with the rule All mega bombs!',
+        'A challenge letter pops up on the home screen: a 60-second hunt, very hard, skipping is okay',
         'Boss stage: a giant purple boss jelly guards a chocolate board',
-        'The Challenges map: every candy world has its own special stage with a twist, like Short fuses! or All mega bombs!',
+        'The Challenge map: every candy world has its own special stage with a twist of its own',
         'Dress-up screen: a jelly in bunny ears with rows of toppings to choose from',
         'The jelly town: a candy plaza with a clock tower and jelly friends',
-        'Squish screen: a giggling jelly in bunny ears on a donut cushion',
+        'Squish screen: a giggling blue jelly on a donut cushion',
         'A chocolate-and-cookie board where jellies hop over blocks',
         'A strawberry jam world with arrow tiles and red jam blocks',
         'A pink macaron board where jellies trap each other with jelly bombs'],
@@ -572,14 +578,15 @@ footer{margin-top:30px}
       q4: '가입해야 하나요?', a4: '아니요. 받자마자 바로 할 수 있어요. 로그인(설정 → 계정)은 선택이고, 해 두면 진행 상황이 저장돼서 다른 기기에서도 이어서 할 수 있어요.',
       q5: '게임패드와 언어는요?', a5: '게임패드로도 할 수 있어요. 언어는 12개를 지원해요: 한국어, 영어, 일본어, 중국어(간체·번체), 스페인어, 프랑스어, 독일어, 이탈리아어, 포르투갈어, 러시아어, 아랍어.',
       c1: '광고 없음', c2: '뽑기 없음', c3: '15단계 무료', shots: '스크린샷', shot: '스크린샷',
-      alts: ['쿠키 판에서 6인 대전이 「시작!」과 함께 시작되는 장면',
+      landAlts: ['가로 화면으로도 할 수 있어요: 가로로 펼쳐진 얼음 단계', '가로로 펼쳐진 대장 판'],
+      alts: ['초콜릿과 쿠키 판에서 폭탄과 무지개 아이템이 터지는 6인 대전 장면',
         '맵 만들기: 과자·벽·부쉬·물로 칠한 6인용 대칭 판',
-        '홈 화면에 도전장이 날아온 장면: 규칙 카드 「전부 대왕 폭탄!」',
+        '홈 화면에 도전장이 날아온 장면: 60초 안에 잠든 젤리를 가두는 아주 어려운 도전, 안 깨도 괜찮아요',
         '대장 판: 커다란 보라색 대장 젤리가 초콜릿 판을 지키고 있는 장면',
         '도전장 지도: 달콤한 세상마다 규칙이 다른 특별 스테이지가 기다려요',
         '꾸미기 화면: 토끼 귀를 쓴 젤리와 골라 쓸 수 있는 토핑 목록',
         '젤리 마을: 시계탑이 있는 과자 광장과 젤리 친구들',
-        '말랑 화면: 도넛 방석 위에서 깔깔 웃는 토끼 귀 젤리',
+        '말랑 화면: 도넛 방석 위에서 깔깔 웃는 파란 젤리',
         '초콜릿과 쿠키 판에서 젤리가 블록을 뛰어넘는 장면',
         '딸기잼 세상: 화살표 칸과 빨간 잼 블록이 있는 판',
         '분홍 마카롱 판에서 젤리들이 젤리 폭탄으로 서로를 가두는 장면'],
@@ -968,11 +975,13 @@ footer{margin-top:30px}
     var st = $('strip');                          /* 스크린샷 줄 — 한국어는 한국어 화면, 나머지는 영어 화면 · [c430b] 열한 장: 6인 대전 · 맵 만들기 · 도전장 편지 · 대장 · 도전장 지도 · 꾸미기 … */
     if (st) {
       st.setAttribute('aria-label', t.shots);
-      var im = st.getElementsByTagName('img'), set = lang === 'ko' ? 'ko' : 'en';
+      var im = st.querySelectorAll('li:not(.land) img'), set = lang === 'ko' ? 'ko' : 'en';
       for (i = 0; i < im.length; i++) {
         setSrc(im[i], 'shot-' + set + '-' + (i + 1) + '.webp');
         im[i].alt = (t.alts && t.alts[i]) || (t.shot + ' ' + (i + 1));
       }
+      var ld = st.querySelectorAll('li.land img');   /* [c708b] */
+      for (i = 0; i < ld.length; i++) ld[i].alt = (t.landAlts && t.landAlts[i]) || (t.shot + ' ' + (12 + i));
     }
   }
   (function () {
