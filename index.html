@@ -153,8 +153,6 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 .shots{margin:18px -16px 0}
 .strip{display:flex;gap:12px;margin:0;padding:6px 16px 16px;list-style:none;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding:0 16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .strip::-webkit-scrollbar{display:none}
-.strip li.land{width:min(62vw,300px);align-self:center;display:flex;flex-direction:column;gap:12px}  /* [c708b] 가로 컷 — 글 없이 은근히 */
-.strip li.land img{aspect-ratio:1170/540;border-radius:16px}
 .strip:focus-visible{outline:3px solid #fff;outline-offset:-3px}
 .strip li{flex:none;width:min(40vw,200px);scroll-snap-align:start}
 .strip img{display:block;width:100%;height:auto;aspect-ratio:440/952;border-radius:20px;border:4px solid #fff;background:#f7c3da;box-shadow:0 6px 0 rgba(120,10,70,.25),0 10px 18px rgba(90,0,50,.22)}
@@ -246,7 +244,6 @@ main>*{grid-column:1/-1;min-width:0}
 .strip{gap:16px;padding:8px 4px 18px;scroll-padding:0 4px}
 .strip li{width:228px}
 .strip img{border-radius:24px}
-.strip li.land{width:360px}  /* [c708b] */
 .hls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:14px}
 .hls>.card{margin-top:0}
 .hl{display:flex;flex-direction:column}
@@ -276,8 +273,20 @@ footer{margin-top:30px}
 [dir="rtl"] .sx svg{transform:scaleX(-1)}
 .sx[data-end]{opacity:0;pointer-events:none}
 }
+/* [c844] 가로 화면 묶음(스크린샷 줄 바로 아래 · 안내 문구 크기) · PC(Steam) 묶음 · PC 단추 */
+.sideways{margin:18px auto 0;max-width:400px;text-align:center}
+.sideways>p{margin:0 0 10px;color:#fff;font-size:15.5px;line-height:1.4;text-shadow:0 1px 0 rgba(130,10,70,.4);text-wrap:balance}
+.sideways ul,.pcband ul{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:0;padding:0;list-style:none}
+.sideways ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sideways img{display:block;width:100%;height:auto;aspect-ratio:1170/540;border-radius:16px;border:4px solid #fff;background:#f7c3da;box-shadow:0 5px 0 rgba(120,10,70,.25),0 9px 16px rgba(90,0,50,.2)}
+.pcband{text-align:center}
+.pcband>p{margin:0 0 12px;font-family:"Fredoka",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-weight:600;font-size:17px;line-height:1.35;text-wrap:balance}
+.pcband img{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:14px;background:#f7c3da;box-shadow:0 0 0 3px #fff,0 5px 0 3px rgba(120,10,70,.18)}
+@media (min-width:640px){.sideways{max-width:640px;margin-top:30px}.sideways ul,.pcband ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.preget>#bPrePc{grid-column:1/-1;justify-self:center;width:min(100%,290px)}}
+@media (min-width:1024px){.pcband{max-width:860px;width:100%;margin-left:auto;margin-right:auto}}
 </style>
 <!-- [c708b] -->
+<!-- [c844] -->
 </head>
 <body>
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -384,6 +393,7 @@ footer{margin-top:30px}
     <div class="preget" id="preGet" hidden>
       <a class="btn btn-pre" id="bPreApp" rel="noopener"><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2h16l-2-2zM10 20a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="aAppPre">Pre-order on the App Store</span></a>
       <a class="btn btn-pre" id="bPrePlay" rel="noopener"><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2h16l-2-2zM10 20a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="aPlayPre">Pre-register on Google Play</span></a>
+      <a class="btn btn-pre off" id="bPrePc" rel="noopener" hidden><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M8.5 20h7M12 16.5V20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span data-i="pcSoon">PC (Steam): coming soon</span></a><!-- [c844] -->
     </div>
     <div class="getit" id="getit" hidden>
       <a class="bdg as" id="bApp" rel="noopener" hidden><span class="bx"><img id="imApp" alt="" decoding="async"></span></a>
@@ -406,6 +416,14 @@ footer{margin-top:30px}
     <p class="fine" id="ctaNote">Launch news lands on Discord first.</p>
   </section>
 
+  <section class="sideways" aria-label="Landscape"><!-- [c844] 가로 화면도 된다 — 줄 밖 · 받기 칸과 스크린샷 줄 사이 -->
+    <p data-i="landLine">Play it upright or sideways, your pick.</p>
+    <ul>
+      <li><img src="land-1.webp" width="1170" height="540" loading="lazy" decoding="async" alt="The game also plays sideways: an ice stage in landscape" data-land="1"></li>
+      <li><img src="land-2.webp" width="1170" height="540" loading="lazy" decoding="async" alt="A boss stage in landscape" data-land="2"></li>
+    </ul>
+  </section>
+
   <section class="shots">
     <button type="button" class="sx sx-prev" id="sxPrev" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button type="button" class="sx sx-next" id="sxNext" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -421,7 +439,6 @@ footer{margin-top:30px}
       <li><img src="shot-en-9.webp" width="440" height="952" loading="lazy" decoding="async" alt="A chocolate-and-cookie board where jellies hop over blocks"></li>
       <li><img src="shot-en-10.webp" width="440" height="952" loading="lazy" decoding="async" alt="A strawberry jam world with arrow tiles and red jam blocks"></li>
       <li><img src="shot-en-11.webp" width="440" height="952" loading="lazy" decoding="async" alt="A pink macaron board where jellies trap each other with jelly bombs"></li>
-      <li class="land"><img src="land-1.webp" width="1170" height="540" loading="lazy" decoding="async" alt="The game also plays sideways: an ice stage in landscape" data-land="1"><img src="land-2.webp" width="1170" height="540" loading="lazy" decoding="async" alt="A boss stage in landscape" data-land="2"></li><!-- [c708b] -->
     </ul>
   </section>
 
@@ -444,6 +461,14 @@ footer{margin-top:30px}
       <p data-i="hChP">Beat a world’s boss and a challenge letter arrives: that boss stage again, with a new rule. Jump over a chocolate wall, push marshmallows to block the way, or face nothing but Trap Jellies. Every letter has its own twist, so each one plays differently.</p>
       <ul class="hlc"><li data-i="hCh1">12 special stages</li><li data-i="hCh2">A different twist in every stage</li><li data-i="hCh3">Boss stages, remixed</li></ul>
     </article>
+  </section>
+
+  <section class="card pcband" aria-label="PC"><!-- [c844] PC(Steam) — 상점 공개 전이라 링크 없음(CFG.steam) -->
+    <p data-i="pcLine">Coming to PC on Steam, too.</p>
+    <ul>
+      <li><img src="pc-1.webp" width="960" height="540" loading="lazy" decoding="async" alt="Pop! Jelly PangPang on a PC screen: a strawberry jam stage" data-pc="1"></li>
+      <li><img src="pc-2.webp" width="960" height="540" loading="lazy" decoding="async" alt="On PC too: the boss stage in the chocolate lava world" data-pc="2"></li>
+    </ul>
   </section>
 
   <section class="card" aria-label="About the game">
@@ -503,7 +528,7 @@ footer{margin-top:30px}
      phase    : ''(기본 · 위 주소에 따라 '곧 출시' / '출시됨') | 'pre'(사전 예약 화면 — 구글 사전 등록 · 애플 사전 주문 글자 단추, play·appstore 중 하나는 채워져 있어야 함) | 'live'(= '' 와 같음, 기록용)
      launch   : 'YYYY-MM-DD' — pre 일 때 칩에 "10월 8일 출시" 로 현지화해 보인다(비우면 날짜 없이 · 날짜가 지나면 저절로 빠진다)
      ──────────────────────────────────────────────────────────────────── */
-  var CFG = { play: 'https://play.google.com/store/apps/details?id=com.jellypangpang.game', appstore: '', applePt: '', trailer: 'https://youtu.be/zD-ADSRCdg8', phase: 'pre', launch: '' };
+  var CFG = { play: 'https://play.google.com/store/apps/details?id=com.jellypangpang.game', appstore: '', applePt: '', trailer: 'https://youtu.be/zD-ADSRCdg8', phase: 'pre', launch: '', steam: '' };   /* [c844] steam: 상점이 공개되면 'https://store.steampowered.com/app/5396440' 을 넣는다(사전 예약 칸 PC 단추가 찜하기 링크로 바뀐다) */
 
   var $ = function (id) { return document.getElementById(id); };
   var INL = window.__INL || {};                   /* 한 장짜리 미리보기(build.py)만 쓴다 — 파일 이름 → 박아 넣은 그림(스크린샷·배지) */
@@ -556,6 +581,8 @@ footer{margin-top:30px}
       hChK: 'Challenge Letters', hChH: '12 special stages with a twist',
       hChP: 'Beat a world’s boss and a challenge letter arrives: that boss stage again, with a new rule. Jump over a chocolate wall, push marshmallows to block the way, or face nothing but Trap Jellies. Every letter has its own twist, so each one plays differently.',
       hCh1: '12 special stages', hCh2: 'A different twist in every stage', hCh3: 'Boss stages, remixed',
+      pcSoon: 'PC (Steam): coming soon', aSteamPre: 'Wishlist on Steam', landLine: 'Play it upright or sideways, your pick.', pcLine: 'Coming to PC on Steam, too.',
+      pcAlts: ['Pop! Jelly PangPang on a PC screen: a strawberry jam stage', 'On PC too: the boss stage in the chocolate lava world'],
       q6: 'Can I play battles and the map maker right away?', a6: 'You start with the solo stages. Battle mode, online rooms and the map maker unlock one by one as you clear the free stages. The first two challenge letters are free; the rest come with the full version.' },
     ko: { name: '터져라! 젤리팡팡', iconAlt: '터져라! 젤리팡팡 앱 아이콘 — 깜짝 놀란 파란 젤리', tag1: '젤리 폭탄으로 가두고', tag2: '팡팡!', sub: '가만히 있으면 설탕에 굳어 버리는 과자 세상! 설탕 거인에 맞서는 꼬마 젤리의 대모험 · 친구와는 서로 가두는 팡팡 놀이',
       preChip: '사전 예약 중\u00a0· {d} 출시', preChipNoDate: '사전 예약 중',
@@ -599,6 +626,8 @@ footer{margin-top:30px}
       hChK: '도전장', hChH: '규칙이 확 달라지는 특별 스테이지 12개',
       hChP: '각 세계의 대장을 물리치면 도전장이 날아와요. 그 세계의 대장 판에 새 규칙이 붙어서 다시 도전하는 거예요. 초콜릿 성벽은 점프로만 넘고, 말랑 블록은 밀어서 길을 막고, 어떤 판에는 함정 젤리만 나와요. 도전장마다 규칙이 따로 있어서 깰 때마다 새로운 판이에요.',
       hCh1: '특별 스테이지 12개', hCh2: '도전장마다 다른 규칙', hCh3: '대장 판 리믹스',
+      pcSoon: 'PC(스팀)는 곧 나와요', aSteamPre: '스팀에서 찜하기', landLine: '세로로도, 가로로도 할 수 있어요.', pcLine: 'PC(스팀)에도 곧 찾아가요.',
+      pcAlts: ['PC 화면으로 본 딸기잼 단계', 'PC 화면으로 본 초코 용암 세상의 대장 판'],
       q6: '대전이나 맵 만들기는 처음부터 할 수 있나요?', a6: '처음에는 혼자 하는 단계부터 시작해요. 무료 단계를 하나씩 깨다 보면 대전, 온라인 방, 맵 만들기가 차례로 열려요. 도전장은 1·2번만 무료고, 나머지는 풀버전에 들어 있어요.' },
     ja: { name: 'ハジケロ！ゼリーパンパン', iconAlt: 'ハジケロ！ゼリーパンパン アプリアイコン：びっくりした青いゼリー', tag1: 'ゼリーばくだんで閉じこめて', tag2: 'パンパン！', sub: 'じっとしていると砂糖でかたまってしまうお菓子の世界！シュガー ジャイアントに立ち向かう小さなゼリーの大冒険・友だちとは閉じこめ合うパンパンあそび',
       preChip: '事前登録受付中\u00a0· {d}配信開始', preChipNoDate: '事前登録受付中',
@@ -630,6 +659,7 @@ footer{margin-top:30px}
       hChK: 'ちょうせんじょう', hChH: 'ルールが変わる特別ステージ12個',
       hChP: 'ワールドのボスを倒すと、ちょうせんじょうが届きます。同じステージなのに、ルールがひとつだけ変わります。導火線が短い、ばくだんはひとつだけ、ぜんぶ大玉、みんなが突撃してくる。ちょうせんじょうごとにルールが違うので、クリアするたびに別のステージを遊べます。',
       hCh1: '特別ステージ12個', hCh2: 'ちょうせんじょうごとに違うルール', hCh3: 'ボス戦のアレンジ',
+      pcSoon: 'PC（Steam）版は近日配信', aSteamPre: 'Steamでウィッシュリストに追加', landLine: '縦でも横でも遊べます。', pcLine: 'PC（Steam）にも登場予定です。',
       q6: '対戦やマップ作りは最初から遊べますか？', a6: '最初はひとり用のステージから始まります。無料のステージをクリアしていくと、対戦・オンライン部屋・マップ作りが順番に遊べるようになります。ちょうせんじょうは1・2通目が無料で、残りはフルバージョンに入っています。' },
     'zh-Hant': { name: 'Pop! Jelly PangPang', tag1: '用果凍炸彈困住，', tag2: '碰碰！', sub: '一動也不動就會被糖凝固的甜點世界！小果凍對抗糖霜巨人的大冒險・和朋友互相困住的碰碰遊戲',
       preChip: '開放事前預約\u00a0· {d}上線', preChipNoDate: '開放事前預約',
@@ -661,6 +691,7 @@ footer{margin-top:30px}
       hChK: '挑戰書', hChH: '12 個改變規則的特殊關卡',
       hChP: '打倒每個世界的魔王，就會收到挑戰書：同一關，但規則不一樣。引線變短、只能放一個炸彈、全是大王炸彈、大家一起衝鋒。每封挑戰書各有各的規則，每過一關都是新的玩法。',
       hCh1: '12 個特殊關卡', hCh2: '每封挑戰書規則不同', hCh3: '魔王關的變奏',
+      pcSoon: 'PC（Steam）版即將推出', aSteamPre: '在 Steam 加入願望清單', landLine: '直式、橫式都能玩。', pcLine: 'PC（Steam）版也即將登場。',
       q6: '對戰和地圖製作一開始就能玩嗎？', a6: '一開始是單人關卡。通關免費關卡的過程中，對戰、線上房間和地圖製作會依序開放。前兩封挑戰書免費，其餘包含在完整版中。' },
     'zh-Hans': { name: '果冻碰碰乐', iconAlt: '果冻碰碰乐 应用图标：一只吓了一跳的蓝色果冻', tag1: '用果冻炸弹困住，', tag2: '碰碰！', sub: '一动不动就会被糖凝固的甜点世界！小果冻对抗糖霜巨人的大冒险・和朋友互相困住的碰碰游戏',
       preChip: '开放预约\u00a0· {d}上线', preChipNoDate: '开放预约',
@@ -692,6 +723,7 @@ footer{margin-top:30px}
       hChK: '挑战书', hChH: '12 个改变规则的特殊关卡',
       hChP: '打倒每个世界的魔王，就会收到挑战书：同一关，但规则不一样。引线变短、只能放一个炸弹、全是大王炸弹、大家一起冲锋。每封挑战书各有各的规则，每过一关都是新的玩法。',
       hCh1: '12 个特殊关卡', hCh2: '每封挑战书规则不同', hCh3: '魔王关的变奏',
+      pcSoon: 'PC（Steam）版即将上线', aSteamPre: '在 Steam 加入愿望单', landLine: '竖屏、横屏都能玩。', pcLine: 'PC（Steam）版也即将登场。',
       q6: '对战和地图制作一开始就能玩吗？', a6: '一开始是单人关卡。通关免费关卡的过程中，对战、在线房间和地图制作会依次开放。前两封挑战书免费，其余包含在完整版中。' },
     ru: { name: 'Pop! Jelly PangPang', tag1: 'Лови желе-бомбой —', tag2: 'бах-бах!', sub: 'Сладкий мир, который застывает в сахар, если стоять на месте! Большое приключение маленького желе против Сахарного великана · А с друзьями — ловите друг друга в мягкой игре.',
       preChip: 'Открыта предзапись\u00a0· выход {d}', preChipNoDate: 'Открыта предзапись',
@@ -723,6 +755,7 @@ footer{margin-top:30px}
       hChK: 'Вызовы', hChH: '12 особых уровней с подвохом',
       hChP: 'Победи босса мира — и придёт вызов: тот же уровень, но с изменённым правилом. Фитиль короче. Только одна бомба. Только мега-бомбы. Все бросаются на тебя. У каждого вызова своё правило, так что каждый уровень играется по-новому.',
       hCh1: '12 особых уровней', hCh2: 'У каждого вызова своё правило', hCh3: 'Боссы с новыми правилами',
+      pcSoon: 'PC (Steam): скоро', aSteamPre: 'Добавить в желаемое в Steam', landLine: 'Играй вертикально или горизонтально — как удобнее.', pcLine: 'Скоро и на ПК в Steam.',
       q6: 'Бои и редактор карт доступны сразу?', a6: 'Сначала идут одиночные уровни. По мере прохождения бесплатных уровней по очереди открываются бои, онлайн-комнаты и редактор карт. Первые два вызова бесплатны, остальные входят в полную версию.' },
     ar: { name: 'جيلي بانغ بانغ', iconAlt: 'أيقونة تطبيق جيلي بانغ بانغ: جيلي أزرق متفاجئ', tag1: 'احبسهم بقنابل الجيلي:', tag2: 'بانغ بانغ!', sub: 'عالم من الحلوى يتصلّب سكرًا إذا بقيت ساكنًا! مغامرة جيلي صغير في مواجهة عملاق السكر · ومع الأصدقاء، احبسوا بعضكم في لعبة طرية.',
       preChip: 'التسجيل المسبق مفتوح\u00a0· الإطلاق في {d}', preChipNoDate: 'التسجيل المسبق مفتوح',
@@ -754,6 +787,7 @@ footer{margin-top:30px}
       hChK: 'التحديات', hChH: '12 مرحلة خاصة بمفاجأة',
       hChP: 'اهزم زعيم أحد العوالم فيصلك تحدٍّ: المرحلة نفسها لكن بقاعدة مختلفة. فتيل قصير. قنبلة واحدة فقط. كل القنابل ضخمة. الجميع يندفع نحوك. لكل تحدٍّ قاعدته الخاصة، فكل مرحلة تُلعب بشكل مختلف.',
       hCh1: '12 مرحلة خاصة', hCh2: 'لكل تحدٍّ قاعدته الخاصة', hCh3: 'مراحل الزعماء بحلّة جديدة',
+      pcSoon: 'PC (Steam): قريبًا', aSteamPre: 'أضِف إلى قائمة الرغبات على Steam', landLine: 'العب بالوضع الطولي أو العرضي كما تحب.', pcLine: 'قريبًا على الحاسوب عبر Steam أيضًا.',
       q6: 'هل يمكنني لعب المباريات وصانع الخرائط من البداية؟', a6: 'تبدأ بالمراحل الفردية. ومع إنهاء المراحل المجانية تُفتح المباريات والغرف عبر الإنترنت وصانع الخرائط واحدة تلو الأخرى. أول تحدّيين مجانيان، والباقي ضمن النسخة الكاملة.' },
     es: { name: 'Pop! Jelly PangPang', tag1: 'Atrápalos con bombas de gelatina:', tag2: '¡pang-pang!', sub: '¡Un mundo de dulces que se endurece en azúcar si te quedas quieto! La gran aventura de una gelatinita contra el Gigante de azúcar · Con amigos, atrápense unos a otros en una fiesta blandita.',
       preChip: 'Registro previo abierto\u00a0· Lanzamiento: {d}', preChipNoDate: 'Registro previo abierto',
@@ -785,6 +819,7 @@ footer{margin-top:30px}
       hChK: 'Desafíos', hChH: '12 niveles especiales con giro',
       hChP: 'Vence al jefe de un mundo y llega un desafío: el mismo nivel con una regla cambiada. Mecha corta. Una sola bomba. Todo bombas gigantes. Todos a por ti. Cada desafío tiene su propia regla, así que cada nivel se juega distinto.',
       hCh1: '12 niveles especiales', hCh2: 'Una regla distinta en cada desafío', hCh3: 'Niveles de jefe, remezclados',
+      pcSoon: 'PC (Steam): próximamente', aSteamPre: 'Añadir a deseados en Steam', landLine: 'Juega en vertical o en horizontal, como prefieras.', pcLine: 'Pronto también en PC, en Steam.',
       q6: '¿Puedo jugar batallas y crear mapas desde el principio?', a6: 'Al principio solo hay niveles para un jugador. Al superar los niveles gratis se abren, uno a uno, el modo batalla, las salas en línea y Crear mapa. Los dos primeros desafíos también son gratis; el resto viene con la versión completa.' },
     fr: { name: 'Pop! Jelly PangPang', tag1: 'Piège-les avec des bombes gelée :', tag2: 'pang-pang !', sub: 'Un monde de bonbons qui durcit en sucre si on reste immobile ! La grande aventure d’une petite gelée contre le Géant de sucre · Entre amis, piégez-vous les uns les autres dans une fête toute moelleuse.',
       preChip: 'Préinscriptions ouvertes\u00a0· Sortie\u00a0: {d}', preChipNoDate: 'Préinscriptions ouvertes',
@@ -816,6 +851,7 @@ footer{margin-top:30px}
       hChK: 'Défis', hChH: '12 niveaux spéciaux, une règle bousculée',
       hChP: 'Bats le boss d’un monde et un défi arrive : le même niveau, avec une règle modifiée. Mèche courte. Une seule bombe. Que des méga bombes. Tout le monde fonce sur toi. Chaque défi a sa propre règle, donc chaque niveau se joue autrement.',
       hCh1: '12 niveaux spéciaux', hCh2: 'Une règle différente à chaque défi', hCh3: 'Niveaux de boss remixés',
+      pcSoon: 'PC (Steam) : bientôt', aSteamPre: 'Ajouter à la liste de souhaits Steam', landLine: 'Joue en portrait ou en paysage, comme tu préfères.', pcLine: 'Bientôt aussi sur PC, via Steam.',
       q6: 'Peut-on jouer en combat et créer des cartes dès le début ?', a6: 'On commence par les niveaux solo. En terminant les niveaux gratuits, le mode combat, les salons en ligne et Créer une carte s’ouvrent un à un. Les deux premiers défis sont gratuits aussi ; le reste est dans la version complète.' },
     it: { name: 'Pop! Jelly PangPang', tag1: 'Intrappolali con bombe di gelatina:', tag2: 'pang-pang!', sub: 'Un mondo di dolci che si indurisce nello zucchero se resti fermo! La grande avventura di una gelatina contro il Gigante di zucchero · Con gli amici, intrappolatevi a vicenda in una festa morbidissima.',
       preChip: 'Preregistrazione aperta\u00a0· Uscita: {d}', preChipNoDate: 'Preregistrazione aperta',
@@ -847,6 +883,7 @@ footer{margin-top:30px}
       hChK: 'Sfide', hChH: '12 livelli speciali con una variante',
       hChP: 'Batti il boss di un mondo e arriva una sfida: lo stesso livello con una regola cambiata. Miccia corta. Una sola bomba. Solo bombe giganti. Tutti ti caricano. Ogni sfida ha la sua regola, quindi ogni livello si gioca in modo diverso.',
       hCh1: '12 livelli speciali', hCh2: 'Una regola diversa per ogni sfida', hCh3: 'Livelli boss rimescolati',
+      pcSoon: 'PC (Steam): presto disponibile', aSteamPre: 'Aggiungi alla lista desideri su Steam', landLine: 'Gioca in verticale o in orizzontale, come preferisci.', pcLine: 'Presto anche su PC, su Steam.',
       q6: 'Posso giocare in battaglia e creare mappe fin da subito?', a6: 'All’inizio ci sono i livelli singoli. Superando i livelli gratuiti si aprono, uno alla volta, la modalità battaglia, le stanze online e Crea mappa. Anche le prime due sfide sono gratis; il resto è nella versione completa.' },
     de: { name: 'Pop! Jelly PangPang', tag1: 'Fang sie mit Gelee-Bomben –', tag2: 'Peng-Peng!', sub: 'Eine Süßigkeitenwelt, die zu Zucker erstarrt, wenn man stillsteht! Das große Abenteuer eines kleinen Gelees gegen den Zucker-Riesen · Mit Freunden: fangt euch gegenseitig – ein wabbeliges Partyspiel.',
       preChip: 'Vorregistrierung offen\u00a0· Start: {d}', preChipNoDate: 'Vorregistrierung offen',
@@ -878,6 +915,7 @@ footer{margin-top:30px}
       hChK: 'Herausforderungen', hChH: '12 Spezial-Level mit Twist',
       hChP: 'Besiege den Boss einer Welt und eine Herausforderung trifft ein: dasselbe Level, aber mit einer geänderten Regel. Kurze Lunte. Nur eine Bombe. Nur Riesenbomben. Alle stürmen auf dich zu. Jede Herausforderung hat ihre eigene Regel, jedes Level spielt sich also anders.',
       hCh1: '12 Spezial-Level', hCh2: 'Jede Herausforderung mit eigener Regel', hCh3: 'Boss-Level neu gemischt',
+      pcSoon: 'PC (Steam): bald verfügbar', aSteamPre: 'Auf die Steam-Wunschliste', landLine: 'Spiel hochkant oder quer, ganz wie du magst.', pcLine: 'Bald auch am PC auf Steam.',
       q6: 'Kann ich sofort kämpfen und Karten bauen?', a6: 'Am Anfang gibt es die Einzelspieler-Level. Während du die kostenlosen Level schaffst, werden Kampfmodus, Online-Räume und Karten-Editor nach und nach freigeschaltet. Auch die ersten zwei Herausforderungen sind kostenlos, der Rest gehört zur Vollversion.' },
     pt: { name: 'Pop! Jelly PangPang', tag1: 'Prenda com bombas de gelatina:', tag2: 'pang-pang!', sub: 'Um mundo de doces que endurece em açúcar se você ficar parado! A grande aventura de uma gelatininha contra o Gigante de açúcar · Com amigos, prendam uns aos outros numa festa fofinha.',
       preChip: 'Pré-registro aberto\u00a0· Lançamento: {d}', preChipNoDate: 'Pré-registro aberto',
@@ -909,6 +947,7 @@ footer{margin-top:30px}
       hChK: 'Desafios', hChH: '12 fases especiais com reviravolta',
       hChP: 'Vença o chefe de um mundo e chega um desafio: a mesma fase com uma regra alterada. Pavio curto. Só uma bomba. Só bombas gigantes. Todo mundo vem para cima de você. Cada desafio tem a sua própria regra, então cada fase se joga de um jeito diferente.',
       hCh1: '12 fases especiais', hCh2: 'Uma regra diferente em cada desafio', hCh3: 'Fases de chefe remixadas',
+      pcSoon: 'PC (Steam): em breve', aSteamPre: 'Adicionar à lista de desejos na Steam', landLine: 'Jogue na vertical ou na horizontal, do seu jeito.', pcLine: 'Em breve também no PC, na Steam.',
       q6: 'Posso jogar batalhas e criar mapas desde o começo?', a6: 'No começo há as fases para um jogador. Ao passar pelas fases grátis, o modo batalha, as salas online e o Criar mapa vão sendo liberados um a um. Os dois primeiros desafios também são grátis; o resto vem com a versão completa.' }
   };
   var pick = window.__jppPick, lang = window.__jppLang || 'en', src = '';   /* 언어는 <head> 의 스크립트가 먼저 정했다 */
@@ -943,7 +982,7 @@ footer{margin-top:30px}
   function preChip(t) { var d = preDate(); return d ? t.preChip.replace('{d}', d) : t.preChipNoDate; }
   function preUi(t) {                            /* [c620] 사전 예약 화면 — 단추 둘은 같은 모양(제 스토어가 위) · 날짜 칩은 단추 위 · 안내 한 줄은 단추 아래 · 소개 줄은 구호 바로 밑 */
     var g = $('preGet'), chip = $('chip'), note = $('ctaNote'), sub = document.querySelector('.hero .sub'), m = $('more'),
-        bA = $('bPreApp'), bP = $('bPrePlay'), first = isAndroid ? bP : bA, second = isAndroid ? bA : bP, order = [chip, first, second, note], i;
+        bA = $('bPreApp'), bP = $('bPrePlay'), bC = $('bPrePc'), first = isAndroid ? bP : bA, second = isAndroid ? bA : bP, order = [chip, first, second, bC, note], i;
     function setBtn(b, on, key, soonKey, url) {
       b.className = 'btn btn-pre' + (on ? '' : ' off'); b.hidden = false;
       if (on) { b.href = url; b.removeAttribute('aria-disabled'); b.removeAttribute('tabindex'); }
@@ -952,6 +991,7 @@ footer{margin-top:30px}
     }
     setBtn(bA, hasApp, 'aAppPre', 'appSoon', hasApp ? appUrl() : '');
     setBtn(bP, hasPlay, 'aPlayPre', 'playSoon', hasPlay ? playUrl() : '');
+    setBtn(bC, !!CFG.steam, 'aSteamPre', 'pcSoon', CFG.steam || '');   /* [c844] */
     chip.className = 'chip pre'; note.className = 'prenote';
     if (sub && sub.nextElementSibling !== g) g.parentNode.insertBefore(sub, g);
     for (i = 0; i < order.length; i++) g.appendChild(order[i]);
@@ -980,9 +1020,10 @@ footer{margin-top:30px}
         setSrc(im[i], 'shot-' + set + '-' + (i + 1) + '.webp');
         im[i].alt = (t.alts && t.alts[i]) || (t.shot + ' ' + (i + 1));
       }
-      var ld = st.querySelectorAll('li.land img');   /* [c708b] */
-      for (i = 0; i < ld.length; i++) ld[i].alt = (t.landAlts && t.landAlts[i]) || (t.shot + ' ' + (12 + i));
     }
+    var ld = document.querySelectorAll('img[data-land]'), pcs = document.querySelectorAll('img[data-pc]');   /* [c844] 줄 밖으로 옮김 */
+    for (i = 0; i < ld.length; i++) ld[i].alt = (t.landAlts && t.landAlts[i]) || (t.shot + ' ' + (12 + i));
+    for (i = 0; i < pcs.length; i++) pcs[i].alt = (t.pcAlts && t.pcAlts[i]) || (t.shot + ' ' + (14 + i));
   }
   (function () {
     var sel = $('lang');
