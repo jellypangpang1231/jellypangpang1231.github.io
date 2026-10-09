@@ -155,7 +155,7 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 .strip::-webkit-scrollbar{display:none}
 .strip:focus-visible{outline:3px solid #fff;outline-offset:-3px}
 .strip li{flex:none;width:min(40vw,200px);scroll-snap-align:start}
-.strip img{display:block;width:100%;height:auto;aspect-ratio:440/952;border-radius:20px;border:4px solid #fff;background:#f7c3da;box-shadow:0 6px 0 rgba(120,10,70,.25),0 10px 18px rgba(90,0,50,.22)}
+.strip img{display:block;width:100%;height:auto;aspect-ratio:440/954;/* [c878b] 430:932 */border-radius:20px;border:4px solid #fff;background:#f7c3da;box-shadow:0 6px 0 rgba(120,10,70,.25),0 10px 18px rgba(90,0,50,.22)}
 @media (hover:hover) and (pointer:fine){.strip{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.8) transparent}.strip::-webkit-scrollbar{display:block;height:8px}.strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.8);border-radius:8px}}
 .fine{margin:18px 0 0;font-size:14px;color:var(--ink-soft)}
 .tagline span{display:inline-block}
@@ -274,15 +274,15 @@ footer{margin-top:30px}
 .sx[data-end]{opacity:0;pointer-events:none}
 }
 /* [c844] 가로 화면 묶음(스크린샷 줄 바로 아래 · 안내 문구 크기) · PC(Steam) 묶음 · PC 단추 */
-.sideways{margin:18px auto 0;max-width:400px;text-align:center}
+.sideways{margin:18px auto 0;max-width:min(100%,440px);text-align:center}/* [c878] 폰: 폭 거의 전부 */
 .sideways>p{margin:0 0 10px;color:#fff;font-size:15.5px;line-height:1.4;text-shadow:0 1px 0 rgba(130,10,70,.4);text-wrap:balance}
 .sideways ul,.pcband ul{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:0;padding:0;list-style:none}
-.sideways ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sideways ul{grid-template-columns:minmax(0,1fr);gap:12px}/* [c878] 폰: 한 줄에 한 장 */
 .sideways img{display:block;width:100%;height:auto;aspect-ratio:1170/540;border-radius:16px;border:4px solid #fff;background:#f7c3da;box-shadow:0 5px 0 rgba(120,10,70,.25),0 9px 16px rgba(90,0,50,.2)}
 .pcband{text-align:center}
 .pcband>p{margin:0 0 12px;font-family:"Fredoka",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-weight:600;font-size:17px;line-height:1.35;text-wrap:balance}
 .pcband img{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:14px;background:#f7c3da;box-shadow:0 0 0 3px #fff,0 5px 0 3px rgba(120,10,70,.18)}
-@media (min-width:640px){.sideways{max-width:640px;margin-top:30px}.sideways ul,.pcband ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.preget>#bPrePc{grid-column:1/-1;justify-self:center;width:min(100%,290px)}}
+@media (min-width:640px){.sideways{max-width:880px;margin-top:30px}/* [c878] PC: 세로 컷(228px)보다 크게 */.sideways ul,.pcband ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.preget>#bPrePc{grid-column:1/-1;justify-self:center;width:min(100%,290px)}}
 @media (min-width:1024px){.pcband{max-width:860px;width:100%;margin-left:auto;margin-right:auto}}
 </style>
 <!-- [c708b] -->
@@ -428,17 +428,17 @@ footer{margin-top:30px}
     <button type="button" class="sx sx-prev" id="sxPrev" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button type="button" class="sx sx-next" id="sxNext" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <ul class="strip" id="strip" tabindex="0" aria-label="Screenshots">
-      <li><img src="shot-en-1.webp" width="440" height="952" loading="lazy" decoding="async" alt="A six-player battle kicks off on a cookie board with a big GO!"></li>
-      <li><img src="shot-en-2.webp" width="440" height="952" loading="lazy" decoding="async" alt="The map maker: a symmetrical six-player arena painted with cookies, walls, bushes and water"></li>
-      <li><img src="shot-en-3.webp" width="440" height="952" loading="lazy" decoding="async" alt="A challenge letter pops up on the home screen with the rule All mega bombs!"></li>
-      <li><img src="shot-en-4.webp" width="440" height="952" loading="lazy" decoding="async" alt="Boss stage: a giant purple boss jelly guards a chocolate board"></li>
-      <li><img src="shot-en-5.webp" width="440" height="952" loading="lazy" decoding="async" alt="The Challenges map: every candy world has its own special stage with a twist, like Short fuses! or All mega bombs!"></li>
-      <li><img src="shot-en-6.webp" width="440" height="952" loading="lazy" decoding="async" alt="Dress-up screen: a jelly in bunny ears with rows of toppings to choose from"></li>
-      <li><img src="shot-en-7.webp" width="440" height="952" loading="lazy" decoding="async" alt="The jelly town: a candy plaza with a clock tower and jelly friends"></li>
-      <li><img src="shot-en-8.webp" width="440" height="952" loading="lazy" decoding="async" alt="Squish screen: a giggling jelly in bunny ears on a donut cushion"></li>
-      <li><img src="shot-en-9.webp" width="440" height="952" loading="lazy" decoding="async" alt="A chocolate-and-cookie board where jellies hop over blocks"></li>
-      <li><img src="shot-en-10.webp" width="440" height="952" loading="lazy" decoding="async" alt="A strawberry jam world with arrow tiles and red jam blocks"></li>
-      <li><img src="shot-en-11.webp" width="440" height="952" loading="lazy" decoding="async" alt="A pink macaron board where jellies trap each other with jelly bombs"></li>
+      <li><img src="shot-en-1.webp" width="440" height="954" loading="lazy" decoding="async" alt="Two players on one phone: each jelly has its own joystick and bomb button, one at the top and one at the bottom"></li>
+      <li><img src="shot-en-2.webp" width="440" height="954" loading="lazy" decoding="async" alt="The map maker: a symmetrical six-player arena painted with cookies, walls, bushes and water"></li>
+      <li><img src="shot-en-3.webp" width="440" height="954" loading="lazy" decoding="async" alt="A challenge letter pops up on the home screen with the rule All mega bombs!"></li>
+      <li><img src="shot-en-4.webp" width="440" height="954" loading="lazy" decoding="async" alt="Boss stage: a giant purple boss jelly guards a chocolate board"></li>
+      <li><img src="shot-en-5.webp" width="440" height="954" loading="lazy" decoding="async" alt="The Challenges map: every candy world has its own special stage with a twist, like Short fuses! or All mega bombs!"></li>
+      <li><img src="shot-en-6.webp" width="440" height="954" loading="lazy" decoding="async" alt="Dress-up screen: a jelly in bunny ears with rows of toppings to choose from"></li>
+      <li><img src="shot-en-7.webp" width="440" height="954" loading="lazy" decoding="async" alt="The jelly town: a candy plaza with a clock tower and jelly friends"></li>
+      <li><img src="shot-en-8.webp" width="440" height="954" loading="lazy" decoding="async" alt="Squish screen: a giggling jelly in bunny ears on a donut cushion"></li>
+      <li><img src="shot-en-9.webp" width="440" height="954" loading="lazy" decoding="async" alt="A chocolate wafer maze with a waterfall where you save the baby jellies"></li>
+      <li><img src="shot-en-10.webp" width="440" height="954" loading="lazy" decoding="async" alt="A cookie-and-chocolate board: trap every jelly with bombs"></li>
+      <li><img src="shot-en-11.webp" width="440" height="954" loading="lazy" decoding="async" alt="A strawberry jam world with arrow tiles and red jam blocks"></li>
     </ul>
   </section>
 
@@ -561,7 +561,7 @@ footer{margin-top:30px}
       q5: 'Controllers and languages?', a5: 'Yes to controllers! The game comes in 12 languages: English, Korean, Japanese, Chinese (Simplified and Traditional), Spanish, French, German, Italian, Portuguese, Russian and Arabic.',
       c1: 'No ads', c2: 'No gacha', c3: '15 stages free', shots: 'Screenshots', shot: 'Screenshot',
       landAlts: ['The game also plays sideways: an ice stage in landscape', 'A boss stage in landscape'],
-      alts: ['A six-player battle on a chocolate and cookie board, bombs and rainbow power-ups everywhere',
+      alts: ['Two players on one phone: each jelly has its own joystick and bomb button, one at the top and one at the bottom',
         'The map maker: a symmetrical six-player arena painted with cookies, walls, bushes and water',
         'A challenge letter pops up on the home screen: a 60-second hunt, very hard, skipping is okay',
         'Boss stage: a giant purple boss jelly guards a chocolate board',
@@ -569,9 +569,9 @@ footer{margin-top:30px}
         'Dress-up screen: a jelly in bunny ears with rows of toppings to choose from',
         'The jelly town: a candy plaza with a clock tower and jelly friends',
         'Squish screen: a giggling blue jelly on a donut cushion',
-        'A chocolate-and-cookie board where jellies hop over blocks',
-        'A strawberry jam world with arrow tiles and red jam blocks',
-        'A pink macaron board where jellies trap each other with jelly bombs'],
+        'A chocolate wafer maze with a waterfall where you save the baby jellies',
+        'A cookie-and-chocolate board: trap every jelly with bombs',
+        'A strawberry jam world with arrow tiles and red jam blocks'],
       hVsK: 'Online battle', hVsH: 'Battle up to 6 online',
       hVsP: 'Make a room, share the five-letter code, and your friends hop right in. Free-for-all or teams, ten candy arenas, bots with their own personalities, and a replay when the dust settles.',
       hVs1: 'Up to 6 players', hVs2: 'Room code', hVs3: 'Teams or free-for-all', hVs4: 'Replay',
@@ -606,7 +606,7 @@ footer{margin-top:30px}
       q5: '게임패드와 언어는요?', a5: '게임패드로도 할 수 있어요. 언어는 12개를 지원해요: 한국어, 영어, 일본어, 중국어(간체·번체), 스페인어, 프랑스어, 독일어, 이탈리아어, 포르투갈어, 러시아어, 아랍어.',
       c1: '광고 없음', c2: '뽑기 없음', c3: '15단계 무료', shots: '스크린샷', shot: '스크린샷',
       landAlts: ['가로 화면으로도 할 수 있어요: 가로로 펼쳐진 얼음 단계', '가로로 펼쳐진 대장 판'],
-      alts: ['초콜릿과 쿠키 판에서 폭탄과 무지개 아이템이 터지는 6인 대전 장면',
+      alts: ['폰 하나로 둘이서: 위와 아래에 각자 조이스틱과 폭탄 단추가 있는 장면',
         '맵 만들기: 과자·벽·부쉬·물로 칠한 6인용 대칭 판',
         '홈 화면에 도전장이 날아온 장면: 60초 안에 잠든 젤리를 가두는 아주 어려운 도전, 안 깨도 괜찮아요',
         '대장 판: 커다란 보라색 대장 젤리가 초콜릿 판을 지키고 있는 장면',
@@ -614,9 +614,9 @@ footer{margin-top:30px}
         '꾸미기 화면: 토끼 귀를 쓴 젤리와 골라 쓸 수 있는 토핑 목록',
         '젤리 마을: 시계탑이 있는 과자 광장과 젤리 친구들',
         '말랑 화면: 도넛 방석 위에서 깔깔 웃는 파란 젤리',
-        '초콜릿과 쿠키 판에서 젤리가 블록을 뛰어넘는 장면',
-        '딸기잼 세상: 화살표 칸과 빨간 잼 블록이 있는 판',
-        '분홍 마카롱 판에서 젤리들이 젤리 폭탄으로 서로를 가두는 장면'],
+        '폭포가 흐르는 초콜릿 과자 길에서 아기 젤리를 구하는 장면',
+        '쿠키와 초콜릿 판에서 폭탄으로 젤리를 가두는 장면',
+        '딸기잼 세상: 화살표 칸과 빨간 잼 블록이 있는 판'],
       hVsK: '온라인 대전', hVsH: '최대 6명이 한 판에서 팡팡!',
       hVsP: '방을 만들고 다섯 글자 방 번호를 알려 주면 친구가 바로 들어와요. 개인전도 팀전도 되고, 달콤한 판이 열 가지 있어요. 친구가 없으면 성격이 제각각인 봇 젤리와 한 판. 끝난 판은 다시 볼 수도 있어요.',
       hVs1: '최대 6명', hVs2: '방 번호', hVs3: '개인전 · 팀전', hVs4: '다시 보기',
