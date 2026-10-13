@@ -202,6 +202,10 @@ h2{margin:0 0 6px;font-size:23px;line-height:1.2;text-wrap:balance}
 .mail .addr{overflow-wrap:anywhere;text-align:center;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(43,27,74,.35)}
 @media (max-width:350px){.mail a{font-size:15px;padding:6px 4px}}
 @media (min-width:1024px){.card>p.mail{margin-top:18px}.card[aria-label="Official channels"]>p.mail{max-width:none}}
+/* [c988] 받기 칸 — 무료판 대전·맵 만들기 한 줄 · 믿음 칩 바로 아래 · 강조 칸 칩 '구매 없이' 는 초록 칩 */
+.cta>.freeline{margin:12px auto 0;max-width:30em;font-size:15px;font-weight:700;line-height:1.45;color:var(--ink);text-align:center;text-wrap:balance}
+.hlc li[data-i="hFree"]{background:#dff6e6}
+:lang(ko) .cta>.freeline{word-break:keep-all}
 footer{margin-top:22px;text-align:center;color:#fff;font-size:14.5px;text-shadow:0 1px 0 rgba(130,10,70,.4)}
 footer nav{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;margin-bottom:8px}
 footer a{color:#fff;text-underline-offset:3px;padding:6px 2px}
@@ -410,7 +414,7 @@ footer{margin-top:30px}
       <a class="bdg gp" id="bPlay" rel="noopener" hidden><span class="bx"><img id="imPlay" alt="" decoding="async"></span></a>
     </div>
     <p class="more" id="more" hidden></p>
-    <p class="sub" data-i="sub">A candy world that hardens into sugar if you stand still! A little jelly’s big adventure against the Sugar Giant · With friends, trap each other in a squishy pang-pang party.</p><!-- [c731] -->
+    <p class="sub" data-i="sub">A candy world that hardens into sugar if you stand still! A little jelly rescues the jellies the Sugar Giant caught and brings the town back to life · With friends, trap each other in a squishy pang-pang party.</p><!-- [c731] -->
     </div>
   </header>
 
@@ -423,6 +427,7 @@ footer{margin-top:30px}
       <li class="tag"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6l3.4 3.4 7.6-8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="c2">No gacha</span></li>
       <li class="tag"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6l3.4 3.4 7.6-8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="c3">15 stages free</span></li>
     </ul>
+    <p class="freeline" data-i="freeVm">Battles and the map maker are free too. They unlock as you clear the free stages, no purchase needed.</p>
     <p class="fine" id="ctaNote">Launch news lands on Discord first.</p>
   </section>
 
@@ -457,13 +462,13 @@ footer{margin-top:30px}
       <div class="hlm"><video muted loop playsinline preload="none" poster="hl-vs.jpg" width="640" height="480" aria-hidden="true" tabindex="-1"><source src="hl-vs.mp4" type="video/mp4"></video><span class="hlk"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="14" r="7" fill="currentColor"/><path d="M15 9l2.6-2.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M19.6 1.8v4M17.6 3.8h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-i="hVsK">Online battle</span></span></div>
       <h2 data-i="hVsH">Battle up to 6 online</h2>
       <p data-i="hVsP">Make a room, share the five-letter code, and your friends hop right in. Free-for-all or teams, ten candy arenas, bots with their own personalities, and a replay when the dust settles.</p>
-      <ul class="hlc"><li data-i="hVs1">Up to 6 players</li><li data-i="hVs2">Room code</li><li data-i="hVs3">Teams or free-for-all</li><li data-i="hVs4">Replay</li></ul>
+      <ul class="hlc"><li data-i="hVs1">Up to 6 players</li><li data-i="hVs2">Room code</li><li data-i="hVs3">Teams or free-for-all</li><li data-i="hVs4">Replay</li><li data-i="hFree">No purchase needed</li></ul>
     </article>
     <article class="card hl hl-map">
       <div class="hlm"><video muted loop playsinline preload="none" poster="hl-map.jpg" width="640" height="480" aria-hidden="true" tabindex="-1"><source src="hl-map.mp4" type="video/mp4"></video><span class="hlk"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2.2" fill="currentColor"/><rect x="13" y="3" width="8" height="8" rx="2.2" fill="currentColor" opacity=".55"/><rect x="3" y="13" width="8" height="8" rx="2.2" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="8" height="8" rx="2.2" fill="currentColor"/></svg><span data-i="hMpK">Map maker</span></span></div>
       <h2 data-i="hMpH">Build your own arena</h2>
       <p data-i="hMpP">Paint cookies and walls, add bushes and water, pick 2, 4 or 6 players and choose the items. Finish up and you get a JELLY-code. Friends type it in and battle on your map!</p>
-      <ul class="hlc"><li data-i="hMp1">Paint it your way</li><li data-i="hMp2">2, 4 or 6 players</li><li data-i="hMp3">Share with a code</li></ul>
+      <ul class="hlc"><li data-i="hMp1">Paint it your way</li><li data-i="hMp2">2, 4 or 6 players</li><li data-i="hMp3">Share with a code</li><li data-i="hFree">No purchase needed</li></ul>
     </article>
     <article class="card hl hl-ch">
       <div class="hlm"><video muted loop playsinline preload="none" poster="hl-ch.jpg" width="640" height="480" aria-hidden="true" tabindex="-1"><source src="hl-ch.mp4" type="video/mp4"></video><span class="hlk"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.8" fill="currentColor"/><path d="M4.2 8l7.8 5.6L19.8 8" fill="none" stroke="var(--acc)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="hChK">Challenge Letters</span></span></div>
@@ -485,7 +490,7 @@ footer{margin-top:30px}
     <ul class="feats">
       <li><video class="fv" muted loop playsinline preload="none" poster="feat-1.jpg" width="240" height="240" aria-hidden="true" tabindex="-1"><source src="feat-1.mp4" type="video/mp4"></video><div><h3 data-i="f1h">Squishy</h3><p data-i="f1p">Tap your jelly and it giggles. Poke it too much and it sulks.</p></div></li>
       <li><video class="fv" muted loop playsinline preload="none" poster="feat-2.jpg" width="240" height="240" aria-hidden="true" tabindex="-1"><source src="feat-2.mp4" type="video/mp4"></video><div><h3 data-i="f2h">Better together</h3><p data-i="f2p">Two players on one phone, or up to 6 online with a room code.</p></div></li>
-      <li><video class="fv" muted loop playsinline preload="none" poster="feat-3.jpg" width="240" height="240" aria-hidden="true" tabindex="-1"><source src="feat-3.mp4" type="video/mp4"></video><div><h3 data-i="f3h">Fair play</h3><p data-i="f3p">No ads. No gacha. The first 15 stages are free, and one purchase unlocks the rest.</p></div></li>
+      <li><video class="fv" muted loop playsinline preload="none" poster="feat-3.jpg" width="240" height="240" aria-hidden="true" tabindex="-1"><source src="feat-3.mp4" type="video/mp4"></video><div><h3 data-i="f3h">Fair play</h3><p data-i="f3p">No ads. No gacha. The first 15 stages are free, and one purchase unlocks stages 16–50.</p></div></li>
       <li><video class="fv" muted loop playsinline preload="none" poster="feat-4.jpg" width="240" height="240" aria-hidden="true" tabindex="-1"><source src="feat-4.mp4" type="video/mp4"></video><div><h3 data-i="f4h">Lots to do</h3><p data-i="f4p">50 stages with bosses, a one-tile jump, a map maker and lots of ways to dress up your jelly.</p></div></li>
     </ul>
     <ul class="tags">
@@ -498,7 +503,7 @@ footer{margin-top:30px}
   <section class="card" aria-labelledby="faqH">
     <h2 id="faqH" data-i="faqH">Got questions?</h2>
     <div class="faq"><!-- [c958x] a4: 같은 계정이면 Android·iPhone·iPad·PC(Steam) 진행 이어짐 · 구매 공유 문구는 iOS 다음 판 공개 뒤 -->
-      <details><summary data-i="q1">Is it free?</summary><p data-i="a1">Yep! Downloading and playing is free. The first 15 stages cost nothing, and one purchase unlocks all 50. Cosmetic theme packs are optional. No ads, no subscriptions, no gacha.</p></details>
+      <details><summary data-i="q1">Is it free?</summary><p data-i="a1">Yep! Downloading and playing is free. The first 15 stages cost nothing, and one purchase unlocks stages 16–50. Cosmetic theme packs are optional. No ads, no subscriptions, no gacha.</p></details>
       <details><summary data-i="q2">Do I need internet?</summary><p data-i="a2">No. The stages and two players on one phone work offline. Online matches and sharing maps need a connection.</p></details>
       <details><summary data-i="q3">How do we play together?</summary><p data-i="a3">Two players share one phone on a board built for two. Online, create a room and share its five-letter room code. Up to 6 can play.</p></details>
       <details><summary data-i="q4">Do I need an account?</summary><p data-i="a4">Nope! Jump right in. Signing in (Settings → Account) is optional. It saves your progress, so with the same account you can pick up on Android, iPhone, iPad or PC (Steam).</p></details>
@@ -550,7 +555,7 @@ footer{margin-top:30px}
   var LANGS = [['ko', '한국어'], ['en', 'English'], ['ja', '日本語'], ['zh-Hant', '繁體中文'], ['zh-Hans', '简体中文'], ['ru', 'Русский'],
                ['ar', 'العربية'], ['es', 'Español'], ['fr', 'Français'], ['it', 'Italiano'], ['de', 'Deutsch'], ['pt', 'Português']];
   var T = {
-    en: { name: 'Pop! Jelly PangPang', tag1: 'Trap them with jelly bombs —', tag2: 'pang-pang!', sub: 'A candy world that hardens into sugar if you stand still! A little jelly’s big adventure against the Sugar Giant · With friends, trap each other in a squishy pang-pang party.',
+    en: { name: 'Pop! Jelly PangPang', freeVm: 'Battles and the map maker are free too. They unlock as you clear the free stages, no purchase needed.', hFree: 'No purchase needed', tag1: 'Trap them with jelly bombs —', tag2: 'pang-pang!', sub: 'A candy world that hardens into sugar if you stand still! A little jelly rescues the jellies the Sugar Giant caught and brings the town back to life · With friends, trap each other in a squishy pang-pang party.',
       preChip: 'Pre-registration open\u00a0· Launches {d}', preChipNoDate: 'Pre-registration open',
       aPlayPre: 'Pre-register on Google Play', aAppPre: 'Pre-order on the App Store', preNote: 'Pre-register or pre-order to get it on launch day.',
       soon: 'Coming soon to Google Play & App Store', outBoth: 'Out now! Free to start', outPlay: 'Out now on Google Play', outApp: 'Out now on the App Store',
@@ -558,14 +563,14 @@ footer{margin-top:30px}
       aPlay: 'Get it on Google Play', aApp: 'Download on the App Store', appSoon: 'iPhone and iPad: coming soon', playSoon: 'Android: coming soon', alsoApp: 'Also on iPhone and iPad', alsoPlay: 'Also on Android', trailer: 'Watch the trailer',
       f1h: 'Squishy', f1p: 'Tap your jelly and it giggles. Poke it too much and it sulks.',
       f2h: 'Better together', f2p: 'Two players on one phone, or up to 6 online with a room code.',
-      f3h: 'Fair play', f3p: 'No ads. No gacha. The first 15 stages are free, and one purchase unlocks the rest.',
+      f3h: 'Fair play', f3p: 'No ads. No gacha. The first 15 stages are free, and one purchase unlocks stages 16–50.',
       f4h: 'Lots to do', f4p: '50 stages with bosses, a one-tile jump, a map maker and lots of ways to dress up your jelly.',
       t1: '12 languages', t2: 'Controller support', t3: 'No sign-up needed',
       chH: 'Follow the jellies', chP: 'New clips and updates are posted on all the channels below. Want to find people to play with, show off your maps or report a bug? Come to Discord.',
       age: 'Discord is for ages 13 and up (older in some countries).', priv: 'Privacy', contact: 'Contact',
       sndOn: 'Turn sound on', sndOff: 'Turn sound off', langLbl: 'Language', vid: 'Gameplay: jellies drop bombs and pop each other across candy arenas',
       faqH: 'Got questions?',
-      q1: 'Is it free?', a1: 'Yep! Downloading and playing is free. The first 15 stages cost nothing, and one purchase unlocks all 50. Cosmetic theme packs are optional. No ads, no subscriptions, no gacha.',
+      q1: 'Is it free?', a1: 'Yep! Downloading and playing is free. The first 15 stages cost nothing, and one purchase unlocks stages 16–50. Cosmetic theme packs are optional. No ads, no subscriptions, no gacha.',
       q2: 'Do I need internet?', a2: 'No. The stages and two players on one phone work offline. Online matches and sharing maps need a connection.',
       q3: 'How do we play together?', a3: 'Two players share one phone on a board built for two. Online, create a room and share its five-letter room code. Up to 6 can play.',
       q4: 'Do I need an account?', a4: 'Nope! Jump right in. Signing in (Settings → Account) is optional. It saves your progress, so with the same account you can pick up on Android, iPhone, iPad or PC (Steam).',
@@ -595,7 +600,7 @@ footer{margin-top:30px}
       pcSoon: 'PC (Steam): coming soon', aSteamPre: 'Wishlist on Steam', landLine: 'Play it upright or sideways, your pick.', pcLine: 'Coming to PC on Steam, too.',
       pcAlts: ['Pop! Jelly PangPang on a PC screen: a strawberry jam stage', 'On PC too: the boss stage in the chocolate lava world'],
       q6: 'Can I play battles and the map maker right away?', a6: 'You start with the solo stages. Battle mode, online rooms and the map maker unlock one by one as you clear the free stages. The first two challenge letters are free; the rest come with the full version.' },
-    ko: { name: '터져라! 젤리팡팡', iconAlt: '터져라! 젤리팡팡 앱 아이콘 — 깜짝 놀란 파란 젤리', tag1: '젤리 폭탄으로 가두고', tag2: '팡팡!', sub: '가만히 있으면 설탕에 굳어 버리는 과자 세상! 설탕 거인에 맞서는 꼬마 젤리의 대모험 · 친구와는 서로 가두는 팡팡 놀이',
+    ko: { name: '터져라! 젤리팡팡', freeVm: '대전도 맵 만들기도 무료예요. 단계를 깨다 보면 열려요.', hFree: '구매 없이 열려요', iconAlt: '터져라! 젤리팡팡 앱 아이콘 — 깜짝 놀란 파란 젤리', tag1: '젤리 폭탄으로 가두고', tag2: '팡팡!', sub: '가만히 있으면 설탕에 굳어 버리는 과자 세상! 설탕 거인에게 붙잡힌 젤리들을 구하고 마을을 되살리는 꼬마 젤리의 대모험 · 친구와는 서로 가두는 팡팡 놀이',
       preChip: '사전 예약 중\u00a0· {d} 출시', preChipNoDate: '사전 예약 중',
       aPlayPre: 'Google Play 사전 예약', aAppPre: 'App Store 사전 예약', preNote: '사전 예약하면 출시 날 바로 받을 수 있어요.',
       soon: '곧 구글 플레이 · 앱 스토어에서 만나요', outBoth: '출시했어요. 무료로 시작할 수 있어요', outPlay: '구글 플레이에 출시했어요', outApp: '앱 스토어에 출시했어요',
@@ -603,14 +608,14 @@ footer{margin-top:30px}
       aPlay: 'Google Play에서 받기', aApp: 'App Store에서 받기', appSoon: '아이폰·아이패드는 곧 나와요', playSoon: '안드로이드는 곧 나와요', alsoApp: '아이폰·아이패드에서도 받기', alsoPlay: '안드로이드에서도 받기', trailer: '트레일러 보기',
       f1h: '말랑말랑', f1p: '톡 치면 깔깔 웃고, 자꾸 찌르면 삐져요.',
       f2h: '같이 하는 게임', f2p: '한 폰으로 둘이서, 온라인에서는 방 번호로 최대 6명까지 할 수 있어요.',
-      f3h: '광고·뽑기 없는 게임', f3p: '구독도 없어요. 15단계까지 무료고, 한 번 결제하면 나머지 단계가 전부 열려요. 꾸미기 테마팩은 원하는 것만 따로 살 수 있어요.',
+      f3h: '광고·뽑기 없는 게임', f3p: '구독도 없어요. 15단계까지 무료고, 한 번 결제하면 16~50단계가 열려요. 꾸미기 테마팩은 원하는 것만 따로 살 수 있어요.',
       f4h: '할 게 많아요', f4p: '대장 젤리가 나오는 50단계, 한 칸 점프, 맵 만들기, 젤리 꾸미기.',
       t1: '12개 언어', t2: '게임패드 지원', t3: '가입 없이 바로',
       chH: '젤리 소식 받아 보기', chP: '새 영상과 업데이트 소식은 아래 채널에 같이 올라와요. 같이 놀 친구를 찾거나, 만든 맵을 자랑하거나, 버그를 알리고 싶다면 디스코드로 오세요.',
       age: '디스코드는 만 13세 이상부터 쓸 수 있어요(나라에 따라 더 높아요).', priv: '개인정보처리방침', contact: '문의',
       sndOn: '소리 켜기', sndOff: '소리 끄기', langLbl: '언어', vid: '게임 장면: 젤리들이 과자 판 위에서 폭탄을 놓고 서로를 팡팡 터뜨려요',
       faqH: '궁금한 게 있나요?',
-      q1: '무료인가요?', a1: '네, 설치는 무료예요. 15단계까지는 무료로 할 수 있고, 한 번만 결제하면 50단계가 전부 열려요. 꾸미기 테마팩은 원하는 것만 따로 살 수 있어요. 광고도 구독도 뽑기도 없어요.',
+      q1: '무료인가요?', a1: '네, 설치는 무료예요. 15단계까지는 무료로 할 수 있고, 한 번만 결제하면 16~50단계가 열려요. 꾸미기 테마팩은 원하는 것만 따로 살 수 있어요. 광고도 구독도 뽑기도 없어요.',
       q2: '인터넷이 꼭 있어야 하나요?', a2: '아니요. 혼자 하는 단계와 한 폰으로 둘이서 하는 대전은 인터넷 없이도 돼요. 온라인 대전과 맵 공유만 인터넷이 필요해요.',
       q3: '친구와는 어떻게 하나요?', a3: '폰 하나로 둘이서 할 땐 2인용 판에서 겨뤄요. 온라인은 방을 만들고 다섯 글자 방 번호를 알려 주면 돼요. 최대 6명까지 같이 할 수 있어요.',
       q4: '가입해야 하나요?', a4: '아니요. 받자마자 바로 할 수 있어요. 로그인(설정 → 계정)은 선택이고, 해 두면 진행 상황이 저장돼서 같은 계정으로 안드로이드·아이폰·아이패드·PC(스팀) 어디서든 이어서 할 수 있어요.',
@@ -640,7 +645,7 @@ footer{margin-top:30px}
       pcSoon: 'PC(스팀)는 곧 나와요', aSteamPre: '스팀에서 찜하기', landLine: '세로로도, 가로로도 할 수 있어요.', pcLine: 'PC(스팀)에도 곧 찾아가요.',
       pcAlts: ['PC 화면으로 본 딸기잼 단계', 'PC 화면으로 본 초코 용암 세상의 대장 판'],
       q6: '대전이나 맵 만들기는 처음부터 할 수 있나요?', a6: '처음에는 혼자 하는 단계부터 시작해요. 무료 단계를 하나씩 깨다 보면 대전, 온라인 방, 맵 만들기가 차례로 열려요. 도전장은 1·2번만 무료고, 나머지는 풀버전에 들어 있어요.' },
-    ja: { name: 'ハジケロ！ゼリーパンパン', iconAlt: 'ハジケロ！ゼリーパンパン アプリアイコン：びっくりした青いゼリー', tag1: 'ゼリーばくだんで閉じこめて', tag2: 'パンパン！', sub: 'じっとしていると砂糖でかたまってしまうお菓子の世界！シュガー ジャイアントに立ち向かう小さなゼリーの大冒険・友だちとは閉じこめ合うパンパンあそび',
+    ja: { name: 'ハジケロ！ゼリーパンパン', freeVm: '対戦とマップメーカーも無料です。無料ステージをクリアすると解放されるので、購入は必要ありません。', hFree: '購入不要', iconAlt: 'ハジケロ！ゼリーパンパン アプリアイコン：びっくりした青いゼリー', tag1: 'ゼリーばくだんで閉じこめて', tag2: 'パンパン！', sub: 'じっとしていると砂糖でかたまってしまうお菓子の世界！シュガー ジャイアントに捕まったゼリーたちを救い、町をよみがえらせる小さなゼリーの大冒険・友だちとは閉じこめ合うパンパンあそび',
       preChip: '事前登録受付中\u00a0· {d}配信開始', preChipNoDate: '事前登録受付中',
       aPlayPre: 'Google Play で事前登録', aAppPre: 'App Store で事前登録', preNote: '事前登録しておくと、配信日にすぐダウンロードできます。',
       soon: 'Google Play・App Store で近日配信', outBoth: '配信中 — 無料で始められます', outPlay: 'Google Play で配信中', outApp: 'App Store で配信中',
@@ -648,14 +653,14 @@ footer{margin-top:30px}
       aPlay: 'Google Play で手に入れよう', aApp: 'App Store からダウンロード', appSoon: 'iPhone・iPad 版は近日配信', playSoon: 'Android 版は近日配信', alsoApp: 'iPhone・iPad 版もあります', alsoPlay: 'Android 版もあります', trailer: 'トレーラーを見る',
       f1h: 'ぷるぷる', f1p: 'タップするとくすくす笑い、つつきすぎるとすねます。',
       f2h: 'みんなで遊ぼう', f2p: '1台のスマホで2人対戦、オンラインは部屋番号で最大6人。',
-      f3h: 'フェアな設計', f3p: '広告なし。ガチャなし。最初の15ステージは無料、1回の購入で残りがすべて遊べます。',
+      f3h: 'フェアな設計', f3p: '広告なし。ガチャなし。最初の15ステージは無料、1回の購入で16–50ステージが遊べます。',
       f4h: '遊びがいっぱい', f4p: 'ボスが待つ50ステージ、1マスジャンプ、マップ作り、ゼリーの着せ替えもたくさん。',
       t1: '12言語対応', t2: 'コントローラー対応', t3: '登録不要',
       chH: 'ゼリーたちをフォロー', chP: '新しい動画やアップデート情報は各チャンネルで。一緒に遊ぶ仲間探し、マップの共有、バグ報告は Discord へ。',
       age: 'Discord は13歳以上（国によってはそれ以上）が対象です。', priv: 'プライバシー', contact: 'お問い合わせ',
       sndOn: 'サウンドをオンにする', sndOff: 'サウンドをオフにする', langLbl: '言語', vid: 'ゲーム映像：ゼリーたちがお菓子のステージでばくだんを置いてはじけ合います',
       faqH: 'よくある質問',
-      q1: '無料ですか？', a1: 'はい、ダウンロードもプレイも無料です。最初の15ステージは無料で、1回の購入で全50ステージが遊べます。きせかえテーマパックは好きなものだけどうぞ。広告なし、サブスクなし、ガチャなし。',
+      q1: '無料ですか？', a1: 'はい、ダウンロードもプレイも無料です。最初の15ステージは無料で、1回の購入で16~50ステージが遊べます。きせかえテーマパックは好きなものだけどうぞ。広告なし、サブスクなし、ガチャなし。',
       q2: 'インターネットは必要ですか？', a2: 'いいえ。ステージと、1台のスマホでの2人対戦はオフラインで遊べます。オンライン対戦とマップの共有だけ接続が必要です。',
       q3: '友だちとはどうやって遊びますか？', a3: '1台のスマホを2人で使い、2人用のステージで対戦します。オンラインは部屋を作って5文字の部屋番号を伝えるだけ。最大6人まで遊べます。',
       q4: 'アカウント登録は必要ですか？', a4: 'いいえ。すぐに遊べます。サインイン（せってい → アカウント）は任意で、進行状況が保存され、同じアカウントなら Android・iPhone・iPad・PC（Steam）のどれでも続きから遊べます。',
@@ -672,7 +677,7 @@ footer{margin-top:30px}
       hCh1: '特別ステージ12個', hCh2: 'ちょうせんじょうごとに違うルール', hCh3: 'ボス戦のアレンジ',
       pcSoon: 'PC（Steam）版は近日配信', aSteamPre: 'Steamでウィッシュリスト', landLine: '縦でも横でも遊べます。', pcLine: 'PC（Steam）にも登場予定です。',
       q6: '対戦やマップ作りは最初から遊べますか？', a6: '最初はひとり用のステージから始まります。無料のステージをクリアしていくと、対戦・オンライン部屋・マップ作りが順番に遊べるようになります。ちょうせんじょうは1・2通目が無料で、残りはフルバージョンに入っています。' },
-    'zh-Hant': { name: 'Pop! Jelly PangPang', tag1: '用果凍炸彈困住，', tag2: '碰碰！', sub: '一動也不動就會被糖凝固的甜點世界！小果凍對抗糖霜巨人的大冒險・和朋友互相困住的碰碰遊戲',
+    'zh-Hant': { name: 'Pop! Jelly PangPang', freeVm: '對戰和地圖製作也都免費。通過免費關卡就能解鎖，不需要購買。', hFree: '無需購買', tag1: '用果凍炸彈困住，', tag2: '碰碰！', sub: '一動也不動就會被糖凝固的甜點世界！小果凍救回被糖霜巨人抓走的果凍們，讓小鎮重新活過來・和朋友互相困住的碰碰遊戲',
       preChip: '開放事前預約\u00a0· {d}上線', preChipNoDate: '開放事前預約',
       aPlayPre: '在 Google Play 事前預約', aAppPre: '在 App Store 事前預約', preNote: '事前預約後，上線當天就能下載。',
       soon: '即將登上 Google Play 與 App Store', outBoth: '現已推出 — 免費開始', outPlay: '已在 Google Play 推出', outApp: '已在 App Store 推出',
@@ -680,14 +685,14 @@ footer{margin-top:30px}
       aPlay: '在 Google Play 下載', aApp: '在 App Store 下載', appSoon: 'iPhone 與 iPad 版即將推出', playSoon: 'Android 版即將推出', alsoApp: '也有 iPhone 與 iPad 版', alsoPlay: '也有 Android 版', trailer: '觀看預告片',
       f1h: 'Q 彈軟萌', f1p: '輕點果凍，它會咯咯笑；戳太多次，它會鬧脾氣。',
       f2h: '一起玩更有趣', f2p: '一支手機兩人同玩，或用房間號碼連線，最多 6 人。',
-      f3h: '公平實在', f3p: '無廣告。無轉蛋。前 15 關免費，一次購買即可解鎖其餘全部內容。',
+      f3h: '公平實在', f3p: '無廣告。無轉蛋。前 15 關免費，一次購買即可解鎖第 16–50 關。',
       f4h: '內容滿滿', f4p: '50 個有魔王的關卡、一格跳躍、地圖編輯器，還有多種果凍裝扮。',
       t1: '12 種語言', t2: '支援手把', t3: '無需註冊',
       chH: '追蹤果凍們', chP: '新影片與更新消息會發布在各個頻道。找人一起玩、分享地圖或回報問題，請到 Discord。',
       age: 'Discord 僅限 13 歲以上使用（部分國家/地區要求更高）。', priv: '隱私權政策', contact: '聯絡我們',
       sndOn: '開啟聲音', sndOff: '關閉聲音', langLbl: '語言', vid: '遊戲畫面：果凍們在糖果場地上放炸彈、互相炸開',
       faqH: '常見問題',
-      q1: '遊戲免費嗎？', a1: '是的，下載和遊玩都免費。前 15 關免費，一次購買即可解鎖全部 50 關。裝扮主題包可依喜好選購。無廣告、無訂閱、無轉蛋。',
+      q1: '遊戲免費嗎？', a1: '是的，下載和遊玩都免費。前 15 關免費，一次購買即可解鎖第 16–50 關。裝扮主題包可依喜好選購。無廣告、無訂閱、無轉蛋。',
       q2: '需要網路嗎？', a2: '不需要。闖關和一支手機兩人同玩都可以離線遊玩，只有線上對戰和分享地圖需要連線。',
       q3: '怎麼和朋友一起玩？', a3: '兩人共用一支手機，在專為雙人設計的場地對戰。線上對戰只要建立房間並分享五個字的房間號碼，最多 6 人同玩。',
       q4: '需要註冊帳號嗎？', a4: '不需要，下載後就能直接玩。登入（設定 → 帳號）為選用，登入後會儲存進度，用同一個帳號在 Android、iPhone、iPad、PC（Steam）都能繼續玩。',
@@ -704,7 +709,7 @@ footer{margin-top:30px}
       hCh1: '12 個特殊關卡', hCh2: '每封挑戰書規則不同', hCh3: '魔王關的變奏',
       pcSoon: 'PC（Steam）版即將推出', aSteamPre: '在 Steam 加入願望清單', landLine: '直式、橫式都能玩。', pcLine: 'PC（Steam）版也即將登場。',
       q6: '對戰和地圖製作一開始就能玩嗎？', a6: '一開始是單人關卡。通關免費關卡的過程中，對戰、線上房間和地圖製作會依序開放。前兩封挑戰書免費，其餘包含在完整版中。' },
-    'zh-Hans': { name: '果冻碰碰乐', iconAlt: '果冻碰碰乐 应用图标：一只吓了一跳的蓝色果冻', tag1: '用果冻炸弹困住，', tag2: '碰碰！', sub: '一动不动就会被糖凝固的甜点世界！小果冻对抗糖霜巨人的大冒险・和朋友互相困住的碰碰游戏',
+    'zh-Hans': { name: '果冻碰碰乐', freeVm: '对战和地图制作也是免费的。通关免费关卡就能解锁，无需购买。', hFree: '无需购买', iconAlt: '果冻碰碰乐 应用图标：一只吓了一跳的蓝色果冻', tag1: '用果冻炸弹困住，', tag2: '碰碰！', sub: '一动不动就会被糖凝固的甜点世界！小果冻救出被糖霜巨人抓走的果冻们，让小镇重获生机・和朋友互相困住的碰碰游戏',
       preChip: '开放预约\u00a0· {d}上线', preChipNoDate: '开放预约',
       aPlayPre: '在 Google Play 预约', aAppPre: '在 App Store 预约', preNote: '预约后，上线当天就能下载。',
       soon: '即将登陆 Google Play 和 App Store', outBoth: '现已上线 — 免费开玩', outPlay: '已在 Google Play 上线', outApp: '已在 App Store 上线',
@@ -712,14 +717,14 @@ footer{margin-top:30px}
       aPlay: '在 Google Play 下载', aApp: '在 App Store 下载', appSoon: 'iPhone 和 iPad 版即将上线', playSoon: 'Android 版即将上线', alsoApp: '也有 iPhone 和 iPad 版', alsoPlay: '也有 Android 版', trailer: '观看预告片',
       f1h: 'Q 弹软萌', f1p: '轻点果冻，它会咯咯笑；戳太多次，它会闹脾气。',
       f2h: '一起玩更有趣', f2p: '一部手机两人同玩，或用房间号码联机，最多 6 人。',
-      f3h: '公平实在', f3p: '无广告。无抽卡。前 15 关免费，一次购买即可解锁其余全部内容。',
+      f3h: '公平实在', f3p: '无广告。无抽卡。前 15 关免费，一次购买即可解锁第 16–50 关。',
       f4h: '内容满满', f4p: '50 个有头目的关卡、一格跳跃、地图编辑器，还有多种果冻装扮。',
       t1: '12 种语言', t2: '支持手柄', t3: '无需注册',
       chH: '关注果冻们', chP: '新视频和更新消息会发布在各个频道。找人一起玩、分享地图或反馈问题，请来 Discord。',
       age: 'Discord 仅限 13 岁及以上用户使用（部分国家/地区要求更高）。', priv: '隐私政策', contact: '联系我们',
       sndOn: '打开声音', sndOff: '关闭声音', langLbl: '语言', vid: '游戏画面：果冻们在糖果场地上放炸弹、互相炸开',
       faqH: '常见问题',
-      q1: '游戏免费吗？', a1: '是的，下载和游玩都免费。前 15 关免费，一次购买即可解锁全部 50 关。装扮主题包可按喜好选购。无广告、无订阅、无抽卡。',
+      q1: '游戏免费吗？', a1: '是的，下载和游玩都免费。前 15 关免费，一次购买即可解锁第 16–50 关。装扮主题包可按喜好选购。无广告、无订阅、无抽卡。',
       q2: '需要联网吗？', a2: '不需要。闯关和一部手机两人同玩都可以离线游玩，只有在线对战和分享地图需要联网。',
       q3: '怎么和朋友一起玩？', a3: '两人共用一部手机，在专为双人设计的场地对战。联机对战只要创建房间并分享五位房间号码，最多 6 人同玩。',
       q4: '需要注册账号吗？', a4: '不需要，下载后就能直接玩。登录（设置 → 账号）为可选项，登录后会保存进度，用同一个账号在 Android、iPhone、iPad、PC（Steam）上都能继续玩。',
@@ -736,7 +741,7 @@ footer{margin-top:30px}
       hCh1: '12 个特殊关卡', hCh2: '每封挑战书规则不同', hCh3: '魔王关的变奏',
       pcSoon: 'PC（Steam）版即将上线', aSteamPre: '在 Steam 加入愿望单', landLine: '竖屏、横屏都能玩。', pcLine: 'PC（Steam）版也即将登场。',
       q6: '对战和地图制作一开始就能玩吗？', a6: '一开始是单人关卡。通关免费关卡的过程中，对战、在线房间和地图制作会依次开放。前两封挑战书免费，其余包含在完整版中。' },
-    ru: { name: 'Pop! Jelly PangPang', tag1: 'Лови желе-бомбой —', tag2: 'бах-бах!', sub: 'Сладкий мир, который застывает в сахар, если стоять на месте! Большое приключение маленького желе против Сахарного великана · А с друзьями — ловите друг друга в мягкой игре.',
+    ru: { name: 'Pop! Jelly PangPang', freeVm: 'Битвы и редактор карт тоже бесплатны. Они открываются по мере прохождения бесплатных уровней, покупка не нужна.', hFree: 'Покупать ничего не нужно', tag1: 'Лови желе-бомбой —', tag2: 'бах-бах!', sub: 'Сладкий мир, который застывает в сахар, если стоять на месте! Маленькое желе спасает желе, которых поймал Сахарный великан, и возвращает городу жизнь · А с друзьями — ловите друг друга в мягкой игре.',
       preChip: 'Открыта предзапись\u00a0· выход {d}', preChipNoDate: 'Открыта предзапись',
       aPlayPre: 'Предварительная регистрация в Google Play', aAppPre: 'Предзаказ в App Store', preNote: 'Оформите предварительную регистрацию или предзаказ, и в день выхода игру можно сразу скачать.',
       soon: 'Скоро в Google Play и App Store', outBoth: 'Уже вышла — начни бесплатно', outPlay: 'Уже в Google Play', outApp: 'Уже в App Store',
@@ -744,14 +749,14 @@ footer{margin-top:30px}
       aPlay: 'Доступно в Google Play', aApp: 'Загрузите в App Store', appSoon: 'iPhone и iPad: скоро', playSoon: 'Android: скоро', alsoApp: 'Также на iPhone и iPad', alsoPlay: 'Также на Android', trailer: 'Смотреть трейлер',
       f1h: 'Мягкое желе', f1p: 'Коснись желе — оно хихикает. Тыкай слишком часто — обидится.',
       f2h: 'Вместе веселее', f2p: 'Вдвоём на одном телефоне или до 6 игроков онлайн по коду комнаты.',
-      f3h: 'Честно', f3p: 'Без рекламы. Без гачи. Первые 15 уровней бесплатно, а одна покупка открывает всё остальное.',
+      f3h: 'Честно', f3p: 'Без рекламы. Без гачи. Первые 15 уровней бесплатно, а одна покупка открывает уровни 16–50.',
       f4h: 'Есть чем заняться', f4p: '50 уровней с боссами, прыжок на одну клетку, редактор карт и множество нарядов для желе.',
       t1: '12 языков', t2: 'Поддержка геймпада', t3: 'Без регистрации',
       chH: 'Следи за желе', chP: 'Новые ролики и обновления — на всех каналах. Найти напарников, поделиться картами или сообщить об ошибке можно в Discord.',
       age: 'Discord доступен с 13 лет (в некоторых странах — старше).', priv: 'Конфиденциальность', contact: 'Связаться',
       sndOn: 'Включить звук', sndOff: 'Выключить звук', langLbl: 'Язык', vid: 'Игровой процесс: желе ставят бомбы и лопают друг друга на сладких аренах',
       faqH: 'Частые вопросы',
-      q1: 'Игра бесплатная?', a1: 'Да, скачать и играть можно бесплатно. Первые 15 уровней бесплатны, а одна покупка открывает все 50. Тематические наборы украшений — по желанию. Без рекламы, без подписок, без гачи.',
+      q1: 'Игра бесплатная?', a1: 'Да, скачать и играть можно бесплатно. Первые 15 уровней бесплатны, а одна покупка открывает уровни 16–50. Тематические наборы украшений — по желанию. Без рекламы, без подписок, без гачи.',
       q2: 'Нужен ли интернет?', a2: 'Нет. Уровни и игра вдвоём на одном телефоне работают офлайн. Подключение нужно только для онлайн-матчей и обмена картами.',
       q3: 'Как играть вместе?', a3: 'Вдвоём на одном телефоне — на поле для двоих. В онлайне создайте комнату и поделитесь её кодом комнаты из пяти букв. Играть могут до 6 человек.',
       q4: 'Нужен ли аккаунт?', a4: 'Нет, играть можно сразу. Вход (Настройки → Аккаунт) необязателен: он сохраняет прогресс, и с тем же аккаунтом можно продолжить на Android, iPhone, iPad или PC (Steam).',
@@ -768,7 +773,7 @@ footer{margin-top:30px}
       hCh1: '12 особых уровней', hCh2: 'У каждого вызова своё правило', hCh3: 'Боссы с новыми правилами',
       pcSoon: 'PC (Steam): скоро', aSteamPre: 'В желаемое в Steam', landLine: 'Играй вертикально или горизонтально — как удобнее.', pcLine: 'Скоро и на ПК в Steam.',
       q6: 'Бои и редактор карт доступны сразу?', a6: 'Сначала идут одиночные уровни. По мере прохождения бесплатных уровней по очереди открываются бои, онлайн-комнаты и редактор карт. Первые два вызова бесплатны, остальные входят в полную версию.' },
-    ar: { name: 'جيلي بانغ بانغ', iconAlt: 'أيقونة تطبيق جيلي بانغ بانغ: جيلي أزرق متفاجئ', tag1: 'احبسهم بقنابل الجيلي:', tag2: 'بانغ بانغ!', sub: 'عالم من الحلوى يتصلّب سكرًا إذا بقيت ساكنًا! مغامرة جيلي صغير في مواجهة عملاق السكر · ومع الأصدقاء، احبسوا بعضكم في لعبة طرية.',
+    ar: { name: 'جيلي بانغ بانغ', freeVm: 'المعارك وصانع الخرائط مجانيان أيضًا. تُفتح مع إكمال المراحل المجانية، ولا حاجة إلى أي شراء.', hFree: 'لا حاجة إلى أي شراء', iconAlt: 'أيقونة تطبيق جيلي بانغ بانغ: جيلي أزرق متفاجئ', tag1: 'احبسهم بقنابل الجيلي:', tag2: 'بانغ بانغ!', sub: 'عالم من الحلوى يتصلّب سكرًا إذا بقيت ساكنًا! جيلي صغير ينقذ الجيلي الذين أسرهم عملاق السكر ويعيد الحياة إلى البلدة · ومع الأصدقاء، احبسوا بعضكم في لعبة طرية.',
       preChip: 'التسجيل المسبق مفتوح\u00a0· الإطلاق في {d}', preChipNoDate: 'التسجيل المسبق مفتوح',
       aPlayPre: 'التسجيل المسبق في Google Play', aAppPre: 'الطلب المسبق في App Store', preNote: 'سجّل مسبقًا أو اطلبها مسبقًا لتحمّلها فور إطلاقها.',
       soon: 'قريبًا على Google Play و App Store', outBoth: 'متوفرة الآن — ابدأ مجانًا', outPlay: 'متوفرة الآن على Google Play', outApp: 'متوفرة الآن على App Store',
@@ -776,14 +781,14 @@ footer{margin-top:30px}
       aPlay: 'احصل عليها من Google Play', aApp: 'حمّلها من App Store', appSoon: 'iPhone و iPad: قريبًا', playSoon: 'Android: قريبًا', alsoApp: 'متوفرة أيضًا على iPhone و iPad', alsoPlay: 'متوفرة أيضًا على Android', trailer: 'شاهد العرض التشويقي',
       f1h: 'طرية ولطيفة', f1p: 'المس الجيلي فيضحك. وإن أكثرتَ من وخزه يزعل.',
       f2h: 'أمتع مع الأصدقاء', f2p: 'لاعبان على هاتف واحد، أو حتى 6 لاعبين عبر الإنترنت برمز الغرفة.',
-      f3h: 'منصفة', f3p: 'بلا إعلانات. بلا غاتشا. أول 15 مرحلة مجانية، وشراء واحد يفتح الباقي.',
+      f3h: 'منصفة', f3p: 'بلا إعلانات. بلا غاتشا. أول 15 مرحلة مجانية، وشراء واحد يفتح المراحل 16–50.',
       f4h: 'الكثير لتفعله', f4p: '50 مرحلة مع زعماء، قفزة بمربع واحد، صانع خرائط وطرق كثيرة لتزيين الجيلي.',
       t1: '12 لغة', t2: 'دعم يد التحكم', t3: 'بدون تسجيل',
       chH: 'تابع الجيلي', chP: 'مقاطع جديدة وتحديثات على كل القنوات. للبحث عن لاعبين أو مشاركة خرائطك أو الإبلاغ عن خطأ، تعال إلى Discord.',
       age: 'Discord متاح لمن هم بعمر 13 عامًا فأكثر (وأكبر في بعض الدول).', priv: 'الخصوصية', contact: 'اتصل بنا',
       sndOn: 'تشغيل الصوت', sndOff: 'إيقاف الصوت', langLbl: 'اللغة', vid: 'مشاهد من اللعبة: الجيلي يضع القنابل ويفجّر بعضه بعضًا في ساحات الحلوى',
       faqH: 'أسئلة شائعة',
-      q1: 'هل اللعبة مجانية؟', a1: 'نعم، التحميل واللعب مجانيان. أول 15 مرحلة مجانية، وشراء واحد يفتح المراحل الخمسين كلها. حزم الزينة اختيارية. بلا إعلانات، بلا اشتراكات، بلا غاتشا.',
+      q1: 'هل اللعبة مجانية؟', a1: 'نعم، التحميل واللعب مجانيان. أول 15 مرحلة مجانية، وشراء واحد يفتح المراحل 16–50. حزم الزينة اختيارية. بلا إعلانات، بلا اشتراكات، بلا غاتشا.',
       q2: 'هل أحتاج إلى الإنترنت؟', a2: 'لا. المراحل واللعب بين لاعبين على هاتف واحد يعملان دون إنترنت. المباريات عبر الإنترنت ومشاركة الخرائط فقط تحتاجان إلى اتصال.',
       q3: 'كيف نلعب معًا؟', a3: 'لاعبان يتشاركان هاتفًا واحدًا على ساحة مصممة لاثنين. وعبر الإنترنت أنشئ غرفة وشارك رمز الغرفة المكوّن من خمسة أحرف. يمكن أن يلعب حتى 6 لاعبين.',
       q4: 'هل أحتاج إلى حساب؟', a4: 'لا. يمكنك اللعب فورًا. تسجيل الدخول اختياري (الإعدادات ← الحساب) ويحفظ تقدمك لتكمل بالحساب نفسه على Android أو iPhone أو iPad أو PC (Steam).',
@@ -800,7 +805,7 @@ footer{margin-top:30px}
       hCh1: '12 مرحلة خاصة', hCh2: 'لكل تحدٍّ قاعدته الخاصة', hCh3: 'مراحل الزعماء بحلّة جديدة',
       pcSoon: 'PC (Steam): قريبًا', aSteamPre: 'قائمة الرغبات على Steam', landLine: 'العب بالوضع الطولي أو العرضي كما تحب.', pcLine: 'قريبًا على الحاسوب عبر Steam أيضًا.',
       q6: 'هل يمكنني لعب المباريات وصانع الخرائط من البداية؟', a6: 'تبدأ بالمراحل الفردية. ومع إنهاء المراحل المجانية تُفتح المباريات والغرف عبر الإنترنت وصانع الخرائط واحدة تلو الأخرى. أول تحدّيين مجانيان، والباقي ضمن النسخة الكاملة.' },
-    es: { name: 'Pop! Jelly PangPang', tag1: 'Atrápalos con bombas de gelatina:', tag2: '¡pang-pang!', sub: '¡Un mundo de dulces que se endurece en azúcar si te quedas quieto! La gran aventura de una gelatinita contra el Gigante de azúcar · Con amigos, atrápense unos a otros en una fiesta blandita.',
+    es: { name: 'Pop! Jelly PangPang', freeVm: 'Las batallas y el creador de mapas también son gratis. Se desbloquean al superar los niveles gratis, sin necesidad de comprar nada.', hFree: 'No hace falta comprar nada', tag1: 'Atrápalos con bombas de gelatina:', tag2: '¡pang-pang!', sub: '¡Un mundo de dulces que se endurece en azúcar si te quedas quieto! Una gelatinita rescata a las gelatinitas que atrapó el Gigante de azúcar y devuelve la vida al pueblo · Con amigos, atrápense unos a otros en una fiesta blandita.',
       preChip: 'Registro previo abierto\u00a0· Lanzamiento: {d}', preChipNoDate: 'Registro previo abierto',
       aPlayPre: 'Registro previo en Google Play', aAppPre: 'Reserva en el App Store', preNote: 'Haz el registro previo o la reserva y podrás descargar el juego el mismo día del lanzamiento.',
       soon: 'Próximamente en Google Play y App Store', outBoth: 'Ya disponible: empieza gratis', outPlay: 'Ya disponible en Google Play', outApp: 'Ya disponible en App Store',
@@ -808,14 +813,14 @@ footer{margin-top:30px}
       aPlay: 'Disponible en Google Play', aApp: 'Descárgalo en el App Store', appSoon: 'iPhone y iPad: próximamente', playSoon: 'Android: próximamente', alsoApp: 'También en iPhone y iPad', alsoPlay: 'También en Android', trailer: 'Ver el tráiler',
       f1h: 'Blandito', f1p: 'Toca tu gelatina y se ríe. Si la pinchas demasiado, se enfurruña.',
       f2h: 'Mejor en compañía', f2p: 'Dos jugadores en un mismo móvil, o hasta 6 en línea con un código de sala.',
-      f3h: 'Justo', f3p: 'Sin anuncios. Sin gacha. Los primeros 15 niveles son gratis y una sola compra desbloquea el resto.',
+      f3h: 'Justo', f3p: 'Sin anuncios. Sin gacha. Los primeros 15 niveles son gratis y una sola compra desbloquea los niveles 16–50.',
       f4h: 'Mucho por hacer', f4p: '50 niveles con jefes, un salto de una casilla, un editor de mapas y un montón de formas de vestir a tu gelatina.',
       t1: '12 idiomas', t2: 'Compatible con mando', t3: 'Sin registro',
       chH: 'Sigue a las gelatinas', chP: 'Nuevos clips y novedades en todos los canales. Para buscar con quién jugar, compartir tus mapas o avisar de un error, ven a Discord.',
       age: 'Discord es para mayores de 13 años (más en algunos países).', priv: 'Privacidad', contact: 'Contacto',
       sndOn: 'Activar sonido', sndOff: 'Desactivar sonido', langLbl: 'Idioma', vid: 'Juego: las gelatinas ponen bombas y se revientan entre sí en arenas de dulces',
       faqH: 'Preguntas frecuentes',
-      q1: '¿Es gratis?', a1: 'Sí, descargar y jugar es gratis. Los primeros 15 niveles son gratis y una sola compra desbloquea los 50. Los packs temáticos de aspectos son opcionales. Sin anuncios, sin suscripciones, sin gacha.',
+      q1: '¿Es gratis?', a1: 'Sí, descargar y jugar es gratis. Los primeros 15 niveles son gratis y una sola compra desbloquea los niveles 16–50. Los packs temáticos de aspectos son opcionales. Sin anuncios, sin suscripciones, sin gacha.',
       q2: '¿Necesito internet?', a2: 'No. Los niveles y el modo de dos jugadores en un teléfono funcionan sin conexión. Solo las partidas en línea y compartir mapas necesitan conexión.',
       q3: '¿Cómo jugamos juntos?', a3: 'Dos jugadores comparten un mismo móvil en un tablero hecho para dos. En línea, crea una sala y comparte su código de sala de cinco letras. Pueden jugar hasta 6.',
       q4: '¿Necesito una cuenta?', a4: 'No. Puedes jugar al instante. Iniciar sesión (Ajustes → Cuenta) es opcional y guarda tu progreso para continuar con la misma cuenta en Android, iPhone, iPad o PC (Steam).',
@@ -832,7 +837,7 @@ footer{margin-top:30px}
       hCh1: '12 niveles especiales', hCh2: 'Una regla distinta en cada desafío', hCh3: 'Niveles de jefe, remezclados',
       pcSoon: 'PC (Steam): próximamente', aSteamPre: 'Añadir a deseados en Steam', landLine: 'Juega en vertical o en horizontal, como prefieras.', pcLine: 'Pronto también en PC, en Steam.',
       q6: '¿Puedo jugar batallas y crear mapas desde el principio?', a6: 'Al principio solo hay niveles para un jugador. Al superar los niveles gratis se abren, uno a uno, el modo batalla, las salas en línea y Crear mapa. Los dos primeros desafíos también son gratis; el resto viene con la versión completa.' },
-    fr: { name: 'Pop! Jelly PangPang', tag1: 'Piège-les avec des bombes gelée :', tag2: 'pang-pang !', sub: 'Un monde de bonbons qui durcit en sucre si on reste immobile ! La grande aventure d’une petite gelée contre le Géant de sucre · Entre amis, piégez-vous les uns les autres dans une fête toute moelleuse.',
+    fr: { name: 'Pop! Jelly PangPang', freeVm: 'Les combats et l’éditeur de cartes sont gratuits aussi. Ils se débloquent en terminant les niveaux gratuits, sans aucun achat.', hFree: 'Aucun achat nécessaire', tag1: 'Piège-les avec des bombes gelée :', tag2: 'pang-pang !', sub: 'Un monde de bonbons qui durcit en sucre si on reste immobile ! Une petite gelée sauve les gelées capturées par le Géant de sucre et redonne vie à la ville · Entre amis, piégez-vous les uns les autres dans une fête toute moelleuse.',
       preChip: 'Préinscriptions ouvertes\u00a0· Sortie\u00a0: {d}', preChipNoDate: 'Préinscriptions ouvertes',
       aPlayPre: 'Se préinscrire sur Google Play', aAppPre: 'Précommander sur l’App Store', preNote: 'Préinscrivez-vous ou précommandez pour télécharger le jeu dès le jour de sa sortie.',
       soon: 'Bientôt sur Google Play et l’App Store', outBoth: 'Disponible — gratuit pour commencer', outPlay: 'Disponible sur Google Play', outApp: 'Disponible sur l’App Store',
@@ -840,14 +845,14 @@ footer{margin-top:30px}
       aPlay: 'Disponible sur Google Play', aApp: 'Télécharger dans l’App Store', appSoon: 'iPhone et iPad : bientôt', playSoon: 'Android : bientôt', alsoApp: 'Aussi sur iPhone et iPad', alsoPlay: 'Aussi sur Android', trailer: 'Voir la bande-annonce',
       f1h: 'Tout moelleux', f1p: 'Touche ta gelée et elle rigole. Embête-la trop et elle boude.',
       f2h: 'Meilleur à plusieurs', f2p: 'À deux sur un seul téléphone, ou jusqu’à 6 en ligne avec un code du salon.',
-      f3h: 'Honnête', f3p: 'Sans pub. Sans gacha. Les 15 premiers niveaux sont gratuits et un seul achat débloque le reste.',
+      f3h: 'Honnête', f3p: 'Sans pub. Sans gacha. Les 15 premiers niveaux sont gratuits et un seul achat débloque les niveaux 16–50.',
       f4h: 'Plein de choses à faire', f4p: '50 niveaux avec des boss, un saut d’une case, un éditeur de cartes et plein de façons d’habiller ta gelée.',
       t1: '12 langues', t2: 'Compatible manette', t3: 'Sans inscription',
       chH: 'Suis les gelées', chP: 'Nouveaux clips et mises à jour sur toutes les chaînes. Pour trouver des partenaires, partager tes cartes ou signaler un bug, viens sur Discord.',
       age: 'Discord est réservé aux 13 ans et plus (davantage dans certains pays).', priv: 'Confidentialité', contact: 'Contact',
       sndOn: 'Activer le son', sndOff: 'Couper le son', langLbl: 'Langue', vid: 'Extrait du jeu : les gelées posent des bombes et s’éclatent dans des arènes sucrées',
       faqH: 'Questions fréquentes',
-      q1: 'Est-ce gratuit ?', a1: 'Oui, le téléchargement et le jeu sont gratuits. Les 15 premiers niveaux sont gratuits et un seul achat débloque les 50. Les packs de tenues à thème sont facultatifs. Sans pub, sans abonnement, sans gacha.',
+      q1: 'Est-ce gratuit ?', a1: 'Oui, le téléchargement et le jeu sont gratuits. Les 15 premiers niveaux sont gratuits et un seul achat débloque les niveaux 16–50. Les packs de tenues à thème sont facultatifs. Sans pub, sans abonnement, sans gacha.',
       q2: 'Faut-il une connexion internet ?', a2: 'Non. Les niveaux et le mode à deux sur un seul téléphone marchent hors ligne. Seuls les matchs en ligne et le partage de cartes demandent une connexion.',
       q3: 'Comment jouer ensemble ?', a3: 'À deux sur un seul téléphone, sur un plateau conçu pour deux. En ligne, crée un salon et partage son code du salon à cinq lettres. Jusqu’à 6 joueurs peuvent jouer.',
       q4: 'Faut-il un compte ?', a4: 'Non. Tu peux jouer tout de suite. La connexion (Réglages → Compte) est facultative et sauvegarde ta progression pour continuer avec le même compte sur Android, iPhone, iPad ou PC (Steam).',
@@ -864,7 +869,7 @@ footer{margin-top:30px}
       hCh1: '12 niveaux spéciaux', hCh2: 'Une règle différente à chaque défi', hCh3: 'Niveaux de boss remixés',
       pcSoon: 'PC (Steam) : bientôt', aSteamPre: 'Liste de souhaits Steam', landLine: 'Joue en portrait ou en paysage, comme tu préfères.', pcLine: 'Bientôt aussi sur PC, via Steam.',
       q6: 'Peut-on jouer en combat et créer des cartes dès le début ?', a6: 'On commence par les niveaux solo. En terminant les niveaux gratuits, le mode combat, les salons en ligne et Créer une carte s’ouvrent un à un. Les deux premiers défis sont gratuits aussi ; le reste est dans la version complète.' },
-    it: { name: 'Pop! Jelly PangPang', tag1: 'Intrappolali con bombe di gelatina:', tag2: 'pang-pang!', sub: 'Un mondo di dolci che si indurisce nello zucchero se resti fermo! La grande avventura di una gelatina contro il Gigante di zucchero · Con gli amici, intrappolatevi a vicenda in una festa morbidissima.',
+    it: { name: 'Pop! Jelly PangPang', freeVm: 'Anche le battaglie e il creatore di mappe sono gratis. Si sbloccano superando i livelli gratuiti, senza bisogno di acquisti.', hFree: 'Non serve nessun acquisto', tag1: 'Intrappolali con bombe di gelatina:', tag2: 'pang-pang!', sub: 'Un mondo di dolci che si indurisce nello zucchero se resti fermo! La grande avventura di una gelatina che salva le gelatine catturate dal Gigante di zucchero e riporta in vita la città · Con gli amici, intrappolatevi a vicenda in una festa morbidissima.',
       preChip: 'Preregistrazione aperta\u00a0· Uscita: {d}', preChipNoDate: 'Preregistrazione aperta',
       aPlayPre: 'Preregistrati su Google Play', aAppPre: 'Preordina su App Store', preNote: 'Preregistrati o preordina e potrai scaricare il gioco dal giorno del lancio.',
       soon: 'Presto su Google Play e App Store', outBoth: 'Disponibile ora: inizia gratis', outPlay: 'Disponibile su Google Play', outApp: 'Disponibile su App Store',
@@ -872,14 +877,14 @@ footer{margin-top:30px}
       aPlay: 'Disponibile su Google Play', aApp: 'Scarica su App Store', appSoon: 'iPhone e iPad: presto disponibile', playSoon: 'Android: presto disponibile', alsoApp: 'Anche su iPhone e iPad', alsoPlay: 'Anche su Android', trailer: 'Guarda il trailer',
       f1h: 'Morbidoso', f1p: 'Tocca la tua gelatina e ridacchia. Stuzzicala troppo e mette il broncio.',
       f2h: 'Insieme è meglio', f2p: 'In due sullo stesso telefono, o fino a 6 online con un codice stanza.',
-      f3h: 'Onesto', f3p: 'Niente pubblicità. Niente gacha. I primi 15 livelli sono gratis e un solo acquisto sblocca il resto.',
+      f3h: 'Onesto', f3p: 'Niente pubblicità. Niente gacha. I primi 15 livelli sono gratis e un solo acquisto sblocca i livelli 16–50.',
       f4h: 'Tanto da fare', f4p: '50 livelli con boss, un salto di una casella, un editor di mappe e tanti modi per vestire la tua gelatina.',
       t1: '12 lingue', t2: 'Supporto controller', t3: 'Nessuna registrazione',
       chH: 'Segui le gelatine', chP: 'Nuove clip e aggiornamenti su tutti i canali. Per trovare compagni di gioco, condividere le mappe o segnalare un bug, vieni su Discord.',
       age: 'Discord è per chi ha almeno 13 anni (di più in alcuni Paesi).', priv: 'Privacy', contact: 'Contatti',
       sndOn: 'Attiva audio', sndOff: 'Disattiva audio', langLbl: 'Lingua', vid: 'Gameplay: le gelatine piazzano bombe e si fanno scoppiare in arene di dolci',
       faqH: 'Domande frequenti',
-      q1: 'È gratis?', a1: 'Sì, scaricare e giocare è gratis. I primi 15 livelli sono gratis e un solo acquisto sblocca tutti e 50. I pacchetti a tema per vestire la gelatina sono facoltativi. Niente pubblicità, niente abbonamenti, niente gacha.',
+      q1: 'È gratis?', a1: 'Sì, scaricare e giocare è gratis. I primi 15 livelli sono gratis e un solo acquisto sblocca i livelli 16–50. I pacchetti a tema per vestire la gelatina sono facoltativi. Niente pubblicità, niente abbonamenti, niente gacha.',
       q2: 'Serve internet?', a2: 'No. I livelli e la modalità a due sullo stesso telefono funzionano offline. Solo le partite online e la condivisione delle mappe richiedono la connessione.',
       q3: 'Come si gioca insieme?', a3: 'In due sullo stesso telefono, su un campo pensato per due. Online, crea una stanza e condividi il suo codice stanza di cinque lettere. Si può giocare fino a 6.',
       q4: 'Serve un account?', a4: 'No. Puoi giocare subito. L’accesso (Impostazioni → Account) è facoltativo e salva i tuoi progressi per continuare con lo stesso account su Android, iPhone, iPad o PC (Steam).',
@@ -896,7 +901,7 @@ footer{margin-top:30px}
       hCh1: '12 livelli speciali', hCh2: 'Una regola diversa per ogni sfida', hCh3: 'Livelli boss rimescolati',
       pcSoon: 'PC (Steam): presto disponibile', aSteamPre: 'Lista desideri su Steam', landLine: 'Gioca in verticale o in orizzontale, come preferisci.', pcLine: 'Presto anche su PC, su Steam.',
       q6: 'Posso giocare in battaglia e creare mappe fin da subito?', a6: 'All’inizio ci sono i livelli singoli. Superando i livelli gratuiti si aprono, uno alla volta, la modalità battaglia, le stanze online e Crea mappa. Anche le prime due sfide sono gratis; il resto è nella versione completa.' },
-    de: { name: 'Pop! Jelly PangPang', tag1: 'Fang sie mit Gelee-Bomben –', tag2: 'Peng-Peng!', sub: 'Eine Süßigkeitenwelt, die zu Zucker erstarrt, wenn man stillsteht! Das große Abenteuer eines kleinen Gelees gegen den Zucker-Riesen · Mit Freunden: fangt euch gegenseitig – ein wabbeliges Partyspiel.',
+    de: { name: 'Pop! Jelly PangPang', freeVm: 'Kämpfe und der Karteneditor sind ebenfalls kostenlos. Du schaltest sie frei, indem du die kostenlosen Level schaffst. Dafür ist kein Kauf nötig.', hFree: 'Kein Kauf nötig', tag1: 'Fang sie mit Gelee-Bomben –', tag2: 'Peng-Peng!', sub: 'Eine Süßigkeitenwelt, die zu Zucker erstarrt, wenn man stillsteht! Das Abenteuer eines kleinen Gelees, das die vom Zucker-Riesen gefangenen Gelees rettet und die Stadt wieder zum Leben erweckt · Mit Freunden: fangt euch gegenseitig – ein wabbeliges Partyspiel.',
       preChip: 'Vorregistrierung offen\u00a0· Start: {d}', preChipNoDate: 'Vorregistrierung offen',
       aPlayPre: 'Bei Google Play vorregistrieren', aAppPre: 'Im App Store vorbestellen', preNote: 'Wer sich vorregistriert oder vorbestellt, kann das Spiel am Starttag sofort laden.',
       soon: 'Bald bei Google Play und im App Store', outBoth: 'Jetzt erhältlich – kostenlos starten', outPlay: 'Jetzt bei Google Play', outApp: 'Jetzt im App Store',
@@ -904,14 +909,14 @@ footer{margin-top:30px}
       aPlay: 'Jetzt bei Google Play', aApp: 'Laden im App Store', appSoon: 'iPhone und iPad: bald verfügbar', playSoon: 'Android: bald verfügbar', alsoApp: 'Auch für iPhone und iPad', alsoPlay: 'Auch für Android', trailer: 'Trailer ansehen',
       f1h: 'Wabbelig', f1p: 'Tipp dein Gelee an und es kichert. Piks es zu oft und es schmollt.',
       f2h: 'Zusammen besser', f2p: 'Zu zweit an einem Handy oder online mit bis zu 6 Spielern per Raumcode.',
-      f3h: 'Fair', f3p: 'Keine Werbung. Kein Gacha. Die ersten 15 Level sind kostenlos, ein einmaliger Kauf schaltet den Rest frei.',
+      f3h: 'Fair', f3p: 'Keine Werbung. Kein Gacha. Die ersten 15 Level sind kostenlos, ein einmaliger Kauf schaltet die Level 16–50 frei.',
       f4h: 'Viel zu tun', f4p: '50 Level mit Bossen, ein Sprung über ein Feld, ein Karteneditor und viele Möglichkeiten, dein Gelee zu stylen.',
       t1: '12 Sprachen', t2: 'Controller-Unterstützung', t3: 'Keine Anmeldung nötig',
       chH: 'Folge den Gelees', chP: 'Neue Clips und Updates gibt es auf allen Kanälen. Mitspieler finden, Karten teilen oder Fehler melden: auf Discord.',
       age: 'Discord ist ab 13 Jahren (in manchen Ländern älter).', priv: 'Datenschutz', contact: 'Kontakt',
       sndOn: 'Ton einschalten', sndOff: 'Ton ausschalten', langLbl: 'Sprache', vid: 'Gameplay: Gelees legen Bomben und lassen einander in Süßigkeiten-Arenen platzen',
       faqH: 'Häufige Fragen',
-      q1: 'Ist es kostenlos?', a1: 'Ja, Herunterladen und Spielen ist kostenlos. Die ersten 15 Level sind kostenlos, ein einmaliger Kauf schaltet alle 50 frei. Thematische Kosmetik-Pakete sind optional. Keine Werbung, kein Abo, kein Gacha.',
+      q1: 'Ist es kostenlos?', a1: 'Ja, Herunterladen und Spielen ist kostenlos. Die ersten 15 Level sind kostenlos, ein einmaliger Kauf schaltet Level 16–50 frei. Thematische Kosmetik-Pakete sind optional. Keine Werbung, kein Abo, kein Gacha.',
       q2: 'Brauche ich Internet?', a2: 'Nein. Die Level und der Zwei-Spieler-Modus an einem Handy funktionieren offline. Nur Online-Matches und das Teilen von Karten brauchen eine Verbindung.',
       q3: 'Wie spielen wir zusammen?', a3: 'Zu zweit an einem Handy, auf einem Spielfeld für zwei. Online erstellst du einen Raum und teilst seinen Raumcode mit fünf Buchstaben. Bis zu 6 können mitspielen.',
       q4: 'Brauche ich ein Konto?', a4: 'Nein. Du kannst sofort spielen. Die Anmeldung (Einstellungen → Konto) ist freiwillig und speichert deinen Fortschritt, damit du mit demselben Konto auf Android, iPhone, iPad oder PC (Steam) weiterspielen kannst.',
@@ -928,7 +933,7 @@ footer{margin-top:30px}
       hCh1: '12 Spezial-Level', hCh2: 'Jede Herausforderung mit eigener Regel', hCh3: 'Boss-Level neu gemischt',
       pcSoon: 'PC (Steam): bald verfügbar', aSteamPre: 'Auf die Steam-Wunschliste', landLine: 'Spiel hochkant oder quer, ganz wie du magst.', pcLine: 'Bald auch am PC auf Steam.',
       q6: 'Kann ich sofort kämpfen und Karten bauen?', a6: 'Am Anfang gibt es die Einzelspieler-Level. Während du die kostenlosen Level schaffst, werden Kampfmodus, Online-Räume und Karten-Editor nach und nach freigeschaltet. Auch die ersten zwei Herausforderungen sind kostenlos, der Rest gehört zur Vollversion.' },
-    pt: { name: 'Pop! Jelly PangPang', tag1: 'Prenda com bombas de gelatina:', tag2: 'pang-pang!', sub: 'Um mundo de doces que endurece em açúcar se você ficar parado! A grande aventura de uma gelatininha contra o Gigante de açúcar · Com amigos, prendam uns aos outros numa festa fofinha.',
+    pt: { name: 'Pop! Jelly PangPang', freeVm: 'Batalhas e o criador de mapas também são grátis. Eles são liberados conforme você conclui as fases grátis, sem precisar de nenhuma compra.', hFree: 'Nenhuma compra necessária', tag1: 'Prenda com bombas de gelatina:', tag2: 'pang-pang!', sub: 'Um mundo de doces que endurece em açúcar se você ficar parado! Uma gelatininha resgata as gelatinas presas pelo Gigante de açúcar e traz a cidade de volta à vida · Com amigos, prendam uns aos outros numa festa fofinha.',
       preChip: 'Pré-registro aberto\u00a0· Lançamento: {d}', preChipNoDate: 'Pré-registro aberto',
       aPlayPre: 'Pré-registro no Google Play', aAppPre: 'Pré-venda na App Store', preNote: 'Com o pré-registro ou a pré-venda, o jogo fica pronto para baixar no dia do lançamento.',
       soon: 'Em breve no Google Play e na App Store', outBoth: 'Já disponível — comece grátis', outPlay: 'Já disponível no Google Play', outApp: 'Já disponível na App Store',
@@ -936,14 +941,14 @@ footer{margin-top:30px}
       aPlay: 'Disponível no Google Play', aApp: 'Baixar na App Store', appSoon: 'iPhone e iPad: em breve', playSoon: 'Android: em breve', alsoApp: 'Também no iPhone e iPad', alsoPlay: 'Também no Android', trailer: 'Assistir ao trailer',
       f1h: 'Fofinho', f1p: 'Toque na sua gelatina e ela dá risada. Cutuque demais e ela fica emburrada.',
       f2h: 'Melhor em grupo', f2p: 'Dois jogadores no mesmo celular, ou até 6 online com um código da sala.',
-      f3h: 'Justo', f3p: 'Sem anúncios. Sem gacha. As 15 primeiras fases são grátis e uma única compra libera o resto.',
+      f3h: 'Justo', f3p: 'Sem anúncios. Sem gacha. As 15 primeiras fases são grátis e uma única compra libera as fases 16–50.',
       f4h: 'Muito o que fazer', f4p: '50 fases com chefes, um pulo de uma casa, um criador de mapas e várias formas de vestir sua gelatina.',
       t1: '12 idiomas', t2: 'Suporte a controle', t3: 'Sem cadastro',
       chH: 'Siga as gelatinas', chP: 'Novos clipes e novidades em todos os canais. Para achar gente para jogar, compartilhar seus mapas ou avisar de um bug, venha para o Discord.',
       age: 'O Discord é para maiores de 13 anos (mais em alguns países).', priv: 'Privacidade', contact: 'Contato',
       sndOn: 'Ativar som', sndOff: 'Desativar som', langLbl: 'Idioma', vid: 'Gameplay: as gelatinas soltam bombas e estouram umas às outras em arenas de doces',
       faqH: 'Perguntas frequentes',
-      q1: 'É grátis?', a1: 'Sim, baixar e jogar é grátis. As 15 primeiras fases são grátis e uma única compra libera todas as 50. Os pacotes temáticos de visuais são opcionais. Sem anúncios, sem assinatura, sem gacha.',
+      q1: 'É grátis?', a1: 'Sim, baixar e jogar é grátis. As 15 primeiras fases são grátis e uma única compra libera as fases 16–50. Os pacotes temáticos de visuais são opcionais. Sem anúncios, sem assinatura, sem gacha.',
       q2: 'Preciso de internet?', a2: 'Não. As fases e o modo de dois jogadores no mesmo celular funcionam offline. Só as partidas online e o compartilhamento de mapas precisam de conexão.',
       q3: 'Como jogamos juntos?', a3: 'Dois jogadores dividem o mesmo celular em um tabuleiro feito para dois. Online, crie uma sala e compartilhe o código da sala de cinco letras. Até 6 podem jogar.',
       q4: 'Preciso de uma conta?', a4: 'Não. Dá para jogar na hora. Entrar na conta (Opções → Conta) é opcional e salva seu progresso para continuar com a mesma conta no Android, iPhone, iPad ou PC (Steam).',
