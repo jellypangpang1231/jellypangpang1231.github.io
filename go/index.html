@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Pop! Jelly PangPang</title>
+<meta property="og:title" content="Pop! Jelly PangPang">
+<meta property="og:image" content="https://jellypangpang1231.github.io/og.png">
+<link rel="icon" href="../favicon.ico">
+<!-- C-1530 재성님 "폰 카메라로 찍으면 게임 설치되어 있으면 게임 안에 관련 ui까지 열어주거나, 설치 안되어 있으면 스토어 연결까지 친절하게" — 게임 QR 이 여는 안내 쪽. 앱이 깔린 안드로이드는 앱 링크로 이 쪽을 건너뛰고 게임이 바로 연다. -->
+<style>
+@font-face{font-family:"Fredoka";src:url("../fredoka-600.woff2") format("woff2");font-weight:600;font-display:swap}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:linear-gradient(180deg,#ffe9f2 0%,#fff6dc 60%,#e6f6ff 100%);color:#5b3a1e;font-family:"Fredoka",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+main{max-width:460px;margin:0 auto;padding:18px 18px 40px;text-align:center}
+.top{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 14px}
+.top img{width:56px;height:56px;border-radius:14px;box-shadow:0 3px 0 #e8b9c9}
+.top b{font-size:20px}
+.card{background:#fff;border-radius:24px;padding:20px 16px;box-shadow:0 6px 0 #f2c7d6,0 10px 24px rgba(200,120,150,.18)}
+h1{font-size:24px;margin:0 0 14px;line-height:1.3}
+.code{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff6e6;border:3px dashed #ffb86b;border-radius:18px;padding:12px 10px;margin:0 0 16px}
+.code span{font-size:30px;letter-spacing:2px;font-weight:600;color:#c4561c;direction:ltr}
+.code small{display:block;font-size:12px;color:#a07a55}
+.code button{min-height:44px;padding:0 14px;border:0;border-radius:14px;background:#7cc8ff;color:#fff;font:inherit;font-size:16px;box-shadow:0 3px 0 #4f9fd6}
+.store{display:block;margin:6px auto 10px}
+.store img{height:72px;max-width:100%}#play img{height:104px;margin:-16px 0}
+.btn{display:block;width:100%;min-height:58px;margin:10px 0;border:0;border-radius:18px;font:inherit;font-size:19px;color:#fff;background:#ff7fa8;box-shadow:0 4px 0 #d9567f;text-decoration:none;line-height:58px}
+.btn.sub{background:#8fd18a;box-shadow:0 4px 0 #5ea95a}
+.btn.steam{background:#3d5a80;box-shadow:0 4px 0 #24384f}
+p{margin:8px 0;font-size:15px;line-height:1.5}
+.hint{color:#7a5a3a}.small{font-size:13px;color:#a07a55}
+.inapp{background:#fff3b0;border-radius:16px;padding:12px;margin:0 0 14px;font-size:15px}
+.inapp .btn{min-height:48px;line-height:48px;font-size:17px;background:#ffb547;box-shadow:0 4px 0 #d38a1c}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#5b3a1e;color:#fff;padding:10px 18px;border-radius:14px;opacity:0;transition:opacity .2s}
+.toast.on{opacity:1}
+a.home{display:inline-block;margin-top:18px;color:#c4561c;font-size:14px}
+[dir=rtl] .code{flex-direction:row-reverse}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<div class="toast" id="toast"></div>
+<script>
+var KEYS=['name','mapT','roomT','codeL','copy','copied','open','afterM','afterMi','afterR','afterRi','prereg','inapp','inappBtn','inappIos','pc','pc2','steam','bad','home'];
+var T={
+ko:['터져라 젤리팡팡','친구가 맵을 보냈어요!','친구가 같이 놀자고 불렀어요!','코드','복사','복사했어요!','이미 깔았어요, 게임 열기',
+ '깔고 나서 게임을 열면 이 맵이 바로 떠요','게임을 열고 맵 보관함 → 코드 넣기에 붙여 넣어요','게임을 열면 참가 화면에 코드가 들어가 있어요','게임을 열고 친구와 같이 → 코드로 참가에 넣어요',
+ '스토어에 사전 등록만 보이면 눌러 두세요. 나오면 알려 줘요','이 앱 안에서는 게임이 안 열릴 수 있어요','다른 브라우저로 열기','오른쪽 위 ⋯ 를 눌러 Safari 로 열어 주세요',
+ '이 페이지는 폰에서 열어요. 폰 카메라로 친구의 QR 을 찍어 주세요','PC 에서는 스팀 판 게임에 코드를 넣어요','스팀에서 보기','코드가 없어요. 친구에게 QR 을 다시 받아요','젤리팡팡 더 알아보기'],
+en:['Pop! Jelly PangPang','A friend sent you a map!','A friend wants to play with you!','Code','Copy','Copied!','I have it, open the game',
+ 'Open the game after installing and this map pops up','Open the game, then paste it in Map box → Enter code','Open the game and the code is already in the Join screen','Open the game, then Play with friends → Join with code',
+ 'If the store only shows Pre-register, tap it and we will tell you when it is out','The game may not open inside this app','Open in another browser','Tap ⋯ at the top right and open in Safari',
+ 'Open this page on a phone. Scan your friend’s QR with the phone camera','On PC, type the code in the Steam version','See it on Steam','No code here. Ask your friend for the QR again','More about the game'],
+ja:['Pop! Jelly PangPang','友だちがマップをおくってくれたよ!','友だちがいっしょにあそぼうって!','コード','コピー','コピーしたよ!','もう入れてる、ゲームをひらく',
+ 'インストールしてゲームをひらくと、このマップがすぐ出るよ','ゲームをひらいて マップばこ → コード入力 にはりつけてね','ゲームをひらくと参加画面にコードが入っているよ','ゲームをひらいて 友だちと → コードで参加 に入れてね',
+ 'ストアに事前登録だけ出ていたらおしておいてね。出たらおしらせするよ','このアプリの中ではゲームがひらかないことがあるよ','ほかのブラウザでひらく','右上の ⋯ をおして Safari でひらいてね',
+ 'このページはスマホでひらいてね。スマホのカメラで友だちのQRを読みとってね','PCではSteam版のゲームにコードを入れてね','Steamで見る','コードがないよ。友だちにもう一度QRをもらってね','ゲームをもっと知る'],
+'zh-Hant':['Pop! Jelly PangPang','朋友送你一張地圖!','朋友找你一起玩!','代碼','複製','複製好了!','已經安裝了,打開遊戲',
+ '安裝後打開遊戲,這張地圖會馬上出現','打開遊戲,貼到 地圖盒 → 輸入代碼','打開遊戲,加入畫面已填好代碼','打開遊戲,到 和朋友一起 → 用代碼加入 輸入',
+ '如果商店只有「預先註冊」,先按下去,上架時會通知你','在這個 App 裡可能打不開遊戲','用其他瀏覽器打開','按右上角 ⋯ 用 Safari 打開',
+ '請用手機打開這一頁。用手機相機掃朋友的 QR','電腦請在 Steam 版遊戲輸入代碼','在 Steam 查看','沒有代碼。請朋友再給你一次 QR','了解更多遊戲內容'],
+'zh-Hans':['Pop! Jelly PangPang','朋友送你一张地图!','朋友找你一起玩!','代码','复制','复制好了!','已经安装了,打开游戏',
+ '安装后打开游戏,这张地图会马上出现','打开游戏,粘贴到 地图盒 → 输入代码','打开游戏,加入界面已填好代码','打开游戏,到 和朋友一起 → 用代码加入 输入',
+ '如果商店只有“预约”,先点一下,上架时会通知你','在这个 App 里可能打不开游戏','用其他浏览器打开','点右上角 ⋯ 用 Safari 打开',
+ '请用手机打开这一页。用手机相机扫朋友的二维码','电脑请在 Steam 版游戏输入代码','在 Steam 查看','没有代码。请朋友再给你一次二维码','了解更多游戏内容'],
+ru:['Pop! Jelly PangPang','Друг прислал тебе карту!','Друг зовёт поиграть вместе!','Код','Копировать','Скопировано!','Игра уже есть, открыть',
+ 'Установи и открой игру — карта сразу появится','Открой игру и вставь код: Коробка карт → Ввести код','Открой игру — код уже будет на экране входа','Открой игру: С друзьями → Войти по коду',
+ 'Если в магазине только «Предрегистрация», нажми её — мы сообщим о выходе','Внутри этого приложения игра может не открыться','Открыть в другом браузере','Нажми ⋯ справа вверху и открой в Safari',
+ 'Открой эту страницу на телефоне. Отсканируй QR друга камерой','На ПК введи код в версии для Steam','Смотреть в Steam','Кода нет. Попроси у друга QR ещё раз','Подробнее об игре'],
+ar:['Pop! Jelly PangPang','أرسل لك صديقك خريطة!','صديقك يدعوك للعب معًا!','الرمز','نسخ','تم النسخ!','لدي اللعبة، افتحها',
+ 'ثبّت اللعبة وافتحها وستظهر هذه الخريطة فورًا','افتح اللعبة والصق الرمز في صندوق الخرائط ← إدخال الرمز','افتح اللعبة وستجد الرمز في شاشة الانضمام','افتح اللعبة ثم اللعب مع الأصدقاء ← الانضمام برمز',
+ 'إذا ظهر التسجيل المسبق فقط فاضغطه وسنخبرك عند الإطلاق','قد لا تفتح اللعبة داخل هذا التطبيق','افتح في متصفح آخر','اضغط ⋯ في الأعلى وافتح في Safari',
+ 'افتح هذه الصفحة على الهاتف. امسح رمز QR الخاص بصديقك بكاميرا الهاتف','على الكمبيوتر أدخل الرمز في نسخة Steam','شاهدها على Steam','لا يوجد رمز. اطلب من صديقك رمز QR مرة أخرى','المزيد عن اللعبة'],
+es:['Pop! Jelly PangPang','¡Un amigo te envió un mapa!','¡Un amigo quiere jugar contigo!','Código','Copiar','¡Copiado!','Ya lo tengo, abrir el juego',
+ 'Instala y abre el juego: este mapa aparecerá enseguida','Abre el juego y pégalo en Caja de mapas → Poner código','Abre el juego y el código ya estará en la pantalla de Entrar','Abre el juego: Jugar con amigos → Entrar con código',
+ 'Si la tienda solo muestra Preinscripción, tócala y te avisaremos','Puede que el juego no se abra dentro de esta app','Abrir en otro navegador','Toca ⋯ arriba a la derecha y abre en Safari',
+ 'Abre esta página en un teléfono. Escanea el QR de tu amigo con la cámara','En PC, pon el código en la versión de Steam','Ver en Steam','No hay código. Pide el QR otra vez a tu amigo','Más sobre el juego'],
+fr:['Pop! Jelly PangPang','Un ami t’a envoyé une carte !','Un ami veut jouer avec toi !','Code','Copier','Copié !','Je l’ai, ouvrir le jeu',
+ 'Installe puis ouvre le jeu : la carte s’affiche tout de suite','Ouvre le jeu et colle-le dans Boîte à cartes → Entrer un code','Ouvre le jeu : le code est déjà dans l’écran Rejoindre','Ouvre le jeu : Jouer avec des amis → Rejoindre avec un code',
+ 'Si le store n’affiche que Préinscription, touche-la et on te préviendra','Le jeu peut ne pas s’ouvrir dans cette appli','Ouvrir dans un autre navigateur','Touche ⋯ en haut à droite et ouvre dans Safari',
+ 'Ouvre cette page sur un téléphone. Scanne le QR de ton ami avec l’appareil photo','Sur PC, tape le code dans la version Steam','Voir sur Steam','Pas de code ici. Redemande le QR à ton ami','En savoir plus sur le jeu'],
+it:['Pop! Jelly PangPang','Un amico ti ha mandato una mappa!','Un amico vuole giocare con te!','Codice','Copia','Copiato!','Ce l’ho, apri il gioco',
+ 'Installa e apri il gioco: la mappa compare subito','Apri il gioco e incollalo in Scatola mappe → Inserisci codice','Apri il gioco: il codice è già nella schermata Entra','Apri il gioco: Gioca con amici → Entra con codice',
+ 'Se lo store mostra solo Pre-registrazione, toccala e ti avviseremo','Il gioco potrebbe non aprirsi dentro questa app','Apri in un altro browser','Tocca ⋯ in alto a destra e apri in Safari',
+ 'Apri questa pagina su un telefono. Inquadra il QR del tuo amico con la fotocamera','Su PC inserisci il codice nella versione Steam','Vedi su Steam','Nessun codice. Chiedi di nuovo il QR al tuo amico','Scopri il gioco'],
+de:['Pop! Jelly PangPang','Ein Freund hat dir eine Karte geschickt!','Ein Freund will mit dir spielen!','Code','Kopieren','Kopiert!','Hab ich schon, Spiel öffnen',
+ 'Installiere und öffne das Spiel – die Karte erscheint sofort','Öffne das Spiel und füge ihn ein: Kartenkiste → Code eingeben','Öffne das Spiel – der Code steht schon im Beitreten-Fenster','Öffne das Spiel: Mit Freunden → Mit Code beitreten',
+ 'Zeigt der Store nur Vorregistrieren, tippe darauf – wir sagen Bescheid','In dieser App öffnet sich das Spiel vielleicht nicht','In anderem Browser öffnen','Tippe oben rechts auf ⋯ und öffne in Safari',
+ 'Öffne diese Seite auf einem Handy. Scanne den QR-Code deines Freundes mit der Kamera','Am PC gib den Code in der Steam-Version ein','Auf Steam ansehen','Kein Code da. Frag deinen Freund noch mal nach dem QR-Code','Mehr über das Spiel'],
+pt:['Pop! Jelly PangPang','Um amigo te mandou um mapa!','Um amigo quer jogar com você!','Código','Copiar','Copiado!','Já tenho, abrir o jogo',
+ 'Instale e abra o jogo: o mapa aparece na hora','Abra o jogo e cole em Caixa de mapas → Inserir código','Abra o jogo: o código já estará na tela de Entrar','Abra o jogo: Jogar com amigos → Entrar com código',
+ 'Se a loja só mostrar Pré-registro, toque nele e avisaremos quando sair','O jogo pode não abrir dentro deste app','Abrir em outro navegador','Toque em ⋯ no canto superior direito e abra no Safari',
+ 'Abra esta página num celular. Escaneie o QR do seu amigo com a câmera','No PC, digite o código na versão Steam','Ver na Steam','Sem código. Peça o QR de novo ao seu amigo','Mais sobre o jogo']
+};
+(function(){
+var LANGS=['ko','en','ja','zh-Hant','zh-Hans','ru','ar','es','fr','it','de','pt'];
+function pickLang(){
+  var q=new URLSearchParams(location.search).get('lang'); if(q&&LANGS.indexOf(q)>=0) return q;
+  try{var s=localStorage.getItem('jpp_lang'); if(s&&LANGS.indexOf(s)>=0) return s;}catch(e){}
+  var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||'en'];
+  for(var i=0;i<ls.length;i++){var l=String(ls[i]||'');
+    if(/^zh/i.test(l)) return /TW|HK|MO|Hant/i.test(l)?'zh-Hant':'zh-Hans';
+    var b=l.slice(0,2).toLowerCase(); if(LANGS.indexOf(b)>=0) return b;}
+  return 'en';
+}
+var LG=pickLang(), S={}; KEYS.forEach(function(k,i){S[k]=(T[LG]||T.en)[i];});
+document.documentElement.lang=LG; if(LG==='ar') document.documentElement.dir='rtl';
+document.title=S.name;
+var Q=new URLSearchParams(location.search);
+var M=(Q.get('m')||'').toUpperCase().replace(/[^A-Z0-9-]/g,''), R=(Q.get('r')||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+if(M&&!/^JELLY-[A-Z2-9]{4,5}$/.test(M)) M='';
+if(R&&!/^[A-Z0-9]{3,8}$/.test(R)) R='';
+var KIND=M?'m':(R?'r':''), CODE=M||R;
+var ua=navigator.userAgent||'';
+var isAnd=/Android/i.test(ua), isIOS=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/i.test(ua)&&(navigator.maxTouchPoints||0)>1);
+var OS=isAnd?'and':(isIOS?'ios':'pc');
+var IN=/KAKAOTALK/i.test(ua)?'kakao':/Instagram/i.test(ua)?'insta':/FBAN|FBAV|FB_IAB/i.test(ua)?'fb':/\bLine\//i.test(ua)?'line':/NAVER\(inapp|DaumApps|everytimeApp/i.test(ua)?'other':'';
+var PLAY='https://play.google.com/store/apps/details?id=com.jellypangpang.game'+(CODE?'&referrer='+encodeURIComponent('jpp_'+KIND+'='+CODE):'');
+/* App Store 는 아직 안 열려 404 라 비워 둔다. 출시되면 'https://apps.apple.com/app/id6817233245' 로 채운다 */
+var AS='', STEAM='https://store.steampowered.com/app/5396440';
+var SOON={ko:'아이폰 판은 곧 나와요. 코드를 복사해 두면 나온 뒤 바로 쓸 수 있어요',en:'The iPhone version is coming soon. Copy the code now and use it as soon as it is out',ja:'iPhone版はもうすぐ出ます。コードをコピーしておけば、出たらすぐ使えます','zh-Hant':'iPhone 版即將推出。先複製代碼，推出後就能馬上使用','zh-Hans':'iPhone 版即将推出。先复制代码，推出后就能马上使用',ru:'Версия для iPhone скоро выйдет. Скопируйте код и используйте его сразу после выхода',ar:'نسخة iPhone قادمة قريبًا. انسخ الرمز الآن لتستخدمه فور صدورها',es:'La versión para iPhone llegará pronto. Copia el código y úsalo en cuanto salga',fr:'La version iPhone arrive bientôt. Copie le code et utilise-le dès sa sortie',it:'La versione per iPhone arriva presto. Copia il codice e usalo appena esce',de:'Die iPhone-Version kommt bald. Kopiere den Code und nutze ihn, sobald sie da ist',pt:'A versão para iPhone chega em breve. Copie o código e use-o assim que sair'};
+var here=location.host+location.pathname+location.search;
+var INTENT='intent://'+here+'#Intent;scheme=https;package=com.jellypangpang.game;S.browser_fallback_url='+encodeURIComponent(PLAY)+';end';
+function E(t,c,x){var e=document.createElement(t); if(c) e.className=c; if(x!=null) e.textContent=x; return e;}
+function toast(x){var t=document.getElementById('toast'); t.textContent=x; t.classList.add('on'); clearTimeout(toast.k); toast.k=setTimeout(function(){t.classList.remove('on');},1800);}
+function copy(){
+  var ok=function(){toast(S.copied);};
+  try{ if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(CODE).then(ok,fb); return; } }catch(e){}
+  fb();
+  function fb(){ try{var i=document.createElement('input'); i.value=CODE; document.body.appendChild(i); i.select(); document.execCommand('copy'); i.remove(); ok();}catch(e){} }
+}
+var app=document.getElementById('app');
+var top=E('div','top'); var ic=E('img'); ic.src='../icon-192.png'; ic.alt=''; top.appendChild(ic); top.appendChild(E('b',null,S.name)); app.appendChild(top);
+if(IN && OS!=='pc'){
+  var ib=E('div','inapp'); ib.appendChild(E('div',null,'⚠ '+S.inapp));
+  var ext='';
+  if(IN==='kakao') ext='kakaotalk://web/openExternal?url='+encodeURIComponent(location.href);
+  else if(IN==='line') ext=location.href+(location.search?'&':'?')+'openExternalBrowser=1';
+  else if(OS==='and') ext='intent://'+here+'#Intent;scheme=https;package=com.android.chrome;end';
+  if(ext){ var xb=E('a','btn',S.inappBtn); xb.href=ext; ib.appendChild(xb); } else ib.appendChild(E('div','hint',S.inappIos));
+  app.appendChild(ib);
+}
+var card=E('div','card'); app.appendChild(card);
+card.appendChild(E('h1',null,CODE?(KIND==='m'?'🗺 '+S.mapT:'🎮 '+S.roomT):S.bad));
+if(CODE){
+  var cb=E('div','code'); var cs=E('div'); cs.appendChild(E('small',null,S.codeL)); cs.appendChild(E('span',null,CODE)); cb.appendChild(cs);
+  var cpy=E('button',null,'📋 '+S.copy); cpy.onclick=copy; cb.appendChild(cpy); card.appendChild(cb);
+}
+function badge(href,src,id){var a=E('a','store'); a.href=href; a.id=id; a.rel='noopener'; var im=E('img'); im.src=src; im.alt=id; a.appendChild(im); card.appendChild(a); return a;}
+if(OS==='and'){
+  badge(PLAY,'../badges/gp-'+LG+'.png','play');
+  var ob=E('a','btn sub','▶ '+S.open); ob.id='open'; ob.href=CODE?INTENT:'intent://'+location.host+'/go/#Intent;scheme=https;package=com.jellypangpang.game;S.browser_fallback_url='+encodeURIComponent(PLAY)+';end'; card.appendChild(ob);
+  if(CODE) card.appendChild(E('p','hint',KIND==='m'?S.afterM:S.afterR));
+  card.appendChild(E('p','small',S.prereg));
+}else if(OS==='ios'&&!AS){
+  card.appendChild(E('p','hint',SOON[LG]||SOON.en));
+}else if(OS==='ios'){
+  badge(AS,'../badges/as-'+LG+'.svg','appstore');
+  var ob2=E('button','btn sub','▶ '+S.open); ob2.id='open'; card.appendChild(ob2);
+  var h2=E('p','hint',CODE?(KIND==='m'?S.afterMi:S.afterRi):''); card.appendChild(h2);
+  ob2.onclick=function(){ if(CODE) copy(); h2.style.fontWeight='700'; };
+  card.appendChild(E('p','small',S.prereg));
+}else{
+  card.appendChild(E('p','hint','📱 '+S.pc));
+  if(CODE) card.appendChild(E('p','hint',S.pc2));
+  var st=E('a','btn steam','🎮 '+S.steam); st.href=STEAM; st.rel='noopener'; card.appendChild(st);
+}
+var hm=E('a','home',S.home); hm.href='../?lang='+encodeURIComponent(LG); app.appendChild(hm);
+})();
+</script>
+</body>
+</html>
