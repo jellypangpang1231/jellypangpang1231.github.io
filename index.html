@@ -139,7 +139,7 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 .btn-pre:active{box-shadow:0 2px 0 rgba(120,10,70,.34)}
 .btn-pre.off{background:rgba(255,255,255,.16);color:#fff;font-size:15.5px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.75);text-shadow:0 1px 0 rgba(130,10,70,.35);cursor:default;pointer-events:none}
 .btn-pre.off:active{transform:none}
-.chip.pre{max-width:100%;line-height:1.35;border-radius:20px;text-wrap:balance}
+.chip.pre{max-width:100%;line-height:1.35;border-radius:20px;text-wrap:balance;word-break:keep-all}
 .prenote{margin:2px 0 0;max-width:24em;font-size:14px;line-height:1.45;color:#fff;text-shadow:0 1px 0 rgba(130,10,70,.4);text-wrap:balance}
 @media (min-width:640px){.preget{grid-template-columns:repeat(2,minmax(0,1fr));width:min(100%,580px)}.preget>.chip,.preget>.prenote{grid-column:1/-1}}
 .btn-discord{background:var(--discord);color:#fff;box-shadow:0 5px 0 #3c45b5}
@@ -551,7 +551,7 @@ footer{margin-top:30px}
      phase    : ''(기본 · 위 주소에 따라 '곧 출시' / '출시됨') | 'pre'(사전 예약 화면 — 구글 사전 등록 · 애플 사전 주문 글자 단추, play·appstore 중 하나는 채워져 있어야 함) | 'live'(= '' 와 같음, 기록용)
      launch   : 'YYYY-MM-DD' — pre 일 때 칩에 "10월 8일 출시" 로 현지화해 보인다(비우면 날짜 없이 · 날짜가 지나면 저절로 빠진다)
      ──────────────────────────────────────────────────────────────────── */
-  var CFG = { play: 'https://play.google.com/store/apps/details?id=com.jellypangpang.game', appstore: 'https://apps.apple.com/app/id6817233245', applePt: '', trailer: 'https://youtu.be/7cLBKEUDaxs', phase: 'pre', launch: '', steam: 'https://store.steampowered.com/app/5396440' };   /* [c844] steam: 스팀 상점 주소(비우면 PC 단추가 'PC(스팀)는 곧 나와요' 글자로 돌아간다) · [c958] 10-11 상점 공개('곧 출시 예정' — 찜하기)로 채움 */
+  var CFG = { play: 'https://play.google.com/store/apps/details?id=com.jellypangpang.game', appstore: 'https://apps.apple.com/app/id6817233245', applePt: '', trailer: 'https://youtu.be/7cLBKEUDaxs', phase: 'pre', launch: '2026-11-11', steam: 'https://store.steampowered.com/app/5396440' };   /* [c844] steam: 스팀 상점 주소(비우면 PC 단추가 'PC(스팀)는 곧 나와요' 글자로 돌아간다) · [c958] 10-11 상점 공개('곧 출시 예정' — 찜하기)로 채움 */
 
   var $ = function (id) { return document.getElementById(id); };
   var INL = window.__INL || {};                   /* 한 장짜리 미리보기(build.py)만 쓴다 — 파일 이름 → 박아 넣은 그림(스크린샷·배지) */
@@ -563,7 +563,7 @@ footer{margin-top:30px}
                ['ar', 'العربية'], ['es', 'Español'], ['fr', 'Français'], ['it', 'Italiano'], ['de', 'Deutsch'], ['pt', 'Português']];
   var T = {
     en: { name: 'Pop! Jelly PangPang', freeVm: 'Battles and the map maker are free too. They unlock as you clear the free stages, no purchase needed.', hFree: 'No purchase needed', tag1: 'Trap them with jelly bombs —', tag2: 'pang-pang!', sub: 'A candy world that hardens into sugar if you stand still! A little jelly rescues the jellies the Sugar Giant caught and brings the town back to life · With friends, trap each other in a squishy pang-pang party.',
-      preChip: 'Pre-registration open\u00a0· Launches {d}', preChipNoDate: 'Pre-registration open',
+      preChip: 'Pre-registration open\u00a0· Out {d} on iOS & Android', preChipNoDate: 'Pre-registration open',
       aPlayPre: 'Pre-register on Google Play', aAppPre: 'Pre-order on the App Store', preNote: 'Pre-register or pre-order to get it on launch day.',
       soon: 'Coming soon to Google Play & App Store', outBoth: 'Out now! Free to start', outPlay: 'Out now on Google Play', outApp: 'Out now on the App Store',
       join: 'Join the official Discord', noteSoon: 'Launch news lands on Discord first.', noteOut: 'The first 15 stages are free. No ads, no gacha.',
@@ -608,7 +608,7 @@ footer{margin-top:30px}
       pcAlts: ['Pop! Jelly PangPang on a PC screen: a strawberry jam stage', 'On PC too: the boss stage in the chocolate lava world'],
       q6: 'Can I play battles and the map maker right away?', a6: 'You start with the solo stages. Battle mode, online rooms and the map maker unlock one by one as you clear the free stages. The first two challenge letters are free; the rest come with the full version.' },
     ko: { name: '터져라! 젤리팡팡', freeVm: '대전도 맵 만들기도 무료예요. 단계를 깨다 보면 열려요.', hFree: '구매 없이 열려요', iconAlt: '터져라! 젤리팡팡 앱 아이콘 — 깜짝 놀란 파란 젤리', tag1: '젤리 폭탄으로 가두고', tag2: '팡팡!', sub: '가만히 있으면 설탕에 굳어 버리는 과자 세상! 설탕 거인에게 붙잡힌 젤리들을 구하고 마을을 되살리는 꼬마 젤리의 대모험 · 친구와는 서로 가두는 팡팡 놀이',
-      preChip: '사전 예약 중\u00a0· {d} 출시', preChipNoDate: '사전 예약 중',
+      preChip: '사전 예약 중\u00a0· iOS·Android {d} 출시', preChipNoDate: '사전 예약 중',
       aPlayPre: 'Google Play 사전 예약', aAppPre: 'App Store 사전 예약', preNote: '사전 예약하면 출시 날 바로 받을 수 있어요.',
       soon: '곧 구글 플레이 · 앱 스토어에서 만나요', outBoth: '출시했어요. 무료로 시작할 수 있어요', outPlay: '구글 플레이에 출시했어요', outApp: '앱 스토어에 출시했어요',
       join: '공식 디스코드 놀러 가기', noteSoon: '출시 소식은 디스코드에 제일 먼저 올라와요.', noteOut: '15단계까지 무료예요. 광고도 뽑기도 없어요.',
@@ -653,7 +653,7 @@ footer{margin-top:30px}
       pcAlts: ['PC 화면으로 본 딸기잼 단계', 'PC 화면으로 본 초코 용암 세상의 대장 판'],
       q6: '대전이나 맵 만들기는 처음부터 할 수 있나요?', a6: '처음에는 혼자 하는 단계부터 시작해요. 무료 단계를 하나씩 깨다 보면 대전, 온라인 방, 맵 만들기가 차례로 열려요. 도전장은 1·2번만 무료고, 나머지는 풀버전에 들어 있어요.' },
     ja: { name: 'ハジケロ！ゼリーパンパン', freeVm: '対戦とマップメーカーも無料です。無料ステージをクリアすると解放されるので、購入は必要ありません。', hFree: '購入不要', iconAlt: 'ハジケロ！ゼリーパンパン アプリアイコン：びっくりした青いゼリー', tag1: 'ゼリーばくだんで閉じこめて', tag2: 'パンパン！', sub: 'じっとしていると砂糖でかたまってしまうお菓子の世界！シュガー ジャイアントに捕まったゼリーたちを救い、町をよみがえらせる小さなゼリーの大冒険・友だちとは閉じこめ合うパンパンあそび',
-      preChip: '事前登録受付中\u00a0· {d}配信開始', preChipNoDate: '事前登録受付中',
+      preChip: '事前登録受付中\u00a0· iOS・Android {d}配信開始', preChipNoDate: '事前登録受付中',
       aPlayPre: 'Google Play で事前登録', aAppPre: 'App Store で事前登録', preNote: '事前登録しておくと、配信日にすぐダウンロードできます。',
       soon: 'Google Play・App Store で近日配信', outBoth: '配信中 — 無料で始められます', outPlay: 'Google Play で配信中', outApp: 'App Store で配信中',
       join: '公式 Discord に参加', noteSoon: '配信のお知らせは Discord でいちばん早く届きます。', noteOut: '最初の15ステージは無料。広告なし、ガチャなし。',
@@ -685,7 +685,7 @@ footer{margin-top:30px}
       pcSoon: 'PC（Steam）版は近日配信', aSteamPre: 'Steamでウィッシュリスト', landLine: '縦でも横でも遊べます。', pcLine: 'PC（Steam）にも登場予定です。',
       q6: '対戦やマップ作りは最初から遊べますか？', a6: '最初はひとり用のステージから始まります。無料のステージをクリアしていくと、対戦・オンライン部屋・マップ作りが順番に遊べるようになります。ちょうせんじょうは1・2通目が無料で、残りはフルバージョンに入っています。' },
     'zh-Hant': { name: 'Pop! Jelly PangPang', freeVm: '對戰和地圖製作也都免費。通過免費關卡就能解鎖，不需要購買。', hFree: '無需購買', tag1: '用果凍炸彈困住，', tag2: '碰碰！', sub: '一動也不動就會被糖凝固的甜點世界！小果凍救回被糖霜巨人抓走的果凍們，讓小鎮重新活過來・和朋友互相困住的碰碰遊戲',
-      preChip: '開放事前預約\u00a0· {d}上線', preChipNoDate: '開放事前預約',
+      preChip: '開放事前預約\u00a0· iOS／Android {d}上線', preChipNoDate: '開放事前預約',
       aPlayPre: '在 Google Play 事前預約', aAppPre: '在 App Store 事前預約', preNote: '事前預約後，上線當天就能下載。',
       soon: '即將登上 Google Play 與 App Store', outBoth: '現已推出 — 免費開始', outPlay: '已在 Google Play 推出', outApp: '已在 App Store 推出',
       join: '加入官方 Discord', noteSoon: '上線消息會最先在 Discord 公布。', noteOut: '前 15 關免費。無廣告，無轉蛋。',
@@ -717,7 +717,7 @@ footer{margin-top:30px}
       pcSoon: 'PC（Steam）版即將推出', aSteamPre: '在 Steam 加入願望清單', landLine: '直式、橫式都能玩。', pcLine: 'PC（Steam）版也即將登場。',
       q6: '對戰和地圖製作一開始就能玩嗎？', a6: '一開始是單人關卡。通關免費關卡的過程中，對戰、線上房間和地圖製作會依序開放。前兩封挑戰書免費，其餘包含在完整版中。' },
     'zh-Hans': { name: '果冻碰碰乐', freeVm: '对战和地图制作也是免费的。通关免费关卡就能解锁，无需购买。', hFree: '无需购买', iconAlt: '果冻碰碰乐 应用图标：一只吓了一跳的蓝色果冻', tag1: '用果冻炸弹困住，', tag2: '碰碰！', sub: '一动不动就会被糖凝固的甜点世界！小果冻救出被糖霜巨人抓走的果冻们，让小镇重获生机・和朋友互相困住的碰碰游戏',
-      preChip: '开放预约\u00a0· {d}上线', preChipNoDate: '开放预约',
+      preChip: '开放预约\u00a0· iOS／Android {d}上线', preChipNoDate: '开放预约',
       aPlayPre: '在 Google Play 预约', aAppPre: '在 App Store 预约', preNote: '预约后，上线当天就能下载。',
       soon: '即将登陆 Google Play 和 App Store', outBoth: '现已上线 — 免费开玩', outPlay: '已在 Google Play 上线', outApp: '已在 App Store 上线',
       join: '加入官方 Discord', noteSoon: '上线消息会最先在 Discord 发布。', noteOut: '前 15 关免费。无广告，无抽卡。',
@@ -749,7 +749,7 @@ footer{margin-top:30px}
       pcSoon: 'PC（Steam）版即将上线', aSteamPre: '在 Steam 加入愿望单', landLine: '竖屏、横屏都能玩。', pcLine: 'PC（Steam）版也即将登场。',
       q6: '对战和地图制作一开始就能玩吗？', a6: '一开始是单人关卡。通关免费关卡的过程中，对战、在线房间和地图制作会依次开放。前两封挑战书免费，其余包含在完整版中。' },
     ru: { name: 'Pop! Jelly PangPang', freeVm: 'Битвы и редактор карт тоже бесплатны. Они открываются по мере прохождения бесплатных уровней, покупка не нужна.', hFree: 'Покупать ничего не нужно', tag1: 'Лови желе-бомбой —', tag2: 'бах-бах!', sub: 'Сладкий мир, который застывает в сахар, если стоять на месте! Маленькое желе спасает желе, которых поймал Сахарный великан, и возвращает городу жизнь · А с друзьями — ловите друг друга в мягкой игре.',
-      preChip: 'Открыта предзапись\u00a0· выход {d}', preChipNoDate: 'Открыта предзапись',
+      preChip: 'Открыта предзапись\u00a0· на iOS и Android {d}', preChipNoDate: 'Открыта предзапись',
       aPlayPre: 'Предварительная регистрация в Google Play', aAppPre: 'Предзаказ в App Store', preNote: 'Оформите предварительную регистрацию или предзаказ, и в день выхода игру можно сразу скачать.',
       soon: 'Скоро в Google Play и App Store', outBoth: 'Уже вышла — начни бесплатно', outPlay: 'Уже в Google Play', outApp: 'Уже в App Store',
       join: 'Зайти в официальный Discord', noteSoon: 'Новости о выходе первыми появляются в Discord.', noteOut: 'Первые 15 уровней бесплатно. Без рекламы и гачи.',
@@ -781,7 +781,7 @@ footer{margin-top:30px}
       pcSoon: 'PC (Steam): скоро', aSteamPre: 'В желаемое в Steam', landLine: 'Играй вертикально или горизонтально — как удобнее.', pcLine: 'Скоро и на ПК в Steam.',
       q6: 'Бои и редактор карт доступны сразу?', a6: 'Сначала идут одиночные уровни. По мере прохождения бесплатных уровней по очереди открываются бои, онлайн-комнаты и редактор карт. Первые два вызова бесплатны, остальные входят в полную версию.' },
     ar: { name: 'جيلي بانغ بانغ', freeVm: 'المعارك وصانع الخرائط مجانيان أيضًا. تُفتح مع إكمال المراحل المجانية، ولا حاجة إلى أي شراء.', hFree: 'لا حاجة إلى أي شراء', iconAlt: 'أيقونة تطبيق جيلي بانغ بانغ: جيلي أزرق متفاجئ', tag1: 'احبسهم بقنابل الجيلي:', tag2: 'بانغ بانغ!', sub: 'عالم من الحلوى يتصلّب سكرًا إذا بقيت ساكنًا! جيلي صغير ينقذ الجيلي الذين أسرهم عملاق السكر ويعيد الحياة إلى البلدة · ومع الأصدقاء، احبسوا بعضكم في لعبة طرية.',
-      preChip: 'التسجيل المسبق مفتوح\u00a0· الإطلاق في {d}', preChipNoDate: 'التسجيل المسبق مفتوح',
+      preChip: 'التسجيل المسبق مفتوح\u00a0· على iOS وAndroid في {d}', preChipNoDate: 'التسجيل المسبق مفتوح',
       aPlayPre: 'التسجيل المسبق في Google Play', aAppPre: 'الطلب المسبق في App Store', preNote: 'سجّل مسبقًا أو اطلبها مسبقًا لتحمّلها فور إطلاقها.',
       soon: 'قريبًا على Google Play و App Store', outBoth: 'متوفرة الآن — ابدأ مجانًا', outPlay: 'متوفرة الآن على Google Play', outApp: 'متوفرة الآن على App Store',
       join: 'انضم إلى Discord الرسمي', noteSoon: 'أخبار الإصدار تُنشر على Discord أولًا.', noteOut: 'أول 15 مرحلة مجانية. بلا إعلانات وبلا غاتشا.',
@@ -813,7 +813,7 @@ footer{margin-top:30px}
       pcSoon: 'PC (Steam): قريبًا', aSteamPre: 'قائمة الرغبات على Steam', landLine: 'العب بالوضع الطولي أو العرضي كما تحب.', pcLine: 'قريبًا على الحاسوب عبر Steam أيضًا.',
       q6: 'هل يمكنني لعب المباريات وصانع الخرائط من البداية؟', a6: 'تبدأ بالمراحل الفردية. ومع إنهاء المراحل المجانية تُفتح المباريات والغرف عبر الإنترنت وصانع الخرائط واحدة تلو الأخرى. أول تحدّيين مجانيان، والباقي ضمن النسخة الكاملة.' },
     es: { name: 'Pop! Jelly PangPang', freeVm: 'Las batallas y el creador de mapas también son gratis. Se desbloquean al superar los niveles gratis, sin necesidad de comprar nada.', hFree: 'No hace falta comprar nada', tag1: 'Atrápalos con bombas de gelatina:', tag2: '¡pang-pang!', sub: '¡Un mundo de dulces que se endurece en azúcar si te quedas quieto! Una gelatinita rescata a las gelatinitas que atrapó el Gigante de azúcar y devuelve la vida al pueblo · Con amigos, atrápense unos a otros en una fiesta blandita.',
-      preChip: 'Registro previo abierto\u00a0· Lanzamiento: {d}', preChipNoDate: 'Registro previo abierto',
+      preChip: 'Registro previo abierto\u00a0· iOS y Android: {d}', preChipNoDate: 'Registro previo abierto',
       aPlayPre: 'Registro previo en Google Play', aAppPre: 'Reserva en el App Store', preNote: 'Haz el registro previo o la reserva y podrás descargar el juego el mismo día del lanzamiento.',
       soon: 'Próximamente en Google Play y App Store', outBoth: 'Ya disponible: empieza gratis', outPlay: 'Ya disponible en Google Play', outApp: 'Ya disponible en App Store',
       join: 'Únete al Discord oficial', noteSoon: 'Las noticias del lanzamiento llegan primero a Discord.', noteOut: 'Los primeros 15 niveles son gratis. Sin anuncios ni gacha.',
@@ -845,7 +845,7 @@ footer{margin-top:30px}
       pcSoon: 'PC (Steam): próximamente', aSteamPre: 'Añadir a deseados en Steam', landLine: 'Juega en vertical o en horizontal, como prefieras.', pcLine: 'Pronto también en PC, en Steam.',
       q6: '¿Puedo jugar batallas y crear mapas desde el principio?', a6: 'Al principio solo hay niveles para un jugador. Al superar los niveles gratis se abren, uno a uno, el modo batalla, las salas en línea y Crear mapa. Los dos primeros desafíos también son gratis; el resto viene con la versión completa.' },
     fr: { name: 'Pop! Jelly PangPang', freeVm: 'Les combats et l’éditeur de cartes sont gratuits aussi. Ils se débloquent en terminant les niveaux gratuits, sans aucun achat.', hFree: 'Aucun achat nécessaire', tag1: 'Piège-les avec des bombes gelée :', tag2: 'pang-pang !', sub: 'Un monde de bonbons qui durcit en sucre si on reste immobile ! Une petite gelée sauve les gelées capturées par le Géant de sucre et redonne vie à la ville · Entre amis, piégez-vous les uns les autres dans une fête toute moelleuse.',
-      preChip: 'Préinscriptions ouvertes\u00a0· Sortie\u00a0: {d}', preChipNoDate: 'Préinscriptions ouvertes',
+      preChip: 'Préinscriptions ouvertes\u00a0· iOS et Android\u00a0: {d}', preChipNoDate: 'Préinscriptions ouvertes',
       aPlayPre: 'Se préinscrire sur Google Play', aAppPre: 'Précommander sur l’App Store', preNote: 'Préinscrivez-vous ou précommandez pour télécharger le jeu dès le jour de sa sortie.',
       soon: 'Bientôt sur Google Play et l’App Store', outBoth: 'Disponible — gratuit pour commencer', outPlay: 'Disponible sur Google Play', outApp: 'Disponible sur l’App Store',
       join: 'Rejoindre le Discord officiel', noteSoon: 'Les infos de sortie arrivent d’abord sur Discord.', noteOut: 'Les 15 premiers niveaux sont gratuits. Sans pub, sans gacha.',
@@ -877,7 +877,7 @@ footer{margin-top:30px}
       pcSoon: 'PC (Steam) : bientôt', aSteamPre: 'Liste de souhaits Steam', landLine: 'Joue en portrait ou en paysage, comme tu préfères.', pcLine: 'Bientôt aussi sur PC, via Steam.',
       q6: 'Peut-on jouer en combat et créer des cartes dès le début ?', a6: 'On commence par les niveaux solo. En terminant les niveaux gratuits, le mode combat, les salons en ligne et Créer une carte s’ouvrent un à un. Les deux premiers défis sont gratuits aussi ; le reste est dans la version complète.' },
     it: { name: 'Pop! Jelly PangPang', freeVm: 'Anche le battaglie e il creatore di mappe sono gratis. Si sbloccano superando i livelli gratuiti, senza bisogno di acquisti.', hFree: 'Non serve nessun acquisto', tag1: 'Intrappolali con bombe di gelatina:', tag2: 'pang-pang!', sub: 'Un mondo di dolci che si indurisce nello zucchero se resti fermo! La grande avventura di una gelatina che salva le gelatine catturate dal Gigante di zucchero e riporta in vita la città · Con gli amici, intrappolatevi a vicenda in una festa morbidissima.',
-      preChip: 'Preregistrazione aperta\u00a0· Uscita: {d}', preChipNoDate: 'Preregistrazione aperta',
+      preChip: 'Preregistrazione aperta\u00a0· iOS e Android: {d}', preChipNoDate: 'Preregistrazione aperta',
       aPlayPre: 'Preregistrati su Google Play', aAppPre: 'Preordina su App Store', preNote: 'Preregistrati o preordina e potrai scaricare il gioco dal giorno del lancio.',
       soon: 'Presto su Google Play e App Store', outBoth: 'Disponibile ora: inizia gratis', outPlay: 'Disponibile su Google Play', outApp: 'Disponibile su App Store',
       join: 'Entra nel Discord ufficiale', noteSoon: 'Le notizie sul lancio arrivano prima su Discord.', noteOut: 'I primi 15 livelli sono gratis. Niente pubblicità, niente gacha.',
@@ -909,7 +909,7 @@ footer{margin-top:30px}
       pcSoon: 'PC (Steam): presto disponibile', aSteamPre: 'Lista desideri su Steam', landLine: 'Gioca in verticale o in orizzontale, come preferisci.', pcLine: 'Presto anche su PC, su Steam.',
       q6: 'Posso giocare in battaglia e creare mappe fin da subito?', a6: 'All’inizio ci sono i livelli singoli. Superando i livelli gratuiti si aprono, uno alla volta, la modalità battaglia, le stanze online e Crea mappa. Anche le prime due sfide sono gratis; il resto è nella versione completa.' },
     de: { name: 'Pop! Jelly PangPang', freeVm: 'Kämpfe und der Karteneditor sind ebenfalls kostenlos. Du schaltest sie frei, indem du die kostenlosen Level schaffst. Dafür ist kein Kauf nötig.', hFree: 'Kein Kauf nötig', tag1: 'Fang sie mit Gelee-Bomben –', tag2: 'Peng-Peng!', sub: 'Eine Süßigkeitenwelt, die zu Zucker erstarrt, wenn man stillsteht! Das Abenteuer eines kleinen Gelees, das die vom Zucker-Riesen gefangenen Gelees rettet und die Stadt wieder zum Leben erweckt · Mit Freunden: fangt euch gegenseitig – ein wabbeliges Partyspiel.',
-      preChip: 'Vorregistrierung offen\u00a0· Start: {d}', preChipNoDate: 'Vorregistrierung offen',
+      preChip: 'Vorregistrierung offen\u00a0· iOS und Android: {d}', preChipNoDate: 'Vorregistrierung offen',
       aPlayPre: 'Bei Google Play vorregistrieren', aAppPre: 'Im App Store vorbestellen', preNote: 'Wer sich vorregistriert oder vorbestellt, kann das Spiel am Starttag sofort laden.',
       soon: 'Bald bei Google Play und im App Store', outBoth: 'Jetzt erhältlich – kostenlos starten', outPlay: 'Jetzt bei Google Play', outApp: 'Jetzt im App Store',
       join: 'Zum offiziellen Discord', noteSoon: 'Neuigkeiten zum Start gibt es zuerst auf Discord.', noteOut: 'Die ersten 15 Level sind kostenlos. Keine Werbung, kein Gacha.',
@@ -941,7 +941,7 @@ footer{margin-top:30px}
       pcSoon: 'PC (Steam): bald verfügbar', aSteamPre: 'Auf die Steam-Wunschliste', landLine: 'Spiel hochkant oder quer, ganz wie du magst.', pcLine: 'Bald auch am PC auf Steam.',
       q6: 'Kann ich sofort kämpfen und Karten bauen?', a6: 'Am Anfang gibt es die Einzelspieler-Level. Während du die kostenlosen Level schaffst, werden Kampfmodus, Online-Räume und Karten-Editor nach und nach freigeschaltet. Auch die ersten zwei Herausforderungen sind kostenlos, der Rest gehört zur Vollversion.' },
     pt: { name: 'Pop! Jelly PangPang', freeVm: 'Batalhas e o criador de mapas também são grátis. Eles são liberados conforme você conclui as fases grátis, sem precisar de nenhuma compra.', hFree: 'Nenhuma compra necessária', tag1: 'Prenda com bombas de gelatina:', tag2: 'pang-pang!', sub: 'Um mundo de doces que endurece em açúcar se você ficar parado! Uma gelatininha resgata as gelatinas presas pelo Gigante de açúcar e traz a cidade de volta à vida · Com amigos, prendam uns aos outros numa festa fofinha.',
-      preChip: 'Pré-registro aberto\u00a0· Lançamento: {d}', preChipNoDate: 'Pré-registro aberto',
+      preChip: 'Pré-registro aberto\u00a0· iOS e Android: {d}', preChipNoDate: 'Pré-registro aberto',
       aPlayPre: 'Pré-registro no Google Play', aAppPre: 'Pré-venda na App Store', preNote: 'Com o pré-registro ou a pré-venda, o jogo fica pronto para baixar no dia do lançamento.',
       soon: 'Em breve no Google Play e na App Store', outBoth: 'Já disponível — comece grátis', outPlay: 'Já disponível no Google Play', outApp: 'Já disponível na App Store',
       join: 'Entre no Discord oficial', noteSoon: 'As novidades do lançamento chegam primeiro no Discord.', noteOut: 'As 15 primeiras fases são grátis. Sem anúncios, sem gacha.',
