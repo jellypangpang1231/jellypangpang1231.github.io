@@ -239,6 +239,8 @@ html[lang="ko"] body{word-break:keep-all}
 .hl-dy{--acc:#e0761f;--tint:#ffeccb}.hl-st{--acc:#10a090;--tint:#dcf7f1}.hl-dr{--acc:#c62f3a;--tint:#ffe2e2}
 .hlm img{display:block;width:100%;height:100%;object-fit:cover}
 @media (min-width:1024px){.hls.nws{margin-top:36px}.nws .nwh{grid-column:1/-1;margin:0}}
+/* [l1108b] 작은 폰(폭 380 이하) — 첫 화면에 사전 예약 첫 단추가 들어오게 로고, 머리 글, 소개 글, 칩을 조금 줄임 */
+@media (max-width:380px){.hinfo .icon{margin-bottom:4px}.logo{width:min(100%,286px)}.tagline{margin-top:4px;font-size:19px;line-height:1.2}.hero .sub{font-size:14.5px;line-height:1.38}.preget{gap:9px;margin-top:12px}.chip.pre{font-size:13.5px;padding:5px 12px}}
 @media (prefers-reduced-motion:reduce){.icon{animation:none}.btn,.snd{transition:none}}
 /* [c668] PC 화면(폭 1024 이상) — 맨 위 두 단(영상 | 로고·단추·받기 칸) · 스크린샷 넘김 단추 · 강조 셋 가로 · 소개·질문 두 단. 1023 이하는 그대로 */
 .sx{display:none}
