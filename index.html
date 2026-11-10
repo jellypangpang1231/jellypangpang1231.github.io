@@ -399,14 +399,14 @@ footer{margin-top:30px}
     <button type="button" class="sx sx-prev" id="sxPrev" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button type="button" class="sx sx-next" id="sxNext" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <ul class="strip" id="strip" tabindex="0" aria-label="Screenshots"><!-- [l1108] 승인된 새 스토어 그림 8장 · 언어마다 제 그림 -->
-      <li><img src="shot-en-1.webp" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
-      <li><img src="shot-en-2.webp" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
-      <li><img src="shot-en-3.webp" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
-      <li><img src="shot-en-4.webp" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
-      <li><img src="shot-en-5.webp" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
-      <li><img src="shot-en-6.webp" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
-      <li><img src="shot-en-7.webp" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
-      <li><img src="shot-en-8.webp" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
+      <li><img src="shot-en-1.webp?v=1111" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
+      <li><img src="shot-en-2.webp?v=1111" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
+      <li><img src="shot-en-3.webp?v=1111" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
+      <li><img src="shot-en-4.webp?v=1111" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
+      <li><img src="shot-en-5.webp?v=1111" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
+      <li><img src="shot-en-6.webp?v=1111" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
+      <li><img src="shot-en-7.webp?v=1111" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
+      <li><img src="shot-en-8.webp?v=1111" width="440" height="952" loading="lazy" decoding="async" alt=""></li>
     </ul>
   </section>
 
@@ -613,7 +613,7 @@ footer{margin-top:30px}
       st.setAttribute('aria-label', t.shots);
       var im = st.querySelectorAll('li:not(.land) img'), set = lang;   /* [l1108] 13개 언어 모두 제 그림 */   /* [c878d] 차례: 혼자 인게임 · 맵 만들기 · 둘이서 · 도전장 편지 · 대장 · 도전장 지도 · 꾸미기 · 마을 · 말랑 · 레벨 3 · 레벨 4 · [c878e] 둘이서 FAQ 형용사 뺌 · 점프 화살표 없는 컷 */
       for (i = 0; i < im.length; i++) {
-        setSrc(im[i], 'shot-' + set + '-' + (i + 1) + '.webp');
+        setSrc(im[i], 'shot-' + set + '-' + (i + 1) + '.webp?v=1111');   /* [c1929] 새 화면 캐시 키 */
         im[i].alt = (t.alts && t.alts[i]) || (t.shot + ' ' + (i + 1));
       }
     }
