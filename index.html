@@ -84,10 +84,10 @@ main{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:max(18px,
 .reel video{display:block;width:100%;height:100%;object-fit:cover}
 .trl{position:relative;width:min(100%,540px);margin:18px auto 0;border-radius:26px;border:5px solid #fff;overflow:hidden;background:#f7c3da;box-shadow:0 10px 0 rgba(120,10,70,.28),0 18px 32px rgba(90,0,50,.3);aspect-ratio:16/9}
 .trl video{display:block;width:100%;height:100%;object-fit:cover}
-.snd{position:absolute;top:10px;right:10px;z-index:3;display:flex;align-items:center;justify-content:center;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 4px 0 rgba(120,10,70,.3),0 6px 14px rgba(90,0,50,.25);transition:transform .08s ease}
+.snd{position:absolute;top:8px;right:8px;z-index:3;display:flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 4px 0 rgba(120,10,70,.3),0 6px 14px rgba(90,0,50,.25);transition:transform .08s ease}
 .snd:active{transform:scale(.94)}
 .snd:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-.snd svg{display:block;width:26px;height:26px}
+.snd svg{display:block;width:22px;height:22px}
 .snd .on{display:none}
 .snd[aria-pressed="true"]{background:var(--yellow)}
 .snd[aria-pressed="true"] .on{display:block}
@@ -242,10 +242,12 @@ html[lang="ko"] body{word-break:keep-all}
 @media (min-width:1024px){.hls.nws{margin-top:36px}.nws .nwh{grid-column:1/-1;margin:0}}
 /* [l1108b] 작은 폰(폭 380 이하) — 첫 화면에 사전 예약 첫 단추가 들어오게 로고, 머리 글, 소개 글, 칩을 조금 줄임 */
 @media (max-width:380px){.hinfo .icon{margin-bottom:4px}.logo{width:min(100%,286px)}.tagline{margin-top:4px;font-size:19px;line-height:1.2}.hero .sub{font-size:14.5px;line-height:1.38}.preget{gap:9px;margin-top:12px}.chip.pre{font-size:13.5px;padding:5px 12px}}
-.reel>.gift{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;gap:8px;min-height:58px;margin:0;padding:5px 66px 5px 8px;background:rgba(255,246,214,.95);color:#7a3b00;font-weight:700;font-size:13px;line-height:1.3;text-align:start;text-decoration:none;box-shadow:0 3px 0 rgba(120,10,70,.16)}
-.reel>.gift .gt{width:40px;height:40px;flex:none;border-radius:10px;background:#fbe3c4;box-shadow:0 0 0 2px #fff}
-@media (max-width:380px){.reel>.gift{font-size:12px;gap:5px;padding:5px 60px 5px 5px}.reel>.gift .gt{width:30px;height:30px;border-radius:8px}}
-@media (min-width:1024px){.reel>.gift{font-size:15px;min-height:64px;padding-left:10px}.reel>.gift .gt{width:46px;height:46px}}
+.rbox{width:min(100%,540px);margin:-6px auto 0}
+.rbox>.gift span{text-wrap:balance}
+.rbox>.gift{display:flex;align-items:center;gap:8px;min-height:40px;margin:0 0 7px;padding:3px 12px 3px 4px;border-radius:16px;background:rgba(255,246,214,.97);color:#7a3b00;font-weight:700;font-size:13px;line-height:1.25;text-align:start;text-decoration:none;box-shadow:0 3px 0 rgba(120,10,70,.22)}
+.rbox>.gift .gt{width:34px;height:34px;flex:none;border-radius:10px;background:#fbe3c4;box-shadow:0 0 0 2px #fff}
+@media (max-width:380px){.rbox>.gift{min-height:38px;margin-bottom:6px;font-size:12px;gap:6px;padding:3px 10px 3px 4px;border-radius:13px}.rbox>.gift .gt{width:30px;height:30px;border-radius:8px}}
+@media (min-width:1024px){.rbox>.gift{font-size:15px;min-height:54px;margin-bottom:12px;padding-left:7px}.rbox>.gift .gt{width:44px;height:44px}}
 .gifts{--acc:#a0521d;--tint:#fff1dc;margin-top:18px}
 .gifts h2{margin:0 0 8px}
 .gifts p{margin:0}
@@ -257,7 +259,8 @@ html[lang="ko"] body{word-break:keep-all}
 main{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);column-gap:48px;align-items:start;max-width:1200px;padding:22px 36px 44px}
 main>*{grid-column:1/-1;min-width:0}
 .hero{display:contents}
-.reel{grid-column:1;grid-row:2;align-self:center;width:100%;margin:0;border-radius:30px;border-width:6px}
+.rbox{grid-column:1;grid-row:2;align-self:center;width:100%;margin:0}
+.reel{width:100%;margin:0;border-radius:30px;border-width:6px}
 .hinfo{grid-column:2;grid-row:2;align-self:center;text-align:center}
 .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 16px;max-width:860px;width:100%;margin:26px auto 0;padding:22px 28px}
 .cta>*{flex:1 1 100%;margin:0}
@@ -346,15 +349,17 @@ footer{margin-top:30px}
     </label>
   </div>
   <header class="hero">
+    <div class="rbox">
+    <a class="gift" id="gift" href="#giftCard"><!-- [gift1111] 출시 선물 띠 · 영상 틀 바로 위 별도 줄(영상 안 가림) --><img class="gt" src="gift-thumb2.webp" width="40" height="40" alt="" decoding="async"><span data-i="giftBand"></span></a>
     <div class="reel">
       <video id="reel" autoplay muted loop playsinline preload="auto" poster="hero.jpg?v=1111" width="720" height="540" aria-label="Gameplay: jellies drop bombs and pop each other across candy arenas">
         <source src="hero.mp4?v=1111" type="video/mp4">
       </video>
-      <a class="gift" id="gift" href="#giftCard"><!-- [gift] 출시 선물 띠 · 영상 위쪽에 겹침(높이 0) --><img class="gt" src="gift-thumb2.webp" width="40" height="40" alt="" decoding="async"><span data-i="giftBand"></span></a>
       <button type="button" class="snd" id="snd" aria-pressed="false" aria-label="Turn sound on">
         <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.4L12 5.6v12.8l-4.6-3.9H4z" fill="currentColor"/><path d="M16 9.4l5 5.2M21 9.4l-5 5.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
         <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.4L12 5.6v12.8l-4.6-3.9H4z" fill="currentColor"/><path d="M15.3 9.2a4 4 0 0 1 0 5.6M17.9 6.8a7.4 7.4 0 0 1 0 10.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
       </button>
+    </div>
     </div>
     <div class="hinfo">
     <img class="icon" src="icon-512.jpg" width="88" height="88" alt="Pop! Jelly PangPang app icon: a surprised blue jelly">
