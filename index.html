@@ -330,6 +330,8 @@ footer{margin-top:30px}
 @keyframes jb3In{0%{transform:scale(.3,.2);opacity:0}40%{transform:scale(1.07,.9);opacity:1}62%{transform:scale(.96,1.05)}80%{transform:scale(1.02,.98)}100%{transform:none}}
 @keyframes jb3Tong{0%{transform:none}30%{transform:translateY(-3%) scale(.97,1.06)}60%{transform:translateY(0) scale(1.05,.95)}80%{transform:scale(.99,1.01)}100%{transform:none}}
 @keyframes jb3Boing{0%{transform:none}18%{transform:scale(1.07,.92)}45%{transform:translateY(-6%) scale(.97,1.04)}70%{transform:translateY(0) scale(1.04,.96)}85%{transform:scale(.99,1.01)}100%{transform:none}}
+@media (prefers-reduced-motion:no-preference){img.logo{animation:jb3In .9s cubic-bezier(.3,.7,.4,1) both}}
+/* ↑ 등장 움직임을 첫 그림부터 건다(스크립트 전에 로고가 한 번 다 보였다 사라지는 깜빡임 없앰 · 스크립트가 못 돌아도 한 번 튀고 원래 그림으로 섬) */
 @media (prefers-reduced-motion:reduce){.jb3 .jl{display:none}.jb3.go .jbsz{visibility:visible}.jb3.in{animation:none}}
 </style>
 <!-- [c708b] -->
@@ -779,6 +781,8 @@ footer{margin-top:30px}
       if (!key) continue;
       var t = T[key], box = document.createElement('div');
       box.className = img.className + ' jb3';
+      var an = img.getAnimations ? img.getAnimations() : [], el = an.length && an[0].currentTime ? an[0].currentTime : 0;
+      if (el) box.style.animationDelay = (-el) + 'ms';  /* 그림에서 이미 시작한 등장 움직임을 이어받음 */
       img.parentNode.insertBefore(box, img); box.appendChild(img); img.className = 'jbsz';
       var units = {}, files = [];
       for (var j = 0; j < t.u.length; j++) {
@@ -809,17 +813,25 @@ footer{margin-top:30px}
       var fs = box.__files, left = fs.length;
       function one() {
         if (--left) return;
-        var ds = []; for (var q = 0; q < fs.length; q++) if (fs[q].decode) ds.push(fs[q].decode().catch(function () {}));
-        (window.Promise && ds.length ? Promise.all(ds) : { then: function (f) { f(); } }).then(function () {
-          box.classList.add('on');
-          requestAnimationFrame(function () { requestAnimationFrame(function () { box.classList.add('go'); box.__ready = 1; }); });
-        });
+        var ds = []; for (var q = 0; q < fs.length; q++) if (fs[q].decode) ds.push(fs[q].decode());
+        /* decode 가 하나라도 실패하면 원래 그림 그대로(조각으로 넘어가지 않음) */
+        (window.Promise && ds.length ? Promise.all(ds) : { then: function (f) { f(); } }).then(function () { box.__ok = 1; warm(box); }, function () {});
         box.addEventListener('animationend', function (ev) { var e = ev.target; if (e.classList && e.classList.contains('jl')) e.classList.remove('t', 'b'); });
-        box.addEventListener('pointerdown', function (ev) { var u = hit(box, ev); if (u) poke(box, u.i, 'b'); });
+        box.addEventListener('pointerdown', function (ev) { if (!box.__ready) return; var u = hit(box, ev); if (u) poke(box, u.i, 'b'); });
       }
       for (var q = 0; q < fs.length; q++) { fs[q].onload = one; fs[q].onerror = function () { left = -1; }; fs[q].src = fs[q].__f; }
     }
-    function kick() { for (var q = 0; q < boxes.length; q++) if (boxes[q].offsetParent) start(boxes[q]); }
+    /* 조각을 원래 그림 위에 먼저 띄워 그려 두고(.on) 두 프레임 뒤 원래 그림을 숨긴다(.go) · 언어를 바꿔 숨었던 로고가 다시 보일 때도 같은 순서로 */
+    function warm(box) {
+      box.classList.remove('go'); box.classList.add('on'); box.__ready = 0;
+      requestAnimationFrame(function () { requestAnimationFrame(function () { if (box.offsetParent) { box.classList.add('go'); box.__ready = 1; } }); });
+    }
+    function kick() {
+      for (var q = 0; q < boxes.length; q++) {
+        var b = boxes[q];
+        if (b.offsetParent) { start(b); if (b.__hid && b.__ok) warm(b); b.__hid = 0; } else b.__hid = 1;
+      }
+    }
     kick();
     if (window.MutationObserver) new MutationObserver(kick).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
     var last = 0;
