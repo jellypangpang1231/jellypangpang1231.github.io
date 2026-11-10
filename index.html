@@ -323,7 +323,7 @@ footer{margin-top:30px}
 .jb3 .jbsz{display:block;width:100%;height:auto}
 .jb3.go .jbsz{visibility:hidden}
 .jb3 .jl{position:absolute;left:0;top:0;width:100%;height:100%;max-width:none;margin:0;padding:0;border:0;pointer-events:none;visibility:hidden;will-change:transform;-webkit-user-drag:none;user-select:none}
-.jb3.go .jl{visibility:visible}
+.jb3.on .jl,.jb3.go .jl{visibility:visible}
 .jb3.in{animation:jb3In .9s cubic-bezier(.3,.7,.4,1) both}
 .jb3 .jl.t{animation:jb3Tong .6s ease-out}
 .jb3 .jl.b{animation:jb3Boing .8s ease-out}
@@ -783,17 +783,16 @@ footer{margin-top:30px}
       var units = {}, files = [];
       for (var j = 0; j < t.u.length; j++) {
         var u = t.u[j], e = document.createElement('img');
-        e.className = 'jl'; e.alt = ''; e.setAttribute('aria-hidden', 'true'); e.decoding = 'async'; e.__f = 'jb3/jb3-' + key + '-' + u.i + '.webp?v=1111';
+        e.className = 'jl'; e.alt = ''; e.setAttribute('aria-hidden', 'true'); e.decoding = 'sync'; e.__f = 'jb3/jb3-' + key + '-' + u.i + '.webp?v=1111';
         e.style.transformOrigin = u.ox + '% ' + u.oy + '%'; units[u.i] = e; files.push(e); box.appendChild(e);
       }
       box.__t = t; box.__units = units; box.__files = files; boxes.push(box);
     }
-    /* 멈춰 있을 땐 원래 그림 한 장 · 단어가 움직이는 동안만 조각으로 바꿔 그린다 */
-    function settle(box) { if (!box.querySelector('.jl.t, .jl.b')) box.classList.remove('go'); }
+    /* 깜빡임 없앰(재성님 11-11 06:5x 「…살짝 깜빡이듯 보이는데…」): 원래 그림↔조각을 오가지 않는다. 조각을 다 불러와 그린 뒤 원래 그림 위에 겹쳐 띄우고(.on · 겹치면 화소 같음), 두 프레임 뒤 원래 그림을 숨겨(.go) 그 뒤로는 조각만 쓴다 */
     function poke(box, i, c) {
       var e = box.__units[i]; if (!e) return;
       e.classList.remove('t', 'b'); void box.offsetWidth;
-      box.classList.add('go'); e.classList.add(c);
+      e.classList.add(c);
     }
     function hit(box, ev) {
       var r = box.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * 100, y = (ev.clientY - r.top) / r.height * 100, best = null, bz = -1;
@@ -810,8 +809,12 @@ footer{margin-top:30px}
       var fs = box.__files, left = fs.length;
       function one() {
         if (--left) return;
-        box.__ready = 1;
-        box.addEventListener('animationend', function (ev) { var e = ev.target; if (e.classList && e.classList.contains('jl')) { e.classList.remove('t', 'b'); settle(box); } });
+        var ds = []; for (var q = 0; q < fs.length; q++) if (fs[q].decode) ds.push(fs[q].decode().catch(function () {}));
+        (window.Promise && ds.length ? Promise.all(ds) : { then: function (f) { f(); } }).then(function () {
+          box.classList.add('on');
+          requestAnimationFrame(function () { requestAnimationFrame(function () { box.classList.add('go'); box.__ready = 1; }); });
+        });
+        box.addEventListener('animationend', function (ev) { var e = ev.target; if (e.classList && e.classList.contains('jl')) e.classList.remove('t', 'b'); });
         box.addEventListener('pointerdown', function (ev) { var u = hit(box, ev); if (u) poke(box, u.i, 'b'); });
       }
       for (var q = 0; q < fs.length; q++) { fs[q].onload = one; fs[q].onerror = function () { left = -1; }; fs[q].src = fs[q].__f; }
