@@ -318,6 +318,19 @@ footer{margin-top:30px}
 @media (min-width:1024px){.pcband{max-width:860px;width:100%;margin-left:auto;margin-right:auto}}
 @media (min-width:1024px){.preget>#bPrePc{width:100%}}/* [c958] 넓은 화면: 찜하기 단추도 위아래 단추와 같은 폭 */
 /* [c1908] 설치 QR — PC(넓은 화면 + 마우스)에서만 단추 옆 */.qrbox{display:none}@media (min-width:1024px) and (hover:hover) and (pointer:fine){.qrbox{display:flex;flex-direction:column;align-items:center;gap:6px;width:150px;padding:12px 10px 10px;border-radius:22px;background:#fff;box-shadow:0 5px 0 rgba(120,10,70,.34);color:var(--ink);text-align:center}.qrbox img{display:block;width:124px;height:124px;border-radius:10px;image-rendering:auto}.qrbox span{font-size:13px;line-height:1.3;word-break:keep-all;text-wrap:balance}.preget{grid-template-columns:minmax(0,1fr) 150px;column-gap:18px;width:min(100%,560px)}.preget>.chip,.preget>.prenote,.preget>#bPrePc{grid-column:1}.preget>.qrbox{grid-column:2;grid-row:1/span 5;align-self:center}}
+/* [jb3] 로고 통통 — 단어 조각(jb3/*.webp)을 원래 그림 자리에 겹쳐 놓고 움직인다 */
+.jb3{position:relative;transform-origin:50% 100%}
+.jb3 .jbsz{display:block;width:100%;height:auto}
+.jb3.go .jbsz{visibility:hidden}
+.jb3 .jl{position:absolute;left:0;top:0;width:100%;height:100%;max-width:none;margin:0;padding:0;border:0;pointer-events:none;visibility:hidden;will-change:transform;-webkit-user-drag:none;user-select:none}
+.jb3.go .jl{visibility:visible}
+.jb3.in{animation:jb3In .9s cubic-bezier(.3,.7,.4,1) both}
+.jb3 .jl.t{animation:jb3Tong .6s ease-out}
+.jb3 .jl.b{animation:jb3Boing .8s ease-out}
+@keyframes jb3In{0%{transform:scale(.3,.2);opacity:0}40%{transform:scale(1.07,.9);opacity:1}62%{transform:scale(.96,1.05)}80%{transform:scale(1.02,.98)}100%{transform:none}}
+@keyframes jb3Tong{0%{transform:none}30%{transform:translateY(-3%) scale(.97,1.06)}60%{transform:translateY(0) scale(1.05,.95)}80%{transform:scale(.99,1.01)}100%{transform:none}}
+@keyframes jb3Boing{0%{transform:none}18%{transform:scale(1.07,.92)}45%{transform:translateY(-6%) scale(.97,1.04)}70%{transform:translateY(0) scale(1.04,.96)}85%{transform:scale(.99,1.01)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){.jb3 .jl{display:none}.jb3.go .jbsz{visibility:visible}.jb3.in{animation:none}}
 </style>
 <!-- [c708b] -->
 <!-- [c844] -->
@@ -750,6 +763,80 @@ footer{margin-top:30px}
     window.addEventListener('load', mark);
     mark();
   })();
+})();
+</script>
+<script>
+/* [jb3] 로고 통통 v3 — 단어 통째로 · 재성님 11-11 06:1x 「…잘 안되면 그냥 글자 한단어 통째로 움직여도 된다」 · 움직임 줄이기 설정이면 아무것도 안 함 */
+(function () {
+  try {
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var T = {"ko":{"u":[{"i":1,"z":1,"ox":49.95,"oy":30.99,"bb":[30.42,0.66,69.48,30.99]},{"i":2,"z":2,"ox":49.95,"oy":99.12,"bb":[0.31,32.53,99.58,99.12]}]},"en":{"u":[{"i":1,"z":1,"ox":49.95,"oy":39.66,"bb":[38.33,0.0,61.56,39.66]},{"i":2,"z":2,"ox":50.0,"oy":99.57,"bb":[0.1,44.83,99.9,99.57]}]},"ja":{"u":[{"i":1,"z":1,"ox":49.95,"oy":32.12,"bb":[31.98,0.0,67.92,32.12]},{"i":2,"z":2,"ox":49.95,"oy":99.67,"bb":[0.0,35.1,99.9,99.67]}]},"zh":{"u":[{"i":1,"z":1,"ox":49.95,"oy":35.36,"bb":[31.67,0.0,68.23,35.36]},{"i":2,"z":2,"ox":49.95,"oy":99.82,"bb":[0.0,35.54,99.9,99.82]}]},"ar":{"u":[{"i":1,"z":1,"ox":49.48,"oy":35.22,"bb":[33.96,0.18,65.0,35.22]},{"i":2,"z":2,"ox":49.95,"oy":99.82,"bb":[0.0,35.58,99.9,99.82]}]}};
+    var boxes = [];
+    var imgs = document.querySelectorAll('img.logo');
+    for (var n = 0; n < imgs.length; n++) {
+      var img = imgs[n], key = null;
+      for (var k in T) if (img.classList.contains(k)) key = k;
+      if (!key) continue;
+      var t = T[key], box = document.createElement('div');
+      box.className = img.className + ' jb3';
+      img.parentNode.insertBefore(box, img); box.appendChild(img); img.className = 'jbsz';
+      var units = {}, files = [];
+      for (var j = 0; j < t.u.length; j++) {
+        var u = t.u[j], e = document.createElement('img');
+        e.className = 'jl'; e.alt = ''; e.setAttribute('aria-hidden', 'true'); e.decoding = 'async'; e.__f = 'jb3/jb3-' + key + '-' + u.i + '.webp?v=1111';
+        e.style.transformOrigin = u.ox + '% ' + u.oy + '%'; units[u.i] = e; files.push(e); box.appendChild(e);
+      }
+      box.__t = t; box.__units = units; box.__files = files; boxes.push(box);
+    }
+    /* 멈춰 있을 땐 원래 그림 한 장 · 단어가 움직이는 동안만 조각으로 바꿔 그린다 */
+    function settle(box) { if (!box.querySelector('.jl.t, .jl.b')) box.classList.remove('go'); }
+    function poke(box, i, c) {
+      var e = box.__units[i]; if (!e) return;
+      e.classList.remove('t', 'b'); void box.offsetWidth;
+      box.classList.add('go'); e.classList.add(c);
+    }
+    function hit(box, ev) {
+      var r = box.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * 100, y = (ev.clientY - r.top) / r.height * 100, best = null, bz = -1;
+      for (var q = 0; q < box.__t.u.length; q++) {
+        var u = box.__t.u[q], b = u.bb;
+        if (x >= b[0] && x <= b[2] && y >= b[1] && y <= b[3] && u.z > bz) { best = u; bz = u.z; }
+      }
+      return best;
+    }
+    function start(box) {
+      if (box.__st) return; box.__st = 1;
+      box.classList.add('in');
+      box.addEventListener('animationend', function (ev) { if (ev.target === box) box.classList.remove('in'); });  /* 언어를 바꿨다 돌아와도 등장 움직임을 다시 하지 않음 */
+      var fs = box.__files, left = fs.length;
+      function one() {
+        if (--left) return;
+        box.__ready = 1;
+        box.addEventListener('animationend', function (ev) { var e = ev.target; if (e.classList && e.classList.contains('jl')) { e.classList.remove('t', 'b'); settle(box); } });
+        box.addEventListener('pointerdown', function (ev) { var u = hit(box, ev); if (u) poke(box, u.i, 'b'); });
+      }
+      for (var q = 0; q < fs.length; q++) { fs[q].onload = one; fs[q].onerror = function () { left = -1; }; fs[q].src = fs[q].__f; }
+    }
+    function kick() { for (var q = 0; q < boxes.length; q++) if (boxes[q].offsetParent) start(boxes[q]); }
+    kick();
+    if (window.MutationObserver) new MutationObserver(kick).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+    var last = 0;
+    (function idle() {
+      setTimeout(function () {
+        if (!document.hidden) {
+          for (var q = 0; q < boxes.length; q++) {
+            var b = boxes[q];
+            if (b.offsetParent && b.__ready) {
+              var us = b.__t.u, u = us[Math.floor(Math.random() * us.length)];
+              if (u.i === last && us.length > 1) u = us[(us.indexOf(u) + 1) % us.length];
+              last = u.i;
+              if (!/(^| )(t|b)( |$)/.test(b.__units[u.i].className)) poke(b, u.i, 't');  /* 누른 뽀잉이 도는 중이면 덮지 않음 */
+            }
+          }
+        }
+        idle();
+      }, 2600 + Math.random() * 1600);
+    })();
+  } catch (_e) {}
 })();
 </script>
 </body>
