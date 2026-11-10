@@ -68,7 +68,7 @@ a.home{display:inline-block;margin-top:14px;color:#c4561c;font-size:15px}
   var home = '../' + (src ? '?s=' + encodeURIComponent(src) : '');
   document.getElementById('home').href = home;
   document.getElementById('as').href = appUrl;
-  document.getElementById('gp').href = isAnd ? market : playWeb;
+  document.getElementById('gp').href = playWeb;                      /* 손으로 누르는 단추는 웹 주소(앱 안 브라우저가 intent 를 막을 때의 예비) */
   document.getElementById('as').hidden = isAnd;
   document.getElementById('gp').hidden = isIOS;
 
