@@ -125,14 +125,21 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 .bdg:focus-visible{outline:3px solid #fff;outline-offset:5px}
 .bdg .bx{position:relative;display:block;overflow:hidden;height:var(--bh);width:calc(var(--bh)*var(--r,3))}
 .bdg img{position:absolute;left:0;top:0;display:block;max-width:none;width:100%;height:100%}
-.bdg.st{--r:3.3}
-.bdg.st .stx{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;box-sizing:border-box;background:#171a21;color:#fff;border:2px solid #66c0f4;border-radius:10px;font:700 calc(var(--bh)*.46)/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.01em}
+.bdg.st{--r:3}/* [c1958] 공식 Steam 로고(inverse) 배지 · 로고 높이 = 배지 60% · 둘레 여백 >= 크랭크 지름 */
+.bdg.st .bx{background:#000;border-radius:calc(var(--bh)*.17);box-shadow:inset 0 0 0 1px #a6a6a6}
+.bdg.st img{left:50%;top:50%;width:auto;height:60%;transform:translate(-50%,-50%)}
 .bdg.gp img{width:calc(var(--bh)*var(--s,1.302)*2.584);height:calc(var(--bh)*var(--s,1.302));left:calc(var(--bh)*var(--s,1.302)*2.584*var(--px,0)*-1);top:calc(var(--bh)*var(--s,1.302)*var(--py,.116)*-1)}
 .more{margin:14px auto 0;color:#fff;font-size:14.5px;text-shadow:0 1px 0 rgba(130,10,70,.4)}
 .getit:not([hidden])+.more[hidden]+.sub{margin-top:14px}
 .more a{color:#fff;text-underline-offset:3px;padding:8px 2px}
 .legal{margin:12px auto 0;max-width:44em;font-size:11.5px;line-height:1.5;opacity:.85}
 @media (max-width:350px){.getit{--bh:50px}}
+/* [c1958] 세 배지 줄 — 배지 사이 = 배지 높이의 1/4(구글 둘레 여백) · 폰은 위 줄에 폰 스토어 둘, 아래 줄에 스팀(터키어는 애플 배지가 넓어 세 줄) · 가로 폰은 낮게 */
+.getit{gap:calc(var(--bh)/4)}
+@media (max-width:430px){.getit{--bh:54px}}
+@media (max-width:380px){.getit{--bh:46px}}
+@media (orientation:landscape) and (max-height:500px) and (max-width:1023px){.getit{--bh:40px;margin-top:10px}}
+@media (min-width:1024px) and (hover:hover) and (pointer:fine){.getit{display:grid;grid-template-columns:auto 150px;grid-template-rows:repeat(3,auto);grid-auto-flow:column;justify-content:center;justify-items:center;align-items:center;column-gap:28px}.getit>.qrbox{grid-column:2;grid-row:1/-1;align-self:center}}/* PC 마우스: 세 배지 한 줄 세로 · QR 은 옆 */
 /* [c619] 사전 예약 단계(CFG.phase='pre') — 공식 배지 대신 글자 단추. 로고 아래 배지 자리에 놓는다. */
 /* [c620] 사전 예약 화면 정리 — 단추 둘은 같은 모양·크기(제 스토어가 위) · 날짜 칩은 단추 바로 위 · 안내 한 줄은 단추 아래 · 안 열린 쪽은 점선 단추 */
 .preget{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;gap:12px;width:min(100%,340px);margin:18px auto 0}
@@ -445,7 +452,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     <div class="getit" id="getit" hidden>
       <a class="bdg as" id="bApp" rel="noopener" hidden><span class="bx"><img id="imApp" alt="" decoding="async"></span></a>
       <a class="bdg gp" id="bPlay" rel="noopener" hidden><span class="bx"><img id="imPlay" alt="" decoding="async"></span></a>
-      <a class="bdg st" id="bSteam" rel="noopener" target="_blank" hidden aria-label="Steam"><span class="bx"><span class="stx">Steam</span></span></a><!-- [l1111] 출시 뒤(phase live) PC 에서만 켜진다 · 글자 배지(언어 공통) -->
+      <a class="bdg st" id="bSteam" rel="noopener" hidden aria-label="Steam"><span class="bx"><img src="badges/steam-inv.png?v=1958" width="632" height="192" alt="" decoding="async"></span></a><!-- [c1958] 출시 뒤 늘 켜진다 · Valve 공식 Steam 로고(inverse) · 언어 공통 -->
     </div>
     <p class="more" id="more" hidden></p>
     </div>
@@ -646,7 +653,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
   var PRE = CFG.phase === 'pre' && (hasPlay || hasApp);     /* [c619] 사전 예약 단계 — 주소가 하나도 없으면 켜지 않는다(열려 있다는 말만 있고 갈 곳이 없는 화면 방지) */
   /* 스토어 배지(공식 그림 · badges/ · mk_badges.py 가 받아 잰 값) — 애플 SVG 는 언어마다 가로세로 비가 다르고,
      구글 PNG(646x250)는 영어·아랍어만 사방에 투명 여백(41px)이 있고 나머지는 위아래(29px)만 있다. 보이는 배지 높이를 --bh 로 똑같이 맞춘다. */
-  var AS_R = { ko: 3.2425, ja: 2.7213, 'zh-Hant': 2.7213, 'zh-Hans': 2.7213, fr: 3.1627 }, GP_PAD = { en: 1, ar: 1 };
+  var AS_R = { ko: 3.2425, ja: 2.7213, 'zh-Hant': 2.7213, 'zh-Hans': 2.7213, fr: 3.1627, tr: 3.7823 }, GP_PAD = { en: 1, ar: 1 };
   var showApp = false, showPlay = false, MORE = null;      /* 아래 '출시 뒤' 대목이 정한다 */
   function badges(t) {
     if (showApp) { var a = $('bApp'); a.style.setProperty('--r', AS_R[lang] || 2.9916); a.setAttribute('aria-label', t.aApp); setSrc($('imApp'), 'badges/as-' + lang + '.svg'); }
@@ -813,15 +820,15 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     $('bTrailer').className = 'btn btn-line'; $('bDiscord').className = 'btn btn-line';
     if (hasPlay) $('bPlay').href = playUrl();
     if (hasApp) $('bApp').href = appUrl();
-    /* 폰에서는 제 스토어 배지 하나만(다른 기기는 글 한 줄), PC 에서는 나온 것 전부 — HTML 차례가 애플 먼저다(애플 규정: 나란히 놓을 때 맨 앞). */
-    showApp = hasApp && !isAndroid; showPlay = hasPlay && !isIOS;
+    /* [c1958] 기기와 상관없이 나온 스토어 배지 전부(구글·애플·스팀) — 재성님 11-11 「구글, 애플, 스팀 버튼 다보여야한다. 다 된다는걸 시각적으로 알려주는 장치다」
+       차례만 기기에 맞춘다: 안드로이드 구글 먼저 · 아이폰/아이패드 애플 먼저 · PC 스팀 먼저(옛: 폰은 제 배지 하나 + 글 고리, 스팀은 PC 만) */
+    showApp = hasApp; showPlay = hasPlay;
     $('bApp').hidden = !showApp; $('bPlay').hidden = !showPlay;
-    var showSteam = !!CFG.steam && !isIOS && !isAndroid && (showApp || showPlay);   /* [l1111] 스팀 받기 배지 — PC 에서만, 스토어 배지 옆 */
-    if (showSteam) { $('bSteam').href = CFG.steam; $('bSteam').hidden = false; }
+    if (CFG.steam) { $('bSteam').href = steamUrl(); $('bSteam').hidden = false; }
+    (function () { var g = $('getit'), a = $('bApp'), p = $('bPlay'), st = $('bSteam'), o = isAndroid ? [p, a, st] : isIOS ? [a, p, st] : [st, a, p], k;
+      for (k = 0; k < o.length; k++) g.appendChild(o[k]); })();
     $('getit').hidden = !(showApp || showPlay); $('legal').hidden = !(showApp || showPlay);
-    MORE = isIOS ? (hasApp ? (hasPlay ? ['alsoPlay', playUrl()] : null) : ['appSoon', ''])
-         : isAndroid ? (hasPlay ? (hasApp ? ['alsoApp', appUrl()] : ['appSoon', '']) : ['playSoon', ''])
-         : (hasPlay && hasApp ? null : hasPlay ? ['appSoon', ''] : ['playSoon', '']);
+    MORE = hasPlay && hasApp ? null : hasPlay ? ['appSoon', ''] : ['playSoon', ''];
   }
   if (PRE) {                                     /* [c619] 사전 예약 단계: 단추 주소(출처 꼬리표 ?s= 포함은 playUrl/appUrl 그대로) · 보이기는 preUi 가 언어를 바꿀 때마다 다시 정한다 */
     if (hasPlay) $('bPrePlay').href = playUrl();
