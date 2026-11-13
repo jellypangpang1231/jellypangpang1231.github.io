@@ -7,7 +7,7 @@
 <title>Pop! Jelly PangPang</title>
 <meta property="og:title" content="Pop! Jelly PangPang">
 <meta property="og:image" content="https://jellypangpang1231.github.io/og.png">
-<link rel="icon" href="../favicon.ico">
+<link rel="icon" href="../favicon.ico?v=1113i">
 <!-- C-1530 재성님 "폰 카메라로 찍으면 게임 설치되어 있으면 게임 안에 관련 ui까지 열어주거나, 설치 안되어 있으면 스토어 연결까지 친절하게" — 게임 QR 이 여는 안내 쪽. 앱이 깔린 안드로이드는 앱 링크로 이 쪽을 건너뛰고 게임이 바로 연다. -->
 <style>
 @font-face{font-family:"Fredoka";src:url("../fredoka-600.woff2") format("woff2");font-weight:600;font-display:swap}
@@ -131,7 +131,7 @@ function copy(){
   function fb(){ try{var i=document.createElement('input'); i.value=CODE; document.body.appendChild(i); i.select(); document.execCommand('copy'); i.remove(); ok();}catch(e){} }
 }
 var app=document.getElementById('app');
-var top=E('div','top'); var ic=E('img'); ic.src='../icon-192.png'; ic.alt=''; top.appendChild(ic); top.appendChild(E('b',null,S.name)); app.appendChild(top);
+var top=E('div','top'); var ic=E('img'); ic.src='../icon-192.png?v=1113i'; ic.alt=''; top.appendChild(ic); top.appendChild(E('b',null,S.name)); app.appendChild(top);
 if(IN && OS!=='pc'){
   var ib=E('div','inapp'); ib.appendChild(E('div',null,'⚠ '+S.inapp));
   var ext='';
