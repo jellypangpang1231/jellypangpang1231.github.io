@@ -105,6 +105,8 @@ var isAnd=/Android/i.test(ua), isIOS=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/i
 var OS=isAnd?'and':(isIOS?'ios':'pc');
 var IN=/KAKAOTALK/i.test(ua)?'kakao':/Instagram/i.test(ua)?'insta':/FBAN|FBAV|FB_IAB/i.test(ua)?'fb':/\bLine\//i.test(ua)?'line':/NAVER\(inapp|DaumApps|everytimeApp/i.test(ua)?'other':'';
 var PLAY='https://play.google.com/store/apps/details?id=com.jellypangpang.game'+(CODE?'&referrer='+encodeURIComponent('jpp_'+KIND+'='+CODE):'');
+/* 아이폰 앱 주소 체계(1.0.56 에 들어감 · 지휘부 11-14). 지금은 꺼 둠(''): 앱이 없거나 옛 판인 폰에서 Safari 가 '주소가 유효하지 않음' 창을 띄우기 때문. 1.0.56 이 충분히 퍼지면 'jellypangpang://' 로 켜면 단추가 앱을 먼저 열어 보고, 1.6초 안에 안 열리면 앱스토어로 간다 */
+var IOS_SCHEME='';
 var AS='https://apps.apple.com/app/id6817233245', STEAM='https://store.steampowered.com/app/5396440';
 var LOGO={ko:'ko',ja:'ja','zh-Hant':'zh','zh-Hans':'zh',ar:'ar'}[LG]||'en';
 var here=location.host+location.pathname+location.search;
@@ -144,7 +146,9 @@ if(OS==='and'||OS==='ios'){
   /* ① 게임으로 바로 입장 = 코드 복사 + 앱 열기. 안드로이드는 intent(없으면 referrer 실은 플레이로), 아이폰은 앱 스킴이 없고 같은 도메인 유니버설 링크는 Safari 가 안 넘기므로 앱스토어 쪽(깔려 있으면 '열기')으로 */
   var go=E('a','btn btn-pink btn-big','▶ '+S.enter); go.id='enter';
   go.href=OS==='and'?OPEN:AS; go.rel='noopener';
-  go.onclick=function(ev){ if(CODE){ ev.preventDefault(); copySync(); toast(S.copied); var u=go.href; setTimeout(function(){location.href=u;},350); } };
+  go.onclick=function(ev){ if(CODE){ ev.preventDefault(); copySync(); toast(S.copied); var u=go.href;
+    if(OS==='ios'&&IOS_SCHEME){ setTimeout(function(){ location.href=IOS_SCHEME+'go?'+KIND+'='+encodeURIComponent(CODE); setTimeout(function(){ if(!document.hidden) location.href=AS; },1600); },350); return; }
+    setTimeout(function(){location.href=u;},350); } };
   card.appendChild(go);
   if(CODE) card.appendChild(H('p','sub',OS==='and'?S.enterSub:S.enterSubI));
   /* ② 게임이 없으면 받기 = 기기 스토어 배지(작게) */
