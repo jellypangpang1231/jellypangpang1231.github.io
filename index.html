@@ -121,7 +121,7 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 /* 스토어 배지 — 구글·애플이 준 그림 그대로(badges/). 그림자·테두리·움직임을 덧대지 않고, 둘레 여백은 배지 높이의 1/4 이상, 두 배지는 같은 높이.
    구글 PNG 는 그림 안에 투명 여백이 들어 있어(언어에 따라 두 가지) 틀(.bx)을 보이는 배지 크기로 잡고 그림을 그만큼 밀어 넣는다(--s --px --py 는 스크립트가 넣는다). */
 .getit{--bhx:56px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:16px;margin:16px auto 0}
-/* [btn1116] 팀 11-16 「플랫폼 버튼들 크기나 디자인 정리 좀 해줘. 너무 제각각에 안이쁘다」 — 배지 넷을 한 덩어리로: 보이는 높이 같게 · 두 줄 2칸(.brk 줄바꿈) · 배지 사이 = 높이의 1/4 · 두 줄 폭은 스팀 단추 폭으로 맞춤(bal()) · 높이는 가장 넓은 줄이 칸 폭에 들어가게(--rw = 넓은 줄 비율 합 + 사이 0.5) */
+/* [btn1116] 요청 11-16 「플랫폼 버튼들 크기나 디자인 정리 좀 해줘. 너무 제각각에 안이쁘다」 — 배지 넷을 한 덩어리로: 보이는 높이 같게 · 두 줄 2칸(.brk 줄바꿈) · 배지 사이 = 높이의 1/4 · 두 줄 폭은 스팀 단추 폭으로 맞춤(bal()) · 높이는 가장 넓은 줄이 칸 폭에 들어가게(--rw = 넓은 줄 비율 합 + 사이 0.5) */
 .bdgs{container-type:inline-size;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;width:100%}
 .bdgs>.brk{flex-basis:100%;height:0}
 .bdgs>.bdg{--bh:var(--bhx,56px);--bh:min(var(--bhx,56px),calc((100cqw - 1px)/var(--rw,7)));margin:calc(var(--bh)/8)}
@@ -141,6 +141,15 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 @media (max-width:350px){.getit{--bhx:50px}}
 /* [c1958] 세 배지 줄 — 배지 사이 = 배지 높이의 1/4(구글 둘레 여백) · 폰은 위 줄에 폰 스토어 둘, 아래 줄에 스팀(터키어는 애플 배지가 넓어 세 줄) · 가로 폰은 낮게 */
 .getit{gap:0}
+/* [dev1117] 기기에 맞는 상점 배지 하나를 크게(11-17 통과 안) · 다른 상점은 아래 작게 한 줄 · 배지는 공식 그림 그대로 */
+.gcol{width:100%;display:flex;flex-direction:column;align-items:center}
+.big1{display:flex;justify-content:center;width:100%}.big1[hidden]{display:none}
+.big1>.bdg{--bh:min(76px,calc((100vw - 64px)/var(--r,3)))}
+.getline{margin:8px 0 2px;font-size:14.5px;white-space:nowrap;line-height:1.35;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(150,20,80,.35)}.getline[hidden]{display:none}@media (max-width:350px){.getline{font-size:12px}}
+.bdgs.sm>.bdg{--bh:40px;margin:5px}
+.stick{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;justify-content:center;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(rgba(240,80,140,0),rgba(214,48,110,.92) 38%);transition:transform .25s,opacity .25s}.stick.off{transform:translateY(110%);opacity:0;pointer-events:none}
+.stick>.bdg{--bh:min(60px,calc((100vw - 48px)/var(--r,3)))}
+@media (min-width:1024px) and (hover:hover) and (pointer:fine){.stick{display:none}}
 @media (max-width:430px){.getit{--bhx:54px}}
 @media (max-width:380px){.getit{--bhx:50px}}
 @media (orientation:landscape) and (max-height:500px) and (max-width:1023px){.getit{--bhx:40px;margin-top:10px}}
@@ -336,7 +345,7 @@ footer{margin-top:30px}
 @media (min-width:640px){.sideways{max-width:880px;margin-top:30px}/* [c878] PC: 세로 컷(228px)보다 크게 */.sideways ul,.pcband ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.preget>#bPrePc{grid-column:1/-1;justify-self:center;width:min(100%,290px)}}
 @media (min-width:1024px){.pcband{max-width:860px;width:100%;margin-left:auto;margin-right:auto}}
 @media (min-width:1024px){.preget>#bPrePc{width:100%}}/* [c958] 넓은 화면: 찜하기 단추도 위아래 단추와 같은 폭 */
-/* [c1908] 설치 QR — PC(넓은 화면 + 마우스)에서만 단추 옆 */.qrbox{display:none}@media (min-width:1024px) and (hover:hover) and (pointer:fine){.qrbox{display:flex;flex-direction:column;align-items:center;gap:6px;width:150px;padding:12px 10px 10px;border-radius:22px;background:#fff;box-shadow:0 5px 0 rgba(120,10,70,.34);color:var(--ink);text-align:center}.qrbox img{display:block;width:124px;height:124px;border-radius:10px;image-rendering:auto}.qrbox span{font-size:13px;line-height:1.3;word-break:keep-all;text-wrap:balance}.preget{grid-template-columns:minmax(0,1fr) 150px;column-gap:18px;width:min(100%,560px)}.preget>.chip,.preget>.prenote,.preget>#bPrePc{grid-column:1}.preget>.qrbox{grid-column:2;grid-row:1/span 5;align-self:center}}
+/* [c1908] 설치 QR — PC(넓은 화면 + 마우스)에서만 단추 옆 */.qrbox{display:none}@media (min-width:1024px) and (hover:hover) and (pointer:fine){.qrbox{display:flex;flex-direction:column;align-items:center;gap:6px;width:150px;padding:12px 10px 10px;border-radius:22px;background:#fff;box-shadow:0 5px 0 rgba(120,10,70,.34);color:var(--ink);text-align:center}.qrbox img{display:block;width:124px;height:124px;border-radius:10px;image-rendering:auto}.qrbox span{font-size:13px;line-height:1.3;word-break:keep-all;text-wrap:balance}html[lang=ja] .qrbox span,html[lang^=zh] .qrbox span{word-break:normal;line-break:strict}.preget{grid-template-columns:minmax(0,1fr) 150px;column-gap:18px;width:min(100%,560px)}.preget>.chip,.preget>.prenote,.preget>#bPrePc{grid-column:1}.preget>.qrbox{grid-column:2;grid-row:1/span 5;align-self:center}}
 /* [jb3] 로고 통통 — 단어 조각(jb3/*.webp)을 원래 그림 자리에 겹쳐 놓고 움직인다 */
 .jb3{position:relative;transform-origin:50% 100%}
 .jb3 .jbsz{display:block;width:100%;height:auto}
@@ -455,12 +464,12 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
       <a class="btn btn-pre off" id="bPrePc" rel="noopener" hidden><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M8.5 20h7M12 16.5V20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span data-i="pcSoon">PC (Steam): coming soon</span></a><!-- [c844] -->
     </div>
     <div class="qrbox" id="qrBox"><img src="qr-get.png" width="124" height="124" alt="QR: jellypangpang1231.github.io/get" decoding="async"><span data-i="qrScan">Scan with your phone camera to install</span></div><!-- [c1908] -->
-    <div class="getit" id="getit" hidden><div class="bdgs" id="bdgs">
+    <div class="getit" id="getit" hidden><div class="gcol"><div class="big1" id="big1" hidden></div><p class="getline" id="getLine" hidden></p><div class="bdgs" id="bdgs">
       <a class="bdg as" id="bApp" rel="noopener" hidden><span class="bx"><img id="imApp" alt="" decoding="async"></span></a>
       <a class="bdg gp" id="bPlay" rel="noopener" hidden><span class="bx"><img id="imPlay" alt="" decoding="async"></span></a>
       <a class="bdg st" id="bSteam" rel="noopener" hidden aria-label="Steam"><span class="bx"><img src="badges/steam-inv.png?v=1958" width="632" height="192" alt="" decoding="async"></span></a><!-- [c1958] 출시 뒤 늘 켜진다 · Valve 공식 Steam 로고(inverse) · 언어 공통 -->
-      <a class="bdg tt" id="bTap" rel="noopener" hidden aria-label="TapTap"><span class="bx"><img id="imTap" alt="" decoding="async"></span></a><!-- [tt] 팀 11-16 탭탭 단추: 한국어 페이지에는 안 보임 · 스팀과 따로 · CFG.taptap 이 비면 안 보임 -->
-      <i class="brk" aria-hidden="true"></i></div><!-- [btn1116] 배지 칸 · .brk 는 순서 정할 때 둘째 배지 뒤로 옮김 -->
+      <a class="bdg tt" id="bTap" rel="noopener" hidden aria-label="TapTap"><span class="bx"><img id="imTap" alt="" decoding="async"></span></a><!-- [tt] 요청 11-16 탭탭 단추: 한국어 페이지에는 안 보임 · 스팀과 따로 · CFG.taptap 이 비면 안 보임 -->
+      <i class="brk" aria-hidden="true"></i></div></div><!-- [dev1117] .gcol = 큰 단추 하나 + 한 줄 + 작은 배지 줄 · [btn1116] 배지 칸 · .brk 는 순서 정할 때 둘째 배지 뒤로 옮김 -->
     </div>
     <p class="more" id="more" hidden></p>
     </div>
@@ -669,7 +678,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     try {
       var box = $('bdgs'), br = box.querySelector('.brk'), it = [], i, st = $('bSteam'), rg = parseFloat($('bPlay').style.getPropertyValue('--r')) || 3.3646;
       for (i = 0; i < box.children.length; i++) { var e = box.children[i]; if (e.classList.contains('bdg') && !e.hidden) it.push(e); }
-      var cut = it.length === 3 && it[0] === st ? 1 : 2;   /* 배지가 셋이고 스팀이 맨 앞(PC 한국어)이면 스팀 혼자 윗줄 — 아랫줄 하나만 남는 거꾸로 된 짜임을 피함 */
+      var cut = box.classList.contains('sm') ? it.length : it.length === 3 && it[0] === st ? 1 : 2;   /* 배지가 셋이고 스팀이 맨 앞(PC 한국어)이면 스팀 혼자 윗줄 — 아랫줄 하나만 남는 거꾸로 된 짜임을 피함 */
       if (it.length > cut) box.insertBefore(br, it[cut]); else box.appendChild(br);
       var R = function (e) { return e === st ? 0 : (parseFloat(e.style.getPropertyValue('--r')) || 3); }, rows = [it.slice(0, cut), it.slice(cut)], s = rows.map(function (r) { return r.reduce(function (a, e) { return a + R(e); }, 0); });
       var k = rows[0].indexOf(st) >= 0 ? 0 : rows[1].indexOf(st) >= 0 ? 1 : -1, rs = rg;
@@ -679,6 +688,35 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
       box.style.setProperty('--rw', (Math.max(s[0], s[1]) + 0.52).toFixed(4));
     } catch (e) {}
   }
+  /* [dev1117] 단추 줄 짜기 — 안드로이드 = 구글 플레이 크게, 아이폰·아이패드 = 앱 스토어 크게, PC = 스팀 크게(QR 은 옆 그대로).
+     한국어 페이지이거나 한국 시간대 PC 는 스팀을 크게 띄우지 않고 구글 플레이와 앱 스토어를 지금 크기로 둔다. 나머지 배지는 아래 작게 한 줄. */
+  function layout(t) {
+    var a = $('bApp'), p = $('bPlay'), st = $('bSteam'), tt = $('bTap'), box = $('bdgs'), big = $('big1'), ln = $('getLine'), k;
+    var krPC = !isIOS && !isAndroid && (lang === 'ko' || TZKR);
+    var own = isAndroid ? p : isIOS ? a : krPC ? null : st;
+    if (own && own.hidden) own = null;
+    var o = isAndroid ? [a, st, tt] : isIOS ? [p, st, tt] : krPC ? [p, a, st, tt] : [a, p, tt];
+    if (own) big.appendChild(own); 
+    for (k = 0; k < o.length; k++) box.appendChild(o[k]);
+    box.appendChild(box.querySelector('.brk'));
+    big.hidden = !own; box.classList.toggle('sm', !!own);
+    var nl = [t.c3, t.c1, t.c2].filter(Boolean).join(' · '); ln.textContent = nl; ln.hidden = !nl;   /* 한 줄로 짧게(맨 아래 칸의 표 셋과 같은 말) */
+    stick(own);
+  }
+  var STK = null, STO = null;
+  function stick(own) {                         /* [dev1117] 폰에서 큰 배지가 아직 화면 아래에 있으면(유튜브·인스타 앱 안 브라우저처럼 낮은 화면) 바닥에 같은 배지를 띄우고, 큰 배지에 닿거나 지나가면 내린다 */
+    try {
+      if (!STK) { STK = document.createElement('div'); STK.className = 'stick off'; STK.setAttribute('aria-hidden', 'true'); document.body.appendChild(STK); }
+      STK.textContent = '';
+      if (!own || !(isIOS || isAndroid)) { STK.classList.add('off'); return; }
+      var c = own.cloneNode(true); c.removeAttribute('id'); c.tabIndex = -1;
+      var ims = c.querySelectorAll('[id]'); for (var i = 0; i < ims.length; i++) ims[i].removeAttribute('id');
+      STK.appendChild(c);
+      var chk = function () { var r = own.getBoundingClientRect(); STK.classList.toggle('off', !(r.height > 0 && r.top > innerHeight - 8)); };
+      if (!STO) { STO = chk; addEventListener('scroll', function () { STO(); }, { passive: true }); addEventListener('resize', function () { STO(); }); }
+      STO = chk; chk(); setTimeout(chk, 600);
+    } catch (e) {}
+  }
   function badges(t) {
     if (showApp) { var a = $('bApp'); a.style.setProperty('--r', AS_R[lang] || 2.9916); a.setAttribute('aria-label', t.aApp); setSrc($('imApp'), 'badges/as-' + lang + '.svg'); }
     if (showPlay) {
@@ -686,10 +724,12 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
       g.style.setProperty('--r', pad ? 3.3571 : 3.3646); g.style.setProperty('--s', pad ? 1.4881 : 1.3021); g.style.setProperty('--px', pad ? 0.0635 : 0); g.style.setProperty('--py', pad ? 0.164 : 0.116);
       g.setAttribute('aria-label', t.aPlay); setSrc($('imPlay'), 'badges/gp-' + lang + '.png');
     }
-    var tp = $('bTap'), tk = CFG.ttBadge === 'prereg' ? 'prereg' : 'android', tr = tk === 'prereg' ? 4.0864 : 3.2591;   /* [tt] 탭탭 — 한국어 페이지에는 달지 않는다(언어를 바꿀 때도) */
-    tp.hidden = !CFG.taptap || lang === 'ko';
+    var tp = $('bTap'), tk = CFG.ttBadge === 'prereg' ? 'prereg' : 'android', tr = tk === 'prereg' ? 4.0864 : 3.2591;   /* [tt] 탭탭 — 한국어 페이지에는 달지 않는다(언어를 바꿀 때도) · [dev1117] 아이폰과 아이패드는 누를 수 없는 상점이라 뺌(/play/ 와 같음) */
+    tp.hidden = !CFG.taptap || lang === 'ko' || isIOS;
+    $('bSteam').hidden = !CFG.steam || lang === 'ko';   /* [dev1117] 11-17 스팀 한국 판매 닫음 → 한국어 페이지에는 스팀 배지 없음(다른 언어는 그대로) */
     $('getit').classList.toggle('ttOn', !tp.hidden);   /* PC 세로 줄에 넷째 칸 */
     if (!tp.hidden) { tp.style.setProperty('--r', tr); setSrc($('imTap'), 'badges/taptap-' + tk + '.svg?v=1116tt'); }
+    layout(t);
     bal();
     var m = $('more'); m.hidden = !MORE;
     if (MORE) { m.textContent = ''; if (MORE[1]) { var l = document.createElement('a'); l.href = MORE[1]; l.rel = 'noopener'; l.textContent = t[MORE[0]]; m.appendChild(l); } else m.textContent = t[MORE[0]]; }
@@ -763,6 +803,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
   var ua = navigator.userAgent || '';
   var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
   var isAndroid = !isIOS && /Android/i.test(ua);
+  var TZKR = false; try { TZKR = Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Seoul'; } catch (e) {}   /* [dev1117] 한국에서 온 PC */
   try { var os = (new URLSearchParams(location.search).get('os') || '').toLowerCase();      /* 확인용: 주소에 ?os=android|ios|pc 를 붙이면 그 기기에서 보이는 모습으로 본다 */
         if (os === 'android' || os === 'ios' || os === 'pc') { isIOS = os === 'ios'; isAndroid = os === 'android'; } } catch (e) {}
 
@@ -860,14 +901,13 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     $('bTrailer').className = 'btn btn-line'; $('bDiscord').className = 'btn btn-line';
     if (hasPlay) $('bPlay').href = playUrl();
     if (hasApp) $('bApp').href = appUrl();
-    /* [c1958] 기기와 상관없이 나온 스토어 배지 전부(구글·애플·스팀) — 팀 11-11 「구글, 애플, 스팀 버튼 다보여야한다. 다 된다는걸 시각적으로 알려주는 장치다」
+    /* [c1958] 기기와 상관없이 나온 스토어 배지 전부(구글·애플·스팀) — 요청 11-11 「구글, 애플, 스팀 버튼 다보여야한다. 다 된다는걸 시각적으로 알려주는 장치다」
        차례만 기기에 맞춘다: 안드로이드 구글 먼저 · 아이폰/아이패드 애플 먼저 · PC 스팀 먼저(옛: 폰은 제 배지 하나 + 글 고리, 스팀은 PC 만) */
     showApp = hasApp; showPlay = hasPlay;
     $('bApp').hidden = !showApp; $('bPlay').hidden = !showPlay;
     if (CFG.steam) { $('bSteam').href = steamUrl(); $('bSteam').hidden = false; }
     if (CFG.taptap) $('bTap').href = CFG.taptap;   /* [tt] 보이기는 badges() 가 언어마다 정한다 */
-    (function () { var g = $('getit'), a = $('bApp'), p = $('bPlay'), st = $('bSteam'), tt = $('bTap'), o = isAndroid ? [p, a, st, tt] : isIOS ? [a, p, st, tt] : [st, a, p, tt], k;
-      g = $('bdgs'); for (k = 0; k < o.length; k++) g.appendChild(o[k]); g.appendChild(g.querySelector('.brk')); bal(); })();
+    /* [dev1117] 차례와 크게 띄울 배지는 badges() 안 layout() 이 언어를 바꿀 때마다 다시 정한다 */
     $('getit').hidden = !(showApp || showPlay); $('legal').hidden = !(showApp || showPlay);
     MORE = hasPlay && hasApp ? null : hasPlay ? ['appSoon', ''] : ['playSoon', ''];
   }
@@ -898,7 +938,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
 })();
 </script>
 <script>
-/* [jb3] 로고 통통 v3 — 단어 통째로 · 팀 11-11 06:1x 「…잘 안되면 그냥 글자 한단어 통째로 움직여도 된다」 · 움직임 줄이기 설정이면 아무것도 안 함 */
+/* [jb3] 로고 통통 v3 — 단어 통째로 · 요청 11-11 06:1x 「…잘 안되면 그냥 글자 한단어 통째로 움직여도 된다」 · 움직임 줄이기 설정이면 아무것도 안 함 */
 (function () {
   try {
     if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -922,7 +962,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
       }
       box.__t = t; box.__units = units; box.__files = files; boxes.push(box);
     }
-    /* 깜빡임 없앰(팀 11-11 06:5x 「…살짝 깜빡이듯 보이는데…」): 원래 그림↔조각을 오가지 않는다. 조각을 다 불러와 그린 뒤 원래 그림 위에 겹쳐 띄우고(.on · 겹치면 화소 같음), 두 프레임 뒤 원래 그림을 숨겨(.go) 그 뒤로는 조각만 쓴다 */
+    /* 깜빡임 없앰(요청 11-11 06:5x 「…살짝 깜빡이듯 보이는데…」): 원래 그림↔조각을 오가지 않는다. 조각을 다 불러와 그린 뒤 원래 그림 위에 겹쳐 띄우고(.on · 겹치면 화소 같음), 두 프레임 뒤 원래 그림을 숨겨(.go) 그 뒤로는 조각만 쓴다 */
     function poke(box, i, c) {
       var e = box.__units[i]; if (!e) return;
       e.classList.remove('t', 'b'); void box.offsetWidth;
