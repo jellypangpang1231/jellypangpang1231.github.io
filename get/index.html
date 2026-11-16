@@ -72,6 +72,13 @@ a.home{display:inline-block;margin-top:14px;color:#c4561c;font-size:15px}
   document.getElementById('as').hidden = isAnd;
   document.getElementById('gp').hidden = isIOS;
 
+  /* [tap1116] 방문 세기 — 홈페이지 방문 계수기와 같은 길·같은 합계만(IP·쿠키·기기 id 저장 안 함). 꼬리표 앞 '_g'(자동으로 보냄 · os = 보낸 곳 기기) · 손으로 누른 배지는 '_gk' + as/gp · 확인용 stay=1 과 내 PC 에서는 안 셈 */
+  var CNT = !/^(localhost|127\.0\.0\.1)$/.test(location.hostname) && q.get('stay') !== '1', OSN = isIOS ? 'ios' : isAnd ? 'android' : 'pc';
+  function cnt(tag) { if (!CNT) return; try { var u = 'https://jpp-visits.jellypangpang.workers.dev/v?s=' + encodeURIComponent((tag + '_' + src).slice(0, 24)) + '&os=' + OSN;
+    if (!(navigator.sendBeacon && navigator.sendBeacon(u))) fetch(u, { method: 'POST', mode: 'no-cors', keepalive: true }).catch(function () {}); } catch (e) {} }
+  document.getElementById('as').addEventListener('click', function () { cnt('_gkas'); });
+  document.getElementById('gp').addEventListener('click', function () { cnt('_gkgp'); });
+  cnt('_g');
   var to = isIOS ? appUrl : isAnd ? market : home;
   window.__jppGo = to;
   if (q.get('stay') === '1') return;                                  /* 확인용: 이동하지 않고 갈 곳만 보인다 */
