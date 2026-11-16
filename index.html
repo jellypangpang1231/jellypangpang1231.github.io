@@ -472,7 +472,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     <div class="sech"><h2 id="oH" data-i="oH">Jelly PangPang at a glance</h2>
     <p data-i="oP">Trap them with jelly bombs and pop! Solo or with friends.</p></div>
     <section class="trl" aria-label="Trailer"><!-- [c1555] 새 트레일러 16:9(무음 · 한국어는 ko 판, 나머지는 en 판) — 맨 위 4:3 영상은 그대로 -->
-      <video id="trl" muted loop playsinline preload="none" poster="trailer-en.jpg" width="960" height="540" aria-label="Pop! Jelly PangPang"><source src="trailer-en.mp4" type="video/mp4"></video>
+      <video id="trl" muted loop playsinline preload="none" poster="trailer-en.jpg?v=1116t" width="960" height="540" aria-label="Pop! Jelly PangPang"><source src="trailer-en.mp4?v=1116t" type="video/mp4"></video>
     </section>
       <div class="trlbtn"><a class="btn btn-pink" id="bTrailer" rel="noopener" hidden><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4.6v14.8a1 1 0 0 0 1.5.86l12.3-7.4a1 1 0 0 0 0-1.72L9 3.74a1 1 0 0 0-1.5.86z" fill="currentColor"/></svg><span data-i="trailer">Watch the trailer</span></a></div>
     <section class="shots">
@@ -621,7 +621,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
      phase    : ''(기본 · 위 주소에 따라 '곧 출시' / '출시됨') | 'pre'(사전 예약 화면 — 구글 사전 등록 · 애플 사전 주문 글자 단추, play·appstore 중 하나는 채워져 있어야 함) | 'live'(= '' 와 같음, 기록용)
      launch   : 'YYYY-MM-DD' — pre 일 때 칩에 "10월 8일 출시" 로 현지화해 보인다(비우면 날짜 없이 · 날짜가 지나면 저절로 빠진다)
      ──────────────────────────────────────────────────────────────────── */
-  var CFG = { play: 'https://play.google.com/store/apps/details?id=com.jellypangpang.game', appstore: 'https://apps.apple.com/app/id6817233245', applePt: '129487925', trailer: 'https://youtu.be/7cLBKEUDaxs', phase: 'live', launch: '', steam: 'https://store.steampowered.com/app/5396440' };   /* [c844] steam: 스팀 상점 주소(비우면 PC 단추가 'PC(스팀)는 곧 나와요' 글자로 돌아간다) · [c958] 10-11 상점 공개('곧 출시 예정' — 찜하기)로 채움 */
+  var CFG = { play: 'https://play.google.com/store/apps/details?id=com.jellypangpang.game', appstore: 'https://apps.apple.com/app/id6817233245', applePt: '129487925', trailer: 'https://youtu.be/uGyzfHXBhGU', phase: 'live', launch: '', steam: 'https://store.steampowered.com/app/5396440' };   /* [c844] steam: 스팀 상점 주소(비우면 PC 단추가 'PC(스팀)는 곧 나와요' 글자로 돌아간다) · [c958] 10-11 상점 공개('곧 출시 예정' — 찜하기)로 채움 */
 
   var $ = function (id) { return document.getElementById(id); };
   var INL = window.__INL || {};                   /* 한 장짜리 미리보기(build.py)만 쓴다 — 파일 이름 → 박아 넣은 그림(스크린샷·배지) */
@@ -705,7 +705,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     $('lang').setAttribute('aria-label', t.langLbl); $('lang').value = lang;
     if ($('reel')) $('reel').setAttribute('aria-label', t.vid);
     var tv = $('trl');   /* [c1555] 트레일러 칸 — 한국어는 ko 판 */
-    if (tv) { var tf = lang === 'ko' ? 'trailer-ko' : 'trailer-en', ts = tv.querySelector('source'); tv.setAttribute('aria-label', t.name); if (ts.getAttribute('src') !== tf + '.mp4') { tv.poster = tf + '.jpg'; ts.src = tf + '.mp4'; tv.load(); } }
+    if (tv) { var tf = lang === 'ko' ? 'trailer-ko' : 'trailer-en', ts = tv.querySelector('source'); tv.setAttribute('aria-label', t.name); if (ts.getAttribute('src') !== tf + '.mp4?v=1116t') { tv.poster = tf + '.jpg?v=1116t'; ts.src = tf + '.mp4?v=1116t'; tv.load(); } }
     $('chip').textContent = PRE ? preChip(t) : (!hasPlay && !hasApp) ? t.soon : (hasPlay && hasApp) ? t.outBoth : (hasPlay ? t.outPlay : t.outApp);
     $('ctaNote').textContent = PRE ? t.preNote : t.noteSoon; $('ctaNote').hidden = !PRE && (hasPlay || hasApp);   /* 출시 뒤에는 바로 위 칩 셋(광고 없음·뽑기 없음·15단계 무료)이 그 말을 대신한다 */
     if (PRE) preUi(t); else badges(t);
