@@ -98,17 +98,17 @@ main{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:max(18px,
 .logo text{font-family:"Fredoka",system-ui,sans-serif;font-weight:600;text-anchor:middle}
 .logo.ko{display:none}
 .logo.ko text{font-family:"NSRoundLogo","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;font-weight:800}
-.logo.zh,.logo.ar{display:none}
+.logo.zh,.logo.ar,.logo.zt{display:none}
 .logo.zh text{font-family:"SRLogo","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;font-weight:700}
 .logo.ar text{font-family:"ARLogo","Segoe UI","Noto Sans Arabic",system-ui,sans-serif;font-weight:700;direction:rtl;unicode-bidi:isolate}
-html[lang="ko"] .logo.en,html[lang="zh-Hans"] .logo.en,html[lang="ar"] .logo.en{display:none}
-html[lang="ko"] .logo.ko,html[lang="zh-Hans"] .logo.zh,html[lang="ar"] .logo.ar{display:block}
+html[lang="ko"] .logo.en,html[lang="zh-Hans"] .logo.en,html[lang="zh-Hant"] .logo.en,html[lang="ar"] .logo.en{display:none}
+html[lang="ko"] .logo.ko,html[lang="zh-Hans"] .logo.zh,html[lang="zh-Hant"] .logo.zt,html[lang="ar"] .logo.ar{display:block}/* [btn1116] 번체 = 果凍爆爆樂 그림(게임 1.0.58 과 같은 그림) */
 /* [c722] */
 .logo.ja{display:none}
 .logo.ja text{font-family:"JPLogo","Hiragino Maru Gothic ProN","Yu Gothic","Meiryo","Noto Sans JP",system-ui,sans-serif;font-weight:700}
 html[lang="ja"] .logo.en{display:none}
 html[lang="ja"] .logo.ja{display:block}
-.logo.en{width:min(100%,460px)}.logo.ko{width:min(100%,360px)}.logo.zh{width:min(100%,320px)}.logo.ar{width:min(100%,330px)}.logo.ja{width:min(100%,400px)}@media (max-width:380px){.logo.ko,.logo.zh,.logo.ar{width:min(100%,290px)}}  /* [C-1901] 새 로고 그림 크기 · 작은 폰은 키 큰 셋을 줄여 첫 단추가 첫 화면에 */
+.logo.en{width:min(100%,460px)}.logo.ko{width:min(100%,360px)}.logo.zh,.logo.zt{width:min(100%,320px)}.logo.ar{width:min(100%,330px)}.logo.ja{width:min(100%,400px)}@media (max-width:380px){.logo.ko,.logo.zh,.logo.zt,.logo.ar{width:min(100%,290px)}}  /* [C-1901] 새 로고 그림 크기 · 작은 폰은 키 큰 셋을 줄여 첫 단추가 첫 화면에 */
 h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tagline{margin:8px auto 0;font-family:"Fredoka",system-ui,sans-serif;font-weight:600;font-size:clamp(21px,5.6vw,27px);line-height:1.25;color:#fff;text-shadow:0 2px 0 rgba(130,10,70,.45)}
 .sub{margin:6px auto 0;max-width:30em;color:#fff;font-size:16px;text-shadow:0 1px 0 rgba(130,10,70,.4)}
@@ -120,27 +120,31 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);whi
 .btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 /* 스토어 배지 — 구글·애플이 준 그림 그대로(badges/). 그림자·테두리·움직임을 덧대지 않고, 둘레 여백은 배지 높이의 1/4 이상, 두 배지는 같은 높이.
    구글 PNG 는 그림 안에 투명 여백이 들어 있어(언어에 따라 두 가지) 틀(.bx)을 보이는 배지 크기로 잡고 그림을 그만큼 밀어 넣는다(--s --px --py 는 스크립트가 넣는다). */
-.getit{--bh:56px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:16px;margin:16px auto 0}
+.getit{--bhx:56px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:16px;margin:16px auto 0}
+/* [btn1116] 팀 11-16 「플랫폼 버튼들 크기나 디자인 정리 좀 해줘. 너무 제각각에 안이쁘다」 — 배지 넷을 한 덩어리로: 보이는 높이 같게 · 두 줄 2칸(.brk 줄바꿈) · 배지 사이 = 높이의 1/4 · 두 줄 폭은 스팀 단추 폭으로 맞춤(bal()) · 높이는 가장 넓은 줄이 칸 폭에 들어가게(--rw = 넓은 줄 비율 합 + 사이 0.5) */
+.bdgs{container-type:inline-size;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;width:100%}
+.bdgs>.brk{flex-basis:100%;height:0}
+.bdgs>.bdg{--bh:var(--bhx,56px);--bh:min(var(--bhx,56px),calc((100cqw - 1px)/var(--rw,7)));margin:calc(var(--bh)/8)}
 .bdg{display:block;line-height:0;border-radius:10px;-webkit-tap-highlight-color:transparent}
 .bdg:focus-visible{outline:3px solid #fff;outline-offset:5px}
 .bdg .bx{position:relative;display:block;overflow:hidden;height:var(--bh);width:calc(var(--bh)*var(--r,3))}
 .bdg img{position:absolute;left:0;top:0;display:block;max-width:none;width:100%;height:100%}
-.bdg.st{--r:3}/* [c1958] 공식 Steam 로고(inverse) 배지 · 로고 높이 = 배지 60% · 둘레 여백 >= 크랭크 지름 */
-.bdg.st .bx{background:#000;border-radius:calc(var(--bh)*.17);box-shadow:inset 0 0 0 1px #a6a6a6}
-.bdg.st img{left:50%;top:50%;width:auto;height:60%;transform:translate(-50%,-50%)}
-.bdg.tt .bx{height:calc(var(--bh)*var(--k,1));width:calc(var(--bh)*var(--k,1)*var(--r,3.2591))}/* [tt] 탭탭 공식 배지(badges/taptap-*.svg 받은 그대로) · 구글 배지보다 넓지 않게 --k 로 줄임 · 한국어는 숨김 */
+.bdg.st{--r:3}/* [c1958] 공식 Steam 로고(inverse) 배지 · [btn1116] 로고 높이 = 배지 50%(공식 배지 글자 키와 맞춤) · 단추 폭은 bal() 이 두 줄 폭을 맞추게 정함(2.2~가장 넓은 공식 배지 폭) */
+.bdg.st .bx{background:#000;border-radius:calc(var(--bh)*.16);box-shadow:inset 0 0 0 max(1px,calc(var(--bh)*.025)) #a6a6a6}
+.bdg.st img{left:50%;top:50%;width:auto;height:50%;transform:translate(-50%,-50%)}
+/* [tt] 탭탭 공식 배지(badges/taptap-*.svg 받은 그대로) · 한국어는 숨김 · [btn1116] 줄이지 않고 다른 배지와 같은 높이 */
 .bdg.gp img{width:calc(var(--bh)*var(--s,1.302)*2.584);height:calc(var(--bh)*var(--s,1.302));left:calc(var(--bh)*var(--s,1.302)*2.584*var(--px,0)*-1);top:calc(var(--bh)*var(--s,1.302)*var(--py,.116)*-1)}
 .more{margin:14px auto 0;color:#fff;font-size:14.5px;text-shadow:0 1px 0 rgba(130,10,70,.4)}
 .getit:not([hidden])+.more[hidden]+.sub{margin-top:14px}
 .more a{color:#fff;text-underline-offset:3px;padding:8px 2px}
 .legal{margin:12px auto 0;max-width:44em;font-size:11.5px;line-height:1.5;opacity:.85}
-@media (max-width:350px){.getit{--bh:50px}}
+@media (max-width:350px){.getit{--bhx:50px}}
 /* [c1958] 세 배지 줄 — 배지 사이 = 배지 높이의 1/4(구글 둘레 여백) · 폰은 위 줄에 폰 스토어 둘, 아래 줄에 스팀(터키어는 애플 배지가 넓어 세 줄) · 가로 폰은 낮게 */
-.getit{gap:calc(var(--bh)/4)}
-@media (max-width:430px){.getit{--bh:54px}}
-@media (max-width:380px){.getit{--bh:46px}}
-@media (orientation:landscape) and (max-height:500px) and (max-width:1023px){.getit{--bh:40px;margin-top:10px}}
-@media (min-width:1024px) and (hover:hover) and (pointer:fine){.getit{display:grid;grid-template-columns:auto 150px;grid-template-rows:repeat(3,auto);grid-auto-flow:column;justify-content:center;justify-items:center;align-items:center;column-gap:28px}.getit>.qrbox{grid-column:2;grid-row:1/-1;align-self:center}.getit.ttOn{grid-template-rows:repeat(4,auto)}}/* PC 마우스: 세 배지 한 줄 세로 · QR 은 옆 */
+.getit{gap:0}
+@media (max-width:430px){.getit{--bhx:54px}}
+@media (max-width:380px){.getit{--bhx:50px}}
+@media (orientation:landscape) and (max-height:500px) and (max-width:1023px){.getit{--bhx:40px;margin-top:10px}}
+@media (min-width:1024px) and (hover:hover) and (pointer:fine){.getit{display:grid;grid-template-columns:440px 150px;justify-content:center;align-items:center;column-gap:24px}.getit>.qrbox{grid-column:2;align-self:center}}/* PC 마우스: [btn1116] 배지 두 줄 2칸 덩어리 · QR 은 옆 */
 /* [c619] 사전 예약 단계(CFG.phase='pre') — 공식 배지 대신 글자 단추. 로고 아래 배지 자리에 놓는다. */
 /* [c620] 사전 예약 화면 정리 — 단추 둘은 같은 모양·크기(제 스토어가 위) · 날짜 칩은 단추 바로 위 · 안내 한 줄은 단추 아래 · 안 열린 쪽은 점선 단추 */
 .preget{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;gap:12px;width:min(100%,340px);margin:18px auto 0}
@@ -399,7 +403,7 @@ footer{margin-top:30px}
 @media (min-width:640px){.where .sideways{max-width:min(100%,600px)}.endget .preget>.pcb{width:100%}}
 @media (min-width:768px){.story{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:22px;align-items:center}.story .hlm{margin:0}}
 /* 가로 폰(높이 500 이하) 첫 화면 — 받기 첫 단추가 첫 화면에 들게(800x379 13개 언어 b1 260~339 · 전 519~661) · 단추는 한 줄에 하나(두 칸이면 글이 단추 밖으로 나갔다) */
-@media (orientation:landscape) and (max-height:500px) and (max-width:1023px){main{max-width:780px}.hinfo .icon{display:none}.logo,.logo.ko,.logo.zh,.logo.ar,.logo.ja,.logo.en{width:min(100%,240px)}.tagline{margin-top:2px;font-size:18px}.hero .preget{grid-template-columns:minmax(0,1fr);width:min(100%,320px);margin-top:8px;gap:8px}.hero .preget>#bPrePc{width:100%}.chip.pre{font-size:13px;padding:4px 10px}.topbar{margin-bottom:2px}}
+@media (orientation:landscape) and (max-height:500px) and (max-width:1023px){main{max-width:780px}.hinfo .icon{display:none}.logo,.logo.ko,.logo.zh,.logo.zt,.logo.ar,.logo.ja,.logo.en{width:min(100%,240px)}.tagline{margin-top:2px;font-size:18px}.hero .preget{grid-template-columns:minmax(0,1fr);width:min(100%,320px);margin-top:8px;gap:8px}.hero .preget>#bPrePc{width:100%}.chip.pre{font-size:13px;padding:4px 10px}.topbar{margin-bottom:2px}}
 @media (min-width:1024px){.sech{max-width:860px;margin-top:40px}.sech h2{font-size:28px}.story{max-width:1100px;width:100%;margin:26px auto 0;padding:18px 20px}.fun{margin-top:40px}
 .gifts{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:22px;align-items:center;max-width:1100px;width:100%;margin:26px auto 0}
 .endget .preget,.endget .preget>*{grid-column:auto;grid-row:auto}.endget .preget{grid-template-columns:minmax(0,1fr);width:min(100%,380px)}.endcta>.endget{flex:1 1 100%}}
@@ -442,6 +446,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     <img class="logo ko" src="logo-ko.webp" width="960" height="455" alt="" decoding="async">
     <img class="logo zh" src="logo-zh.webp" width="960" height="543" alt="" decoding="async">
     <img class="logo ar" src="logo-ar.webp" width="960" height="548" alt="" decoding="async">
+    <img class="logo zt" src="logo-zh-Hant.webp" width="640" height="365" alt="" decoding="async">
     <img class="logo ja" src="logo-ja.webp" width="960" height="302" alt="" decoding="async">
     <p class="tagline"><span data-i="tag1">Squish and stretch your jelly,</span> <span data-i="tag2">then go pang-pang with bombs!</span><!-- [c731b] --><!-- [c731c] --></p>
     <div class="preget" id="preGet" hidden>
@@ -450,11 +455,12 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
       <a class="btn btn-pre off" id="bPrePc" rel="noopener" hidden><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M8.5 20h7M12 16.5V20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span data-i="pcSoon">PC (Steam): coming soon</span></a><!-- [c844] -->
     </div>
     <div class="qrbox" id="qrBox"><img src="qr-get.png" width="124" height="124" alt="QR: jellypangpang1231.github.io/get" decoding="async"><span data-i="qrScan">Scan with your phone camera to install</span></div><!-- [c1908] -->
-    <div class="getit" id="getit" hidden>
+    <div class="getit" id="getit" hidden><div class="bdgs" id="bdgs">
       <a class="bdg as" id="bApp" rel="noopener" hidden><span class="bx"><img id="imApp" alt="" decoding="async"></span></a>
       <a class="bdg gp" id="bPlay" rel="noopener" hidden><span class="bx"><img id="imPlay" alt="" decoding="async"></span></a>
       <a class="bdg st" id="bSteam" rel="noopener" hidden aria-label="Steam"><span class="bx"><img src="badges/steam-inv.png?v=1958" width="632" height="192" alt="" decoding="async"></span></a><!-- [c1958] 출시 뒤 늘 켜진다 · Valve 공식 Steam 로고(inverse) · 언어 공통 -->
       <a class="bdg tt" id="bTap" rel="noopener" hidden aria-label="TapTap"><span class="bx"><img id="imTap" alt="" decoding="async"></span></a><!-- [tt] 팀 11-16 탭탭 단추: 한국어 페이지에는 안 보임 · 스팀과 따로 · CFG.taptap 이 비면 안 보임 -->
+      <i class="brk" aria-hidden="true"></i></div><!-- [btn1116] 배지 칸 · .brk 는 순서 정할 때 둘째 배지 뒤로 옮김 -->
     </div>
     <p class="more" id="more" hidden></p>
     </div>
@@ -657,6 +663,22 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
      구글 PNG(646x250)는 영어·아랍어만 사방에 투명 여백(41px)이 있고 나머지는 위아래(29px)만 있다. 보이는 배지 높이를 --bh 로 똑같이 맞춘다. */
   var AS_R = { ko: 3.2425, ja: 2.7213, 'zh-Hant': 2.7213, 'zh-Hans': 2.7213, fr: 3.1627, tr: 3.7823 }, GP_PAD = { en: 1, ar: 1 };
   var showApp = false, showPlay = false, MORE = null;      /* 아래 '출시 뒤' 대목이 정한다 */
+  /* [btn1116] 두 줄 폭 맞추기 — 줄 = 보이는 배지 앞 둘 / 나머지. 스팀(우리가 만든 단추)의 폭으로 두 줄 합을 맞춘다(2.2 ~ 가장 넓은 공식 배지 폭 · 배지 셋에 스팀이 혼자인 줄은 구글 폭).
+     --rw = 넓은 줄 비율 합 + 0.5(배지 사이) · CSS 가 배지 높이를 칸 폭 / --rw 로 줄인다 */
+  function bal() {
+    try {
+      var box = $('bdgs'), br = box.querySelector('.brk'), it = [], i, st = $('bSteam'), rg = parseFloat($('bPlay').style.getPropertyValue('--r')) || 3.3646;
+      for (i = 0; i < box.children.length; i++) { var e = box.children[i]; if (e.classList.contains('bdg') && !e.hidden) it.push(e); }
+      var cut = it.length === 3 && it[0] === st ? 1 : 2;   /* 배지가 셋이고 스팀이 맨 앞(PC 한국어)이면 스팀 혼자 윗줄 — 아랫줄 하나만 남는 거꾸로 된 짜임을 피함 */
+      if (it.length > cut) box.insertBefore(br, it[cut]); else box.appendChild(br);
+      var R = function (e) { return e === st ? 0 : (parseFloat(e.style.getPropertyValue('--r')) || 3); }, rows = [it.slice(0, cut), it.slice(cut)], s = rows.map(function (r) { return r.reduce(function (a, e) { return a + R(e); }, 0); });
+      var k = rows[0].indexOf(st) >= 0 ? 0 : rows[1].indexOf(st) >= 0 ? 1 : -1, rs = rg;
+      var mx = rg; for (i = 0; i < it.length; i++) if (it[i] !== st) mx = Math.max(mx, R(it[i]));   /* 스팀은 가장 넓은 공식 배지보다 넓어지지 않음(Codex 11-16: PC 두 줄 끝 맞춤) */
+      if (k >= 0 && rows[k].length > 1) rs = Math.max(2.2, Math.min(mx, s[1 - k] - s[k]));
+      if (k >= 0) { st.style.setProperty('--r', rs.toFixed(4)); s[k] += rs; }
+      box.style.setProperty('--rw', (Math.max(s[0], s[1]) + 0.52).toFixed(4));
+    } catch (e) {}
+  }
   function badges(t) {
     if (showApp) { var a = $('bApp'); a.style.setProperty('--r', AS_R[lang] || 2.9916); a.setAttribute('aria-label', t.aApp); setSrc($('imApp'), 'badges/as-' + lang + '.svg'); }
     if (showPlay) {
@@ -667,7 +689,8 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     var tp = $('bTap'), tk = CFG.ttBadge === 'prereg' ? 'prereg' : 'android', tr = tk === 'prereg' ? 4.0864 : 3.2591;   /* [tt] 탭탭 — 한국어 페이지에는 달지 않는다(언어를 바꿀 때도) */
     tp.hidden = !CFG.taptap || lang === 'ko';
     $('getit').classList.toggle('ttOn', !tp.hidden);   /* PC 세로 줄에 넷째 칸 */
-    if (!tp.hidden) { tp.style.setProperty('--r', tr); tp.style.setProperty('--k', Math.min(1, 3.3571 / tr).toFixed(4)); setSrc($('imTap'), 'badges/taptap-' + tk + '.svg?v=1116tt'); }
+    if (!tp.hidden) { tp.style.setProperty('--r', tr); setSrc($('imTap'), 'badges/taptap-' + tk + '.svg?v=1116tt'); }
+    bal();
     var m = $('more'); m.hidden = !MORE;
     if (MORE) { m.textContent = ''; if (MORE[1]) { var l = document.createElement('a'); l.href = MORE[1]; l.rel = 'noopener'; l.textContent = t[MORE[0]]; m.appendChild(l); } else m.textContent = t[MORE[0]]; }
   }
@@ -837,7 +860,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     if (CFG.steam) { $('bSteam').href = steamUrl(); $('bSteam').hidden = false; }
     if (CFG.taptap) $('bTap').href = CFG.taptap;   /* [tt] 보이기는 badges() 가 언어마다 정한다 */
     (function () { var g = $('getit'), a = $('bApp'), p = $('bPlay'), st = $('bSteam'), tt = $('bTap'), o = isAndroid ? [p, a, st, tt] : isIOS ? [a, p, st, tt] : [st, a, p, tt], k;
-      for (k = 0; k < o.length; k++) g.appendChild(o[k]); })();
+      g = $('bdgs'); for (k = 0; k < o.length; k++) g.appendChild(o[k]); g.appendChild(g.querySelector('.brk')); bal(); })();
     $('getit').hidden = !(showApp || showPlay); $('legal').hidden = !(showApp || showPlay);
     MORE = hasPlay && hasApp ? null : hasPlay ? ['appSoon', ''] : ['playSoon', ''];
   }
@@ -872,7 +895,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
 (function () {
   try {
     if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var T = {"ko":{"u":[{"i":1,"z":1,"ox":49.95,"oy":30.99,"bb":[30.42,0.66,69.48,30.99]},{"i":2,"z":2,"ox":49.95,"oy":99.12,"bb":[0.31,32.53,99.58,99.12]}]},"en":{"u":[{"i":1,"z":1,"ox":49.95,"oy":39.66,"bb":[38.33,0.0,61.56,39.66]},{"i":2,"z":2,"ox":50.0,"oy":99.57,"bb":[0.1,44.83,99.9,99.57]}]},"ja":{"u":[{"i":1,"z":1,"ox":49.95,"oy":32.12,"bb":[31.98,0.0,67.92,32.12]},{"i":2,"z":2,"ox":49.95,"oy":99.67,"bb":[0.0,35.1,99.9,99.67]}]},"zh":{"u":[{"i":1,"z":1,"ox":49.95,"oy":35.36,"bb":[31.67,0.0,68.23,35.36]},{"i":2,"z":2,"ox":49.95,"oy":99.82,"bb":[0.0,35.54,99.9,99.82]}]},"ar":{"u":[{"i":1,"z":1,"ox":49.48,"oy":35.22,"bb":[33.96,0.18,65.0,35.22]},{"i":2,"z":2,"ox":49.95,"oy":99.82,"bb":[0.0,35.58,99.9,99.82]}]}};
+    var T = {"zt":{"u":[{"i":1,"z":1,"ox":49.92,"oy":35.34,"bb":[31.72,0.27,68.12,35.34]},{"i":2,"z":2,"ox":50.0,"oy":99.73,"bb":[0.16,35.34,99.84,99.73]}]},"ko":{"u":[{"i":1,"z":1,"ox":49.95,"oy":30.99,"bb":[30.42,0.66,69.48,30.99]},{"i":2,"z":2,"ox":49.95,"oy":99.12,"bb":[0.31,32.53,99.58,99.12]}]},"en":{"u":[{"i":1,"z":1,"ox":49.95,"oy":39.66,"bb":[38.33,0.0,61.56,39.66]},{"i":2,"z":2,"ox":50.0,"oy":99.57,"bb":[0.1,44.83,99.9,99.57]}]},"ja":{"u":[{"i":1,"z":1,"ox":49.95,"oy":32.12,"bb":[31.98,0.0,67.92,32.12]},{"i":2,"z":2,"ox":49.95,"oy":99.67,"bb":[0.0,35.1,99.9,99.67]}]},"zh":{"u":[{"i":1,"z":1,"ox":49.95,"oy":35.36,"bb":[31.67,0.0,68.23,35.36]},{"i":2,"z":2,"ox":49.95,"oy":99.82,"bb":[0.0,35.54,99.9,99.82]}]},"ar":{"u":[{"i":1,"z":1,"ox":49.48,"oy":35.22,"bb":[33.96,0.18,65.0,35.22]},{"i":2,"z":2,"ox":49.95,"oy":99.82,"bb":[0.0,35.58,99.9,99.82]}]}};
     var boxes = [];
     var imgs = document.querySelectorAll('img.logo');
     for (var n = 0; n < imgs.length; n++) {
