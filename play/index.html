@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Pop! Jelly PangPang</title>
+<meta property="og:title" content="Pop! Jelly PangPang">
+<meta property="og:image" content="https://jellypangpang1231.github.io/og2.png">
+<link rel="icon" href="/favicon.ico?v=1113i">
+<link rel="preload" as="image" href="/tex-reel-en.jpg?v=1111q">
+<!-- 쇼츠 도착 페이지 /play/ (JP-랜딩쇼츠도착 11-17 · 시안 B '세로 영상 + 바닥 고정 단추' JP-랜딩참고조사) · 자동 이동 없음
+     /go/ 는 게임 QR 초대 쪽이고 앱 링크 경로라 따로 둔다. 쇼츠 주소 예: /play/?s=yth&v=tex
+     기기별: 아이폰·아이패드 = App Store 하나(구글 배지 없음) · 안드로이드 = Google Play 하나(애플 배지 없음) · PC = Steam + 폰 QR(/get/ 이 기기에 맞는 상점으로) + 두 상점 작은 배지
+     탭탭 사전 예약 배지는 홈과 같이 한국어 페이지에서는 숨기고, 아이폰에서도 숨긴다(안드로이드 상점이라 누를 수 없음)
+     쇼츠와 같은 세로 장면이 화면을 채우고(촉감 놀이 + 귀퉁이 폭탄 대전), 상점 단추는 화면 아래에 늘 붙어 있다(앱 안 브라우저 높이 664 에서도 보임) -->
+<style>
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:#ffeaf3;color:#5b3a1e;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+main{max-width:480px;margin:0 auto;padding-bottom:210px}
+.stage{position:relative;aspect-ratio:4/5;max-height:min(72vh,calc(100vh - 300px));width:100%;overflow:hidden;background:#ffe7c2}
+.stage video.main{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stage .top{position:absolute;left:0;right:0;top:0;padding:max(10px,env(safe-area-inset-top)) 12px 26px;background:linear-gradient(180deg,rgba(255,234,243,.95) 0%,rgba(255,234,243,.75) 55%,rgba(255,234,243,0) 100%);display:flex;align-items:center;gap:10px}
+.stage .top img.icon{width:46px;height:46px;border-radius:12px;box-shadow:0 2px 0 #e8b9c9;flex:none}
+.stage .top img.logo{height:44px;width:auto;max-width:calc(100% - 70px);object-fit:contain;object-position:left center}
+html[dir="rtl"] .stage .top img.logo{object-position:right center}
+.pip{position:absolute;right:10px;bottom:10px;width:38%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.25);background:#333}
+html[dir="rtl"] .pip{right:auto;left:10px}
+.pip video{display:block;width:100%;height:100%;object-fit:cover}
+.pip b{position:absolute;left:6px;top:4px;font-size:11px;color:#fff;text-shadow:0 1px 2px #000}
+.tag{margin:12px 16px 4px;text-align:center;font-size:18px;font-weight:800;line-height:1.3;color:#7a3a14}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:8px 12px}
+.chips span{padding:5px 11px;border-radius:999px;background:#fff;color:#d2457a;font-weight:700;font-size:13px;box-shadow:0 2px 0 #f3b7cd}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;padding:10px 12px max(10px,env(safe-area-inset-bottom));background:rgba(255,255,255,.96);box-shadow:0 -4px 18px rgba(210,69,122,.18);border-radius:20px 20px 0 0;text-align:center}
+#cta{line-height:0;position:relative}
+.bdg{display:inline-block;line-height:0;border-radius:14px;-webkit-tap-highlight-color:transparent}
+.bdg img{display:block;height:38px;width:auto}
+.bdg.big img{height:68px}
+.bdg.big.gp img{height:100px;margin:-16px -6px}
+#cta .bdg.big{position:relative;z-index:1}
+#cta::before{content:"";position:absolute;left:50%;top:50%;width:230px;height:62px;margin:-31px 0 0 -115px;border-radius:18px;background:rgba(255,79,140,.45);animation:halo 1.6s ease-out infinite;pointer-events:none}
+@keyframes halo{0%{transform:scale(.95);opacity:.9}100%{transform:scale(1.35,1.7);opacity:0}}   /* 상점 배지는 그대로 두고(규정) 뒤의 빛 고리만 두근 */
+@media (prefers-reduced-motion:reduce){#cta::before{animation:none;opacity:0}}
+.othrow{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:#9a6a4a;flex-wrap:wrap}
+#oth{display:flex;gap:8px;align-items:center}
+#oth .gp img{height:54px;margin:-8px -3px}
+.bdg.st{background:#000;box-shadow:inset 0 0 0 1px #a6a6a6;border-radius:8px}
+.bdg.big.st{border-radius:13px}
+.bdg.tt img{height:38px}
+#qr{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px;font-size:12.5px;color:#9a6a4a}
+#qr img{width:96px;height:96px;border-radius:8px;background:#fff;box-shadow:0 0 0 1px #f3b7cd}
+#qr span{max-width:170px;text-align:start}
+body.pc main{padding-bottom:0}
+body.pc .stage{max-height:52vh}
+body.pc .bar{position:static;max-width:480px;margin:0 auto;padding-top:14px;background:transparent;box-shadow:none}   /* PC 는 화면이 넓어 띠를 붙이지 않는다(글을 덮지 않게) */
+</style>
+</head>
+<body>
+<main>
+<div class="stage">
+<video class="main" id="v1" autoplay muted loop playsinline preload="auto" poster="/tex-reel-en.jpg?v=1111q" src="/tex-reel-en.mp4?v=1111q"></video>
+<div class="top"><img class="icon" src="/icon-192.png?v=1113i" width="46" height="46" alt=""><img class="logo" data-logo alt="Pop! Jelly PangPang" decoding="async"></div>
+<div class="pip"><video id="v2" autoplay muted loop playsinline preload="auto" poster="/hl-vs.jpg?v=1111" src="/hl-vs.mp4?v=1111"></video></div>
+</div>
+<p class="tag"><span data-t="tag1"></span> <span data-t="tag2"></span></p>
+<div class="chips"><span data-t="outBoth"></span></div>
+<p class="tag" style="font-size:13.5px;font-weight:600;color:#8a5a3a" data-t="noteOut"></p>
+</main>
+<div class="bar">
+<div id="cta"></div>
+<div class="othrow"><div id="oth"></div></div>
+<div id="qr" hidden><img src="/qr-get.png" width="96" height="96" alt="QR: jellypangpang1231.github.io/get" decoding="async"><span data-t="qrScan"></span></div>
+<div id="also" style="font-size:11.5px;color:#9a6a4a;margin-top:2px"></div>
+</div>
+<script>
+window.__pickClip = function (v) {      /* ?v=vs 면 폭탄 대전을 크게, 촉감 놀이를 귀퉁이로 바꾼다 */
+  if (v !== 'vs') return; var a = document.getElementById('v1'), b = document.getElementById('v2');
+  a.poster = '/hl-vs.jpg?v=1111'; a.src = '/hl-vs.mp4?v=1111'; b.poster = '/tex-reel-en.jpg?v=1111q'; b.src = '/tex-reel-en.mp4?v=1111q';
+};
+(function () {
+  /* 쇼츠 도착 페이지 공통(시안 · JP-랜딩참고조사 11-17) — 자동 이동 없음. 기기에 맞는 상점 단추 하나만 크게, 나머지는 아래 작은 줄.
+     꼬리표(?s= 없으면 ?utm_source=)는 홈페이지 CFG 와 같은 방식으로 상점 주소에 붙인다. 방문·누름 세기는 /get/ 과 같은 계수기·같은 합계만(IP·쿠키·기기 id 저장 안 함). */
+  var S = {"en":{"name":"Pop! Jelly PangPang","tag1":"Squish and stretch your jelly,","tag2":"then go pang-pang with bombs!","outBoth":"Out now on phones and Steam! Free to start","noteOut":"The first 15 stages are free. No ads, no gacha.","alsoApp":"Also on iPhone and iPad","alsoPlay":"Also on Android","pcLine":"Out now on PC, too, on Steam.","plTxH":"Every texture feels different","hVsH":"Battle up to 6 online","qrScan":"Scan with your phone camera to install"},"ko":{"name":"터져라! 젤리팡팡","tag1":"말랑 젤리를 쭉 늘리고","tag2":"폭탄으로 팡팡!","outBoth":"휴대폰과 스팀 모두 출시했어요. 무료로 시작할 수 있어요","noteOut":"15단계까지 무료예요. 광고도 뽑기도 없어요.","alsoApp":"아이폰과 아이패드에서도 받기","alsoPlay":"안드로이드에서도 받기","pcLine":"PC(스팀)에서도 지금 할 수 있어요.","plTxH":"촉감마다 다른 손맛","hVsH":"최대 6명이 한 판에서 팡팡","qrScan":"폰 카메라로 찍으면 바로 설치"},"ja":{"name":"ハジケロ！ゼリーパンパン","tag1":"ぷにぷにゼリーをのばして、","tag2":"ばくだんでパンパン！","outBoth":"スマホとSteamで配信中 — 無料で始められます","noteOut":"最初の15ステージは無料。広告なし、ガチャなし。","alsoApp":"iPhone・iPad 版もあります","alsoPlay":"Android 版もあります","pcLine":"PC（Steam）でも今すぐ遊べます。","plTxH":"しょっかんごとにちがう手ざわり","hVsH":"最大6人で同時対戦","qrScan":"スマホのカメラで読みとってすぐインストール"},"zh-Hant":{"name":"果凍爆爆樂","tag1":"把軟Q果凍拉長長，","tag2":"再用炸彈碰碰！","outBoth":"手機和 Steam 現已推出 — 免費開始","noteOut":"前 15 關免費。無廣告，無轉蛋。","alsoApp":"也有 iPhone 與 iPad 版","alsoPlay":"也有 Android 版","pcLine":"PC（Steam）版現在也能玩了。","plTxH":"每種觸感，手感都不同","hVsH":"最多 6 人同場對戰","qrScan":"用手機相機掃描，立即安裝"},"zh-Hans":{"name":"果冻碰碰乐","tag1":"把软Q果冻拉长长，","tag2":"再用炸弹碰碰！","outBoth":"手机和 Steam 现已上线 — 免费开玩","noteOut":"前 15 关免费。无广告，无抽卡。","alsoApp":"也有 iPhone 和 iPad 版","alsoPlay":"也有 Android 版","pcLine":"PC（Steam）版现在也能玩了。","plTxH":"每种触感，手感都不同","hVsH":"最多 6 人同场对战","qrScan":"用手机相机扫一扫，马上安装"},"ru":{"name":"Pop! Jelly PangPang","tag1":"Тяни мягкое желе —","tag2":"и бах-бах бомбами!","outBoth":"Уже на телефонах и в Steam — начни бесплатно","noteOut":"Первые 15 уровней бесплатно. Без рекламы и гачи.","alsoApp":"Также на iPhone и iPad","alsoPlay":"Также на Android","pcLine":"Уже и на ПК в Steam.","plTxH":"Каждая текстура — по-своему!","hVsH":"До 6 игроков в одном бою","qrScan":"Наведи камеру телефона, чтобы установить"},"ar":{"name":"جيلي بانغ بانغ","tag1":"مُدّ الجيلي الطري،","tag2":"ثم بانغ بانغ بالقنابل!","outBoth":"متوفرة الآن على الهواتف وSteam — ابدأ مجانًا","noteOut":"أول 15 مرحلة مجانية. بلا إعلانات وبلا غاتشا.","alsoApp":"متوفرة أيضًا على iPhone و iPad","alsoPlay":"متوفرة أيضًا على Android","pcLine":"متوفرة الآن على الحاسوب عبر Steam أيضًا.","plTxH":"لكل ملمس إحساس مختلف","hVsH":"حتى 6 لاعبين في مباراة واحدة","qrScan":"امسح الرمز بكاميرا هاتفك للتثبيت"},"es":{"name":"Pop! Jelly PangPang","tag1":"Estira tu gelatina blandita","tag2":"¡y pang-pang con bombas!","outBoth":"Ya en móviles y en Steam: empieza gratis","noteOut":"Los primeros 15 niveles son gratis. Sin anuncios ni gacha.","alsoApp":"También en iPhone y iPad","alsoPlay":"También en Android","pcLine":"Ya también en PC, en Steam.","plTxH":"Cada textura se siente distinta","hVsH":"Hasta 6 jugadores en una partida","qrScan":"Escanea con la cámara del móvil para instalar"},"fr":{"name":"Pop! Jelly PangPang","tag1":"Étire ta gelée toute molle,","tag2":"puis pang-pang avec des bombes !","outBoth":"Disponible sur mobile et sur Steam — gratuit pour commencer","noteOut":"Les 15 premiers niveaux sont gratuits. Sans pub, sans gacha.","alsoApp":"Aussi sur iPhone et iPad","alsoPlay":"Aussi sur Android","pcLine":"Aussi disponible sur PC, via Steam.","plTxH":"Chaque texture, son toucher","hVsH":"Jusqu’à 6 joueurs dans une partie","qrScan":"Scanne avec l’appareil photo de ton téléphone pour installer"},"it":{"name":"Pop! Jelly PangPang","tag1":"Allunga la tua gelatina morbida,","tag2":"poi pang-pang con le bombe!","outBoth":"Ora su smartphone e su Steam: inizia gratis","noteOut":"I primi 15 livelli sono gratis. Niente pubblicità, niente gacha.","alsoApp":"Anche su iPhone e iPad","alsoPlay":"Anche su Android","pcLine":"Ora anche su PC, su Steam.","plTxH":"Ogni texture, un tocco diverso","hVsH":"Fino a 6 giocatori in una partita","qrScan":"Inquadra con la fotocamera del telefono per installare"},"de":{"name":"Pop! Jelly PangPang","tag1":"Zieh dein weiches Gelee lang –","tag2":"dann Peng-Peng mit Bomben!","outBoth":"Jetzt auf Handy und Steam – kostenlos loslegen","noteOut":"Die ersten 15 Level sind kostenlos. Keine Werbung, kein Gacha.","alsoApp":"Auch für iPhone und iPad","alsoPlay":"Auch für Android","pcLine":"Jetzt auch am PC auf Steam.","plTxH":"Jede Textur fühlt sich anders an","hVsH":"Bis zu 6 Spieler in einer Runde","qrScan":"Mit der Handykamera scannen und installieren"},"pt":{"name":"Pop! Jelly PangPang","tag1":"Estique sua gelatina molinha","tag2":"e pang-pang com bombas!","outBoth":"Já no celular e na Steam: comece de graça","noteOut":"As 15 primeiras fases são grátis. Sem anúncios, sem gacha.","alsoApp":"Também no iPhone e iPad","alsoPlay":"Também no Android","pcLine":"Já também no PC, na Steam.","plTxH":"Cada textura, uma sensação","hVsH":"Até 6 jogadores na mesma partida","qrScan":"Aponte a câmera do celular para instalar"},"tr":{"name":"Pop! Jelly PangPang","tag1":"Yumuşacık jöleni uzat,","tag2":"sonra bombalarla pang-pang!","outBoth":"Telefonda ve Steam’de çıktı! Ücretsiz başla","noteOut":"İlk 15 bölüm ücretsiz. Reklam yok, gacha yok.","alsoApp":"iPhone ve iPad’de de var","alsoPlay":"Android’de de var","pcLine":"Artık PC’de de Steam’de.","plTxH":"Her dokunun hissi başka","hVsH":"6 kişiye kadar çevrim içi maç","qrScan":"Yüklemek için telefon kamerasıyla tara"}};
+  var CFG = { play: 'https://play.google.com/store/apps/details?id=com.jellypangpang.game', appstore: 'https://apps.apple.com/app/id6817233245',
+              applePt: '129487925', steam: 'https://store.steampowered.com/app/5396440', taptap: 'https://www.taptap.io/app/34264921' };   /* 홈페이지 CFG 와 같은 값 */
+  var PFX = '_l';                                       /* 계수기 꼬리표 앞말(/get/ 은 '_g') — 방문 '_l_yth', 누름 '_lkas_yth' '_lkgp_yth' '_lkst_yth' */
+  var q = new URLSearchParams(location.search);
+  var src = (q.get('s') || q.get('utm_source') || '').toLowerCase().replace(/[^a-z0-9_]/g, '').slice(0, 24);
+  function join(u) { return u + (u.indexOf('?') < 0 ? '?' : '&'); }
+  var utm = 'utm_source=' + encodeURIComponent(src) + '&utm_medium=social&utm_campaign=launch';
+  var URL_ = {
+    as: src && CFG.applePt ? join(CFG.appstore) + 'pt=' + encodeURIComponent(CFG.applePt) + '&ct=' + encodeURIComponent(src + '_launch') + '&mt=8' : CFG.appstore,
+    gp: src ? join(CFG.play) + 'referrer=' + encodeURIComponent(utm) : CFG.play,
+    st: src ? join(CFG.steam) + utm : CFG.steam,
+    tt: CFG.taptap
+  };
+
+  /* 말: 영어 기본, 브라우저 말이 13개 안에 있으면 그 말 */
+  var L = ['ko','en','ja','zh-Hant','zh-Hans','ru','ar','es','fr','it','de','pt','tr'], lg = 'en';
+  try {
+    var ls = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
+    for (var i = 0; i < ls.length; i++) { var l = String(ls[i] || '');
+      if (/^zh/i.test(l)) { lg = /TW|HK|MO|Hant/i.test(l) ? 'zh-Hant' : 'zh-Hans'; break; }
+      var b = l.slice(0, 2).toLowerCase(); if (L.indexOf(b) >= 0) { lg = b; break; } }
+  } catch (e) {}
+  if (L.indexOf(q.get('lang')) >= 0) lg = q.get('lang');               /* 확인용 ?lang=ko */
+  var t = S[lg] || S.en, bl = lg === 'tr' ? 'en' : lg;
+  document.documentElement.lang = lg; if (lg === 'ar') document.documentElement.dir = 'rtl';
+  document.title = t.name;
+  var LOGO = { ko: 'ko', ja: 'ja', 'zh-Hans': 'zh', 'zh-Hant': 'zh-Hant', ar: 'ar' };   /* 홈페이지와 같은 언어별 로고 그림 · 나머지는 영어 로고 */
+  [].forEach.call(document.querySelectorAll('img[data-logo]'), function (im) { im.src = '/logo-' + (LOGO[lg] || 'en') + '.webp'; im.alt = t.name; });
+  [].forEach.call(document.querySelectorAll('[data-t]'), function (el) { el.textContent = t[el.getAttribute('data-t')] || ''; });
+
+  /* 기기 */
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && (navigator.maxTouchPoints || 0) > 1);
+  var isAnd = !isIOS && /Android/i.test(ua);
+  var os = (q.get('os') || '').toLowerCase();                          /* 확인용 ?os=ios|android|pc */
+  if (os === 'ios' || os === 'android' || os === 'pc') { isIOS = os === 'ios'; isAnd = os === 'android'; }
+  var main = isIOS ? 'as' : isAnd ? 'gp' : 'st', OSN = isIOS ? 'ios' : isAnd ? 'android' : 'pc';
+  var IMG = { as: '/badges/as-' + bl + '.svg', gp: '/badges/gp-' + bl + '.png', st: '/badges/steam-inv.png?v=1958', tt: '/badges/taptap-prereg.svg?v=1116tt' };
+  var ALT = { as: 'App Store', gp: 'Google Play', st: 'Steam', tt: 'TapTap' };
+  function badge(k, big) {
+    var a = document.createElement('a'); a.className = 'bdg ' + k + (big ? ' big' : ''); a.href = URL_[k]; a.rel = 'noopener'; a.setAttribute('data-k', k);
+    var im = new Image(); im.src = IMG[k]; im.alt = ALT[k]; im.decoding = 'async'; a.appendChild(im); return a;   /* 스팀 배지는 흰 글자 그림이라 홈페이지처럼 검은 판 위에 */
+  }
+  document.getElementById('cta').appendChild(badge(main, true));
+  var oth = document.getElementById('oth');
+  var SMALL = { as: ['st'], gp: ['st', 'tt'], st: ['as', 'gp', 'tt'] }[main];   /* 폰은 다른 폰 상점을 보이지 않는다(아이폰에 구글 배지 없음) · 탭탭은 한국어와 아이폰에서 뺀다 */
+  SMALL.forEach(function (k) { if (k === 'tt' && (!CFG.taptap || lg === 'ko')) return; oth.appendChild(badge(k, false)); });
+  document.getElementById('qr').hidden = main !== 'st';
+  document.body.classList.toggle('pc', main === 'st');                 /* PC: 폰 카메라로 찍으면 /get/ 이 기기에 맞는 상점으로 */
+  var also = document.getElementById('also');                         /* 다른 기기 한 줄: 폰이면 'PC(스팀)에서도' 말 · PC 는 배지만 */
+  if (also) { also.textContent = main === 'st' ? '' : t.pcLine; also.hidden = main === 'st'; }
+
+  if (lg === 'ko') [].forEach.call(document.querySelectorAll('video'), function (v) {   /* 홈페이지처럼 한국어는 한국어 글자가 든 촉감 영상 */
+    ['src', 'poster', 'data-src'].forEach(function (k) { var x = v.getAttribute(k); if (x && x.indexOf('tex-reel-en') >= 0) v.setAttribute(k, x.replace('tex-reel-en', 'tex-reel-ko')); }); });
+  /* 같은 장면 이어 보기: 광고 영상에 맞춰 ?v=vs(폭탄 대전) · ?v=tex(촉감 놀이) 로 첫 영상을 고른다 */
+  var v = (q.get('v') || '').toLowerCase();
+  if (window.__pickClip) window.__pickClip(v);
+
+  /* 세기 — 내 PC·확인용(stay=1)은 안 셈 · 한 탭에서 한 번 */
+  var CNT = !/^(localhost|127\.0\.0\.1)$/.test(location.hostname) && q.get('stay') !== '1';
+  function cnt(tag) { if (!CNT) return; try { if (sessionStorage.getItem('jpp' + tag)) return; sessionStorage.setItem('jpp' + tag, '1'); } catch (e) {}
+    try { var u = 'https://jpp-visits.jellypangpang.workers.dev/v?s=' + encodeURIComponent((tag + '_' + src).slice(0, 24)) + '&os=' + OSN;
+      if (!(navigator.sendBeacon && navigator.sendBeacon(u))) fetch(u, { method: 'POST', mode: 'no-cors', keepalive: true }).catch(function () {}); } catch (e) {} }
+  document.addEventListener('click', function (ev) { var a = ev.target.closest && ev.target.closest('a.bdg'); if (a) cnt(PFX + 'k' + a.getAttribute('data-k')); }, true);
+  cnt(PFX);
+  window.__jpp = { main: main, lang: lg, url: URL_, src: src, small: SMALL };       /* 확인용 */
+})();
+
+[].forEach.call(document.querySelectorAll('video[autoplay]'), function (v) { v.play && v.play().catch(function () {}); });
+</script>
+</body>
+</html>

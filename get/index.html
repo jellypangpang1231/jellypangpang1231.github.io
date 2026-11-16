@@ -13,6 +13,7 @@
      자동 이동이 막히면 스토어 배지 단추가 보인다. -->
 <style>
 *{box-sizing:border-box}
+[hidden]{display:none!important}   /* .st{display:block} 이 hidden 을 이겨 아이폰에 구글 배지가 보이던 것 고침(11-17) */
 html,body{margin:0;min-height:100%;background:linear-gradient(180deg,#ffe9f2 0%,#fff6dc 60%,#e6f6ff 100%);color:#5b3a1e;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
 main{max-width:420px;margin:0 auto;padding:40px 18px;text-align:center}
 .icon{width:96px;height:96px;border-radius:22px;box-shadow:0 4px 0 #e8b9c9}
@@ -39,7 +40,7 @@ a.home{display:inline-block;margin-top:14px;color:#c4561c;font-size:15px}
 (function () {
   var PKG = 'com.jellypangpang.game';
   var PLAY = 'https://play.google.com/store/apps/details?id=' + PKG;
-  var APP = 'https://apps.apple.com/app/id6817233245', APPLE_PT = '';   /* 홈페이지 CFG.applePt 와 같게(비어 있으면 ct 꼬리표 없이 보낸다) */
+  var APP = 'https://apps.apple.com/app/id6817233245', APPLE_PT = '129487925';   /* 홈페이지 CFG.applePt 와 같게(비어 있으면 ct 꼬리표 없이 보낸다) · 11-17 홈 값으로 채움 */
   var q = new URLSearchParams(location.search);
   var src = (q.get('s') || '').toLowerCase().replace(/[^a-z0-9_]/g, '').slice(0, 24);
   var ref = src ? 'utm_source=' + src + '&utm_medium=social&utm_campaign=launch' : '';
