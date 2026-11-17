@@ -109,6 +109,7 @@ html[lang="ko"] .logo.ko,html[lang="zh-Hans"] .logo.zh,html[lang="zh-Hant"] .log
 html[lang="ja"] .logo.en{display:none}
 html[lang="ja"] .logo.ja{display:block}
 .logo.en{width:min(100%,460px)}.logo.ko{width:min(100%,360px)}.logo.zh,.logo.zt{width:min(100%,320px)}.logo.ar{width:min(100%,330px)}.logo.ja{width:min(100%,400px)}@media (max-width:380px){.logo.ko,.logo.zh,.logo.zt,.logo.ar{width:min(100%,290px)}}  /* [C-1901] 새 로고 그림 크기 · 작은 폰은 키 큰 셋을 줄여 첫 단추가 첫 화면에 */
+.enname{display:none;margin:2px auto 0;font-family:"Fredoka",system-ui,sans-serif;font-weight:600;font-size:15px;letter-spacing:.02em;color:rgba(255,255,255,.92);text-shadow:0 1px 0 rgba(130,10,70,.4);direction:ltr}html[lang="ko"] .enname,html[lang="ja"] .enname,html[lang="zh-Hant"] .enname{display:block}
 h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tagline{margin:8px auto 0;font-family:"Fredoka",system-ui,sans-serif;font-weight:600;font-size:clamp(21px,5.6vw,27px);line-height:1.25;color:#fff;text-shadow:0 2px 0 rgba(130,10,70,.45)}
 .sub{margin:6px auto 0;max-width:30em;color:#fff;font-size:16px;text-shadow:0 1px 0 rgba(130,10,70,.4)}
@@ -457,6 +458,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     <img class="logo ar" src="logo-ar.webp" width="960" height="548" alt="" decoding="async">
     <img class="logo zt" src="logo-zh-Hant.webp" width="640" height="365" alt="" decoding="async">
     <img class="logo ja" src="logo-ja.webp" width="960" height="302" alt="" decoding="async">
+    <p class="enname" lang="en">Pop! Jelly PangPang</p><!-- [c1117n] 한국어·일본어·번체는 로고 아래 영어 이름 한 줄 -->
     <p class="tagline"><span data-i="tag1">Squish and stretch your jelly,</span> <span data-i="tag2">then go pang-pang with bombs!</span><!-- [c731b] --><!-- [c731c] --></p>
     <div class="preget" id="preGet" hidden>
       <a class="btn btn-pre" id="bPreApp" rel="noopener"><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2h16l-2-2zM10 20a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i="aAppPre">Pre-order on the App Store</span></a>
@@ -765,10 +767,12 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
   function apply() {
     var t = T[lang] || T.en, de = document.documentElement, i;
     de.lang = lang; de.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.title = t.name + ' — ' + t.sub.replace(/[.。]$/, '');
+    var EN2 = (lang === 'ko' || lang === 'ja' || lang === 'zh-Hant') ? t.name + ' - Pop! Jelly PangPang' : t.name;   /* [c1117n] 현지 이름 뒤에 영어 이름 */
+    document.title = EN2 + ' — ' + t.sub.replace(/[.。]$/, '');
+    var md = document.querySelector('meta[name="description"]'); if (md) { if (md.__c0 == null) md.__c0 = md.content; md.content = EN2 !== t.name ? EN2 + ': ' + t.sub : md.__c0; }
     var els = document.querySelectorAll('[data-i]');
     for (i = 0; i < els.length; i++) { var k = els[i].getAttribute('data-i'); if (t[k] != null) els[i].textContent = t[k]; }
-    var h1 = document.querySelector('h1'); if (h1) h1.textContent = t.name;
+    var h1 = document.querySelector('h1'); if (h1) h1.textContent = EN2;
     var ic = document.querySelector('img.icon'); if (ic) { if (ic.__alt0 == null) ic.__alt0 = ic.alt; ic.alt = t.iconAlt || ic.__alt0; }   /* [c599] */
     for (i = 0; i < LANGS.length; i++) if (LANGS[i][0] === lang) $('langName').textContent = LANGS[i][1];
     $('lang').setAttribute('aria-label', t.langLbl); $('lang').value = lang;
