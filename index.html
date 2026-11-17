@@ -700,13 +700,12 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     } catch (e) {}
   }
   /* [dev1117] 단추 줄 짜기 — 안드로이드 = 구글 플레이 크게, 아이폰·아이패드 = 앱 스토어 크게, PC = 스팀 크게(QR 은 옆 그대로).
-     한국어 페이지이거나 한국 시간대 PC 는 스팀을 크게 띄우지 않고 구글 플레이와 앱 스토어를 지금 크기로 둔다. 나머지 배지는 아래 작게 한 줄. */
+     나머지 배지는 아래 작게 한 줄. 한국어와 한국 시간대 PC 도 같다(11-17 한국 스팀 판매를 그대로 열어 둠). */
   function layout(t) {
     var a = $('bApp'), p = $('bPlay'), st = $('bSteam'), tt = $('bTap'), box = $('bdgs'), big = $('big1'), ln = $('getLine'), k;
-    var krPC = !isIOS && !isAndroid && (lang === 'ko' || TZKR);
-    var own = isAndroid ? p : isIOS ? a : krPC ? null : st;
+    var own = isAndroid ? p : isIOS ? a : st;
     if (own && own.hidden) own = null;
-    var o = isAndroid ? [a, st, tt] : isIOS ? [p, st, tt] : krPC ? [p, a, st, tt] : [a, p, tt];
+    var o = isAndroid ? [a, st, tt] : isIOS ? [p, st, tt] : [a, p, tt];
     if (own) big.appendChild(own); 
     for (k = 0; k < o.length; k++) box.appendChild(o[k]);
     box.appendChild(box.querySelector('.brk'));
@@ -737,7 +736,6 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     }
     var tp = $('bTap'), tk = CFG.ttBadge === 'prereg' ? 'prereg' : 'android', tr = tk === 'prereg' ? 4.0864 : 3.2591;   /* [tt] 탭탭 — 한국어 페이지에는 달지 않는다(언어를 바꿀 때도) · [dev1117] 아이폰과 아이패드는 누를 수 없는 상점이라 뺌(/play/ 와 같음) */
     tp.hidden = !CFG.taptap || lang === 'ko' || isIOS;
-    $('bSteam').hidden = !CFG.steam || lang === 'ko';   /* [dev1117] 11-17 스팀 한국 판매 닫음 → 한국어 페이지에는 스팀 배지 없음(다른 언어는 그대로) */
     $('getit').classList.toggle('ttOn', !tp.hidden);   /* PC 세로 줄에 넷째 칸 */
     if (!tp.hidden) { tp.style.setProperty('--r', tr); setSrc($('imTap'), 'badges/taptap-' + tk + '.svg?v=1116tt'); }
     layout(t);
@@ -816,7 +814,6 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
   var ua = navigator.userAgent || '';
   var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
   var isAndroid = !isIOS && /Android/i.test(ua);
-  var TZKR = false; try { TZKR = Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Seoul'; } catch (e) {}   /* [dev1117] 한국에서 온 PC */
   try { var os = (new URLSearchParams(location.search).get('os') || '').toLowerCase();      /* 확인용: 주소에 ?os=android|ios|pc 를 붙이면 그 기기에서 보이는 모습으로 본다 */
         if (os === 'android' || os === 'ios' || os === 'pc') { isIOS = os === 'ios'; isAndroid = os === 'android'; } } catch (e) {}
 
