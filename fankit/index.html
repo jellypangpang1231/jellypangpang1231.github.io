@@ -3,6 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>
+/* [fk1118] 언어 고르기: 랜딩과 같은 13개 언어 · ?lang= → 랜딩에서 고른 말(jpp_lang) → 브라우저 말 · 아랍어는 오른쪽부터 */
+(function () {
+  var L = ["ko", "en", "ja", "zh-Hant", "zh-Hans", "ru", "ar", "es", "fr", "it", "de", "pt", "tr"];
+  function pick(c) { c = String(c || '').toLowerCase(); if (!c) return '';
+    if (c.indexOf('zh') === 0) return /hant|tw|hk|mo/.test(c) ? 'zh-Hant' : 'zh-Hans';
+    c = c.split('-')[0]; return L.indexOf(c) >= 0 ? c : ''; }
+  var l = '';
+  try { l = pick(new URLSearchParams(location.search).get('lang')); } catch (e) {}
+  try { if (!l) l = pick(localStorage.getItem('jpp_lang')); } catch (e) {}
+  if (!l) { var n = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]; for (var i = 0; i < n.length && !l; i++) l = pick(n[i]); }
+  window.__fkPick = pick; window.__fkLang = l || 'en';
+  document.documentElement.lang = window.__fkLang; document.documentElement.dir = window.__fkLang === 'ar' ? 'rtl' : 'ltr';
+})();
+</script>
 <title>Fan Kit - Pop! Jelly PangPang</title>
 <meta name="description" content="Free jelly stickers and transparent loops from Pop! Jelly PangPang. Use them in memes, fan art, stream overlays and thumbnails.">
 <meta property="og:title" content="Pop! Jelly PangPang Fan Kit">
@@ -11,77 +26,116 @@
 <meta property="og:url" content="https://jellypangpang1231.github.io/fankit/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../favicon.ico?v=1113i">
-<!-- 팬 키트(인디 조사 ③ 밈 소재 꾸러미 · 11-17) · 영어 기본, 브라우저 말이 한국어·일본어면 그 말로 · ?lang=ko|ja|en 으로 바꿔 볼 수 있음 -->
+<link rel="preload" as="image" href="a/l-dance.webp?v=1118k">
+<!-- 팬 키트(11-17 · 11-18 손질: 13개 언어, 첫 그림 = 스티커가 터져 나오는 무더기 + 움짤 다섯이 실제로 움직임, 옛 격자 시트는 아래 '전체 보기') -->
 <style>
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-html,body{margin:0;min-height:100%;background:linear-gradient(180deg,#ffe9f2 0%,#fff6dc 60%,#e6f6ff 100%);color:#2b1b4a;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Hiragino Sans",sans-serif}
-main{max-width:560px;margin:0 auto;padding:28px 16px 40px;text-align:center}
-.top{display:flex;align-items:center;justify-content:center;gap:12px}
-.icon{width:56px;height:56px;border-radius:14px;box-shadow:0 3px 0 #e8b9c9}
-h1{font-size:23px;margin:0;line-height:1.25}
-.sub{margin:14px 0 8px;font-size:16.5px;line-height:1.5}.vsl{margin:0 0 18px;font-weight:700;font-size:16px;color:#d92d77}
+html,body{margin:0;min-height:100%;background:linear-gradient(180deg,#ffe9f2 0%,#fff6dc 60%,#e6f6ff 100%);color:#2b1b4a;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Hiragino Sans","Segoe UI","Noto Sans Arabic",sans-serif}
+main{max-width:560px;margin:0 auto;padding:10px 14px 40px;text-align:center}
+.bar{display:flex;justify-content:flex-end;margin:0 0 6px}
+.lang{position:relative;display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 34px 0 12px;border-radius:999px;background:rgba(255,255,255,.94);color:#2b1b4a;font-size:15px;line-height:1;box-shadow:0 3px 0 rgba(120,10,70,.22)}
+.lang svg{flex:none;width:18px;height:18px}
+.lang:after{content:"";position:absolute;right:14px;top:50%;width:7px;height:7px;margin-top:-6px;border-right:2.5px solid #2b1b4a;border-bottom:2.5px solid #2b1b4a;transform:rotate(45deg);pointer-events:none}
+[dir="rtl"] .lang{padding:0 12px 0 34px}
+[dir="rtl"] .lang:after{right:auto;left:14px}
+.lang select{position:absolute;inset:0;width:100%;height:100%;opacity:0;font-size:16px;cursor:pointer}
+.lang:focus-within{outline:3px solid #2b1b4a;outline-offset:3px}
+.top{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 8px}
+.icon{width:46px;height:46px;border-radius:12px;box-shadow:0 3px 0 #e8b9c9;flex:none}
+h1{font-size:21px;margin:0;line-height:1.25;text-wrap:balance}
+.vsl,.sub,h2{text-wrap:balance}
+.burst{position:relative;width:100%;aspect-ratio:100/95;margin:0 auto 10px;container-type:inline-size;border-radius:26px;overflow:hidden;
+  background:radial-gradient(circle at 50% 50%,#fff 0,#fff7fb 22%,rgba(255,255,255,0) 62%),linear-gradient(160deg,#ffd6ea,#fff1c4 55%,#d6f1ff);box-shadow:0 4px 0 #f1c6d8}
+.burst:before{content:"";position:absolute;left:50%;top:50%;width:170%;aspect-ratio:1;margin:-85% 0 0 -85%;
+  background:repeating-conic-gradient(from 0deg,rgba(255,95,162,.20) 0 9deg,rgba(255,214,90,.16) 9deg 18deg);
+  -webkit-mask:radial-gradient(circle,rgba(0,0,0,.95) 18%,rgba(0,0,0,0) 62%);mask:radial-gradient(circle,rgba(0,0,0,.95) 18%,rgba(0,0,0,0) 62%);animation:spin 60s linear infinite}
+.it{position:absolute;display:block;transform:translate(-50%,-50%) rotate(var(--r));animation:pop .7s cubic-bezier(.2,1.5,.4,1) var(--d) both}
+.it img{display:block;width:100%;height:auto;filter:drop-shadow(0 3px 3px rgba(80,20,60,.18));animation:bob var(--b,3s) ease-in-out calc(var(--d) + .7s) infinite}
+.it.lp img{animation:none}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,-50%) translate(var(--dx),var(--dy)) scale(.15) rotate(0deg)}
+  55%{opacity:1;transform:translate(-50%,-50%) scale(1.14) rotate(var(--r))}100%{opacity:1;transform:translate(-50%,-50%) rotate(var(--r))}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-5%) rotate(var(--wb,2deg))}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.it,.it img,.burst:before{animation:none}}
+.vsl{margin:0 0 6px;font-weight:800;font-size:16px;color:#d92d77}
+.sub{margin:0 0 12px;font-size:15.5px;line-height:1.5}
 .card{background:#fff;border-radius:22px;padding:16px;box-shadow:0 4px 0 #f1c6d8;margin:0 0 16px}
-.prev{display:block;width:100%;height:auto;border-radius:12px}
 .dl{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:12px 26px;border-radius:999px;background:#ff5fa2;color:#fff;font-size:18px;font-weight:800;text-decoration:none;box-shadow:0 4px 0 #c93d7c}
 .dl:active{transform:translateY(2px);box-shadow:0 2px 0 #c93d7c}
 .dl svg{width:22px;height:22px;fill:#fff}
 .size{display:block;margin-top:8px;font-size:13.5px;color:#6b5a86}
-.rules{text-align:left;font-size:15.5px;line-height:1.55;margin:0;padding-left:20px}
+h2{font-size:17px;margin:4px 0 12px}
+.prev{display:block;width:100%;height:auto;border-radius:12px}
+.rules{text-align:start;font-size:15.5px;line-height:1.55;margin:0;padding-inline-start:20px}
 .rules li{margin:4px 0}
-.inside{text-align:left;font-size:14px;color:#6b5a86;margin:12px 0 0;line-height:1.5}
-.langs{margin:6px 0 18px;font-size:14px}
-.langs a{color:#2b1b4a;margin:0 6px;padding:6px 2px}
-.langs a[aria-current]{font-weight:800;text-decoration:none}
+.inside{text-align:start;font-size:14px;color:#6b5a86;margin:12px 0 0;line-height:1.5}
+html[lang=ko] main{word-break:keep-all}
 a.home{display:inline-block;margin-top:6px;color:#c4561c;font-size:15px;padding:6px 2px}
 </style>
 </head>
 <body>
 <main>
-<div class="top"><img class="icon" src="../icon-192.png?v=1113i" width="56" height="56" alt=""><h1 data-t="h">Pop! Jelly PangPang Fan Kit</h1></div>
-<nav class="langs" aria-label="Language"><a href="?lang=en" data-l="en">English</a><a href="?lang=ko" data-l="ko">한국어</a><a href="?lang=ja" data-l="ja">日本語</a></nav>
+<div class="bar"><label class="lang"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.8 12h18.4M12 2.8c2.7 2.6 4 5.7 4 9.2s-1.3 6.6-4 9.2c-2.7-2.6-4-5.7-4-9.2s1.3-6.6 4-9.2z" fill="none" stroke="currentColor" stroke-width="2"/></svg><span id="langName">English</span><select id="lang" aria-label="Language"></select></label></div>
+<div class="top"><img class="icon" src="../icon-192.png?v=1113i" width="46" height="46" alt=""><h1 data-t="h">Pop! Jelly PangPang Fan Kit</h1></div>
+<div class="burst" role="img" aria-label="Jelly stickers bursting out: a crown, a bomb, a choco stick, party, angry and heart eyes" data-ta="alt">
+<span class="it" style="left:9%;top:11%;width:17%;z-index:1;--r:-22deg;--dx:41cqw;--dy:37.0cqw;--d:0.33s;--b:3.1s;--wb:5.5deg"><img src="a/s-teary.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:91%;top:10%;width:17%;z-index:1;--r:18deg;--dx:-41cqw;--dy:38.0cqw;--d:0.36s;--b:3.6s;--wb:-4.5deg"><img src="a/s-sleepy.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:50%;top:6%;width:21%;z-index:1;--r:8deg;--dx:0cqw;--dy:41.8cqw;--d:0.40s;--b:2.7s;--wb:-2.0deg"><img src="a/s-squash.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:6%;top:61%;width:15%;z-index:1;--r:-20deg;--dx:44cqw;--dy:-10.4cqw;--d:0.44s;--b:2.9s;--wb:5.0deg"><img src="a/s-surprised.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:95%;top:63%;width:15%;z-index:1;--r:22deg;--dx:-45cqw;--dy:-12.3cqw;--d:0.33s;--b:3.3s;--wb:-5.5deg"><img src="a/s-sparkle.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:59%;top:95%;width:15%;z-index:1;--r:14deg;--dx:-9cqw;--dy:-42.8cqw;--d:0.36s;--b:3.0s;--wb:-3.5deg"><img src="a/s-bleh.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:95%;top:89%;width:14%;z-index:1;--r:-16deg;--dx:-45cqw;--dy:-37.0cqw;--d:0.40s;--b:3.4s;--wb:4.0deg"><img src="a/s-smug.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:29%;top:15%;width:21%;z-index:2;--r:-14deg;--dx:21cqw;--dy:33.2cqw;--d:0.36s;--b:2.8s;--wb:3.5deg"><img src="a/s-cool.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:71%;top:15%;width:21%;z-index:2;--r:16deg;--dx:-21cqw;--dy:33.2cqw;--d:0.26s;--b:3.2s;--wb:-4.0deg"><img src="a/s-fired_up.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it lp" style="left:11%;top:36%;width:24%;z-index:2;--r:-12deg;--dx:39cqw;--dy:13.3cqw;--d:0.30s"><img src="a/l-bounce.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it lp" style="left:89%;top:37%;width:22%;z-index:2;--r:12deg;--dx:-39cqw;--dy:12.3cqw;--d:0.33s"><img src="a/l-stretch.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it lp" style="left:10%;top:85%;width:23%;z-index:2;--r:10deg;--dx:40cqw;--dy:-33.2cqw;--d:0.36s"><img src="a/l-spin.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it lp" style="left:79%;top:87%;width:27%;z-index:3;--r:-12deg;--dx:-29cqw;--dy:-35.1cqw;--d:0.19s"><img src="a/l-pop.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:37%;top:36%;width:33%;z-index:4;--r:-10deg;--dx:13cqw;--dy:13.3cqw;--d:0.16s;--b:3.0s;--wb:2.5deg"><img src="a/s-crown_win.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:65%;top:37%;width:29%;z-index:4;--r:14deg;--dx:-15cqw;--dy:12.3cqw;--d:0.19s;--b:3.4s;--wb:-3.5deg"><img src="a/s-choco_stick.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:27%;top:62%;width:37%;z-index:5;--r:-16deg;--dx:23cqw;--dy:-11.4cqw;--d:0.16s;--b:2.6s;--wb:4.0deg"><img src="a/s-bomb_scared.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it lp" style="left:53%;top:63%;width:33%;z-index:5;--r:3deg;--dx:-3cqw;--dy:-12.3cqw;--d:0.05s"><img src="a/l-dance.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:80%;top:63%;width:28%;z-index:4;--r:16deg;--dx:-30cqw;--dy:-12.3cqw;--d:0.16s;--b:2.4s;--wb:-4.0deg"><img src="a/s-angry.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:40%;top:86%;width:29%;z-index:4;--r:-8deg;--dx:10cqw;--dy:-34.2cqw;--d:0.19s;--b:3.1s;--wb:2.0deg"><img src="a/s-heart_eyes.webp?v=1118k" alt="" decoding="async"></span>
+</div>
+<p class="vsl" data-t="vs">Real-time online battles · up to 6 players · 3v3 teams</p>
 <p class="sub" data-t="sub">20 jelly stickers and 5 transparent loops. Use them in memes, fan art, stream overlays and thumbnails.</p>
-<p class="vsl" data-t="vs">Real-time online battles · up to 6 players · 3v3 teams</p><!-- [vs1118] 실시간 온라인 대전 한 줄 -->
-<div class="card"><img class="prev" src="preview.webp" width="1200" height="2000" alt="20 jelly stickers and 5 loops" data-ta="alt"></div>
 <p><a class="dl" href="PopJellyPangPang_FanKit.zip" download><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v9.6l3.3-3.3 1.4 1.4L12 16.4 6.3 10.7l1.4-1.4L11 12.6V3zM4 18h16v2H4z"/></svg><span data-t="dl">Download the Fan Kit</span></a><span class="size" data-t="size">ZIP, 11 MB</span></p>
+<div class="card" id="all"><h2 data-t="all">See all 20 stickers and 5 loops</h2><img class="prev" src="preview.webp" width="1200" height="2000" loading="lazy" alt="All 20 jelly stickers and 5 loops" data-tia="allAlt"></div>
 <div class="card">
 <ul class="rules">
 <li data-t="r1">Feel free to use these in memes, fan art, stream overlays and thumbnails.</li>
-<li data-t="r2">Please don't use them on merchandise for sale.</li>
-<li data-t="r3">A credit is always appreciated: "Pop! Jelly PangPang"</li>
+<li data-t="r2">Please don’t use them on merchandise for sale.</li>
+<li data-t="r3">A credit is always appreciated: “Pop! Jelly PangPang”</li>
 </ul>
-<p class="inside" data-t="in">Inside: transparent PNG stickers (512 and 1024 px, 20 poses) and transparent GIF and WebM loops under 2 seconds (bounce, pop, dance, stretch, spin).</p>
+<p class="inside" data-t="inn">Inside: transparent PNG stickers (512 and 1024 px, 20 poses) and transparent GIF and WebM loops under 2 seconds (bounce, pop, dance, stretch, spin).</p>
 </div>
 <a class="home" href="../" data-t="home">Back to Pop! Jelly PangPang</a>
 </main>
 <script>
 (function () {
-  var T = {
-    ko: { vs: '실시간 온라인 대전 · 최대 6명 3대3 팀전', h: '터져라! 젤리팡팡 팬 키트', sub: '젤리 스티커 20개와 투명 움짤 5개예요. 밈, 팬아트, 방송 화면, 썸네일에 마음대로 써도 됩니다.',
-      alt: '젤리 스티커 20개와 움짤 5개', dl: '팬 키트 받기', size: 'ZIP, 11MB',
-      r1: '밈, 팬아트, 방송 화면, 썸네일에 마음대로 써도 됩니다.', r2: '판매용 굿즈에는 쓰지 말아 주세요.',
-      r3: '출처를 적어 주시면 고마워요: "Pop! Jelly PangPang"',
-      'in': '들어 있는 것: 투명 PNG 스티커(512, 1024 px · 20가지 표정)와 2초 안의 투명 GIF, WebM 움짤(통통, 팡, 춤, 쭉, 빙글).',
-      home: '터져라! 젤리팡팡 홈으로', title: '팬 키트 - 터져라! 젤리팡팡 - Pop! Jelly PangPang' },
-    ja: { vs: 'リアルタイムのオンライン対戦・最大6人・3対3のチーム戦', h: 'ハジケロ！ゼリーパンパン ファンキット', sub: 'ゼリーのスタンプ20種と透過ループ5種。ミーム、ファンアート、配信画面、サムネイルに自由に使ってOKです。',
-      alt: 'ゼリーのスタンプ20種とループ5種', dl: 'ファンキットをダウンロード', size: 'ZIP・11MB',
-      r1: 'ミーム、ファンアート、配信画面、サムネイルに自由に使ってOKです。', r2: '販売用グッズへの使用はご遠慮ください。',
-      r3: 'クレジットを書いてもらえるとうれしいです:「Pop! Jelly PangPang」',
-      'in': '中身:透過PNGスタンプ(512・1024px、20ポーズ)と2秒以内の透過GIF・WebMループ(バウンス、ポップ、ダンス、ストレッチ、スピン)。',
-      home: 'ハジケロ！ゼリーパンパンのホームへ', title: 'ファンキット - ハジケロ！ゼリーパンパン - Pop! Jelly PangPang' }
-  };
-  var q = new URLSearchParams(location.search), lg = (q.get('lang') || '').toLowerCase();
-  if (!/^(en|ko|ja)$/.test(lg)) { lg = 'en';
-    try { var ls = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
-      for (var i = 0; i < ls.length; i++) { var b = String(ls[i] || '').slice(0, 2).toLowerCase();
-        if (b === 'ko' || b === 'ja') { lg = b; break; } if (b === 'en') break; } } catch (e) {} }
-  var as = document.querySelectorAll('.langs a');
-  for (var k = 0; k < as.length; k++) if (as[k].getAttribute('data-l') === lg) as[k].setAttribute('aria-current', 'true');
-  var t = T[lg]; if (!t) return;
-  document.documentElement.lang = lg; document.title = t.title;
-  var el = document.querySelectorAll('[data-t]');
-  for (var j = 0; j < el.length; j++) { var v = t[el[j].getAttribute('data-t')]; if (v) el[j].textContent = v; }
-  document.querySelector('.prev').alt = t.alt;
+  var LANGS = [["ko", "한국어"], ["en", "English"], ["ja", "日本語"], ["zh-Hant", "繁體中文"], ["zh-Hans", "简体中文"], ["ru", "Русский"], ["ar", "العربية"], ["es", "Español"], ["fr", "Français"], ["it", "Italiano"], ["de", "Deutsch"], ["pt", "Português"], ["tr", "Türkçe"]];
+  var T = {"en":{"h":"Pop! Jelly PangPang Fan Kit","vs":"Real-time online battles · up to 6 players · 3v3 teams","sub":"20 jelly stickers and 5 transparent loops. Use them in memes, fan art, stream overlays and thumbnails.","alt":"Jelly stickers bursting out: a crown, a bomb, a choco stick, party, angry and heart eyes","dl":"Download the Fan Kit","size":"ZIP, 11 MB","all":"See all 20 stickers and 5 loops","allAlt":"All 20 jelly stickers and 5 loops","r1":"Feel free to use these in memes, fan art, stream overlays and thumbnails.","r2":"Please don’t use them on merchandise for sale.","r3":"A credit is always appreciated: “Pop! Jelly PangPang”","inn":"Inside: transparent PNG stickers (512 and 1024 px, 20 poses) and transparent GIF and WebM loops under 2 seconds (bounce, pop, dance, stretch, spin).","home":"Back to Pop! Jelly PangPang","title":"Fan Kit - Pop! Jelly PangPang","langLbl":"Language"},"ko":{"h":"터져라! 젤리팡팡 팬 키트","vs":"실시간 온라인 대전 · 최대 6명 3대3 팀전","sub":"젤리 스티커 20개와 투명 움짤 5개예요. 밈, 팬아트, 방송 화면, 썸네일에 마음대로 써도 됩니다.","alt":"왕관, 폭탄, 초코 스틱, 파티, 화남, 하트 눈 젤리 스티커가 터져 나오는 그림","dl":"팬 키트 받기","size":"ZIP, 11MB","all":"스티커 20개와 움짤 5개 전체 보기","allAlt":"젤리 스티커 20개와 움짤 5개 전체","r1":"밈, 팬아트, 방송 화면, 썸네일에 마음대로 써도 됩니다.","r2":"판매용 굿즈에는 쓰지 말아 주세요.","r3":"출처를 적어 주시면 고마워요: “Pop! Jelly PangPang”","inn":"들어 있는 것: 투명 PNG 스티커(512, 1024 px · 20가지 표정)와 2초 안의 투명 GIF, WebM 움짤(통통, 팡, 춤, 쭉, 빙글).","home":"터져라! 젤리팡팡 홈으로","title":"팬 키트 - 터져라! 젤리팡팡 - Pop! Jelly PangPang","langLbl":"언어"},"ja":{"h":"ハジケロ！ゼリーパンパン ファンキット","vs":"リアルタイムのオンライン対戦・最大6人・3対3のチーム戦","sub":"ゼリーのスタンプ20種と透過ループ5種。ミーム、ファンアート、配信画面、サムネイルに自由に使ってOKです。","alt":"王冠、爆弾、チョコスティック、パーティー、怒り、ハート目のゼリーがはじけ出す絵","dl":"ファンキットをダウンロード","size":"ZIP・11MB","all":"スタンプ20種とループ5種をぜんぶ見る","allAlt":"ゼリーのスタンプ20種とループ5種の一覧","r1":"ミーム、ファンアート、配信画面、サムネイルに自由に使ってOKです。","r2":"販売用グッズへの使用はご遠慮ください。","r3":"クレジットを書いてもらえるとうれしいです：「Pop! Jelly PangPang」","inn":"中身：透過PNGスタンプ（512・1024px、20ポーズ）と2秒以内の透過GIF・WebMループ（バウンス、ポップ、ダンス、ストレッチ、スピン）。","home":"ハジケロ！ゼリーパンパンのホームへ","title":"ファンキット - ハジケロ！ゼリーパンパン - Pop! Jelly PangPang","langLbl":"言語"},"zh-Hant":{"h":"果凍爆爆樂 粉絲素材包","vs":"即時線上對戰｜最多 6 人｜3 對 3 團隊戰","sub":"20 張果凍貼紙和 5 個透明動圖，梗圖、同人創作、直播畫面、影片縮圖都能自由使用。","alt":"皇冠、炸彈、巧克力棒、派對、生氣、愛心眼的果凍貼紙爆出來的畫面","dl":"下載粉絲素材包","size":"ZIP，11 MB","all":"查看全部 20 張貼紙和 5 個動圖","allAlt":"全部 20 張果凍貼紙和 5 個動圖","r1":"梗圖、同人創作、直播畫面、影片縮圖都能自由使用。","r2":"請不要用在販售的周邊商品上。","r3":"歡迎註明出處：「Pop! Jelly PangPang」","inn":"內容：透明 PNG 貼紙（512、1024 px，20 種表情）和 2 秒內的透明 GIF、WebM 動圖（彈跳、爆開、跳舞、拉長、轉圈）。","home":"回到果凍爆爆樂首頁","title":"粉絲素材包 - 果凍爆爆樂 - Pop! Jelly PangPang","langLbl":"語言"},"zh-Hans":{"h":"果冻碰碰乐 粉丝素材包","vs":"实时在线对战｜最多 6 人｜3 对 3 团队战","sub":"20 张果冻贴纸和 5 个透明动图，表情包、同人创作、直播画面、视频封面都能随便用。","alt":"皇冠、炸弹、巧克力棒、派对、生气、爱心眼的果冻贴纸蹦出来的画面","dl":"下载粉丝素材包","size":"ZIP，11 MB","all":"查看全部 20 张贴纸和 5 个动图","allAlt":"全部 20 张果冻贴纸和 5 个动图","r1":"表情包、同人创作、直播画面、视频封面都能随便用。","r2":"请不要用于售卖的周边商品。","r3":"欢迎注明出处：“Pop! Jelly PangPang”","inn":"内容：透明 PNG 贴纸（512、1024 px，20 种表情）和 2 秒以内的透明 GIF、WebM 动图（弹跳、爆开、跳舞、拉长、转圈）。","home":"返回果冻碰碰乐首页","title":"粉丝素材包 - 果冻碰碰乐 - Pop! Jelly PangPang","langLbl":"语言"},"ru":{"h":"Фан-кит Pop! Jelly PangPang","vs":"Онлайн-битвы в реальном времени · до 6 игроков · команды 3 на 3","sub":"20 наклеек с желе и 5 прозрачных анимаций. Бери для мемов, фан-арта, оформления стримов и превью.","alt":"Наклейки с желе разлетаются во все стороны: корона, бомба, шоколадная палочка, вечеринка, злость и глаза-сердечки","dl":"Скачать фан-кит","size":"ZIP, 11 МБ","all":"Все 20 наклеек и 5 анимаций","allAlt":"Все 20 наклеек с желе и 5 анимаций","r1":"Бери для мемов, фан-арта, оформления стримов и превью — как хочешь.","r2":"Только не используй их в мерче на продажу.","r3":"Будем рады, если укажешь источник: «Pop! Jelly PangPang»","inn":"Внутри: прозрачные PNG-наклейки (512 и 1024 px, 20 поз) и прозрачные анимации GIF и WebM до 2 секунд (прыжок, хлоп, танец, растягивание, вращение).","home":"На главную Pop! Jelly PangPang","title":"Фан-кит - Pop! Jelly PangPang","langLbl":"Язык"},"ar":{"h":"حزمة المعجبين من جيلي بانغ بانغ","vs":"معارك مباشرة عبر الإنترنت · حتى 6 لاعبين · فرق 3 ضد 3","sub":"20 ملصقًا للجيلي و5 رسوم متحركة بخلفية شفافة، للاستخدام بحرية في الميمز ورسومات المعجبين وشاشات البث والصور المصغّرة.","alt":"ملصقات جيلي تنطلق في كل اتجاه: تاج وقنبلة وعصا شوكولاتة وحفلة وغضب وعيون على شكل قلوب","dl":"تنزيل حزمة المعجبين","size":"ملف ZIP بحجم 11 ميغابايت","all":"عرض الملصقات العشرين والرسوم الخمسة كلها","allAlt":"ملصقات الجيلي العشرون والرسوم المتحركة الخمسة كلها","r1":"الاستخدام مسموح بحرية في الميمز ورسومات المعجبين وشاشات البث والصور المصغّرة.","r2":"يُرجى عدم استخدامها على منتجات للبيع.","r3":"يسعدنا ذكر المصدر: «Pop! Jelly PangPang»","inn":"المحتوى: ملصقات PNG شفافة (512 و1024 بكسل، 20 وضعية) ورسوم GIF وWebM متحركة شفافة لا تتجاوز ثانيتين (قفز، فرقعة، رقص، تمدّد، دوران).","home":"العودة إلى صفحة جيلي بانغ بانغ","title":"حزمة المعجبين - جيلي بانغ بانغ - Pop! Jelly PangPang","langLbl":"اللغة"},"es":{"h":"Kit para fans de Pop! Jelly PangPang","vs":"Batallas online en tiempo real · hasta 6 jugadores · equipos 3 contra 3","sub":"20 pegatinas de gelatinas y 5 animaciones con fondo transparente. Úsalas en memes, fan art, overlays de stream y miniaturas.","alt":"Pegatinas de gelatinas saliendo disparadas: corona, bomba, palito de chocolate, fiesta, enfado y ojos de corazón","dl":"Descargar el kit para fans","size":"ZIP, 11 MB","all":"Ver las 20 pegatinas y las 5 animaciones","allAlt":"Las 20 pegatinas de gelatinas y las 5 animaciones","r1":"Úsalas como quieras en memes, fan art, overlays de stream y miniaturas.","r2":"Por favor, no las uses en merchandising a la venta.","r3":"Si mencionas la fuente, te lo agradecemos: “Pop! Jelly PangPang”","inn":"Incluye: pegatinas PNG transparentes (512 y 1024 px, 20 poses) y animaciones GIF y WebM transparentes de menos de 2 segundos (rebote, pop, baile, estiramiento, giro).","home":"Volver a Pop! Jelly PangPang","title":"Kit para fans - Pop! Jelly PangPang","langLbl":"Idioma"},"fr":{"h":"Kit de fan Pop! Jelly PangPang","vs":"Combats en ligne en temps réel · jusqu’à 6 joueurs · équipes de 3 contre 3","sub":"20 stickers de gelées et 5 animations sur fond transparent. Utilise-les dans tes mèmes, fan arts, overlays de stream et miniatures.","alt":"Des stickers de gelées qui jaillissent : couronne, bombe, bâtonnet au chocolat, fête, colère et yeux en cœur","dl":"Télécharger le kit de fan","size":"ZIP, 11 Mo","all":"Voir les 20 stickers et les 5 animations","allAlt":"Les 20 stickers de gelées et les 5 animations","r1":"Utilise-les librement dans tes mèmes, fan arts, overlays de stream et miniatures.","r2":"Merci de ne pas les utiliser sur des produits dérivés vendus.","r3":"Un crédit fait toujours plaisir : « Pop! Jelly PangPang »","inn":"Contenu : stickers PNG transparents (512 et 1024 px, 20 poses) et animations GIF et WebM transparentes de moins de 2 secondes (rebond, pop, danse, étirement, rotation).","home":"Retour à Pop! Jelly PangPang","title":"Kit de fan - Pop! Jelly PangPang","langLbl":"Langue"},"it":{"h":"Kit per i fan di Pop! Jelly PangPang","vs":"Sfide online in tempo reale · fino a 6 giocatori · squadre 3 contro 3","sub":"20 adesivi di gelatine e 5 animazioni con sfondo trasparente. Usali per meme, fan art, overlay per le live e miniature.","alt":"Adesivi di gelatine che schizzano fuori: corona, bomba, bastoncino al cioccolato, festa, rabbia e occhi a cuore","dl":"Scarica il kit per i fan","size":"ZIP, 11 MB","all":"Vedi tutti i 20 adesivi e le 5 animazioni","allAlt":"Tutti i 20 adesivi di gelatine e le 5 animazioni","r1":"Usali liberamente per meme, fan art, overlay per le live e miniature.","r2":"Per favore, non usarli su merchandising in vendita.","r3":"Citare la fonte fa sempre piacere: “Pop! Jelly PangPang”","inn":"Contenuto: adesivi PNG trasparenti (512 e 1024 px, 20 pose) e animazioni GIF e WebM trasparenti sotto i 2 secondi (rimbalzo, pop, ballo, allungamento, giravolta).","home":"Torna a Pop! Jelly PangPang","title":"Kit per i fan - Pop! Jelly PangPang","langLbl":"Lingua"},"de":{"h":"Pop! Jelly PangPang Fan-Kit","vs":"Online-Kämpfe in Echtzeit · bis zu 6 Spieler · Teams 3 gegen 3","sub":"20 Jelly-Sticker und 5 transparente Animationen. Nutze sie für Memes, Fan-Art, Stream-Overlays und Thumbnails.","alt":"Jelly-Sticker, die in alle Richtungen springen: Krone, Bombe, Schokostick, Party, Wut und Herzaugen","dl":"Fan-Kit herunterladen","size":"ZIP, 11 MB","all":"Alle 20 Sticker und 5 Animationen ansehen","allAlt":"Alle 20 Jelly-Sticker und 5 Animationen","r1":"Nutze sie frei für Memes, Fan-Art, Stream-Overlays und Thumbnails.","r2":"Bitte nicht auf Merch zum Verkauf verwenden.","r3":"Über eine Quellenangabe freuen wir uns: „Pop! Jelly PangPang“","inn":"Inhalt: transparente PNG-Sticker (512 und 1024 px, 20 Posen) und transparente GIF- und WebM-Loops unter 2 Sekunden (Hüpfen, Plopp, Tanz, Strecken, Drehen).","home":"Zurück zu Pop! Jelly PangPang","title":"Fan-Kit - Pop! Jelly PangPang","langLbl":"Sprache"},"pt":{"h":"Kit de fã de Pop! Jelly PangPang","vs":"Batalhas online em tempo real · até 6 jogadores · times 3 contra 3","sub":"20 adesivos de gelatina e 5 animações com fundo transparente. Use em memes, fanarts, overlays de live e thumbnails.","alt":"Adesivos de gelatina pulando para todo lado: coroa, bomba, palitinho de chocolate, festa, raiva e olhos de coração","dl":"Baixar o kit de fã","size":"ZIP, 11 MB","all":"Ver os 20 adesivos e as 5 animações","allAlt":"Os 20 adesivos de gelatina e as 5 animações","r1":"Use à vontade em memes, fanarts, overlays de live e thumbnails.","r2":"Só não use em produtos à venda.","r3":"Se der os créditos, a gente agradece: “Pop! Jelly PangPang”","inn":"Inclui: adesivos PNG transparentes (512 e 1024 px, 20 poses) e animações GIF e WebM transparentes de menos de 2 segundos (pulo, estouro, dança, esticada, giro).","home":"Voltar para Pop! Jelly PangPang","title":"Kit de fã - Pop! Jelly PangPang","langLbl":"Idioma"},"tr":{"h":"Pop! Jelly PangPang Hayran Kiti","vs":"Gerçek zamanlı çevrim içi savaş · 6 oyuncuya kadar · 3’e 3 takım maçı","sub":"20 jöle çıkartması ve 5 şeffaf animasyon. Mimlerde, hayran çizimlerinde, yayın ekranlarında ve küçük resimlerde dilediğin gibi kullan.","alt":"Her yöne fırlayan jöle çıkartmaları: taç, bomba, çikolatalı çubuk, parti, kızgın ve kalp gözler","dl":"Hayran kitini indir","size":"ZIP, 11 MB","all":"20 çıkartmanın ve 5 animasyonun hepsini gör","allAlt":"20 jöle çıkartmasının ve 5 animasyonun hepsi","r1":"Mimlerde, hayran çizimlerinde, yayın ekranlarında ve küçük resimlerde dilediğin gibi kullan.","r2":"Lütfen satılık ürünlerde kullanma.","r3":"Kaynak belirtirsen çok seviniriz: “Pop! Jelly PangPang”","inn":"İçinde: şeffaf PNG çıkartmalar (512 ve 1024 px, 20 poz) ve 2 saniyeden kısa şeffaf GIF ve WebM animasyonları (zıplama, patlama, dans, uzama, dönme).","home":"Pop! Jelly PangPang ana sayfasına dön","title":"Hayran Kiti - Pop! Jelly PangPang","langLbl":"Dil"}};
+  var sel = document.getElementById('lang'), i;
+  for (i = 0; i < LANGS.length; i++) { var o = document.createElement('option'); o.value = LANGS[i][0]; o.textContent = LANGS[i][1]; sel.appendChild(o); }
+  function apply(lg) {
+    var t = T[lg] || T.en, de = document.documentElement, j;
+    de.lang = lg; de.dir = lg === 'ar' ? 'rtl' : 'ltr'; document.title = t.title;
+    var el = document.querySelectorAll('[data-t]');
+    for (j = 0; j < el.length; j++) { var v = t[el[j].getAttribute('data-t')]; if (v) el[j].textContent = v; }
+    document.querySelector('.burst').setAttribute('aria-label', t.alt);
+    document.querySelector('.prev').alt = t.allAlt;
+    for (j = 0; j < LANGS.length; j++) if (LANGS[j][0] === lg) document.getElementById('langName').textContent = LANGS[j][1];
+    sel.setAttribute('aria-label', t.langLbl); sel.value = lg;
+  }
+  sel.addEventListener('change', function () {
+    var lg = window.__fkPick(sel.value) || 'en';
+    try { localStorage.setItem('jpp_lang', lg); } catch (e) {}
+    try { var u = new URL(location.href); u.searchParams.set('lang', lg); history.replaceState(null, '', u); } catch (e) {}
+    apply(lg);
+  });
+  apply(window.__fkLang);
 })();
 </script>
 </body>
