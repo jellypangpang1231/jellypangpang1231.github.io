@@ -26,8 +26,8 @@
 <meta property="og:url" content="https://jellypangpang1231.github.io/fankit/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../favicon.ico?v=1113i">
-<link rel="preload" as="image" href="a/l-dance.webp?v=1118k">
-<!-- 팬 키트(11-17 · 11-18 손질: 13개 언어, 첫 그림 = 스티커가 터져 나오는 무더기 + 움짤 다섯이 실제로 움직임, 옛 격자 시트는 아래 '전체 보기') -->
+<link rel="preload" as="image" href="a/l-dance.webp?v=1118m">
+<!-- 팬 키트(11-17 · 11-18 손질: 13개 언어, 첫 그림 = 스티커가 터져 나오는 무더기 + 움짤 다섯이 실제로 움직임, 옛 격자 시트는 아래 '전체 보기' · 11-18 21:3x 전체 보기 = 낱장 20개가 움직이는 격자 + 움짤 다섯 재생) -->
 <style>
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -66,7 +66,25 @@ h1{font-size:21px;margin:0;line-height:1.25;word-break:keep-all;overflow-wrap:an
 .dl svg{width:22px;height:22px;fill:#fff}
 .size{display:block;margin-top:8px;font-size:13.5px;color:#6b5a86}
 h2{font-size:17px;margin:4px 0 12px}
-.prev{display:block;width:100%;height:auto;border-radius:12px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px 4px;margin:0 0 10px}
+@media (min-width:480px){.grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.gc{min-width:0;display:flex;align-items:center;justify-content:center;aspect-ratio:1;border-radius:16px;background:#fff7fb;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;outline:none}
+.gc:focus-visible{outline:3px solid #2b1b4a;outline-offset:1px}
+.gc .mv{display:block;width:84%;height:84%;transform-origin:50% 92%;animation:var(--k) var(--t) ease-in-out var(--dl) infinite;animation-play-state:paused}
+.gc img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 2px rgba(80,20,60,.16))}
+.live .gc .mv{animation-play-state:running}
+.mb{--k:gb}.mw{--k:gw}.ms{--k:gs}.mr{--k:gr}
+@keyframes gb{0%,100%{transform:translateY(0) scale(1,1)}12%{transform:translateY(0) scale(1.12,.86)}38%{transform:translateY(-16%) scale(.93,1.08)}62%{transform:translateY(0) scale(1.08,.92)}78%{transform:translateY(0) scale(.97,1.03)}}
+@keyframes gw{0%,100%{transform:rotate(0)}15%{transform:rotate(-9deg)}30%{transform:rotate(8deg)}45%{transform:rotate(-5deg)}60%{transform:rotate(3deg)}75%{transform:rotate(0)}}
+@keyframes gs{0%,100%{transform:scale(1,1)}25%{transform:scale(.88,1.16)}45%{transform:scale(1.1,.9)}62%{transform:scale(.97,1.04)}78%{transform:scale(1,1)}}
+@keyframes gr{0%,100%{transform:scale(1,1)}50%{transform:scale(1.05,.95) translateY(2%)}}
+.gc.pang{animation:pang .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pang{0%{transform:scale(1)}25%{transform:scale(1.28,.78)}55%{transform:scale(.9,1.14) translateY(-8%)}80%{transform:scale(1.04,.97)}100%{transform:scale(1)}}
+.loops{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding-top:10px;border-top:2px dashed #f6d3e2}
+.lc{display:flex;align-items:center;justify-content:center;width:31%;aspect-ratio:1;border-radius:16px;background:#fff7fb}
+@media (min-width:480px){.lc{width:18.4%}}
+.lc img{display:block;width:86%;height:auto}
+@media (prefers-reduced-motion:reduce){.gc .mv,.gc.pang{animation:none}}
 .rules{text-align:start;font-size:15.5px;line-height:1.55;margin:0;padding-inline-start:20px}
 .rules li{margin:4px 0}
 .inside{text-align:start;font-size:14px;color:#6b5a86;margin:12px 0 0;line-height:1.5}
@@ -79,30 +97,60 @@ a.home{display:inline-block;margin-top:6px;color:#c4561c;font-size:15px;padding:
 <div class="bar"><label class="lang"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.8 12h18.4M12 2.8c2.7 2.6 4 5.7 4 9.2s-1.3 6.6-4 9.2c-2.7-2.6-4-5.7-4-9.2s1.3-6.6 4-9.2z" fill="none" stroke="currentColor" stroke-width="2"/></svg><span id="langName">English</span><select id="lang" aria-label="Language"></select></label></div>
 <div class="top"><img class="icon" src="../icon-192.png?v=1113i" width="46" height="46" alt=""><h1 data-t="h">Pop! Jelly PangPang Fan Kit</h1></div>
 <div class="burst" role="img" aria-label="Jelly stickers bursting out: a crown, a bomb, a choco stick, party, angry and heart eyes" data-ta="alt">
-<span class="it" style="left:9%;top:11%;width:17%;z-index:1;--r:-22deg;--dx:41cqw;--dy:37.0cqw;--d:0.33s;--b:3.1s;--wb:5.5deg"><img src="a/s-teary.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:91%;top:10%;width:17%;z-index:1;--r:18deg;--dx:-41cqw;--dy:38.0cqw;--d:0.36s;--b:3.6s;--wb:-4.5deg"><img src="a/s-sleepy.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:50%;top:6%;width:21%;z-index:1;--r:8deg;--dx:0cqw;--dy:41.8cqw;--d:0.40s;--b:2.7s;--wb:-2.0deg"><img src="a/s-squash.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:6%;top:61%;width:15%;z-index:1;--r:-20deg;--dx:44cqw;--dy:-10.4cqw;--d:0.44s;--b:2.9s;--wb:5.0deg"><img src="a/s-surprised.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:95%;top:63%;width:15%;z-index:1;--r:22deg;--dx:-45cqw;--dy:-12.3cqw;--d:0.33s;--b:3.3s;--wb:-5.5deg"><img src="a/s-sparkle.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:59%;top:95%;width:15%;z-index:1;--r:14deg;--dx:-9cqw;--dy:-42.8cqw;--d:0.36s;--b:3.0s;--wb:-3.5deg"><img src="a/s-bleh.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:95%;top:89%;width:14%;z-index:1;--r:-16deg;--dx:-45cqw;--dy:-37.0cqw;--d:0.40s;--b:3.4s;--wb:4.0deg"><img src="a/s-smug.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:29%;top:15%;width:21%;z-index:2;--r:-14deg;--dx:21cqw;--dy:33.2cqw;--d:0.36s;--b:2.8s;--wb:3.5deg"><img src="a/s-cool.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:71%;top:15%;width:21%;z-index:2;--r:16deg;--dx:-21cqw;--dy:33.2cqw;--d:0.26s;--b:3.2s;--wb:-4.0deg"><img src="a/s-fired_up.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it lp" style="left:11%;top:36%;width:24%;z-index:2;--r:-12deg;--dx:39cqw;--dy:13.3cqw;--d:0.30s"><img src="a/l-bounce.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it lp" style="left:89%;top:37%;width:22%;z-index:2;--r:12deg;--dx:-39cqw;--dy:12.3cqw;--d:0.33s"><img src="a/l-stretch.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it lp" style="left:10%;top:85%;width:23%;z-index:2;--r:10deg;--dx:40cqw;--dy:-33.2cqw;--d:0.36s"><img src="a/l-spin.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it lp" style="left:79%;top:87%;width:27%;z-index:3;--r:-12deg;--dx:-29cqw;--dy:-35.1cqw;--d:0.19s"><img src="a/l-pop.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:37%;top:36%;width:33%;z-index:4;--r:-10deg;--dx:13cqw;--dy:13.3cqw;--d:0.16s;--b:3.0s;--wb:2.5deg"><img src="a/s-crown_win.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:65%;top:37%;width:29%;z-index:4;--r:14deg;--dx:-15cqw;--dy:12.3cqw;--d:0.19s;--b:3.4s;--wb:-3.5deg"><img src="a/s-choco_stick.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:27%;top:62%;width:37%;z-index:5;--r:-16deg;--dx:23cqw;--dy:-11.4cqw;--d:0.16s;--b:2.6s;--wb:4.0deg"><img src="a/s-bomb_scared.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it lp" style="left:53%;top:63%;width:33%;z-index:5;--r:3deg;--dx:-3cqw;--dy:-12.3cqw;--d:0.05s"><img src="a/l-dance.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:80%;top:63%;width:28%;z-index:4;--r:16deg;--dx:-30cqw;--dy:-12.3cqw;--d:0.16s;--b:2.4s;--wb:-4.0deg"><img src="a/s-angry.webp?v=1118k" alt="" decoding="async"></span>
-<span class="it" style="left:40%;top:86%;width:29%;z-index:4;--r:-8deg;--dx:10cqw;--dy:-34.2cqw;--d:0.19s;--b:3.1s;--wb:2.0deg"><img src="a/s-heart_eyes.webp?v=1118k" alt="" decoding="async"></span>
+<span class="it" style="left:9%;top:11%;width:17%;z-index:1;--r:-22deg;--dx:41cqw;--dy:37.0cqw;--d:0.33s;--b:3.1s;--wb:5.5deg"><img src="a/s-teary.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:91%;top:10%;width:17%;z-index:1;--r:18deg;--dx:-41cqw;--dy:38.0cqw;--d:0.36s;--b:3.6s;--wb:-4.5deg"><img src="a/s-sleepy.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:50%;top:6%;width:21%;z-index:1;--r:8deg;--dx:0cqw;--dy:41.8cqw;--d:0.40s;--b:2.7s;--wb:-2.0deg"><img src="a/s-squash.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:6%;top:61%;width:15%;z-index:1;--r:-20deg;--dx:44cqw;--dy:-10.4cqw;--d:0.44s;--b:2.9s;--wb:5.0deg"><img src="a/s-surprised.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:95%;top:63%;width:15%;z-index:1;--r:22deg;--dx:-45cqw;--dy:-12.3cqw;--d:0.33s;--b:3.3s;--wb:-5.5deg"><img src="a/s-sparkle.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:59%;top:95%;width:15%;z-index:1;--r:14deg;--dx:-9cqw;--dy:-42.8cqw;--d:0.36s;--b:3.0s;--wb:-3.5deg"><img src="a/s-bleh.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:95%;top:89%;width:14%;z-index:1;--r:-16deg;--dx:-45cqw;--dy:-37.0cqw;--d:0.40s;--b:3.4s;--wb:4.0deg"><img src="a/s-smug.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:29%;top:15%;width:21%;z-index:2;--r:-14deg;--dx:21cqw;--dy:33.2cqw;--d:0.36s;--b:2.8s;--wb:3.5deg"><img src="a/s-cool.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:71%;top:15%;width:21%;z-index:2;--r:16deg;--dx:-21cqw;--dy:33.2cqw;--d:0.26s;--b:3.2s;--wb:-4.0deg"><img src="a/s-fired_up.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it lp" style="left:11%;top:36%;width:24%;z-index:2;--r:-12deg;--dx:39cqw;--dy:13.3cqw;--d:0.30s"><img src="a/l-bounce.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it lp" style="left:89%;top:37%;width:22%;z-index:2;--r:12deg;--dx:-39cqw;--dy:12.3cqw;--d:0.33s"><img src="a/l-stretch.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it lp" style="left:10%;top:85%;width:23%;z-index:2;--r:10deg;--dx:40cqw;--dy:-33.2cqw;--d:0.36s"><img src="a/l-spin.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it lp" style="left:79%;top:87%;width:27%;z-index:3;--r:-12deg;--dx:-29cqw;--dy:-35.1cqw;--d:0.19s"><img src="a/l-pop.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:37%;top:36%;width:33%;z-index:4;--r:-10deg;--dx:13cqw;--dy:13.3cqw;--d:0.16s;--b:3.0s;--wb:2.5deg"><img src="a/s-crown_win.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:65%;top:37%;width:29%;z-index:4;--r:14deg;--dx:-15cqw;--dy:12.3cqw;--d:0.19s;--b:3.4s;--wb:-3.5deg"><img src="a/s-choco_stick.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:27%;top:62%;width:37%;z-index:5;--r:-16deg;--dx:23cqw;--dy:-11.4cqw;--d:0.16s;--b:2.6s;--wb:4.0deg"><img src="a/s-bomb_scared.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it lp" style="left:53%;top:63%;width:33%;z-index:5;--r:3deg;--dx:-3cqw;--dy:-12.3cqw;--d:0.05s"><img src="a/l-dance.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:80%;top:63%;width:28%;z-index:4;--r:16deg;--dx:-30cqw;--dy:-12.3cqw;--d:0.16s;--b:2.4s;--wb:-4.0deg"><img src="a/s-angry.webp?v=1118m" alt="" decoding="async"></span>
+<span class="it" style="left:40%;top:86%;width:29%;z-index:4;--r:-8deg;--dx:10cqw;--dy:-34.2cqw;--d:0.19s;--b:3.1s;--wb:2.0deg"><img src="a/s-heart_eyes.webp?v=1118m" alt="" decoding="async"></span>
 </div>
 <p class="vsl" data-t="vs">Real-time online battles · up to 6 players · 3v3 teams</p>
 <p class="sub" data-t="sub">20 jelly stickers and 5 transparent loops. Use them in memes, fan art, stream overlays and thumbnails.</p>
 <p><a class="dl" href="PopJellyPangPang_FanKit.zip" download><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v9.6l3.3-3.3 1.4 1.4L12 16.4 6.3 10.7l1.4-1.4L11 12.6V3zM4 18h16v2H4z"/></svg><span data-t="dl">Download the Fan Kit</span></a><span class="size" data-t="size">ZIP, 11 MB</span></p>
-<div class="card" id="all"><h2 data-t="all">See all 20 stickers and 5 loops</h2><img class="prev" src="preview.webp" width="1200" height="2000" loading="lazy" alt="All 20 jelly stickers and 5 loops" data-tia="allAlt"></div>
+<div class="card" id="all"><h2 data-t="all">See all 20 stickers and 5 loops</h2>
+<div class="grid" role="img" aria-label="All 20 jelly stickers and 5 loops">
+<span class="gc" tabindex="0"><span class="mv mb" style="--t:1.50s;--dl:-0.00s"><img src="a/s-crown_win.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mw" style="--t:2.56s;--dl:-0.37s"><img src="a/s-angry.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mr" style="--t:4.12s;--dl:-0.74s"><img src="a/s-sleepy.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv ms" style="--t:2.73s;--dl:-1.11s"><img src="a/s-stretch.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mb" style="--t:1.89s;--dl:-1.48s"><img src="a/s-joy.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mw" style="--t:2.30s;--dl:-1.85s"><img src="a/s-bomb_scared.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mr" style="--t:3.86s;--dl:-2.22s"><img src="a/s-teary.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv ms" style="--t:3.12s;--dl:-2.59s"><img src="a/s-choco_stick.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mb" style="--t:1.63s;--dl:-1.33s"><img src="a/s-party.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mw" style="--t:2.69s;--dl:-0.64s"><img src="a/s-dizzy.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mr" style="--t:3.60s;--dl:-0.10s"><img src="a/s-pleading.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv ms" style="--t:2.86s;--dl:-1.21s"><img src="a/s-squash.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mb" style="--t:2.02s;--dl:-0.40s"><img src="a/s-heart_eyes.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mw" style="--t:2.43s;--dl:-2.38s"><img src="a/s-surprised.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mr" style="--t:3.99s;--dl:-1.19s"><img src="a/s-smug.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv ms" style="--t:2.60s;--dl:-0.35s"><img src="a/s-sparkle.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mb" style="--t:1.76s;--dl:-0.64s"><img src="a/s-fired_up.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mw" style="--t:2.82s;--dl:-0.65s"><img src="a/s-bleh.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv mr" style="--t:3.73s;--dl:-2.93s"><img src="a/s-blank.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+<span class="gc" tabindex="0"><span class="mv ms" style="--t:2.99s;--dl:-1.05s"><img src="a/s-cool.webp?v=1118m" alt="" loading="lazy" decoding="async"></span></span>
+</div>
+<div class="loops">
+<span class="lc"><picture><source media="(prefers-reduced-motion: reduce)" srcset="a/l-bounce-0.webp?v=1118m"><img src="a/l-bounce-0.webp?v=1118m" data-live="a/l-bounce.webp?v=1118m" alt="bounce" loading="lazy" decoding="async"></picture></span>
+<span class="lc"><picture><source media="(prefers-reduced-motion: reduce)" srcset="a/l-pop-0.webp?v=1118m"><img src="a/l-pop-0.webp?v=1118m" data-live="a/l-pop.webp?v=1118m" alt="pop" loading="lazy" decoding="async"></picture></span>
+<span class="lc"><picture><source media="(prefers-reduced-motion: reduce)" srcset="a/l-dance-0.webp?v=1118m"><img src="a/l-dance-0.webp?v=1118m" data-live="a/l-dance.webp?v=1118m" alt="dance" loading="lazy" decoding="async"></picture></span>
+<span class="lc"><picture><source media="(prefers-reduced-motion: reduce)" srcset="a/l-stretch-0.webp?v=1118m"><img src="a/l-stretch-0.webp?v=1118m" data-live="a/l-stretch.webp?v=1118m" alt="stretch" loading="lazy" decoding="async"></picture></span>
+<span class="lc"><picture><source media="(prefers-reduced-motion: reduce)" srcset="a/l-spin-0.webp?v=1118m"><img src="a/l-spin-0.webp?v=1118m" data-live="a/l-spin.webp?v=1118m" alt="spin" loading="lazy" decoding="async"></picture></span>
+</div>
+</div>
 <div class="card">
 <ul class="rules">
 <li data-t="r1">Feel free to use these in memes, fan art, stream overlays and thumbnails.</li>
@@ -125,7 +173,7 @@ a.home{display:inline-block;margin-top:6px;color:#c4561c;font-size:15px;padding:
     var el = document.querySelectorAll('[data-t]');
     for (j = 0; j < el.length; j++) { var v = t[el[j].getAttribute('data-t')]; if (v) el[j].textContent = v; }
     document.querySelector('.burst').setAttribute('aria-label', t.alt);
-    document.querySelector('.prev').alt = t.allAlt;
+    document.querySelector('.grid').setAttribute('aria-label', t.allAlt);
     for (j = 0; j < LANGS.length; j++) if (LANGS[j][0] === lg) document.getElementById('langName').textContent = LANGS[j][1];
     sel.setAttribute('aria-label', t.langLbl); sel.value = lg;
   }
@@ -136,6 +184,23 @@ a.home{display:inline-block;margin-top:6px;color:#c4561c;font-size:15px;padding:
     apply(lg);
   });
   apply(window.__fkLang);
+  /* [fk1118m] 전체 보기 칸: 보일 때만 움직임과 움짤 재생 · 누르면 한 번 팡 */
+  var all = document.getElementById('all'), lp = all.querySelectorAll('.lc img');
+  var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function live(on) {
+    all.classList.toggle('live', on && !calm);
+    for (var k = 0; k < lp.length; k++) { var want = on && !calm ? lp[k].getAttribute('data-live') : lp[k].getAttribute('data-live').replace('.webp', '-0.webp');
+      if (lp[k].getAttribute('src') !== want) lp[k].setAttribute('src', want); }
+  }
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { live(es[es.length - 1].isIntersecting); }, { rootMargin: '80px 0px' }).observe(all);
+  else live(true);
+  function pang(c) { if (calm) return; c.classList.remove('pang'); void c.offsetWidth; c.classList.add('pang'); }
+  var gs = all.querySelectorAll('.gc');
+  for (var g = 0; g < gs.length; g++) {
+    gs[g].addEventListener('pointerdown', function () { pang(this); });
+    gs[g].addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pang(this); } });
+    gs[g].addEventListener('animationend', function (e) { if (e.animationName === 'pang') this.classList.remove('pang'); });
+  }
 })();
 </script>
 </body>
