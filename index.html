@@ -453,8 +453,8 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
     <div class="rbox">
     <a class="gift" id="gift" href="#giftCard"><!-- [gift1111] 출시 선물 띠 · 영상 틀 바로 위 별도 줄(영상 안 가림) --><img class="gt" src="gift-thumb2.webp" width="40" height="40" alt="" decoding="async"><span data-i="giftBand"></span></a>
     <div class="reel">
-      <video id="reel" autoplay muted loop playsinline preload="auto" poster="hero.jpg?v=1111z" width="720" height="540" aria-label="Gameplay: jellies drop bombs and pop each other across candy arenas">
-        <source src="hero.mp4?v=1117h" type="video/mp4">
+      <video id="reel" autoplay muted loop playsinline preload="auto" poster="hero.jpg?v=1118v" width="720" height="540" aria-label="Gameplay: real-time online 3v3 team battle, jellies drop bombs and pop each other">
+        <source src="hero.mp4?v=1118v" type="video/mp4">
       </video>
       <button type="button" class="snd" id="snd" aria-pressed="false" aria-label="Turn sound on">
         <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.4L12 5.6v12.8l-4.6-3.9H4z" fill="currentColor"/><path d="M16 9.4l5 5.2M21 9.4l-5 5.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
@@ -855,7 +855,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
         if (buf) return go();
         if (loading) return;
         loading = true;
-        fetch('hero-loop.m4a').then(function (r) { if (!r.ok) throw 0; return r.arrayBuffer(); })
+        fetch('hero-loop.m4a?v=1118v').then(function (r) { if (!r.ok) throw 0; return r.arrayBuffer(); })
           .then(function (ab) { return new Promise(function (res, rej) { ctx.decodeAudioData(ab, res, rej); }); })
           .then(function (b) { buf = b; loading = false; go(); })
           .catch(function () { loading = false; if (sndIsOn) viaVideo(); });
