@@ -435,16 +435,23 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) :is(h1,h2,h3,.btn,.chip,.
 /* [vsh1118] 팀 11-18 23:5x 「랜딩 페이지에서도 보자마자 보이는 문구로 강조」 · 로고 바로 아래 큰 대전 띠(13개 언어 vbH) · 같은 뜻인 tag1 줄은 띠가 대신해 숨김 */
 .vshead{display:flex;align-items:center;justify-content:center;gap:.42em;width:fit-content;max-width:100%;box-sizing:border-box;margin:10px auto 2px;padding:.34em .95em .36em .8em;border-radius:999px;background:linear-gradient(180deg,#fff27a 0%,#ffc93a 100%);border:3px solid #fff;box-shadow:0 4px 0 rgba(130,10,70,.38),0 8px 22px rgba(120,0,60,.28);color:#6b1452;font-family:"Fredoka",system-ui,sans-serif;font-weight:700;font-size:clamp(20px,5.5vw,31px);line-height:1.12;letter-spacing:.015em;text-transform:uppercase;text-align:center;text-wrap:balance}
 html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) .vshead{font-family:"Fredoka",var(--cjk)}
-.vshead .lv{flex:0 0 auto;width:.5em;height:.5em;border-radius:50%;background:#ff2d55;box-shadow:0 0 0 .16em rgba(255,45,85,.28)}
+.hinfo .vshead{display:block}.vshead .lv{display:inline-block;vertical-align:.06em;margin-inline-end:.42em;flex:0 0 auto;width:.5em;height:.5em;border-radius:50%;background:#ff2d55;box-shadow:0 0 0 .16em rgba(255,45,85,.28)}
 @media (prefers-reduced-motion:no-preference){.vshead .lv{animation:vsLv 1.3s ease-in-out infinite}}
 @keyframes vsLv{0%,100%{box-shadow:0 0 0 .1em rgba(255,45,85,.35)}50%{box-shadow:0 0 0 .32em rgba(255,45,85,0)}}
 .hinfo .vshead+.tagline .tgvs{display:none}
-.hinfo .vshead+.tagline{margin-top:6px}
-@media (max-width:380px){.vshead{font-size:18px;margin-top:6px}}
-@media (max-width:430px) and (max-height:860px){.vshead{margin-top:6px;font-size:19px}}
-@media (max-width:430px) and (max-height:700px){.vshead{margin-top:3px;font-size:17px;border-width:2px;padding:.24em .8em .26em .7em}.hinfo .vshead+.tagline{margin-top:3px}}
-@media (orientation:landscape) and (max-height:500px) and (max-width:1023px){.vshead{font-size:18px;margin-top:4px}}
-@media (min-width:1024px){.vshead{font-size:26px;margin-top:12px}}
+.hinfo .enname{margin-top:4px}
+.hinfo .vshead{margin-top:14px;font-size:clamp(21px,5.8vw,30px)}
+.hinfo .vshead+.tagline{margin-top:12px;font-size:clamp(16px,4.3vw,21px);line-height:1.3;text-wrap:balance;color:rgba(255,255,255,.96)}
+/* [tidy1119] 출시 선물 띠: 한 줄, 글씨와 높이를 줄임(넘치면 JS 가 글씨만 더 줄임) */
+.rbox>.gift{min-height:30px;box-sizing:border-box;padding:3px 10px 3px 3px;gap:6px;font-size:12px;border-radius:12px;margin-bottom:6px}
+.rbox>.gift .gt{width:24px;height:24px;border-radius:7px}
+.rbox>.gift span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.rbox>.gift.nogt .gt{display:none}.rbox>.gift.nogt{padding-left:10px}.rbox>.gift.wrap span{white-space:normal;text-overflow:clip}
+@media (max-width:380px){.hinfo .vshead{font-size:19px;margin-top:10px}.hinfo .vshead+.tagline{font-size:15.5px;margin-top:9px}}
+@media (max-width:430px) and (max-height:860px){.hinfo .vshead{margin-top:9px;font-size:19px}.hinfo .vshead+.tagline{margin-top:8px;font-size:16px}.hinfo .logo.ko,.hinfo .logo.zh,.hinfo .logo.zt,.hinfo .logo.ar{width:min(100%,238px)}.hinfo .enname{margin-top:2px;font-size:14px}}   /* [tidy1119] 다운로드 단추가 실제 폰 높이(412x780)에서 첫 화면 안에(팀 11-19 00:1x 「다운로드 버튼도 좀 바로 보이면 좋겠다」) */
+@media (max-width:430px) and (max-height:700px){.hinfo .vshead{margin-top:5px;font-size:17px;border-width:2px;padding:.24em .8em .26em .7em}.hinfo .vshead+.tagline{margin-top:5px;font-size:15px}}
+@media (orientation:landscape) and (max-height:500px) and (max-width:1023px){.hinfo .vshead{font-size:18px;margin-top:5px}.hinfo .vshead+.tagline{font-size:15px;margin-top:5px}}
+@media (min-width:1024px){.hinfo .vshead{font-size:26px;margin-top:16px}.hinfo .vshead+.tagline{font-size:21px;margin-top:12px}.rbox>.gift{font-size:13.5px;padding:4px 14px 4px 4px;margin-bottom:10px;border-radius:14px}.rbox>.gift .gt{width:32px;height:32px;border-radius:9px}}
 .getline{white-space:normal;text-wrap:balance;max-width:100%}
 .vsb{--acc:#d92d77;--tint:#ffe3ef}.vsb .vbv{aspect-ratio:4/3}.vsb .pltx>p{margin:0 4px 12px;font-size:16.5px;color:var(--ink-soft)}
 .pl1>h2{margin:2px 4px 12px;font-size:24px}.plpair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.pl1 .hlm{margin:0}.pl1 .plv,.pl1 .plv2{aspect-ratio:4/5}
@@ -722,6 +729,12 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) .vshead{font-family:"Fred
   }
   /* [dev1117] 단추 줄 짜기 — 안드로이드 = 구글 플레이 크게, 아이폰·아이패드 = 앱 스토어 크게, PC = 스팀 크게(QR 은 옆 그대로).
      나머지 배지는 아래 작게 한 줄. 한국어와 한국 시간대 PC 도 같다(11-17 한국 스팀 판매를 그대로 열어 둠). */
+  function fitGift() { try { var g = $('gift'), sp = g && g.querySelector('span'); if (!sp || g.hidden) return; sp.style.fontSize = ''; g.classList.remove('nogt', 'wrap');
+    var ov = function () { return sp.scrollWidth > sp.clientWidth; }, f = parseFloat(getComputedStyle(sp).fontSize), n = 0;
+    while (ov() && f > 10.5 && n++ < 12) { f -= 0.5; sp.style.fontSize = f + 'px'; }
+    if (ov()) g.classList.add('nogt'); if (ov()) g.classList.add('wrap'); } catch (e) {} }   /* [tidy1119] 선물 띠 한 줄 맞춤: 글씨 10.5px 까지 → 작은 그림 숨김 → 그래도 넘치면 두 줄 */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitGift(); });
+  addEventListener('resize', function () { fitGift(); });
   function layout(t) {
     var a = $('bApp'), p = $('bPlay'), st = $('bSteam'), tt = $('bTap'), box = $('bdgs'), big = $('big1'), ln = $('getLine'), k;
     var own = isAndroid ? p : isIOS ? a : st;
@@ -731,7 +744,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) .vshead{font-family:"Fred
     for (k = 0; k < o.length; k++) box.appendChild(o[k]);
     box.appendChild(box.querySelector('.brk'));
     big.hidden = !own; box.classList.toggle('sm', !!own);
-    var nl = [t.gB, [t.c3, t.c1, t.c2].filter(Boolean).join(' · ')].filter(Boolean).join(String.fromCharCode(10)); ln.style.whiteSpace = 'pre-line';   /* [vs1118b] 실시간 온라인 대전 먼저(팀 11-18 21:0x) */ ln.textContent = nl; ln.hidden = !nl;   /* 한 줄로 짧게(맨 아래 칸의 표 셋과 같은 말) */
+    var nl = [t.c3, t.c1, t.c2].filter(Boolean).join(' · ');   /* [tidy1119] 대전은 로고 아래 노란 띠 하나로(팀 11-19 00:1x) */ ln.style.whiteSpace = 'pre-line';   /* [vs1118b] 실시간 온라인 대전 먼저(팀 11-18 21:0x) */ ln.textContent = nl; ln.hidden = !nl;   /* 한 줄로 짧게(맨 아래 칸의 표 셋과 같은 말) */
     stick(own);
   }
   var STK = null, STO = null;
@@ -798,6 +811,7 @@ html:is([lang="ja"],[lang="zh-Hans"],[lang="zh-Hant"]) .vshead{font-family:"Fred
     var EN2 = (lang === 'ko' || lang === 'ja' || lang === 'zh-Hant') ? t.name + ' - Pop! Jelly PangPang' : t.name;   /* [c1117n] 현지 이름 뒤에 영어 이름 */
     document.title = EN2 + ' — ' + (t.tS || t.sub.replace(/[.。]$/, ''));   /* [vs1118] 대전 한 줄 */
     var md = document.querySelector('meta[name="description"]'); if (md) { if (md.__c0 == null) md.__c0 = md.content; md.content = lang === 'en' ? md.__c0 : EN2 + ': ' + (t.mD || t.sub); }   /* [vs1118] 언어별 대전 첫 줄 */
+    setTimeout(fitGift, 0);   /* [tidy1119] */
     var els = document.querySelectorAll('[data-i]');
     for (i = 0; i < els.length; i++) { var k = els[i].getAttribute('data-i'); if (t[k] != null) els[i].textContent = t[k]; }
     var h1 = document.querySelector('h1'); if (h1) h1.textContent = EN2;
