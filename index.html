@@ -208,7 +208,7 @@ h2{margin:0 0 6px;font-size:23px;line-height:1.2;text-wrap:balance}
 .card>p{margin:0 0 14px}
 .card>.fine{margin:20px 0 0}
 .chan{display:grid;grid-template-columns:1fr 1fr;gap:12px 10px;margin:0;padding:0 0 5px;list-style:none}
-.chan li:first-child:nth-last-child(odd){grid-column:1/-1}
+.chan li:first-child:nth-last-child(odd){grid-column:1/-1}.chan li:first-child:nth-last-child(odd) .btn{width:calc(50% - 5px);margin:0 auto}
 .chan .btn{min-height:54px;padding:8px 10px;gap:8px;font-size:18px;color:#fff}
 .chan svg{flex:none;width:23px;height:23px;fill:currentColor}
 .chan .ch-x svg{width:26px;height:26px}
@@ -326,7 +326,7 @@ main>*{grid-column:1/-1;min-width:0}
 h2{font-size:26px}
 .faq{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:12px 14px}
 .chan{grid-template-columns:repeat(4,minmax(0,1fr))}
-.chan li:first-child:nth-last-child(odd){grid-column:span 2}
+.chan li:first-child:nth-last-child(odd){grid-column:span 2}.chan li:first-child:nth-last-child(odd) .btn{width:100%}
 .card[aria-label="Official channels"]>p{max-width:46em}
 footer{margin-top:30px}
 }
