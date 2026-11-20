@@ -1,3 +1,3 @@
-# Pop! Jelly PangPang
+# Pop! JellyPangPang
 
-Landing page for Pop! Jelly PangPang — https://jellypangpang1231.github.io/
+Landing page for Pop! JellyPangPang — https://jellypangpang1231.github.io/
